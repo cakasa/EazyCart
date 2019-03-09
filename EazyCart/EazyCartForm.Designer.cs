@@ -30,15 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             this.menuPanel = new System.Windows.Forms.Panel();
-            this.titleLabel = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.closeButton = new System.Windows.Forms.Button();
             this.settingsButton = new System.Windows.Forms.Button();
             this.statisticsButton = new System.Windows.Forms.Button();
             this.warehouseButton = new System.Windows.Forms.Button();
+            this.titleLabel = new System.Windows.Forms.Label();
             this.shoppingCartPIctureBox = new System.Windows.Forms.PictureBox();
             this.cashRegisterButton = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.closeButton = new System.Windows.Forms.Button();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.mainMenuPanel = new System.Windows.Forms.Panel();
             this.menuPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.shoppingCartPIctureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -47,6 +48,7 @@
             // menuPanel
             // 
             this.menuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.menuPanel.Controls.Add(this.mainMenuPanel);
             this.menuPanel.Controls.Add(this.settingsButton);
             this.menuPanel.Controls.Add(this.statisticsButton);
             this.menuPanel.Controls.Add(this.warehouseButton);
@@ -57,31 +59,6 @@
             this.menuPanel.Name = "menuPanel";
             this.menuPanel.Size = new System.Drawing.Size(1600, 60);
             this.menuPanel.TabIndex = 0;
-            // 
-            // titleLabel
-            // 
-            this.titleLabel.AutoSize = true;
-            this.titleLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.titleLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.titleLabel.Location = new System.Drawing.Point(61, 15);
-            this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(97, 30);
-            this.titleLabel.TabIndex = 1;
-            this.titleLabel.Text = "EazyCart";
-            // 
-            // closeButton
-            // 
-            this.closeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.closeButton.BackgroundImage = global::EazyCart.Properties.Resources.closeIcon;
-            this.closeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.closeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.closeButton.Location = new System.Drawing.Point(1545, 5);
-            this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(50, 50);
-            this.closeButton.TabIndex = 5;
-            this.closeButton.UseVisualStyleBackColor = false;
-            this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // settingsButton
             // 
@@ -125,6 +102,17 @@
             this.warehouseButton.UseVisualStyleBackColor = false;
             this.warehouseButton.Click += new System.EventHandler(this.WarehouseButton_Click);
             // 
+            // titleLabel
+            // 
+            this.titleLabel.AutoSize = true;
+            this.titleLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.titleLabel.ForeColor = System.Drawing.SystemColors.Control;
+            this.titleLabel.Location = new System.Drawing.Point(61, 15);
+            this.titleLabel.Name = "titleLabel";
+            this.titleLabel.Size = new System.Drawing.Size(96, 30);
+            this.titleLabel.TabIndex = 1;
+            this.titleLabel.Text = "EazyCart";
+            // 
             // shoppingCartPIctureBox
             // 
             this.shoppingCartPIctureBox.Image = global::EazyCart.Properties.Resources.cartIcon;
@@ -148,6 +136,28 @@
             this.cashRegisterButton.TabIndex = 1;
             this.cashRegisterButton.UseVisualStyleBackColor = false;
             this.cashRegisterButton.Click += new System.EventHandler(this.CashRegisterButton_Click);
+            // 
+            // closeButton
+            // 
+            this.closeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.closeButton.BackgroundImage = global::EazyCart.Properties.Resources.closeIcon;
+            this.closeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.closeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.closeButton.Location = new System.Drawing.Point(1545, 5);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(50, 50);
+            this.closeButton.TabIndex = 5;
+            this.closeButton.UseVisualStyleBackColor = false;
+            this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
+            // 
+            // mainMenuPanel
+            // 
+            this.mainMenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(0)))), ((int)(((byte)(153)))));
+            this.mainMenuPanel.Location = new System.Drawing.Point(342, 57);
+            this.mainMenuPanel.Name = "mainMenuPanel";
+            this.mainMenuPanel.Size = new System.Drawing.Size(253, 3);
+            this.mainMenuPanel.TabIndex = 6;
             // 
             // EazyCartForm
             // 
@@ -183,6 +193,7 @@
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button settingsButton;
+        private System.Windows.Forms.Panel mainMenuPanel;
     }
 }
 

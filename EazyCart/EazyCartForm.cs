@@ -43,6 +43,8 @@ namespace EazyCart
             warehouseUserControl.Visible = false;
             statisticsUserContol.Visible = false;
             settingsUserControl.Visible = false;
+
+            mainMenuPanel.Visible = false;
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -52,40 +54,58 @@ namespace EazyCart
 
         private void WarehouseButton_Click(object sender, EventArgs e)
         {
-
+            // User control switching
             statisticsUserContol.Visible = false;
             cashRegisterUserControl.Visible = false;
             settingsUserControl.Visible = false;
 
             warehouseUserControl.Visible = true;
+
+            // Main Menu Panel Movement
+            mainMenuPanel.Visible = true;
+            mainMenuPanel.Location = new Point(598, 57);
         }
 
         private void StatisticsButton_Click(object sender, EventArgs e)
         {
+            // User control switching
             warehouseUserControl.Visible = false;
             cashRegisterUserControl.Visible = false;
             settingsUserControl.Visible = false;
 
             statisticsUserContol.Visible = true;
+
+            // Main Menu Panel Movement
+            mainMenuPanel.Visible = true;
+            mainMenuPanel.Location = new Point(854, 57);
         }
         
         private void CashRegisterButton_Click(object sender, EventArgs e)
         {
-
+            // User control switching
             warehouseUserControl.Visible = false;
             statisticsUserContol.Visible = false;
             settingsUserControl.Visible = false;
 
             cashRegisterUserControl.Visible = true;
+
+            // Main Menu Panel Movement
+            mainMenuPanel.Visible = true;
+            mainMenuPanel.Location = new Point(342, 57);
         }
 
         private void SettingsButton_Click(object sender, EventArgs e)
         {
+            // User control switching
             warehouseUserControl.Visible = false;
             statisticsUserContol.Visible = false;
             cashRegisterUserControl.Visible = false;
 
             settingsUserControl.Visible = true;
+
+            // Main Menu Panel Movement
+            mainMenuPanel.Visible = true;
+            mainMenuPanel.Location = new Point(1110, 57);
         }
     }
 }
