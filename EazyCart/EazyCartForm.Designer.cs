@@ -33,6 +33,7 @@
             this.titleLabel = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.closeButton = new System.Windows.Forms.Button();
+            this.settingsButton = new System.Windows.Forms.Button();
             this.statisticsButton = new System.Windows.Forms.Button();
             this.warehouseButton = new System.Windows.Forms.Button();
             this.shoppingCartPIctureBox = new System.Windows.Forms.PictureBox();
@@ -46,6 +47,7 @@
             // menuPanel
             // 
             this.menuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.menuPanel.Controls.Add(this.settingsButton);
             this.menuPanel.Controls.Add(this.statisticsButton);
             this.menuPanel.Controls.Add(this.warehouseButton);
             this.menuPanel.Controls.Add(this.titleLabel);
@@ -81,6 +83,20 @@
             this.closeButton.UseVisualStyleBackColor = false;
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
+            // settingsButton
+            // 
+            this.settingsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.settingsButton.BackgroundImage = global::EazyCart.Properties.Resources.settingsImage;
+            this.settingsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.settingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.settingsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.settingsButton.Location = new System.Drawing.Point(1108, 0);
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.Size = new System.Drawing.Size(256, 60);
+            this.settingsButton.TabIndex = 5;
+            this.settingsButton.UseVisualStyleBackColor = false;
+            this.settingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
+            // 
             // statisticsButton
             // 
             this.statisticsButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
@@ -88,7 +104,7 @@
             this.statisticsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.statisticsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.statisticsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.statisticsButton.Location = new System.Drawing.Point(988, 0);
+            this.statisticsButton.Location = new System.Drawing.Point(852, 0);
             this.statisticsButton.Name = "statisticsButton";
             this.statisticsButton.Size = new System.Drawing.Size(256, 60);
             this.statisticsButton.TabIndex = 4;
@@ -102,7 +118,7 @@
             this.warehouseButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.warehouseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.warehouseButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.warehouseButton.Location = new System.Drawing.Point(732, 0);
+            this.warehouseButton.Location = new System.Drawing.Point(596, 0);
             this.warehouseButton.Name = "warehouseButton";
             this.warehouseButton.Size = new System.Drawing.Size(256, 60);
             this.warehouseButton.TabIndex = 3;
@@ -126,7 +142,7 @@
             this.cashRegisterButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.cashRegisterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cashRegisterButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.cashRegisterButton.Location = new System.Drawing.Point(476, 0);
+            this.cashRegisterButton.Location = new System.Drawing.Point(340, 0);
             this.cashRegisterButton.Name = "cashRegisterButton";
             this.cashRegisterButton.Size = new System.Drawing.Size(256, 60);
             this.cashRegisterButton.TabIndex = 1;
@@ -166,6 +182,7 @@
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button settingsButton;
     }
 }
 
