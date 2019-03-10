@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EazyCart.Models
+namespace Data.Models
 {
-    public partial class Productsreceipts
+    public partial class ProductReceipt
     {
         public int Id { get; set; }
         public string ProductCode { get; set; }
@@ -11,7 +11,7 @@ namespace EazyCart.Models
         public decimal Quantity { get; set; }
         public int? DiscountPercentage { get; set; }
 
-        public virtual Products ProductCodeNavigation { get; set; }
-        public virtual Receipts Receipt { get; set; }
+        public virtual Product ProductCodeNavigation { get; set; }
+        public virtual Receipt Receipt { get; set; }
     }
 }

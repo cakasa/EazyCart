@@ -2,26 +2,26 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace EazyCart.Models
+namespace Data.Models
 {
-    public partial class eazycartContext : DbContext
+    public partial class EazyCartContext : DbContext
     {
-        public eazycartContext()
+        public EazyCartContext()
         {
         }
 
-        public eazycartContext(DbContextOptions<eazycartContext> options)
+        public EazyCartContext(DbContextOptions<EazyCartContext> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<Categories> Categories { get; set; }
-        public virtual DbSet<Cities> Cities { get; set; }
-        public virtual DbSet<Countries> Countries { get; set; }
-        public virtual DbSet<Products> Products { get; set; }
-        public virtual DbSet<Productsreceipts> Productsreceipts { get; set; }
-        public virtual DbSet<Providers> Providers { get; set; }
-        public virtual DbSet<Receipts> Receipts { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductReceipt> Productsreceipts { get; set; }
+        public virtual DbSet<Provider> Providers { get; set; }
+        public virtual DbSet<Receipt> Receipts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -36,7 +36,7 @@ namespace EazyCart.Models
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.2-servicing-10034");
 
-            modelBuilder.Entity<Categories>(entity =>
+            modelBuilder.Entity<Category>(entity =>
             {
                 entity.ToTable("categories", "eazycart");
 
@@ -51,7 +51,7 @@ namespace EazyCart.Models
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Cities>(entity =>
+            modelBuilder.Entity<City>(entity =>
             {
                 entity.ToTable("cities", "eazycart");
 
@@ -79,7 +79,7 @@ namespace EazyCart.Models
                     .HasConstraintName("cities_ibfk_1");
             });
 
-            modelBuilder.Entity<Countries>(entity =>
+            modelBuilder.Entity<Country>(entity =>
             {
                 entity.ToTable("countries", "eazycart");
 
@@ -94,7 +94,7 @@ namespace EazyCart.Models
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Products>(entity =>
+            modelBuilder.Entity<Product>(entity =>
             {
                 entity.HasKey(e => e.Code);
 
@@ -150,7 +150,7 @@ namespace EazyCart.Models
                     .HasConstraintName("products_ibfk_1");
             });
 
-            modelBuilder.Entity<Productsreceipts>(entity =>
+            modelBuilder.Entity<ProductReceipt>(entity =>
             {
                 entity.ToTable("productsreceipts", "eazycart");
 
@@ -195,7 +195,7 @@ namespace EazyCart.Models
                     .HasConstraintName("productsreceipts_ibfk_2");
             });
 
-            modelBuilder.Entity<Providers>(entity =>
+            modelBuilder.Entity<Provider>(entity =>
             {
                 entity.ToTable("providers", "eazycart");
 
@@ -223,7 +223,7 @@ namespace EazyCart.Models
                     .HasConstraintName("providers_ibfk_1");
             });
 
-            modelBuilder.Entity<Receipts>(entity =>
+            modelBuilder.Entity<Receipt>(entity =>
             {
                 entity.ToTable("receipts", "eazycart");
 

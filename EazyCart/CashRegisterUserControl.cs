@@ -16,5 +16,10 @@ namespace EazyCart
         {
             InitializeComponent();
         }
+
+        private void CashRegisterUserControl_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

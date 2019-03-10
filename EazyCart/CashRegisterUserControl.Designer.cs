@@ -47,6 +47,7 @@
             this.Controls.Add(this.label1);
             this.Name = "CashRegisterUserControl";
             this.Size = new System.Drawing.Size(1600, 840);
+            this.Load += new System.EventHandler(this.CashRegisterUserControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

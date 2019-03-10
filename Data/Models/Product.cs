@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EazyCart.Models
+namespace Data.Models
 {
-    public partial class Products
+    public partial class Product
     {
-        public Products()
+        public Product()
         {
-            Productsreceipts = new HashSet<Productsreceipts>();
+            Productsreceipts = new HashSet<ProductReceipt>();
         }
 
         public string Code { get; set; }
@@ -17,8 +17,8 @@ namespace EazyCart.Models
         public decimal DeliveryPrice { get; set; }
         public decimal SellingPrice { get; set; }
 
-        public virtual Categories Category { get; set; }
-        public virtual Providers Provider { get; set; }
-        public virtual ICollection<Productsreceipts> Productsreceipts { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual Provider Provider { get; set; }
+        public virtual ICollection<ProductReceipt> Productsreceipts { get; set; }
     }
 }
