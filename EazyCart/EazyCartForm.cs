@@ -49,7 +49,7 @@ namespace EazyCart
 
         private void CloseButton_Click(object sender, EventArgs e)
         {
-            Close();
+            this.Close();
         }
 
         private void WarehouseButton_Click(object sender, EventArgs e)
