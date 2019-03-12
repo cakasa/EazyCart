@@ -21,5 +21,37 @@ namespace EazyCart
         {
 
         }
+
+        private void ListBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = listBox2.SelectedIndex;
+            ChangeListBoxSelection(index);
+        }
+
+        private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = listBox1.SelectedIndex;
+            ChangeListBoxSelection(index);
+        }
+
+        private void ListBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = listBox3.SelectedIndex;
+            ChangeListBoxSelection(index);
+        }
+
+        private void ListBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = listBox4.SelectedIndex;
+            ChangeListBoxSelection(index);
+        }
+
+        private void ChangeListBoxSelection(int index)
+        {
+            listBox1.SelectedIndex = index;
+            listBox2.SelectedIndex = index;
+            listBox3.SelectedIndex = index;
+            listBox4.SelectedIndex = index;
+        }
     }
 }

@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.menuPanel = new System.Windows.Forms.Panel();
+            this.mainMenuPanel = new System.Windows.Forms.Panel();
             this.settingsButton = new System.Windows.Forms.Button();
             this.statisticsButton = new System.Windows.Forms.Button();
             this.warehouseButton = new System.Windows.Forms.Button();
@@ -39,7 +40,6 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.closeButton = new System.Windows.Forms.Button();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.mainMenuPanel = new System.Windows.Forms.Panel();
             this.menuPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.shoppingCartPIctureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -59,6 +59,14 @@
             this.menuPanel.Name = "menuPanel";
             this.menuPanel.Size = new System.Drawing.Size(1600, 60);
             this.menuPanel.TabIndex = 0;
+            // 
+            // mainMenuPanel
+            // 
+            this.mainMenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(0)))), ((int)(((byte)(153)))));
+            this.mainMenuPanel.Location = new System.Drawing.Point(342, 57);
+            this.mainMenuPanel.Name = "mainMenuPanel";
+            this.mainMenuPanel.Size = new System.Drawing.Size(253, 3);
+            this.mainMenuPanel.TabIndex = 6;
             // 
             // settingsButton
             // 
@@ -109,7 +117,7 @@
             this.titleLabel.ForeColor = System.Drawing.SystemColors.Control;
             this.titleLabel.Location = new System.Drawing.Point(61, 15);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(96, 30);
+            this.titleLabel.Size = new System.Drawing.Size(97, 30);
             this.titleLabel.TabIndex = 1;
             this.titleLabel.Text = "EazyCart";
             // 
@@ -150,14 +158,6 @@
             this.closeButton.TabIndex = 5;
             this.closeButton.UseVisualStyleBackColor = false;
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
-            // 
-            // mainMenuPanel
-            // 
-            this.mainMenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(0)))), ((int)(((byte)(153)))));
-            this.mainMenuPanel.Location = new System.Drawing.Point(342, 57);
-            this.mainMenuPanel.Name = "mainMenuPanel";
-            this.mainMenuPanel.Size = new System.Drawing.Size(253, 3);
-            this.mainMenuPanel.TabIndex = 6;
             // 
             // EazyCartForm
             // 

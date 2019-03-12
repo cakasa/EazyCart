@@ -40,7 +40,7 @@ namespace Business
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                var item = eazyCartContext.Products.Find(product.Id);
+                var item = eazyCartContext.Products.Find(product.Code);
                 if (item != null)
                 {
                     eazyCartContext.Entry(item).CurrentValues.SetValues(product);
