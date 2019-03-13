@@ -7,43 +7,43 @@ using System.Threading.Tasks;
 
 namespace Business
 {
-    public class CountryBusiness
+    public class CityBusiness
     {
         private EazyCartContext eazyCartContext;
 
-        public List<Country> GetAll()
+        public List<City> GetAll()
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                return eazyCartContext.Countries.ToList();
+                return eazyCartContext.Cities.ToList();
             }
         }
 
-        public Country Get(int id)
+        public City Get(int id)
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                return eazyCartContext.Countries.Find(id);
+                return eazyCartContext.Cities.Find(id);
             }
         }
 
-        public void Add(Country country)
+        public void Add(City city)
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                eazyCartContext.Countries.Add(country);
+                eazyCartContext.Cities.Add(city);
                 eazyCartContext.SaveChanges();
             }
         }
 
-        public void Update(Country country)
+        public void Update(City city)
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                var countryToUpdate = eazyCartContext.Countries.Find(country.Id);
-                if (countryToUpdate != null)
+                var cityToUpdate = eazyCartContext.Cities.Find(city.Id);
+                if (cityToUpdate != null)
                 {
-                    eazyCartContext.Entry(countryToUpdate).CurrentValues.SetValues(country);
+                    eazyCartContext.Entry(cityToUpdate).CurrentValues.SetValues(city);
                     eazyCartContext.SaveChanges();
                 }
             }
@@ -53,10 +53,10 @@ namespace Business
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                var country = eazyCartContext.Countries.Find(id);
-                if (country != null)
+                var city = eazyCartContext.Cities.Find(id);
+                if (city != null)
                 {
-                    eazyCartContext.Countries.Remove(country);
+                    eazyCartContext.Cities.Remove(city);
                     eazyCartContext.SaveChanges();
                 }
             }

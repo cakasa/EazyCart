@@ -7,43 +7,43 @@ using System.Threading.Tasks;
 
 namespace Business
 {
-    public class CountryBusiness
+    public class ReceiptBusiness
     {
         private EazyCartContext eazyCartContext;
 
-        public List<Country> GetAll()
+        public List<Receipt> GetAll()
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                return eazyCartContext.Countries.ToList();
+                return eazyCartContext.Receipts.ToList();
             }
         }
 
-        public Country Get(int id)
+        public Receipt Get(int id)
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                return eazyCartContext.Countries.Find(id);
+                return eazyCartContext.Receipts.Find(id);
             }
         }
 
-        public void Add(Country country)
+        public void Add(Receipt receipt)
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                eazyCartContext.Countries.Add(country);
+                eazyCartContext.Receipts.Add(receipt);
                 eazyCartContext.SaveChanges();
             }
         }
 
-        public void Update(Country country)
+        public void Update(Receipt receipt)
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                var countryToUpdate = eazyCartContext.Countries.Find(country.Id);
-                if (countryToUpdate != null)
+                var receiptToUpdate = eazyCartContext.Receipts.Find(receipt.Id);
+                if (receiptToUpdate != null)
                 {
-                    eazyCartContext.Entry(countryToUpdate).CurrentValues.SetValues(country);
+                    eazyCartContext.Entry(receiptToUpdate).CurrentValues.SetValues(receipt);
                     eazyCartContext.SaveChanges();
                 }
             }
@@ -53,10 +53,10 @@ namespace Business
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                var country = eazyCartContext.Countries.Find(id);
-                if (country != null)
+                var receipt = eazyCartContext.Receipts.Find(id);
+                if (receipt != null)
                 {
-                    eazyCartContext.Countries.Remove(country);
+                    eazyCartContext.Receipts.Remove(receipt);
                     eazyCartContext.SaveChanges();
                 }
             }

@@ -7,43 +7,43 @@ using System.Threading.Tasks;
 
 namespace Business
 {
-    public class CountryBusiness
+    public class ProviderBusiness
     {
         private EazyCartContext eazyCartContext;
 
-        public List<Country> GetAll()
+        public List<Provider> GetAll()
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                return eazyCartContext.Countries.ToList();
+                return eazyCartContext.Providers.ToList();
             }
         }
 
-        public Country Get(int id)
+        public Provider Get(int id)
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                return eazyCartContext.Countries.Find(id);
+                return eazyCartContext.Providers.Find(id);
             }
         }
 
-        public void Add(Country country)
+        public void Add(Provider provider)
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                eazyCartContext.Countries.Add(country);
+                eazyCartContext.Providers.Add(provider);
                 eazyCartContext.SaveChanges();
             }
         }
 
-        public void Update(Country country)
+        public void Update(Provider provider)
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                var countryToUpdate = eazyCartContext.Countries.Find(country.Id);
-                if (countryToUpdate != null)
+                var providerToUpdate = eazyCartContext.Providers.Find(provider.Id);
+                if (providerToUpdate != null)
                 {
-                    eazyCartContext.Entry(countryToUpdate).CurrentValues.SetValues(country);
+                    eazyCartContext.Entry(providerToUpdate).CurrentValues.SetValues(provider);
                     eazyCartContext.SaveChanges();
                 }
             }
@@ -53,10 +53,10 @@ namespace Business
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                var country = eazyCartContext.Countries.Find(id);
-                if (country != null)
+                var provider = eazyCartContext.Providers.Find(id);
+                if (provider != null)
                 {
-                    eazyCartContext.Countries.Remove(country);
+                    eazyCartContext.Providers.Remove(provider);
                     eazyCartContext.SaveChanges();
                 }
             }

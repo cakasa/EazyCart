@@ -7,43 +7,43 @@ using System.Threading.Tasks;
 
 namespace Business
 {
-    public class CountryBusiness
+    public class ProductReceiptBusiness
     {
         private EazyCartContext eazyCartContext;
 
-        public List<Country> GetAll()
+        public List<ProductReceipt> GetAll()
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                return eazyCartContext.Countries.ToList();
+                return eazyCartContext.Productsreceipts.ToList();
             }
         }
 
-        public Country Get(int id)
+        public ProductReceipt Get(int id)
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                return eazyCartContext.Countries.Find(id);
+                return eazyCartContext.Productsreceipts.Find(id);
             }
         }
 
-        public void Add(Country country)
+        public void Add(ProductReceipt productReceipt)
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                eazyCartContext.Countries.Add(country);
+                eazyCartContext.Productsreceipts.Add(productReceipt);
                 eazyCartContext.SaveChanges();
             }
         }
 
-        public void Update(Country country)
+        public void Update(ProductReceipt productReceipt)
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                var countryToUpdate = eazyCartContext.Countries.Find(country.Id);
-                if (countryToUpdate != null)
+                var productReceiptToUpdate = eazyCartContext.Productsreceipts.Find(productReceipt.Id);
+                if (productReceiptToUpdate != null)
                 {
-                    eazyCartContext.Entry(countryToUpdate).CurrentValues.SetValues(country);
+                    eazyCartContext.Entry(productReceiptToUpdate).CurrentValues.SetValues(productReceipt);
                     eazyCartContext.SaveChanges();
                 }
             }
@@ -53,10 +53,10 @@ namespace Business
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                var country = eazyCartContext.Countries.Find(id);
-                if (country != null)
+                var productReceipt = eazyCartContext.Productsreceipts.Find(id);
+                if (productReceipt != null)
                 {
-                    eazyCartContext.Countries.Remove(country);
+                    eazyCartContext.Productsreceipts.Remove(productReceipt);
                     eazyCartContext.SaveChanges();
                 }
             }
