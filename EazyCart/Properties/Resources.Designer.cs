@@ -63,6 +63,16 @@ namespace EazyCart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AddProductPlaceHolder {
+            get {
+                object obj = ResourceManager.GetObject("AddProductPlaceHolder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cartIcon {
             get {
                 object obj = ResourceManager.GetObject("cartIcon", resourceCulture);
@@ -103,9 +113,9 @@ namespace EazyCart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap completeOrderPlaceholder1 {
+        internal static System.Drawing.Bitmap ModifyProductPlaceHolder {
             get {
-                object obj = ResourceManager.GetObject("completeOrderPlaceholder1", resourceCulture);
+                object obj = ResourceManager.GetObject("ModifyProductPlaceHolder", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +123,9 @@ namespace EazyCart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap completeOrderPlaceholder2 {
+        internal static System.Drawing.Bitmap saveProductPlaceholder {
             get {
-                object obj = ResourceManager.GetObject("completeOrderPlaceholder2", resourceCulture);
+                object obj = ResourceManager.GetObject("saveProductPlaceholder", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

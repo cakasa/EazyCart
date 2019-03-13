@@ -19,39 +19,30 @@ namespace EazyCart
 
         private void CashRegisterUserControl_Load(object sender, EventArgs e)
         {
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("Code", typeof(string));
+            dataTable.Columns.Add("Name", typeof(string));
+            dataTable.Columns.Add("Category", typeof(string));
+            dataTable.Columns.Add("Unit Price", typeof(double));
 
+            dataTable.Rows.Add("#000001", "Apples", "Fruit", 2.05);
+            dataTable.Rows.Add("#000002", "Water, 500ml", "Drink" ,1.00);
+
+            availableProductsDataGridView.Rows.Add("#000001", "Apples", "Fruit", 2.05);
+            availableProductsDataGridView.Rows.Add("#000002", "Water, 500ml", "Drink",1.00);
+
+            receiptDataGridView.Rows.Add("#000001", "Apples", 2.05, 3, 23, 2.05 * 3 * 77);
+            receiptDataGridView.Rows.Add("#000002", "Water, 500ml", 3.42, 5, 10, 3.42 * 5 * 0.9);
         }
 
-        private void ListBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void DiscountCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            int index = listBox2.SelectedIndex;
-            ChangeListBoxSelection(index);
-        }
-
-        private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int index = listBox1.SelectedIndex;
-            ChangeListBoxSelection(index);
-        }
-
-        private void ListBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int index = listBox3.SelectedIndex;
-            ChangeListBoxSelection(index);
-        }
-
-        private void ListBox4_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int index = listBox4.SelectedIndex;
-            ChangeListBoxSelection(index);
-        }
-
-        private void ChangeListBoxSelection(int index)
-        {
-            listBox1.SelectedIndex = index;
-            listBox2.SelectedIndex = index;
-            listBox3.SelectedIndex = index;
-            listBox4.SelectedIndex = index;
+            if (discountCheckBox.Checked)
+            {
+                discountPercentageTextBox.Enabled = true;
+            }
+            else discountPercentageTextBox.Enabled = false;
+            
         }
     }
 }
