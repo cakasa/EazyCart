@@ -22,6 +22,9 @@ namespace EazyCart
             InitializeComponent();
         }
 
+        int mouseX = 0, mouseY = 0;
+        bool mouseDown;
+
         private void EazyCartForm_Load(object sender, EventArgs e)
         {
             cashRegisterUserControl = new CashRegisterUserControl();
@@ -92,6 +95,27 @@ namespace EazyCart
             // Main Menu Panel Movement
             mainMenuPanel.Visible = true;
             mainMenuPanel.Location = new Point(342, 57);
+        }
+
+        // Making the app movable with the use of the menu panel 
+        private void MenuPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            mouseX = e.X;
+            mouseY = e.Y;
+        }
+
+        private void MenuPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown == true)
+            {
+                this.SetDesktopLocation(MousePosition.X - mouseX, MousePosition.Y - mouseY);
+            }
+        }
+
+        private void MenuPanel_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
         }
 
         private void SettingsButton_Click(object sender, EventArgs e)

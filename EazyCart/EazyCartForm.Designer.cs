@@ -59,6 +59,9 @@
             this.menuPanel.Name = "menuPanel";
             this.menuPanel.Size = new System.Drawing.Size(1600, 60);
             this.menuPanel.TabIndex = 0;
+            this.menuPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MenuPanel_MouseDown);
+            this.menuPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MenuPanel_MouseMove);
+            this.menuPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MenuPanel_MouseUp);
             // 
             // mainMenuPanel
             // 
@@ -117,7 +120,7 @@
             this.titleLabel.ForeColor = System.Drawing.SystemColors.Control;
             this.titleLabel.Location = new System.Drawing.Point(61, 15);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(97, 30);
+            this.titleLabel.Size = new System.Drawing.Size(96, 30);
             this.titleLabel.TabIndex = 1;
             this.titleLabel.Text = "EazyCart";
             // 
