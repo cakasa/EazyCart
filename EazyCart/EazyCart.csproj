@@ -274,6 +274,15 @@
   <ItemGroup>
     <None Include="Resources\saveProductPlaceholder.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\addCategoryImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MakeDeliveryImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\revertChangesImage.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
