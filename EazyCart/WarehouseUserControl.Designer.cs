@@ -520,9 +520,9 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.allProductsDataGridView.DefaultCellStyle = dataGridViewCellStyle4;
-            this.allProductsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.allProductsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.allProductsDataGridView.EnableHeadersVisualStyles = false;
-            this.allProductsDataGridView.Location = new System.Drawing.Point(496, 20);
+            this.allProductsDataGridView.Location = new System.Drawing.Point(506, 20);
             this.allProductsDataGridView.MultiSelect = false;
             this.allProductsDataGridView.Name = "allProductsDataGridView";
             this.allProductsDataGridView.ReadOnly = true;

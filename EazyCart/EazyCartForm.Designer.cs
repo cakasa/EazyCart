@@ -120,7 +120,7 @@
             this.titleLabel.ForeColor = System.Drawing.SystemColors.Control;
             this.titleLabel.Location = new System.Drawing.Point(61, 15);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(96, 30);
+            this.titleLabel.Size = new System.Drawing.Size(97, 30);
             this.titleLabel.TabIndex = 1;
             this.titleLabel.Text = "EazyCart";
             // 

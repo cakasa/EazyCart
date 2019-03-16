@@ -118,29 +118,32 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="completeOrderPlaceholder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\completeOrderPlaceholder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="saveProductPlaceholder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\saveProductPlaceholder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AddProductPlaceHolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AddProductPlaceHolder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cashRegisterImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cashRegisterImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MakeDeliveryImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MakeDeliveryImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="cartIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cartIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ModifyProductPlaceHolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ModifyProductPlaceHolder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="statisticsImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\statisticsImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="closeIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\closeIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="settingsImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\settingsImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cashRegisterImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cashRegisterImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AddProductPlaceHolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddProductPlaceHolder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="statisticsImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\statisticsImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="completeOrderPlaceholder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\completeOrderPlaceholder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="revertChangesImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\revertChangesImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MakeDeliveryImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MakeDeliveryImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="warehouseImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\warehouseImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -148,13 +151,13 @@
   <data name="addCategoryImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\addCategoryImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="saveProductPlaceholder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\saveProductPlaceholder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ModifyProductPlaceHolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ModifyProductPlaceHolder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="closeIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\closeIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cartIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cartIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="revertChangesImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\revertChangesImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="currentThemePlaceholder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\currentThemePlaceholder.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
