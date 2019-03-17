@@ -46,5 +46,21 @@ namespace EazyCart
         {
 
         }
+
+        private void productNameTextBox_Enter(object sender, EventArgs e)
+        {
+            if(productNameTextBox.Text == "Product Name")
+            {
+                productNameTextBox.Text = string.Empty;
+            }
+        }
+
+        private void productNameTextBox_Leave(object sender, EventArgs e)
+        {
+            if(productNameTextBox.Text == string.Empty)
+            {
+                productNameTextBox.Text = "Product Name";
+            }
+        }
     }
 }

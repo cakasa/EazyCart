@@ -7,43 +7,43 @@ using System.Threading.Tasks;
 
 namespace Business
 {
-    public class ProviderBusiness
+    public class UnitBusiness
     {
         private EazyCartContext eazyCartContext;
 
-        public List<Provider> GetAll()
+        public List<Unit> GetAll()
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                return eazyCartContext.Providers.ToList();
+                return eazyCartContext.Units.ToList();
             }
         }
 
-        public Provider Get(int id)
+        public Unit Get(int id)
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                return eazyCartContext.Providers.Find(id);
+                return eazyCartContext.Units.Find(id);
             }
         }
 
-        public void Add(Provider provider)
+        public void Add(Unit unit)
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                eazyCartContext.Providers.Add(provider);
+                eazyCartContext.Units.Add(unit);
                 eazyCartContext.SaveChanges();
             }
         }
 
-        public void Update(Provider provider)
+        public void Update(Unit unit)
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                var providerToUpdate = eazyCartContext.Providers.Find(provider.Id);
-                if (providerToUpdate != null)
+                var unitToUpdate = eazyCartContext.Units.Find(unit.Id);
+                if (unitToUpdate != null)
                 {
-                    eazyCartContext.Entry(providerToUpdate).CurrentValues.SetValues(provider);
+                    eazyCartContext.Entry(unitToUpdate).CurrentValues.SetValues(unit);
                     eazyCartContext.SaveChanges();
                 }
             }
@@ -53,10 +53,10 @@ namespace Business
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                var provider = eazyCartContext.Providers.Find(id);
-                if (provider != null)
+                var unit = eazyCartContext.Units.Find(id);
+                if (unit != null)
                 {
-                    eazyCartContext.Providers.Remove(provider);
+                    eazyCartContext.Units.Remove(unit);
                     eazyCartContext.SaveChanges();
                 }
             }

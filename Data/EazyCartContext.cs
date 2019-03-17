@@ -20,8 +20,9 @@ namespace Data.Models
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductReceipt> Productsreceipts { get; set; }
-        public virtual DbSet<Provider> Providers { get; set; }
+        public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<Receipt> Receipts { get; set; }
+        public virtual DbSet<Unit> Units { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -35,6 +36,27 @@ namespace Data.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.2-servicing-10034");
+
+            modelBuilder.Entity<Unit>(entity =>
+            {
+                entity.ToTable("units", "eazycart");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("int(12)");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasColumnName("name")
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Code)
+                    .IsRequired()
+                    .HasColumnName("code")
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+            });
 
             modelBuilder.Entity<Category>(entity =>
             {
@@ -107,8 +129,8 @@ namespace Data.Models
                     .HasName("code")
                     .IsUnique();
 
-                entity.HasIndex(e => e.ProviderId)
-                    .HasName("providerId");
+                entity.HasIndex(e => e.SupplierId)
+                    .HasName("supplierId");
 
                 entity.Property(e => e.Code)
                     .HasColumnName("code")
@@ -129,8 +151,13 @@ namespace Data.Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ProviderId)
-                    .HasColumnName("providerId")
+                entity.Property(e => e.UnitId)
+                    .HasColumnName("unitId")
+                    .HasColumnType("int(12)");
+                
+
+                entity.Property(e => e.SupplierId)
+                    .HasColumnName("supplierId")
                     .HasColumnType("int(6)");
 
                 entity.Property(e => e.SellingPrice)
@@ -141,11 +168,17 @@ namespace Data.Models
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.CategoryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("products_ibfk_3");
+
+                entity.HasOne(d => d.Supplier)
+                    .WithMany(p => p.Products)
+                    .HasForeignKey(d => d.SupplierId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("products_ibfk_2");
 
-                entity.HasOne(d => d.Provider)
+                entity.HasOne(d => d.Unit)
                     .WithMany(p => p.Products)
-                    .HasForeignKey(d => d.ProviderId)
+                    .HasForeignKey(d => d.UnitId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("products_ibfk_1");
             });
@@ -183,7 +216,7 @@ namespace Data.Models
                     .HasColumnType("int(6)");
 
                 entity.HasOne(d => d.ProductCodeNavigation)
-                    .WithMany(p => p.Productsreceipts)
+                    .WithMany(p => p.ProductsReceipts)
                     .HasForeignKey(d => d.ProductCode)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("productsreceipts_ibfk_1");
@@ -195,9 +228,9 @@ namespace Data.Models
                     .HasConstraintName("productsreceipts_ibfk_2");
             });
 
-            modelBuilder.Entity<Provider>(entity =>
+            modelBuilder.Entity<Supplier>(entity =>
             {
-                entity.ToTable("providers", "eazycart");
+                entity.ToTable("suppliers", "eazycart");
 
                 entity.HasIndex(e => e.CityId)
                     .HasName("cityId");
@@ -217,10 +250,10 @@ namespace Data.Models
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.City)
-                    .WithMany(p => p.Providers)
+                    .WithMany(p => p.Suppliers)
                     .HasForeignKey(d => d.CityId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("providers_ibfk_1");
+                    .HasConstraintName("suppliers_ibfk_1");
             });
 
             modelBuilder.Entity<Receipt>(entity =>

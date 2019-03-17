@@ -7,18 +7,20 @@ namespace Data.Models
     {
         public Product()
         {
-            Productsreceipts = new HashSet<ProductReceipt>();
+            ProductsReceipts = new HashSet<ProductReceipt>();
         }
 
         public string Code { get; set; }
         public string Name { get; set; }
-        public int ProviderId { get; set; }
+        public int SupplierId { get; set; }
+        public int UnitId { get; set; }
         public int CategoryId { get; set; }
         public decimal DeliveryPrice { get; set; }
         public decimal SellingPrice { get; set; }
 
         public virtual Category Category { get; set; }
-        public virtual Provider Provider { get; set; }
-        public virtual ICollection<ProductReceipt> Productsreceipts { get; set; }
+        public virtual Supplier Supplier { get; set; }
+        public virtual Unit Unit { get; set; }
+        public virtual ICollection<ProductReceipt> ProductsReceipts { get; set; }
     }
 }
