@@ -96,7 +96,7 @@
             // 
             this.reportsTreeView.BackColor = System.Drawing.Color.Gainsboro;
             this.reportsTreeView.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.reportsTreeView.Location = new System.Drawing.Point(31, 146);
+            this.reportsTreeView.Location = new System.Drawing.Point(31, 87);
             this.reportsTreeView.Name = "reportsTreeView";
             treeNode1.Name = "dailySalesReport";
             treeNode1.Text = "Daily Sales Report";
@@ -132,14 +132,14 @@
             treeNode6,
             treeNode11,
             treeNode15});
-            this.reportsTreeView.Size = new System.Drawing.Size(394, 443);
+            this.reportsTreeView.Size = new System.Drawing.Size(394, 502);
             this.reportsTreeView.TabIndex = 34;
             // 
             // elementHost1
             // 
             this.elementHost1.Location = new System.Drawing.Point(456, 53);
             this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(1107, 625);
+            this.elementHost1.Size = new System.Drawing.Size(1107, 724);
             this.elementHost1.TabIndex = 37;
             this.elementHost1.Text = "elementHost1";
             this.elementHost1.Child = this.cartesianChart1;

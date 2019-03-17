@@ -19,6 +19,23 @@ namespace Business
             }
         }
 
+        public List<string> GetAllNames()
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                var allCategories = eazyCartContext.Categories.ToList();
+                var allNames = new List<string>();
+                allNames.Add("Category");
+                
+                foreach(var category in allCategories)
+                {
+                    allNames.Add(category.Name);
+                }
+
+                return allNames;
+            }
+        }
+
         public Category Get(int id)
         {
             using (eazyCartContext = new EazyCartContext())

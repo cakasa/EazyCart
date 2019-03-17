@@ -82,6 +82,7 @@
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(256, 60);
             this.settingsButton.TabIndex = 5;
+            this.settingsButton.TabStop = false;
             this.settingsButton.UseVisualStyleBackColor = false;
             this.settingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 
@@ -96,6 +97,7 @@
             this.statisticsButton.Name = "statisticsButton";
             this.statisticsButton.Size = new System.Drawing.Size(256, 60);
             this.statisticsButton.TabIndex = 4;
+            this.statisticsButton.TabStop = false;
             this.statisticsButton.UseVisualStyleBackColor = false;
             this.statisticsButton.Click += new System.EventHandler(this.StatisticsButton_Click);
             // 
@@ -110,6 +112,7 @@
             this.warehouseButton.Name = "warehouseButton";
             this.warehouseButton.Size = new System.Drawing.Size(256, 60);
             this.warehouseButton.TabIndex = 3;
+            this.warehouseButton.TabStop = false;
             this.warehouseButton.UseVisualStyleBackColor = false;
             this.warehouseButton.Click += new System.EventHandler(this.WarehouseButton_Click);
             // 
@@ -145,6 +148,7 @@
             this.cashRegisterButton.Name = "cashRegisterButton";
             this.cashRegisterButton.Size = new System.Drawing.Size(256, 60);
             this.cashRegisterButton.TabIndex = 1;
+            this.cashRegisterButton.TabStop = false;
             this.cashRegisterButton.UseVisualStyleBackColor = false;
             this.cashRegisterButton.Click += new System.EventHandler(this.CashRegisterButton_Click);
             // 
@@ -159,6 +163,7 @@
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(50, 50);
             this.closeButton.TabIndex = 5;
+            this.closeButton.TabStop = false;
             this.closeButton.UseVisualStyleBackColor = false;
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
