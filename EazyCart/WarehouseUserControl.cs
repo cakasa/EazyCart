@@ -15,12 +15,12 @@ namespace EazyCart
 {
     public partial class WarehouseUserControl : UserControl
     {
-        private ProductBusiness productBusiness;
+        private ProductBusiness productBusiness = new ProductBusiness();
         private CategoryBusiness categoryBusiness= new CategoryBusiness();
-        private SupplierBusiness supplierBusiness;
-        private UnitBusiness unitBusiness;
-        private CountryBusiness countryBusiness;
-        private CityBusiness cityBusiness;
+        private SupplierBusiness supplierBusiness = new SupplierBusiness();
+        private UnitBusiness unitBusiness = new UnitBusiness(); 
+        private CountryBusiness countryBusiness = new CountryBusiness();
+        private CityBusiness cityBusiness = new CityBusiness();
 
         public WarehouseUserControl()
         {
@@ -29,8 +29,10 @@ namespace EazyCart
 
         private void WarehouseUserControl_Load(object sender, EventArgs e)
         {
-            SetInitialState();
+
             UpdateForm();
+            SetInitialState();
+            
         }
 
         private void SetInitialState()
@@ -44,19 +46,84 @@ namespace EazyCart
 
         private void AddCategoryButton_Click(object sender, EventArgs e)
         {
-            Category category = new Category();
-            if (categoryBusiness.GetAllNames().Contains(categoryComboBox.Text))
+            var category = new Category();
+            var categoryToAdd = categoryComboBox.Text;
+
+            if (categoryBusiness.GetAllNames().Contains(categoryToAdd))
             {
-                MessageBox.Show($"There is already a category named {categoryComboBox.Text}");
+                MessageBox.Show($"There already is a category named {categoryToAdd}");
             }
-            category.Name = categoryComboBox.Text;
+            category.Name = categoryToAdd;
             categoryBusiness.Add(category);
+            UpdateForm();
+        }
+
+        private void AddCountryButton_Click(object sender, EventArgs e)
+        {
+            var country = new Country();
+            string countryToAdd = supplierCountryComboBox.Text;
+            if (countryBusiness.GetAllNames().Contains(countryToAdd))
+            {
+                MessageBox.Show($"There already is a country called {countryToAdd}");
+                return;
+            }
+            country.Name = countryToAdd;
+            countryBusiness.Add(country);
+            UpdateForm();
+        }
+
+        private void AddCityButton_Click(object sender, EventArgs e)
+        {
+            var city = new City();
+            string cityToAdd = supplierCityComboBox.Text;
+            string selectedCountryString = supplierCountryComboBox.Text;
+            Country selectedCountry = countryBusiness.GetByName(selectedCountryString);
+            List<City> existingCitiesInSelectedCountry = countryBusiness.GetCities(selectedCountry.Id);
+
+            // TODO: Fix the if, country always showing it has 0 cities.
+            if (existingCitiesInSelectedCountry.Any(x => x.Name == cityToAdd))
+            {
+                MessageBox.Show($"There already is a city called {cityToAdd} in {selectedCountryString}");
+                return;
+            }
+
+            city.Name = cityToAdd;
+            city.CountryId = selectedCountry.Id;
+            cityBusiness.Add(city);
+            countryBusiness.AddCityToCountry(selectedCountry.Id, city);           
+            UpdateForm();
+        }
+
+        private void AddSupplierButton_Click(object sender, EventArgs e)
+        {
+            var supplier = new Supplier();
+            string supplierToAdd = supplierCityComboBox.Text;
+            string selectedCityString = supplierCityComboBox.Text;
+            string selectedCountryString = supplierCountryComboBox.Text;
+            Country selectedCountry = countryBusiness.GetByName(selectedCountryString);
+            City selectedCity = cityBusiness.GetByCountryAndName(selectedCountry, selectedCityString);
+            List<Supplier> existingSuppliersInSelectedCity = cityBusiness.GetSuppliers(selectedCity);
+
+            if(existingSuppliersInSelectedCity.Any(x => x.Name == supplierToAdd))
+            {
+                MessageBox.Show($"There already is a supplier called {supplierToAdd} in city {selectedCityString}");
+                return;
+            }
+
+            supplier.Name = supplierToAdd;
+            supplier.CityId = selectedCity.Id;
+            supplierBusiness.Add(supplier);
+            cityBusiness.AddSupplierToCity(selectedCity, supplier);
             UpdateForm();
         }
 
         private void UpdateForm()
         {
             categoryComboBox.DataSource = categoryBusiness.GetAllNames();
+            supplierNameComboBox.DataSource = supplierBusiness.GetAllNames();
+            supplierCountryComboBox.DataSource = countryBusiness.GetAllNames();
+            supplierCityComboBox.DataSource = cityBusiness.GetAllNames();
+            productComboBox.DataSource = productBusiness.GetAllNames();
         }
 
         // All of the following methods are responsible for maintaining a consistent UI
@@ -147,5 +214,6 @@ namespace EazyCart
             }
         }
 
+        
     }
 }

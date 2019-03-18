@@ -19,6 +19,46 @@ namespace Business
             }
         }
 
+        public List<string> GetAllNames()
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                List<Country> countries = eazyCartContext.Countries.ToList();
+                var allCountriesNames = new List<string>();
+                allCountriesNames.Add("Country");
+                allCountriesNames.AddRange(countries.Select(x => x.Name).ToList());
+                return allCountriesNames;
+            }
+        }
+
+        public List<City> GetCities(int countryId)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                return eazyCartContext.Countries.Find(countryId).Cities.ToList();
+            }
+
+
+        }
+
+        public void AddCityToCountry(int countryId, City city)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                eazyCartContext.Countries.Find(countryId).Cities.Add(city);
+                eazyCartContext.SaveChanges();
+            }
+        }
+
+        public Country GetByName(string name)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                var country = eazyCartContext.Countries.First(x=>x.Name == name);
+                return country;
+            }
+        }
+
         public Country Get(int id)
         {
             using (eazyCartContext = new EazyCartContext())

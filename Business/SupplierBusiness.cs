@@ -19,6 +19,23 @@ namespace Business
             }
         }
 
+        public List<string> GetAllNames()
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                List<Supplier> suppliers = eazyCartContext.Suppliers.ToList();
+                var supplierNames = new List<string>();
+                supplierNames.Add("Supplier Name");
+
+                foreach (var supplier in suppliers)
+                {
+                    supplierNames.Add(supplier.Name);
+                }
+
+                return supplierNames;
+            }
+        }
+
         public Supplier Get(int id)
         {
             using (eazyCartContext = new EazyCartContext())

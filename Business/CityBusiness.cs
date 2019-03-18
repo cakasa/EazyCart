@@ -27,6 +27,18 @@ namespace Business
             }
         }
 
+        public List<string> GetAllNames()
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                List<City> cities = eazyCartContext.Cities.ToList();
+                var cityNames = new List<string>();
+                cityNames.Add("City");
+                cityNames.AddRange(cities.Select(x => x.Name).ToList());
+                return cityNames;
+            }
+        }
+
         public void Add(City city)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -59,6 +71,30 @@ namespace Business
                     eazyCartContext.Cities.Remove(city);
                     eazyCartContext.SaveChanges();
                 }
+            }
+        }
+
+        public City GetByCountryAndName(Country selectedCountry, string selectedCityString)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                return selectedCountry.Cities.First(x => x.Name == selectedCityString);
+            }
+        }
+
+        public List<Supplier> GetSuppliers(City selectedCity)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                return selectedCity.Suppliers.ToList();
+            }
+        }
+
+        public void AddSupplierToCity(City selectedCity, Supplier supplier)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                selectedCity.Suppliers.Add(supplier);
             }
         }
     }
