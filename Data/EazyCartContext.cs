@@ -151,11 +151,15 @@ namespace Data.Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Quantity)
+                    .IsRequired()
+                    .HasColumnName("quantity")
+                    .HasColumnType("decimal(6,3)");
+
                 entity.Property(e => e.UnitId)
                     .HasColumnName("unitId")
                     .HasColumnType("int(12)");
                 
-
                 entity.Property(e => e.SupplierId)
                     .HasColumnName("supplierId")
                     .HasColumnType("int(6)");

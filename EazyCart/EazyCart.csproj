@@ -173,6 +173,12 @@
     <Compile Include="EazyCartForm.Designer.cs">
       <DependentUpon>EazyCartForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManagementUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ManagementUserControl.Designer.cs">
+      <DependentUpon>ManagementUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -203,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EazyCartForm.resx">
       <DependentUpon>EazyCartForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManagementUserControl.resx">
+      <DependentUpon>ManagementUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

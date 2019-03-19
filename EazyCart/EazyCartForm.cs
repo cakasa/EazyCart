@@ -16,6 +16,7 @@ namespace EazyCart
         private WarehouseUserControl warehouseUserControl;
         private StatisticsUserContol statisticsUserContol;
         private SettingsUserControl settingsUserControl;
+        private ManagementUserControl managementUserControl;
 
         public EazyCartForm()
         {
@@ -31,21 +32,25 @@ namespace EazyCart
             warehouseUserControl = new WarehouseUserControl();
             statisticsUserContol = new StatisticsUserContol();
             settingsUserControl = new SettingsUserControl();
+            managementUserControl = new ManagementUserControl();
 
             cashRegisterUserControl.Dock = DockStyle.Bottom;
             warehouseUserControl.Dock = DockStyle.Bottom;
             statisticsUserContol.Dock = DockStyle.Bottom;
             settingsUserControl.Dock = DockStyle.Bottom;
+            managementUserControl.Dock = DockStyle.Bottom;
 
             this.Controls.Add(cashRegisterUserControl);
             this.Controls.Add(warehouseUserControl);
             this.Controls.Add(statisticsUserContol);
             this.Controls.Add(settingsUserControl);
+            this.Controls.Add(managementUserControl);
 
             cashRegisterUserControl.Visible = false;
             warehouseUserControl.Visible = false;
             statisticsUserContol.Visible = false;
             settingsUserControl.Visible = false;
+            managementUserControl.Visible = false;
 
             mainMenuPanel.Visible = false;
         }
@@ -61,6 +66,7 @@ namespace EazyCart
             statisticsUserContol.Visible = false;
             cashRegisterUserControl.Visible = false;
             settingsUserControl.Visible = false;
+            managementUserControl.Visible = false;
 
             warehouseUserControl.Visible = true;
 
@@ -75,6 +81,7 @@ namespace EazyCart
             warehouseUserControl.Visible = false;
             cashRegisterUserControl.Visible = false;
             settingsUserControl.Visible = false;
+            managementUserControl.Visible = false;
 
             statisticsUserContol.Visible = true;
 
@@ -89,6 +96,7 @@ namespace EazyCart
             warehouseUserControl.Visible = false;
             statisticsUserContol.Visible = false;
             settingsUserControl.Visible = false;
+            managementUserControl.Visible = false;
 
             cashRegisterUserControl.Visible = true;
 
@@ -97,6 +105,35 @@ namespace EazyCart
             mainMenuPanel.Location = new Point(342, 57);
         }
 
+        private void SettingsButton_Click(object sender, EventArgs e)
+        {
+            // User control switching
+            warehouseUserControl.Visible = false;
+            statisticsUserContol.Visible = false;
+            cashRegisterUserControl.Visible = false;
+            managementUserControl.Visible = false;
+
+            settingsUserControl.Visible = true;
+
+            // Main Menu Panel Movement
+            mainMenuPanel.Visible = true;
+            mainMenuPanel.Location = new Point(1110, 57);
+        }
+
+        private void ManagementButton_Click(object sender, EventArgs e)
+        {
+            warehouseUserControl.Visible = false;
+            statisticsUserContol.Visible = false;
+            cashRegisterUserControl.Visible = false;
+            settingsUserControl.Visible = false;
+
+            managementUserControl.Visible = true;
+
+            // Main Menu Panel Movement
+            mainMenuPanel.Visible = true;
+            mainMenuPanel.Location = new Point(1110, 57);
+        }
+                
         // Making the app movable with the use of the menu panel 
         private void MenuPanel_MouseDown(object sender, MouseEventArgs e)
         {
@@ -116,20 +153,6 @@ namespace EazyCart
         private void MenuPanel_MouseUp(object sender, MouseEventArgs e)
         {
             mouseDown = false;
-        }
-
-        private void SettingsButton_Click(object sender, EventArgs e)
-        {
-            // User control switching
-            warehouseUserControl.Visible = false;
-            statisticsUserContol.Visible = false;
-            cashRegisterUserControl.Visible = false;
-
-            settingsUserControl.Visible = true;
-
-            // Main Menu Panel Movement
-            mainMenuPanel.Visible = true;
-            mainMenuPanel.Location = new Point(1110, 57);
-        }
+        }       
     }
 }

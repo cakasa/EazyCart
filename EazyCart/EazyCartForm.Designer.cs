@@ -40,6 +40,7 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.closeButton = new System.Windows.Forms.Button();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.managementButton = new System.Windows.Forms.Button();
             this.menuPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.shoppingCartPIctureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -48,8 +49,9 @@
             // menuPanel
             // 
             this.menuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.menuPanel.Controls.Add(this.mainMenuPanel);
             this.menuPanel.Controls.Add(this.settingsButton);
+            this.menuPanel.Controls.Add(this.managementButton);
+            this.menuPanel.Controls.Add(this.mainMenuPanel);
             this.menuPanel.Controls.Add(this.statisticsButton);
             this.menuPanel.Controls.Add(this.warehouseButton);
             this.menuPanel.Controls.Add(this.titleLabel);
@@ -78,9 +80,9 @@
             this.settingsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.settingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.settingsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.settingsButton.Location = new System.Drawing.Point(1108, 0);
+            this.settingsButton.Location = new System.Drawing.Point(1424, 18);
             this.settingsButton.Name = "settingsButton";
-            this.settingsButton.Size = new System.Drawing.Size(256, 60);
+            this.settingsButton.Size = new System.Drawing.Size(44, 27);
             this.settingsButton.TabIndex = 5;
             this.settingsButton.TabStop = false;
             this.settingsButton.UseVisualStyleBackColor = false;
@@ -167,6 +169,22 @@
             this.closeButton.UseVisualStyleBackColor = false;
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
+            // managementButton
+            // 
+            this.managementButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.managementButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.managementButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.managementButton.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.managementButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.managementButton.Location = new System.Drawing.Point(1108, 0);
+            this.managementButton.Name = "managementButton";
+            this.managementButton.Size = new System.Drawing.Size(256, 60);
+            this.managementButton.TabIndex = 7;
+            this.managementButton.TabStop = false;
+            this.managementButton.Text = "Management";
+            this.managementButton.UseVisualStyleBackColor = false;
+            this.managementButton.Click += new System.EventHandler(this.ManagementButton_Click);
+            // 
             // EazyCartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -202,6 +220,7 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button settingsButton;
         private System.Windows.Forms.Panel mainMenuPanel;
+        private System.Windows.Forms.Button managementButton;
     }
 }
 

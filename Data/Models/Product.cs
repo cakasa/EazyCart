@@ -15,6 +15,7 @@ namespace Data.Models
         public int SupplierId { get; set; }
         public int UnitId { get; set; }
         public int CategoryId { get; set; }
+        public decimal Quantity { get; set; }
         public decimal DeliveryPrice { get; set; }
         public decimal SellingPrice { get; set; }
 

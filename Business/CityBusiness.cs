@@ -74,11 +74,11 @@ namespace Business
             }
         }
 
-        public City GetByCountryAndName(Country selectedCountry, string selectedCityString)
+        public City GetByCountryAndName(Country country, string city)
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                return selectedCountry.Cities.First(x => x.Name == selectedCityString);
+                return this.GetAll().First(x => x.Name == city && x.CountryId == country.Id);
             }
         }
 

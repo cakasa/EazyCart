@@ -9,7 +9,63 @@ namespace Business
 {
     public class CountryBusiness
     {
+        private CityBusiness cityBusiness = new CityBusiness();
         private EazyCartContext eazyCartContext;
+
+        public void Add(string countryName, int countryId)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                var country = new Country
+                {
+                    Id = countryId,
+                    Name = countryName
+                };
+
+                eazyCartContext.Countries.Add(country);
+
+                try
+                {
+                    eazyCartContext.SaveChanges();
+                }
+                catch
+                {
+                    throw new ArgumentException($"Country with ID {countryId} already exists.");
+                }
+            }
+        }
+
+        public void Update(string countryName, int countryId)
+        {
+            Country country = new Country()
+            {
+                Id = countryId,
+                Name = countryName
+            };
+
+            using (eazyCartContext = new EazyCartContext())
+            {
+                var countryToUpdate = eazyCartContext.Countries.Find(countryId);
+                eazyCartContext.Entry(countryToUpdate).CurrentValues.SetValues(country);
+                eazyCartContext.SaveChanges();
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                var country = eazyCartContext.Countries.Find(id);
+                if (cityBusiness.GetAll().Any(x => x.CountryId == country.Id))
+                {
+                    throw new ArgumentException("One or more cities are related to this country.");
+                }
+
+                eazyCartContext.Countries.Remove(country);
+                eazyCartContext.SaveChanges();
+            }
+        }
+
 
         public List<Country> GetAll()
         {
@@ -65,41 +121,6 @@ namespace Business
             {
                 return eazyCartContext.Countries.Find(id);
             }
-        }
-
-        public void Add(Country country)
-        {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                eazyCartContext.Countries.Add(country);
-                eazyCartContext.SaveChanges();
-            }
-        }
-
-        public void Update(Country country)
-        {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                var countryToUpdate = eazyCartContext.Countries.Find(country.Id);
-                if (countryToUpdate != null)
-                {
-                    eazyCartContext.Entry(countryToUpdate).CurrentValues.SetValues(country);
-                    eazyCartContext.SaveChanges();
-                }
-            }
-        }
-
-        public void Delete(int id)
-        {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                var country = eazyCartContext.Countries.Find(id);
-                if (country != null)
-                {
-                    eazyCartContext.Countries.Remove(country);
-                    eazyCartContext.SaveChanges();
-                }
-            }
-        }
+        }   
     }
 }
