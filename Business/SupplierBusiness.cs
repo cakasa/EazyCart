@@ -11,6 +11,62 @@ namespace Business
     {
         private EazyCartContext eazyCartContext;
 
+        public void Add(string supplierName, int supplierId, string supplierCityName, string supplierCountryName)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                List<City> allCitiesWithGivenName = eazyCartContext
+                                                        .Cities
+                                                        .Where(x => x.Name == supplierCityName)
+                                                        .ToList();
+
+                var country = eazyCartContext.Countries.First(x => x.Name == supplierCountryName);
+                var city = allCitiesWithGivenName.First(x => x.CountryId == country.Id);
+
+                var supplier = new Supplier
+                {
+                    Id = supplierId,
+                    Name = supplierName,
+                    CityId = city.Id
+                };
+
+                eazyCartContext.Suppliers.Add(supplier);
+                try
+                {
+                    eazyCartContext.SaveChanges();
+                }
+                catch
+                {
+                    throw new ArgumentException($"Supplier with ID {supplierId} already exists.");
+                }
+            }
+        }
+
+        public void Update(string supplierName, int supplierId, string countryName, string cityName)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                List<City> allCitiesWithGivenName = eazyCartContext
+                                                        .Cities
+                                                        .Where(x => x.Name == cityName)
+                                                        .ToList();
+
+                var country = eazyCartContext.Countries.First(x => x.Name == countryName);
+                var city = allCitiesWithGivenName.First(x => x.CountryId == country.Id);
+
+                var newSupplier = new Supplier()
+                {
+                    Id = supplierId,
+                    Name = supplierName,
+                    CityId = city.Id
+                };
+
+                var supplierToUpdate = eazyCartContext.Suppliers.Find(supplierId);
+                eazyCartContext.Entry(supplierToUpdate).CurrentValues.SetValues(newSupplier);
+                eazyCartContext.SaveChanges();
+            }
+        }
+
         public List<Supplier> GetAll()
         {
             using (eazyCartContext = new EazyCartContext())
@@ -44,38 +100,24 @@ namespace Business
             }
         }
 
-        public void Add(Supplier supplier)
-        {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                eazyCartContext.Suppliers.Add(supplier);
-                eazyCartContext.SaveChanges();
-            }
-        }
+        
 
-        public void Update(Supplier supplier)
-        {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                var supplierToUpdate = eazyCartContext.Suppliers.Find(supplier.Id);
-                if (supplierToUpdate != null)
-                {
-                    eazyCartContext.Entry(supplierToUpdate).CurrentValues.SetValues(supplier);
-                    eazyCartContext.SaveChanges();
-                }
-            }
-        }
+        
 
         public void Delete(int id)
         {
             using (eazyCartContext = new EazyCartContext())
             {
                 var supplier = eazyCartContext.Suppliers.Find(id);
-                if (supplier != null)
+
+                List<Product> productsFromSupplier = eazyCartContext.Products.Where(x => x.SupplierId == supplier.Id).ToList();
+                if (productsFromSupplier.Count > 0)
                 {
-                    eazyCartContext.Suppliers.Remove(supplier);
-                    eazyCartContext.SaveChanges();
+                    throw new ArgumentException("One or more products are related to this supplier.");
                 }
+
+                eazyCartContext.Suppliers.Remove(supplier);
+                eazyCartContext.SaveChanges();
             }
         }
     }

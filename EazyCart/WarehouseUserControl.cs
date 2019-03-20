@@ -280,5 +280,15 @@ namespace EazyCart
                 newRow.Cells[9].Value = product.SellingPrice;
             }
         }
+
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

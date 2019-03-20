@@ -9,7 +9,6 @@ namespace Business
 {
     public class CountryBusiness
     {
-        private CityBusiness cityBusiness = new CityBusiness();
         private EazyCartContext eazyCartContext;
 
         public void Add(string countryName, int countryId)
@@ -37,16 +36,16 @@ namespace Business
 
         public void Update(string countryName, int countryId)
         {
-            Country country = new Country()
-            {
-                Id = countryId,
-                Name = countryName
-            };
-
             using (eazyCartContext = new EazyCartContext())
             {
+                var newCountry = new Country()
+                {
+                    Id = countryId,
+                    Name = countryName
+                };
+
                 var countryToUpdate = eazyCartContext.Countries.Find(countryId);
-                eazyCartContext.Entry(countryToUpdate).CurrentValues.SetValues(country);
+                eazyCartContext.Entry(countryToUpdate).CurrentValues.SetValues(newCountry);
                 eazyCartContext.SaveChanges();
             }
         }
@@ -56,7 +55,8 @@ namespace Business
             using (eazyCartContext = new EazyCartContext())
             {
                 var country = eazyCartContext.Countries.Find(id);
-                if (cityBusiness.GetAll().Any(x => x.CountryId == country.Id))
+                List<City> citiesFromCountry = eazyCartContext.Cities.Where(x => x.CountryId == country.Id).ToList();
+                if (citiesFromCountry.Count > 0)
                 {
                     throw new ArgumentException("One or more cities are related to this country.");
                 }
@@ -80,9 +80,7 @@ namespace Business
             using (eazyCartContext = new EazyCartContext())
             {
                 List<Country> countries = eazyCartContext.Countries.ToList();
-                var allCountriesNames = new List<string>();
-                allCountriesNames.Add("Country");
-                allCountriesNames.AddRange(countries.Select(x => x.Name).ToList());
+                var allCountriesNames = countries.Select(x => x.Name).ToList();
                 return allCountriesNames;
             }
         }

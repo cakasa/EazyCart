@@ -11,6 +11,78 @@ namespace Business
     {
         private EazyCartContext eazyCartContext;
 
+        public void Add(string cityName, int cityId, string cityCountry)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                var country = eazyCartContext.Countries.First(x => x.Name == cityCountry);
+                City city = new City
+                {
+                    Id = cityId,
+                    Name = cityName,
+                    CountryId = country.Id
+                };
+
+                eazyCartContext.Cities.Add(city);
+                try
+                {
+                    eazyCartContext.SaveChanges();
+                }
+                catch
+                {
+                    throw new ArgumentException($"City with ID {cityId} already exists.");
+                }
+            }
+        }
+
+        public void Update(string cityName, int cityId, string countryName)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                var country = eazyCartContext.Countries.First(x => x.Name == countryName);
+                var newCity = new City()
+                {
+                    Id = cityId,
+                    Name = cityName,
+                    CountryId = country.Id
+                };
+
+                var cityToUpdate = eazyCartContext.Cities.Find(cityId);
+                eazyCartContext.Entry(cityToUpdate).CurrentValues.SetValues(newCity);
+                eazyCartContext.SaveChanges();
+            }
+        }
+
+        public List<string> GetAllCityNamesFromCountry(string countryName)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                var allCities = eazyCartContext.Cities;
+                var country = eazyCartContext.Countries.First(x => x.Name == countryName);
+                var countryCities = allCities.Where(x => x.CountryId == country.Id);
+                var countryCitiesNames = countryCities.Select(x => x.Name).ToList();
+
+                return countryCitiesNames;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                var city = eazyCartContext.Cities.Find(id);
+
+                List<Supplier> supplierFromCity = eazyCartContext.Suppliers.Where(x => x.CityId == city.Id).ToList();
+                if (supplierFromCity.Count > 0)
+                {
+                    throw new ArgumentException("One or more suppliers are related to this city.");
+                }
+
+                eazyCartContext.Cities.Remove(city);
+                eazyCartContext.SaveChanges();
+            }
+        }
+
         public List<City> GetAll()
         {
             using (eazyCartContext = new EazyCartContext())
@@ -33,7 +105,6 @@ namespace Business
             {
                 List<City> cities = eazyCartContext.Cities.ToList();
                 var cityNames = new List<string>();
-                cityNames.Add("City");
                 cityNames.AddRange(cities.Select(x => x.Name).ToList());
                 return cityNames;
             }
@@ -48,31 +119,8 @@ namespace Business
             }
         }
 
-        public void Update(City city)
-        {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                var cityToUpdate = eazyCartContext.Cities.Find(city.Id);
-                if (cityToUpdate != null)
-                {
-                    eazyCartContext.Entry(cityToUpdate).CurrentValues.SetValues(city);
-                    eazyCartContext.SaveChanges();
-                }
-            }
-        }
 
-        public void Delete(int id)
-        {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                var city = eazyCartContext.Cities.Find(id);
-                if (city != null)
-                {
-                    eazyCartContext.Cities.Remove(city);
-                    eazyCartContext.SaveChanges();
-                }
-            }
-        }
+
 
         public City GetByCountryAndName(Country country, string city)
         {
@@ -97,5 +145,7 @@ namespace Business
                 selectedCity.Suppliers.Add(supplier);
             }
         }
+
+
     }
 }

@@ -40,6 +40,8 @@ namespace EazyCart
             supplierBusiness = new SupplierBusiness();
             UpdateCategoryTab();
             UpdateCountryTab();
+            UpdateCityTab();
+            UpdateSupplierTab();
         }
 
         private void UpdateCategoryTab()
@@ -77,6 +79,37 @@ namespace EazyCart
                 newRow.Cells[0].Value = country.Id;
                 newRow.Cells[1].Value = country.Name;
             }
+
+            UpdateComboBoxesOnCountryUpdate();
+        }
+
+        public void UpdateComboBoxesOnCountryUpdate()
+        {
+            UpdateCountryComboBox(countryForCityComboBox);
+            UpdateCountryComboBox(countryForSupplierComboBox);
+            UpdateCityComboBox(cityForSupplierComboBox);
+        }
+
+        public void UpdateComboBoxesOnCityUpdate()
+        {
+            UpdateCountryComboBox(countryForSupplierComboBox);
+            UpdateCityComboBox(cityForSupplierComboBox);
+        }
+
+        public void UpdateCountryComboBox(ComboBox comboBox)
+        {
+            List<string> allCountries = new List<string>();
+            allCountries.Add("Select Country");
+            allCountries.AddRange(countryBusiness.GetAllNames());
+            comboBox.DataSource = allCountries;
+        }
+
+        private void UpdateCityComboBox(ComboBox comboBox)
+        {
+            comboBox.Enabled = false;
+            List<string> items = new List<string>();
+            items.Add("Select City");
+            comboBox.DataSource = items;
         }
 
         // Category Tab Interactions
@@ -101,6 +134,7 @@ namespace EazyCart
             catch(ArgumentException exc)
             {
                 MessageBox.Show(exc.Message);
+                return;
             }
 
             UpdateCategoryTab();
@@ -157,6 +191,7 @@ namespace EazyCart
             catch
             {
                 MessageBox.Show("You haven't selected a row");
+                return;
             }
 
             try
@@ -213,6 +248,7 @@ namespace EazyCart
             catch (ArgumentException exc)
             {
                 MessageBox.Show(exc.Message);
+                return;
             }
 
             UpdateCountryTab();
@@ -269,6 +305,7 @@ namespace EazyCart
             catch
             {
                 MessageBox.Show("You haven't selected a row");
+                return;
             }
 
             try
@@ -278,6 +315,7 @@ namespace EazyCart
             catch (ArgumentException exc)
             {
                 MessageBox.Show(exc.Message);
+                return;
             }
 
             UpdateCountryTab();
@@ -300,6 +338,325 @@ namespace EazyCart
 
                 saveChangesForCountryButton.Enabled = false;
                 saveChangesForCountryButton.BackColor = disabledButtonColor;
+            }
+        }
+
+        // City Tab Interaction
+
+        private void AddCityButton_Click(object sender, EventArgs e)
+        {
+            string cityName = cityNameTextBox.Text;
+            string cityIdString = cityIdTextBox.Text;
+            string cityCategory = (string) countryForCityComboBox.SelectedItem;
+            int cityId;
+            bool canBeParsed = int.TryParse(cityIdString, out cityId);
+
+            if (!canBeParsed || cityName == "City Name" || cityCategory == "Select Country")
+            {
+                MessageBox.Show("Invalid values for city");
+                return;
+            }
+
+            try
+            {
+                cityBusiness.Add(cityName, cityId, cityCategory);
+            }
+            catch (ArgumentException exc)
+            {
+                MessageBox.Show(exc.Message);
+                return;
+            }
+
+            UpdateCityTab();
+        }
+
+        private void EditCityButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                cityIdTextBox.Enabled = false;
+                var item = citiesDataGridView.SelectedRows[0].Cells;
+                var cityId = (int)item[0].Value;
+                var city = cityBusiness.Get(cityId);
+                cityIdTextBox.Text = city.Id.ToString();
+                cityIdTextBox.ForeColor = SystemColors.WindowText;
+                cityNameTextBox.Text = city.Name.ToString();
+                cityNameTextBox.ForeColor = SystemColors.WindowText;
+
+                var country = countryBusiness.Get(city.CountryId);
+                 
+                countryForCityComboBox.SelectedItem = country.Name;
+            }
+            catch
+            {
+                MessageBox.Show("You haven't selected a row");
+                return;
+            }
+
+            ToggleCityEditSave();
+        }
+
+        private void SaveChangesForCityButton_Click(object sender, EventArgs e)
+        {
+            string cityName = cityNameTextBox.Text;
+            int cityId = int.Parse(cityIdTextBox.Text);
+            string countryName = countryForCityComboBox.Text;
+
+            if (cityName == "City Name" || countryName == "Select Country")
+            {
+                MessageBox.Show("Invalid values for city");
+                return;
+            }
+
+            cityBusiness.Update(cityName, cityId, countryName);
+
+            cityIdTextBox.Enabled = true;
+            ToggleCityEditSave();
+            UpdateCityTab();
+        }
+
+        private void DeleteCityButton_Click(object sender, EventArgs e)
+        {
+            int cityId = 0;
+            try
+            {
+                var item = citiesDataGridView.SelectedRows[0].Cells;
+                cityId = (int)item[0].Value;
+            }
+            catch
+            {
+                MessageBox.Show("You haven't selected a row");
+                return;
+            }
+
+            try
+            {
+                cityBusiness.Delete(cityId);
+            }
+            catch (ArgumentException exc)
+            {
+                MessageBox.Show(exc.Message);
+                return;
+            }
+
+            UpdateCityTab();
+        }
+
+        private void ToggleCityEditSave()
+        {
+            if (editCityButton.Enabled)
+            {
+                editCityButton.Enabled = false;
+                editCityButton.BackColor = disabledButtonColor;
+
+                saveChangesForCityButton.Enabled = true;
+                saveChangesForCityButton.BackColor = enabledButtonColor;
+            }
+            else
+            {
+                editCityButton.Enabled = true;
+                editCityButton.BackColor = enabledButtonColor;
+
+                saveChangesForCityButton.Enabled = false;
+                saveChangesForCityButton.BackColor = disabledButtonColor;
+            }
+        }
+
+        private void UpdateCityTab()
+        {
+            cityIdTextBox.Text = "ID";
+            cityIdTextBox.ForeColor = SystemColors.WindowFrame;
+            cityNameTextBox.Text = "City Name";
+            cityNameTextBox.ForeColor = SystemColors.WindowFrame;
+            countryForCityComboBox.SelectedIndex = 0;
+
+            citiesDataGridView.Rows.Clear();
+            List<City> allCities = cityBusiness.GetAll();
+            foreach (var city in allCities)
+            {
+                DataGridViewRow newRow = citiesDataGridView.Rows[citiesDataGridView.Rows.Add()];
+                int countryId = city.CountryId;
+                var country = countryBusiness.Get(countryId);
+
+                newRow.Cells[0].Value = city.Id;
+                newRow.Cells[1].Value = city.Name;
+                newRow.Cells[2].Value = country.Name;
+            }
+
+            UpdateComboBoxesOnCityUpdate();
+        }
+       
+        private void FilterCitiesForCountry(string country)
+        {
+            var cityNames = new List<string>();
+            cityNames.Add("Select City");
+            cityNames.AddRange(cityBusiness.GetAllCityNamesFromCountry(country));
+
+            cityForSupplierComboBox.DataSource = cityNames;
+        }
+
+        private void CountryForSupplierComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((string)countryForSupplierComboBox.SelectedItem != "Select Country")
+            {
+                string country = (string)countryForSupplierComboBox.SelectedItem;
+                FilterCitiesForCountry(country);
+                cityForSupplierComboBox.Enabled = true;
+            }
+            else
+            {
+                cityForSupplierComboBox.Text = "Select City";
+                cityForSupplierComboBox.Enabled = false;
+            }
+        }
+
+        private void AddSupplierButton_Click(object sender, EventArgs e)
+        {
+            string supplierName = supplierNameTextBox.Text;
+            string supplierIdString = supplierIdTextBox.Text;
+            string supplierCity = (string) cityForSupplierComboBox.SelectedItem;
+            string supplierCountry = (string)countryForSupplierComboBox.SelectedItem; 
+            int supplierId;
+            bool canBeParsed = int.TryParse(supplierIdString, out supplierId);
+
+            if (!canBeParsed || supplierName == "Supplier Name" || supplierCity == "Select City")
+            {
+                MessageBox.Show("Invalid values for supplier");
+                return;
+            }
+
+            try
+            {
+                supplierBusiness.Add(supplierName, supplierId, supplierCity, supplierCountry);
+            }
+            catch (ArgumentException exc)
+            {
+                MessageBox.Show(exc.Message);
+                return;
+            }
+
+            UpdateSupplierTab();
+        }
+
+        private void EditSupplierButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                supplierIdTextBox.Enabled = false;
+                var item = suppliersDataGridView.SelectedRows[0].Cells;
+                var supplierId = (int)item[0].Value;
+                var supplier = supplierBusiness.Get(supplierId);
+                supplierIdTextBox.Text = supplier.Id.ToString();
+                supplierIdTextBox.ForeColor = SystemColors.WindowText;
+                supplierNameTextBox.Text = supplier.Name.ToString();
+                supplierNameTextBox.ForeColor = SystemColors.WindowText;
+
+                var city = cityBusiness.Get(supplier.CityId);
+                var country = countryBusiness.Get(city.CountryId);
+
+                countryForSupplierComboBox.SelectedItem = country.Name;
+                FilterCitiesForCountry(country.Name);
+                cityForSupplierComboBox.SelectedItem = city.Name;
+            }
+            catch
+            {
+                MessageBox.Show("You haven't selected a row");
+                return;
+            }
+
+            ToggleSupplierEditSave();
+        }
+
+        private void SaveChangesForSupplierButton_Click(object sender, EventArgs e)
+        {
+            string supplierName = supplierNameTextBox.Text;
+            int supplierId = int.Parse(supplierIdTextBox.Text);
+            string countryName = countryForSupplierComboBox.Text;
+            string cityName = cityForSupplierComboBox.Text;
+
+            if (supplierName == "Supplier Name" || countryName == "Select Country" || cityName == "Select City")
+            {
+                MessageBox.Show("Invalid values for supplier");
+                return;
+            }
+
+            supplierBusiness.Update(supplierName, supplierId, countryName, cityName);
+
+            supplierIdTextBox.Enabled = true;
+            ToggleSupplierEditSave();
+            UpdateSupplierTab();
+        }
+
+        private void DeleteSupplierButton_Click(object sender, EventArgs e)
+        {
+            int supplierId = 0;
+            try
+            {
+                var item = suppliersDataGridView.SelectedRows[0].Cells;
+                supplierId = (int)item[0].Value;
+            }
+            catch
+            {
+                MessageBox.Show("You haven't selected a row");
+                return;
+            }
+
+            try
+            {
+                supplierBusiness.Delete(supplierId);
+            }
+            catch (ArgumentException exc)
+            {
+                MessageBox.Show(exc.Message);
+                return;
+            }
+
+            UpdateSupplierTab();
+        }
+
+        private void ToggleSupplierEditSave()
+        {
+            if (editSupplierButton.Enabled)
+            {
+                editSupplierButton.Enabled = false;
+                editSupplierButton.BackColor = disabledButtonColor;
+
+                saveChangesForSupplierButton.Enabled = true;
+                saveChangesForSupplierButton.BackColor = enabledButtonColor;
+            }
+            else
+            {
+                editSupplierButton.Enabled = true;
+                editSupplierButton.BackColor = enabledButtonColor;
+
+                saveChangesForSupplierButton.Enabled = false;
+                saveChangesForSupplierButton.BackColor = disabledButtonColor;
+            }
+        }
+
+        private void UpdateSupplierTab()
+        {
+            supplierIdTextBox.Text = "ID";
+            supplierIdTextBox.ForeColor = SystemColors.WindowFrame;
+            supplierNameTextBox.Text = "Supplier Name";
+            supplierNameTextBox.ForeColor = SystemColors.WindowFrame;
+            countryForSupplierComboBox.SelectedIndex = 0;
+            cityForSupplierComboBox.SelectedIndex = 0;
+            cityForSupplierComboBox.Enabled = false;
+
+            suppliersDataGridView.Rows.Clear();
+            List<Supplier> allSuppliers = supplierBusiness.GetAll();
+            foreach (var supplier in allSuppliers)
+            {
+                DataGridViewRow newRow = suppliersDataGridView.Rows[suppliersDataGridView.Rows.Add()];
+                var city = cityBusiness.Get(supplier.CityId);
+                int countryId = city.CountryId;
+                var country = countryBusiness.Get(countryId);
+
+                newRow.Cells[0].Value = supplier.Id;
+                newRow.Cells[1].Value = supplier.Name;
+                newRow.Cells[2].Value = city.Name;
+                newRow.Cells[3].Value = country.Name;
             }
         }
 
@@ -345,6 +702,46 @@ namespace EazyCart
             AddPromptToTextBoxIfEmpty(categoryIdTextBox, "ID");
         }
 
+        private void CityIdTextBox_Enter(object sender, EventArgs e)
+        {
+            RemovePromptFromTextBoxWhenTyping(cityIdTextBox, "ID");
+        }
+
+        private void CityIdTextBox_Leave(object sender, EventArgs e)
+        {
+            AddPromptToTextBoxIfEmpty(cityIdTextBox, "ID");
+        }
+
+        private void CityNameTextBox_Enter(object sender, EventArgs e)
+        {
+            RemovePromptFromTextBoxWhenTyping(cityNameTextBox, "City Name");
+        }
+
+        private void CityNameTextBox_Leave(object sender, EventArgs e)
+        {
+            AddPromptToTextBoxIfEmpty(cityNameTextBox, "City Name");
+        }
+
+        private void SupplierIdTextBox_Enter(object sender, EventArgs e)
+        {
+            RemovePromptFromTextBoxWhenTyping(supplierIdTextBox, "ID");
+        }
+
+        private void SupplierIdTextBox_Leave(object sender, EventArgs e)
+        {
+            AddPromptToTextBoxIfEmpty(supplierIdTextBox, "ID");
+        }
+
+        private void SupplierNameTextBox_Enter(object sender, EventArgs e)
+        {
+            RemovePromptFromTextBoxWhenTyping(supplierNameTextBox, "Supplier Name");
+        }
+
+        private void SupplierNameTextBox_Leave(object sender, EventArgs e)
+        {
+            AddPromptToTextBoxIfEmpty(supplierNameTextBox, "Supplier Name");
+        }      
+
         private void RemovePromptFromTextBoxWhenTyping(TextBox textBox, string prompt)
         {
             if (textBox.Text == prompt)
@@ -361,6 +758,11 @@ namespace EazyCart
                 textBox.Text = prompt;
                 textBox.ForeColor = SystemColors.WindowFrame;
             }
+        }
+
+        private void GroupBox3_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

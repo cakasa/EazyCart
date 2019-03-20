@@ -44,17 +44,17 @@ namespace Business
         }
 
         public void Update(string categoryName, int categoryId)
-        {
-            Category category = new Category()
-            {
-                Name = categoryName,
-                Id = categoryId
-            };
-
+        {         
             using (eazyCartContext = new EazyCartContext())
             {
+                var newCategory = new Category()
+                {
+                    Name = categoryName,
+                    Id = categoryId
+                };
+
                 var categoryToUpdate = eazyCartContext.Categories.Find(categoryId);
-                eazyCartContext.Entry(categoryToUpdate).CurrentValues.SetValues(category);
+                eazyCartContext.Entry(categoryToUpdate).CurrentValues.SetValues(newCategory);
                 eazyCartContext.SaveChanges();
             }
         }
