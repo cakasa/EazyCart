@@ -60,7 +60,18 @@ namespace EazyCart
                 newRow.Cells[0].Value = category.Id;
                 newRow.Cells[1].Value = category.Name;
             }
+        }
 
+        private void UpdateCategoryComboBoxOnWarehouseUserControl()
+        {
+            EazyCartForm eazyCartForm = (EazyCartForm)EazyCartForm.ActiveForm;
+            eazyCartForm.warehouseUserControl.UpdateCategoryComboBox();
+        }
+
+        private void UpdateSupplierComboBoxOnWarehouseUserControl()
+        {
+            EazyCartForm eazyCartForm = (EazyCartForm)EazyCartForm.ActiveForm;
+            eazyCartForm.warehouseUserControl.UpdateSupplierComboBox();
         }
 
         private void UpdateCountryTab()
@@ -138,6 +149,7 @@ namespace EazyCart
             }
 
             UpdateCategoryTab();
+            UpdateCategoryComboBoxOnWarehouseUserControl();
         }
 
         private void EditCategoryButton_Click(object sender, EventArgs e)
@@ -178,6 +190,7 @@ namespace EazyCart
             categoryIdTextBox.Enabled = true;
             ToggleCategoryEditSave();
             UpdateCategoryTab();
+            UpdateCategoryComboBoxOnWarehouseUserControl();
         }
 
         private void DeleteCategoryButton_Click(object sender, EventArgs e)
@@ -204,6 +217,7 @@ namespace EazyCart
             }
 
             UpdateCategoryTab();
+            UpdateCategoryComboBoxOnWarehouseUserControl();
         }
 
         private void ToggleCategoryEditSave()
@@ -536,6 +550,7 @@ namespace EazyCart
             }
 
             UpdateSupplierTab();
+            UpdateSupplierComboBoxOnWarehouseUserControl();
         }
 
         private void EditSupplierButton_Click(object sender, EventArgs e)
@@ -585,6 +600,7 @@ namespace EazyCart
             supplierIdTextBox.Enabled = true;
             ToggleSupplierEditSave();
             UpdateSupplierTab();
+            UpdateSupplierComboBoxOnWarehouseUserControl();
         }
 
         private void DeleteSupplierButton_Click(object sender, EventArgs e)
@@ -612,6 +628,7 @@ namespace EazyCart
             }
 
             UpdateSupplierTab();
+            UpdateSupplierComboBoxOnWarehouseUserControl();
         }
 
         private void ToggleSupplierEditSave()

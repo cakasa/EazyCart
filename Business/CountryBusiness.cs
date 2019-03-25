@@ -119,6 +119,17 @@ namespace Business
             {
                 return eazyCartContext.Countries.Find(id);
             }
-        }   
+        }
+
+        public string GetNameBySupplier(string supplierName)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                var supplier = eazyCartContext.Suppliers.First(x => x.Name == supplierName);
+                var city = eazyCartContext.Cities.First(x => x.Id == supplier.CityId);
+                var country = eazyCartContext.Countries.First(x => x.Id == city.CountryId);
+                return country.Name;
+            }
+        }
     }
 }

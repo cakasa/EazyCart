@@ -29,18 +29,18 @@
         private void InitializeComponent()
         {
             this.unitTypesGroupBox = new System.Windows.Forms.GroupBox();
-            this.britishUnitsRadioButton = new System.Windows.Forms.RadioButton();
-            this.europeanUnitsUserControl = new System.Windows.Forms.RadioButton();
             this.totalLinePanel = new System.Windows.Forms.Panel();
+            this.europeanUnitsUserControl = new System.Windows.Forms.RadioButton();
+            this.britishUnitsRadioButton = new System.Windows.Forms.RadioButton();
             this.currencyGroupBox = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.otherCurrencyRadioButton = new System.Windows.Forms.RadioButton();
+            this.rubleRadioButton = new System.Windows.Forms.RadioButton();
+            this.levRadioButton = new System.Windows.Forms.RadioButton();
+            this.euroRadioButton = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dollarRadioButton = new System.Windows.Forms.RadioButton();
             this.poundRadioButton = new System.Windows.Forms.RadioButton();
-            this.euroRadioButton = new System.Windows.Forms.RadioButton();
-            this.levRadioButton = new System.Windows.Forms.RadioButton();
-            this.rubleRadioButton = new System.Windows.Forms.RadioButton();
-            this.otherCurrencyRadioButton = new System.Windows.Forms.RadioButton();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.themeGroupBox = new System.Windows.Forms.GroupBox();
             this.blueThemeRadioButton = new System.Windows.Forms.RadioButton();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -72,6 +72,26 @@
             this.unitTypesGroupBox.TabStop = false;
             this.unitTypesGroupBox.Text = "Unit Types";
             // 
+            // totalLinePanel
+            // 
+            this.totalLinePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.totalLinePanel.Location = new System.Drawing.Point(8, 30);
+            this.totalLinePanel.Name = "totalLinePanel";
+            this.totalLinePanel.Size = new System.Drawing.Size(250, 5);
+            this.totalLinePanel.TabIndex = 10;
+            // 
+            // europeanUnitsUserControl
+            // 
+            this.europeanUnitsUserControl.AutoSize = true;
+            this.europeanUnitsUserControl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.europeanUnitsUserControl.Location = new System.Drawing.Point(12, 41);
+            this.europeanUnitsUserControl.Name = "europeanUnitsUserControl";
+            this.europeanUnitsUserControl.Size = new System.Drawing.Size(143, 25);
+            this.europeanUnitsUserControl.TabIndex = 1;
+            this.europeanUnitsUserControl.TabStop = true;
+            this.europeanUnitsUserControl.Text = "European (KG, L)";
+            this.europeanUnitsUserControl.UseVisualStyleBackColor = true;
+            // 
             // britishUnitsRadioButton
             // 
             this.britishUnitsRadioButton.AutoSize = true;
@@ -83,26 +103,6 @@
             this.britishUnitsRadioButton.TabStop = true;
             this.britishUnitsRadioButton.Text = "British/American (LBS, GAL)";
             this.britishUnitsRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // europeanUnitsUserControl
-            // 
-            this.europeanUnitsUserControl.AutoSize = true;
-            this.europeanUnitsUserControl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.europeanUnitsUserControl.Location = new System.Drawing.Point(12, 41);
-            this.europeanUnitsUserControl.Name = "europeanUnitsUserControl";
-            this.europeanUnitsUserControl.Size = new System.Drawing.Size(142, 25);
-            this.europeanUnitsUserControl.TabIndex = 1;
-            this.europeanUnitsUserControl.TabStop = true;
-            this.europeanUnitsUserControl.Text = "European (KG, L)";
-            this.europeanUnitsUserControl.UseVisualStyleBackColor = true;
-            // 
-            // totalLinePanel
-            // 
-            this.totalLinePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.totalLinePanel.Location = new System.Drawing.Point(8, 30);
-            this.totalLinePanel.Name = "totalLinePanel";
-            this.totalLinePanel.Size = new System.Drawing.Size(250, 5);
-            this.totalLinePanel.TabIndex = 10;
             // 
             // currencyGroupBox
             // 
@@ -121,6 +121,62 @@
             this.currencyGroupBox.TabIndex = 11;
             this.currencyGroupBox.TabStop = false;
             this.currencyGroupBox.Text = "Currency";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBox1.Location = new System.Drawing.Point(32, 196);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(169, 29);
+            this.textBox1.TabIndex = 15;
+            this.textBox1.Text = "Other (Please specify)";
+            // 
+            // otherCurrencyRadioButton
+            // 
+            this.otherCurrencyRadioButton.AutoSize = true;
+            this.otherCurrencyRadioButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.otherCurrencyRadioButton.Location = new System.Drawing.Point(12, 203);
+            this.otherCurrencyRadioButton.Name = "otherCurrencyRadioButton";
+            this.otherCurrencyRadioButton.Size = new System.Drawing.Size(14, 13);
+            this.otherCurrencyRadioButton.TabIndex = 14;
+            this.otherCurrencyRadioButton.TabStop = true;
+            this.otherCurrencyRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // rubleRadioButton
+            // 
+            this.rubleRadioButton.AutoSize = true;
+            this.rubleRadioButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rubleRadioButton.Location = new System.Drawing.Point(12, 165);
+            this.rubleRadioButton.Name = "rubleRadioButton";
+            this.rubleRadioButton.Size = new System.Drawing.Size(149, 25);
+            this.rubleRadioButton.TabIndex = 13;
+            this.rubleRadioButton.TabStop = true;
+            this.rubleRadioButton.Text = "Russian Ruble (₽)";
+            this.rubleRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // levRadioButton
+            // 
+            this.levRadioButton.AutoSize = true;
+            this.levRadioButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.levRadioButton.Location = new System.Drawing.Point(12, 134);
+            this.levRadioButton.Name = "levRadioButton";
+            this.levRadioButton.Size = new System.Drawing.Size(155, 25);
+            this.levRadioButton.TabIndex = 12;
+            this.levRadioButton.TabStop = true;
+            this.levRadioButton.Text = "Bulgarian Lev (лв.)";
+            this.levRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // euroRadioButton
+            // 
+            this.euroRadioButton.AutoSize = true;
+            this.euroRadioButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.euroRadioButton.Location = new System.Drawing.Point(12, 103);
+            this.euroRadioButton.Name = "euroRadioButton";
+            this.euroRadioButton.Size = new System.Drawing.Size(83, 25);
+            this.euroRadioButton.TabIndex = 11;
+            this.euroRadioButton.TabStop = true;
+            this.euroRadioButton.Text = "Euro (€)";
+            this.euroRadioButton.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -148,67 +204,11 @@
             this.poundRadioButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.poundRadioButton.Location = new System.Drawing.Point(12, 72);
             this.poundRadioButton.Name = "poundRadioButton";
-            this.poundRadioButton.Size = new System.Drawing.Size(143, 25);
+            this.poundRadioButton.Size = new System.Drawing.Size(144, 25);
             this.poundRadioButton.TabIndex = 0;
             this.poundRadioButton.TabStop = true;
             this.poundRadioButton.Text = "British Pound (£)";
             this.poundRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // euroRadioButton
-            // 
-            this.euroRadioButton.AutoSize = true;
-            this.euroRadioButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.euroRadioButton.Location = new System.Drawing.Point(12, 103);
-            this.euroRadioButton.Name = "euroRadioButton";
-            this.euroRadioButton.Size = new System.Drawing.Size(83, 25);
-            this.euroRadioButton.TabIndex = 11;
-            this.euroRadioButton.TabStop = true;
-            this.euroRadioButton.Text = "Euro (€)";
-            this.euroRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // levRadioButton
-            // 
-            this.levRadioButton.AutoSize = true;
-            this.levRadioButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.levRadioButton.Location = new System.Drawing.Point(12, 134);
-            this.levRadioButton.Name = "levRadioButton";
-            this.levRadioButton.Size = new System.Drawing.Size(155, 25);
-            this.levRadioButton.TabIndex = 12;
-            this.levRadioButton.TabStop = true;
-            this.levRadioButton.Text = "Bulgarian Lev (лв.)";
-            this.levRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // rubleRadioButton
-            // 
-            this.rubleRadioButton.AutoSize = true;
-            this.rubleRadioButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.rubleRadioButton.Location = new System.Drawing.Point(12, 165);
-            this.rubleRadioButton.Name = "rubleRadioButton";
-            this.rubleRadioButton.Size = new System.Drawing.Size(149, 25);
-            this.rubleRadioButton.TabIndex = 13;
-            this.rubleRadioButton.TabStop = true;
-            this.rubleRadioButton.Text = "Russian Ruble (₽)";
-            this.rubleRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // otherCurrencyRadioButton
-            // 
-            this.otherCurrencyRadioButton.AutoSize = true;
-            this.otherCurrencyRadioButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.otherCurrencyRadioButton.Location = new System.Drawing.Point(12, 203);
-            this.otherCurrencyRadioButton.Name = "otherCurrencyRadioButton";
-            this.otherCurrencyRadioButton.Size = new System.Drawing.Size(14, 13);
-            this.otherCurrencyRadioButton.TabIndex = 14;
-            this.otherCurrencyRadioButton.TabStop = true;
-            this.otherCurrencyRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(32, 196);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(169, 29);
-            this.textBox1.TabIndex = 15;
-            this.textBox1.Text = "Other (Please specify)";
             // 
             // themeGroupBox
             // 
@@ -255,6 +255,7 @@
             this.lightThemeRadioButton.TabStop = true;
             this.lightThemeRadioButton.Text = "Light Theme";
             this.lightThemeRadioButton.UseVisualStyleBackColor = true;
+            this.lightThemeRadioButton.CheckedChanged += new System.EventHandler(this.LightThemeRadioButton_CheckedChanged);
             // 
             // darkThemeRadioButton
             // 
@@ -267,6 +268,7 @@
             this.darkThemeRadioButton.TabStop = true;
             this.darkThemeRadioButton.Text = "Dark Theme";
             this.darkThemeRadioButton.UseVisualStyleBackColor = true;
+            this.darkThemeRadioButton.CheckedChanged += new System.EventHandler(this.DarkThemeRadioButton_CheckedChanged);
             // 
             // label1
             // 

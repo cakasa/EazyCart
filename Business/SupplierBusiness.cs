@@ -81,7 +81,6 @@ namespace Business
             {
                 List<Supplier> suppliers = eazyCartContext.Suppliers.ToList();
                 var supplierNames = new List<string>();
-                supplierNames.Add("Supplier Name");
 
                 foreach (var supplier in suppliers)
                 {

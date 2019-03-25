@@ -13,7 +13,7 @@ namespace EazyCart
     public partial class EazyCartForm : Form
     {
         private CashRegisterUserControl cashRegisterUserControl;
-        private WarehouseUserControl warehouseUserControl;
+        public WarehouseUserControl warehouseUserControl;
         private StatisticsUserContol statisticsUserContol;
         private SettingsUserControl settingsUserControl;
         private ManagementUserControl managementUserControl;
@@ -21,6 +21,16 @@ namespace EazyCart
         public EazyCartForm()
         {
             InitializeComponent();
+            InitializeFormUserControls();
+        }
+
+        private void InitializeFormUserControls()
+        {
+            cashRegisterUserControl = new CashRegisterUserControl();
+            warehouseUserControl = new WarehouseUserControl();
+            statisticsUserContol = new StatisticsUserContol();
+            settingsUserControl = new SettingsUserControl();
+            managementUserControl = new ManagementUserControl();
         }
 
         int mouseX = 0, mouseY = 0;
@@ -28,12 +38,6 @@ namespace EazyCart
 
         private void EazyCartForm_Load(object sender, EventArgs e)
         {
-            cashRegisterUserControl = new CashRegisterUserControl();
-            warehouseUserControl = new WarehouseUserControl();
-            statisticsUserContol = new StatisticsUserContol();
-            settingsUserControl = new SettingsUserControl();
-            managementUserControl = new ManagementUserControl();
-
             cashRegisterUserControl.Dock = DockStyle.Bottom;
             warehouseUserControl.Dock = DockStyle.Bottom;
             statisticsUserContol.Dock = DockStyle.Bottom;

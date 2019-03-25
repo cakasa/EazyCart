@@ -47,10 +47,10 @@
             this.supplierNameComboBox = new System.Windows.Forms.ComboBox();
             this.pricingGroupBox = new System.Windows.Forms.GroupBox();
             this.unitsGroupBox = new System.Windows.Forms.GroupBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.litreRadioButton = new System.Windows.Forms.RadioButton();
+            this.kilogramRadioButton = new System.Windows.Forms.RadioButton();
             this.unitRadioButton = new System.Windows.Forms.RadioButton();
-            this.label3 = new System.Windows.Forms.Label();
+            this.netProfitAmountLabel = new System.Windows.Forms.Label();
             this.netProfitTextLabel = new System.Windows.Forms.Label();
             this.sellingPriceTextBox = new System.Windows.Forms.TextBox();
             this.deliveryPriceTextBox = new System.Windows.Forms.TextBox();
@@ -138,7 +138,6 @@
             this.categoryComboBox.Name = "categoryComboBox";
             this.categoryComboBox.Size = new System.Drawing.Size(330, 33);
             this.categoryComboBox.TabIndex = 6;
-            this.categoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
             // 
             // productNameTextBox
             // 
@@ -234,7 +233,6 @@
             // 
             this.supplierNameComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.supplierNameComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.supplierNameComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.supplierNameComboBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.supplierNameComboBox.ForeColor = System.Drawing.SystemColors.WindowText;
             this.supplierNameComboBox.FormattingEnabled = true;
@@ -242,11 +240,12 @@
             this.supplierNameComboBox.Name = "supplierNameComboBox";
             this.supplierNameComboBox.Size = new System.Drawing.Size(404, 33);
             this.supplierNameComboBox.TabIndex = 11;
+            this.supplierNameComboBox.SelectedIndexChanged += new System.EventHandler(this.supplierNameComboBox_SelectedIndexChanged);
             // 
             // pricingGroupBox
             // 
             this.pricingGroupBox.Controls.Add(this.unitsGroupBox);
-            this.pricingGroupBox.Controls.Add(this.label3);
+            this.pricingGroupBox.Controls.Add(this.netProfitAmountLabel);
             this.pricingGroupBox.Controls.Add(this.netProfitTextLabel);
             this.pricingGroupBox.Controls.Add(this.sellingPriceTextBox);
             this.pricingGroupBox.Controls.Add(this.deliveryPriceTextBox);
@@ -260,8 +259,8 @@
             // 
             // unitsGroupBox
             // 
-            this.unitsGroupBox.Controls.Add(this.radioButton2);
-            this.unitsGroupBox.Controls.Add(this.radioButton1);
+            this.unitsGroupBox.Controls.Add(this.litreRadioButton);
+            this.unitsGroupBox.Controls.Add(this.kilogramRadioButton);
             this.unitsGroupBox.Controls.Add(this.unitRadioButton);
             this.unitsGroupBox.Location = new System.Drawing.Point(250, 15);
             this.unitsGroupBox.Name = "unitsGroupBox";
@@ -270,27 +269,27 @@
             this.unitsGroupBox.TabStop = false;
             this.unitsGroupBox.Text = "Units";
             // 
-            // radioButton2
+            // litreRadioButton
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(6, 90);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(77, 24);
-            this.radioButton2.TabIndex = 24;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Litre (L)";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.litreRadioButton.AutoSize = true;
+            this.litreRadioButton.Location = new System.Drawing.Point(6, 90);
+            this.litreRadioButton.Name = "litreRadioButton";
+            this.litreRadioButton.Size = new System.Drawing.Size(77, 24);
+            this.litreRadioButton.TabIndex = 24;
+            this.litreRadioButton.TabStop = true;
+            this.litreRadioButton.Text = "Litre (L)";
+            this.litreRadioButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // kilogramRadioButton
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(6, 58);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(120, 24);
-            this.radioButton1.TabIndex = 23;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Kilogram (KG)";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.kilogramRadioButton.AutoSize = true;
+            this.kilogramRadioButton.Location = new System.Drawing.Point(6, 58);
+            this.kilogramRadioButton.Name = "kilogramRadioButton";
+            this.kilogramRadioButton.Size = new System.Drawing.Size(121, 24);
+            this.kilogramRadioButton.TabIndex = 23;
+            this.kilogramRadioButton.TabStop = true;
+            this.kilogramRadioButton.Text = "Kilogram (KG)";
+            this.kilogramRadioButton.UseVisualStyleBackColor = true;
             // 
             // unitRadioButton
             // 
@@ -303,17 +302,17 @@
             this.unitRadioButton.Text = "Unit (UN)";
             this.unitRadioButton.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // netProfitAmountLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(95, 116);
-            this.label3.MinimumSize = new System.Drawing.Size(130, 20);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(130, 20);
-            this.label3.TabIndex = 20;
-            this.label3.Text = "$0.33";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.netProfitAmountLabel.AutoSize = true;
+            this.netProfitAmountLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.netProfitAmountLabel.Location = new System.Drawing.Point(95, 116);
+            this.netProfitAmountLabel.MinimumSize = new System.Drawing.Size(130, 20);
+            this.netProfitAmountLabel.Name = "netProfitAmountLabel";
+            this.netProfitAmountLabel.Size = new System.Drawing.Size(130, 20);
+            this.netProfitAmountLabel.TabIndex = 20;
+            this.netProfitAmountLabel.Text = "$0.33";
+            this.netProfitAmountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // netProfitTextLabel
             // 
@@ -334,6 +333,7 @@
             this.sellingPriceTextBox.Size = new System.Drawing.Size(200, 33);
             this.sellingPriceTextBox.TabIndex = 18;
             this.sellingPriceTextBox.Text = "Selling Price";
+            this.sellingPriceTextBox.TextChanged += new System.EventHandler(this.sellingPriceTextBox_TextChanged);
             this.sellingPriceTextBox.Enter += new System.EventHandler(this.SellingPriceTextBox_Enter);
             this.sellingPriceTextBox.Leave += new System.EventHandler(this.SellingPriceTextBox_Leave);
             // 
@@ -346,6 +346,7 @@
             this.deliveryPriceTextBox.Size = new System.Drawing.Size(200, 33);
             this.deliveryPriceTextBox.TabIndex = 17;
             this.deliveryPriceTextBox.Text = "Delivery Price";
+            this.deliveryPriceTextBox.TextChanged += new System.EventHandler(this.deliveryPriceTextBox_TextChanged);
             this.deliveryPriceTextBox.Enter += new System.EventHandler(this.DeliveryPriceTextBox_Enter);
             this.deliveryPriceTextBox.Leave += new System.EventHandler(this.DeliveryPriceTextBox_Leave);
             // 
@@ -433,7 +434,6 @@
             this.button1.Size = new System.Drawing.Size(305, 33);
             this.button1.TabIndex = 29;
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // deliveryQuantityTextBox
             // 
@@ -625,13 +625,13 @@
         private System.Windows.Forms.ComboBox supplierNameComboBox;
         private System.Windows.Forms.GroupBox pricingGroupBox;
         private System.Windows.Forms.GroupBox unitsGroupBox;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label netProfitAmountLabel;
         private System.Windows.Forms.Label netProfitTextLabel;
         private System.Windows.Forms.TextBox sellingPriceTextBox;
         private System.Windows.Forms.TextBox deliveryPriceTextBox;
         private System.Windows.Forms.RadioButton unitRadioButton;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton litreRadioButton;
+        private System.Windows.Forms.RadioButton kilogramRadioButton;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button addProductButton;
         private System.Windows.Forms.GroupBox makeDeliveryGroupBox;

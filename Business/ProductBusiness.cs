@@ -73,5 +73,39 @@ namespace Business
                 }
             }
         }
+
+        public void Add(string productCode, string categoryName, string productName, decimal quantity, string supplierName,
+            decimal deliveryPrice, decimal sellingPrice, string unitName)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                var category = eazyCartContext.Categories.First(x => x.Name == categoryName);
+                var supplier = eazyCartContext.Suppliers.First(x => x.Name == supplierName);
+                var unit = eazyCartContext.Units.First(x => x.Name == unitName);
+
+                var product = new Product
+                {
+                    Code = productCode,
+                    CategoryId = category.Id,
+                    Name = productName,
+                    Quantity = quantity,
+                    SupplierId = supplier.Id,
+                    DeliveryPrice = deliveryPrice,
+                    SellingPrice = sellingPrice,
+                    UnitId = unit.Id
+                };
+
+                eazyCartContext.Products.Add(product);
+                
+                try
+                {
+                    eazyCartContext.SaveChanges();
+                }
+                catch
+                {
+                    throw new ArgumentException($"Product with code {productCode} already exists.");
+                }
+            }
+        }
     }
 }

@@ -47,41 +47,41 @@
             this.saveChangesForCountryButton = new System.Windows.Forms.Button();
             this.editCountryButton = new System.Windows.Forms.Button();
             this.countriesDataGridView = new System.Windows.Forms.DataGridView();
+            this.countryIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.countryNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addCountryButton = new System.Windows.Forms.Button();
             this.countryNameTextBox = new System.Windows.Forms.TextBox();
             this.citiesGroupBox = new System.Windows.Forms.GroupBox();
             this.cityIdTextBox = new System.Windows.Forms.TextBox();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.countryForCityComboBox = new System.Windows.Forms.ComboBox();
             this.deteleteCityButton = new System.Windows.Forms.Button();
             this.saveChangesForCityButton = new System.Windows.Forms.Button();
             this.editCityButton = new System.Windows.Forms.Button();
             this.citiesDataGridView = new System.Windows.Forms.DataGridView();
+            this.cityIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cityNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.countryForCityName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addCityButton = new System.Windows.Forms.Button();
             this.cityNameTextBox = new System.Windows.Forms.TextBox();
             this.categoriesGroupBox = new System.Windows.Forms.GroupBox();
             this.categoryIdTextBox = new System.Windows.Forms.TextBox();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.deleteCategoryButton = new System.Windows.Forms.Button();
             this.saveChangesForCategoryButton = new System.Windows.Forms.Button();
             this.editCategoryButton = new System.Windows.Forms.Button();
             this.categoriesDataGridView = new System.Windows.Forms.DataGridView();
-            this.addCategoryButton = new System.Windows.Forms.Button();
-            this.categoryNameTextBox = new System.Windows.Forms.TextBox();
             this.categoryIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.categoryNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cityIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cityNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.countryForCityName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.countryIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.countryNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.addCategoryButton = new System.Windows.Forms.Button();
+            this.categoryNameTextBox = new System.Windows.Forms.TextBox();
             this.supplierNameTextBox = new System.Windows.Forms.TextBox();
             this.addSupplierButton = new System.Windows.Forms.Button();
             this.suppliersDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.supplierCityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.supplierNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.supplierIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.supplierNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.supplierCityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.editSupplierButton = new System.Windows.Forms.Button();
             this.saveChangesForSupplierButton = new System.Windows.Forms.Button();
             this.countryForSupplierComboBox = new System.Windows.Forms.ComboBox();
@@ -243,6 +243,20 @@
             this.countriesDataGridView.TabIndex = 8;
             this.countriesDataGridView.TabStop = false;
             // 
+            // countryIdColumn
+            // 
+            this.countryIdColumn.HeaderText = "ID";
+            this.countryIdColumn.Name = "countryIdColumn";
+            this.countryIdColumn.ReadOnly = true;
+            this.countryIdColumn.Width = 75;
+            // 
+            // countryNameColumn
+            // 
+            this.countryNameColumn.HeaderText = "COUNTRY NAME";
+            this.countryNameColumn.Name = "countryNameColumn";
+            this.countryNameColumn.ReadOnly = true;
+            this.countryNameColumn.Width = 231;
+            // 
             // addCountryButton
             // 
             this.addCountryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
@@ -302,6 +316,14 @@
             this.cityIdTextBox.Text = "ID";
             this.cityIdTextBox.Enter += new System.EventHandler(this.CityIdTextBox_Enter);
             this.cityIdTextBox.Leave += new System.EventHandler(this.CityIdTextBox_Leave);
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.panel3.Location = new System.Drawing.Point(9, 29);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(389, 5);
+            this.panel3.TabIndex = 11;
             // 
             // countryForCityComboBox
             // 
@@ -422,6 +444,27 @@
             this.citiesDataGridView.TabIndex = 18;
             this.citiesDataGridView.TabStop = false;
             // 
+            // cityIdColumn
+            // 
+            this.cityIdColumn.HeaderText = "ID";
+            this.cityIdColumn.Name = "cityIdColumn";
+            this.cityIdColumn.ReadOnly = true;
+            this.cityIdColumn.Width = 75;
+            // 
+            // cityNameColumn
+            // 
+            this.cityNameColumn.HeaderText = "CITY NAME";
+            this.cityNameColumn.Name = "cityNameColumn";
+            this.cityNameColumn.ReadOnly = true;
+            this.cityNameColumn.Width = 175;
+            // 
+            // countryForCityName
+            // 
+            this.countryForCityName.HeaderText = "COUNTRY";
+            this.countryForCityName.Name = "countryForCityName";
+            this.countryForCityName.ReadOnly = true;
+            this.countryForCityName.Width = 126;
+            // 
             // addCityButton
             // 
             this.addCityButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
@@ -479,6 +522,14 @@
             this.categoryIdTextBox.Text = "ID";
             this.categoryIdTextBox.Enter += new System.EventHandler(this.CategoryIdTextBox_Enter);
             this.categoryIdTextBox.Leave += new System.EventHandler(this.CategoryIdTextBox_Leave);
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.panel6.Location = new System.Drawing.Point(9, 29);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(310, 5);
+            this.panel6.TabIndex = 32;
             // 
             // deleteCategoryButton
             // 
@@ -585,6 +636,20 @@
             this.categoriesDataGridView.TabIndex = 36;
             this.categoriesDataGridView.TabStop = false;
             // 
+            // categoryIdColumn
+            // 
+            this.categoryIdColumn.HeaderText = "ID";
+            this.categoryIdColumn.Name = "categoryIdColumn";
+            this.categoryIdColumn.ReadOnly = true;
+            this.categoryIdColumn.Width = 75;
+            // 
+            // categoryNameColumn
+            // 
+            this.categoryNameColumn.HeaderText = "CATEGORY NAME";
+            this.categoryNameColumn.Name = "categoryNameColumn";
+            this.categoryNameColumn.ReadOnly = true;
+            this.categoryNameColumn.Width = 220;
+            // 
             // addCategoryButton
             // 
             this.addCategoryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
@@ -612,71 +677,6 @@
             this.categoryNameTextBox.Text = "Category Name";
             this.categoryNameTextBox.Enter += new System.EventHandler(this.CategoryNameTextBox_Enter);
             this.categoryNameTextBox.Leave += new System.EventHandler(this.CategoryNameTextBox_Leave);
-            // 
-            // categoryIdColumn
-            // 
-            this.categoryIdColumn.HeaderText = "ID";
-            this.categoryIdColumn.Name = "categoryIdColumn";
-            this.categoryIdColumn.ReadOnly = true;
-            this.categoryIdColumn.Width = 75;
-            // 
-            // categoryNameColumn
-            // 
-            this.categoryNameColumn.HeaderText = "CATEGORY NAME";
-            this.categoryNameColumn.Name = "categoryNameColumn";
-            this.categoryNameColumn.ReadOnly = true;
-            this.categoryNameColumn.Width = 220;
-            // 
-            // cityIdColumn
-            // 
-            this.cityIdColumn.HeaderText = "ID";
-            this.cityIdColumn.Name = "cityIdColumn";
-            this.cityIdColumn.ReadOnly = true;
-            this.cityIdColumn.Width = 75;
-            // 
-            // cityNameColumn
-            // 
-            this.cityNameColumn.HeaderText = "CITY NAME";
-            this.cityNameColumn.Name = "cityNameColumn";
-            this.cityNameColumn.ReadOnly = true;
-            this.cityNameColumn.Width = 175;
-            // 
-            // countryForCityName
-            // 
-            this.countryForCityName.HeaderText = "COUNTRY";
-            this.countryForCityName.Name = "countryForCityName";
-            this.countryForCityName.ReadOnly = true;
-            this.countryForCityName.Width = 126;
-            // 
-            // countryIdColumn
-            // 
-            this.countryIdColumn.HeaderText = "ID";
-            this.countryIdColumn.Name = "countryIdColumn";
-            this.countryIdColumn.ReadOnly = true;
-            this.countryIdColumn.Width = 75;
-            // 
-            // countryNameColumn
-            // 
-            this.countryNameColumn.HeaderText = "COUNTRY NAME";
-            this.countryNameColumn.Name = "countryNameColumn";
-            this.countryNameColumn.ReadOnly = true;
-            this.countryNameColumn.Width = 231;
-            // 
-            // panel6
-            // 
-            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.panel6.Location = new System.Drawing.Point(9, 29);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(310, 5);
-            this.panel6.TabIndex = 32;
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.panel3.Location = new System.Drawing.Point(9, 29);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(389, 5);
-            this.panel3.TabIndex = 11;
             // 
             // supplierNameTextBox
             // 
@@ -764,19 +764,12 @@
             this.suppliersDataGridView.TabIndex = 29;
             this.suppliersDataGridView.TabStop = false;
             // 
-            // dataGridViewTextBoxColumn1
+            // supplierIdColumn
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "COUNTRY";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 120;
-            // 
-            // supplierCityColumn
-            // 
-            this.supplierCityColumn.HeaderText = "CITY";
-            this.supplierCityColumn.Name = "supplierCityColumn";
-            this.supplierCityColumn.ReadOnly = true;
-            this.supplierCityColumn.Width = 120;
+            this.supplierIdColumn.HeaderText = "ID";
+            this.supplierIdColumn.Name = "supplierIdColumn";
+            this.supplierIdColumn.ReadOnly = true;
+            this.supplierIdColumn.Width = 75;
             // 
             // supplierNameColumn
             // 
@@ -785,12 +778,19 @@
             this.supplierNameColumn.ReadOnly = true;
             this.supplierNameColumn.Width = 214;
             // 
-            // supplierIdColumn
+            // supplierCityColumn
             // 
-            this.supplierIdColumn.HeaderText = "ID";
-            this.supplierIdColumn.Name = "supplierIdColumn";
-            this.supplierIdColumn.ReadOnly = true;
-            this.supplierIdColumn.Width = 75;
+            this.supplierCityColumn.HeaderText = "CITY";
+            this.supplierCityColumn.Name = "supplierCityColumn";
+            this.supplierCityColumn.ReadOnly = true;
+            this.supplierCityColumn.Width = 120;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "COUNTRY";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 120;
             // 
             // editSupplierButton
             // 

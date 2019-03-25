@@ -89,8 +89,7 @@ namespace Business
             using (eazyCartContext = new EazyCartContext())
             {
                 var allCategories = eazyCartContext.Categories.ToList();
-                var allNames = new List<string>();
-                allNames.Add("Category");
+                var allNames = new List<string>();               
                 
                 foreach(var category in allCategories)
                 {

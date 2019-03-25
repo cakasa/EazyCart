@@ -35,6 +35,7 @@ namespace EazyCart
             receiptDataGridView.Rows.Add("#000002", "Water, 500ml", 3.42, 5, 10, 3.42 * 5 * 0.9);
         }
 
+        // All of the following methods are connected with maintaining a clean UI
         private void DiscountCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (discountCheckBox.Checked)
@@ -43,6 +44,52 @@ namespace EazyCart
             }
             else discountPercentageTextBox.Enabled = false;
             
+        }
+
+        private void SearchBoxTextBox_Enter(object sender, EventArgs e)
+        {
+            RemovePromptFromTextBoxWhenTyping(searchBoxTextBox, "Enter a product's name or its id");
+        }
+
+        private void SearchBoxTextBox_Leave(object sender, EventArgs e)
+        {
+            AddPromptToTextBoxIfEmpty(searchBoxTextBox, "Enter a product's name or its id");
+        }
+
+        private void QuantityTextBox_Enter(object sender, EventArgs e)
+        {
+            RemovePromptFromTextBoxWhenTyping(quantityTextBox, "Enter Quantity");
+        }
+
+        private void QuantityTextBox_Leave(object sender, EventArgs e)
+        {
+            AddPromptToTextBoxIfEmpty(quantityTextBox, "Enter Quantity");
+        }
+        private void DiscountPercentageTextBox_Enter(object sender, EventArgs e)
+        {
+            RemovePromptFromTextBoxWhenTyping(discountPercentageTextBox, "Enter Discount (%)");
+        }
+
+        private void DiscountPercentageTextBox_Leave(object sender, EventArgs e)
+        {
+            AddPromptToTextBoxIfEmpty(discountPercentageTextBox, "Enter Discount (%)");
+        }
+        private void RemovePromptFromTextBoxWhenTyping(TextBox textBox, string prompt)
+        {
+            if (textBox.Text == prompt)
+            {
+                textBox.Text = string.Empty;
+                textBox.ForeColor = SystemColors.WindowText;
+            }
+        }
+
+        private void AddPromptToTextBoxIfEmpty(TextBox textBox, string prompt)
+        {
+            if (textBox.Text == string.Empty)
+            {
+                textBox.Text = prompt;
+                textBox.ForeColor = SystemColors.WindowFrame;
+            }
         }
     }
 }

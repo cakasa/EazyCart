@@ -146,6 +146,14 @@ namespace Business
             }
         }
 
-
+        public string GetNameBySupplier(string supplierName)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                var supplier = eazyCartContext.Suppliers.First(x => x.Name == supplierName);
+                var city = eazyCartContext.Cities.First(x => x.Id == supplier.CityId);
+                return city.Name;
+            }
+        }
     }
 }

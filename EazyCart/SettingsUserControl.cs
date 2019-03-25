@@ -16,5 +16,19 @@ namespace EazyCart
         {
             InitializeComponent();
         }
+
+        private void LightThemeRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void DarkThemeRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ChangeThemeColour()
+        {
+            
+        }
     }
 }
