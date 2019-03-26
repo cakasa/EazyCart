@@ -57,10 +57,13 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.totalLinePanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.deleteProductButton = new System.Windows.Forms.Button();
+            this.saveProductButton = new System.Windows.Forms.Button();
+            this.editProductButton = new System.Windows.Forms.Button();
             this.addProductButton = new System.Windows.Forms.Button();
             this.makeDeliveryGroupBox = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.makeDeliveryButton = new System.Windows.Forms.Button();
             this.deliveryQuantityTextBox = new System.Windows.Forms.TextBox();
             this.productComboBox = new System.Windows.Forms.ComboBox();
             this.allProductsDataGridView = new System.Windows.Forms.DataGridView();
@@ -353,6 +356,9 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.totalLinePanel);
+            this.groupBox1.Controls.Add(this.deleteProductButton);
+            this.groupBox1.Controls.Add(this.saveProductButton);
+            this.groupBox1.Controls.Add(this.editProductButton);
             this.groupBox1.Controls.Add(this.addProductButton);
             this.groupBox1.Controls.Add(this.supplierInformationGroupBox);
             this.groupBox1.Controls.Add(this.pricingGroupBox);
@@ -382,6 +388,54 @@
             this.panel1.Size = new System.Drawing.Size(200, 5);
             this.panel1.TabIndex = 35;
             // 
+            // deleteProductButton
+            // 
+            this.deleteProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.deleteProductButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.deleteProductButton.FlatAppearance.BorderSize = 0;
+            this.deleteProductButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteProductButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.deleteProductButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.deleteProductButton.Location = new System.Drawing.Point(32, 600);
+            this.deleteProductButton.Name = "deleteProductButton";
+            this.deleteProductButton.Size = new System.Drawing.Size(437, 41);
+            this.deleteProductButton.TabIndex = 25;
+            this.deleteProductButton.Text = "DELETE PRODUCT";
+            this.deleteProductButton.UseVisualStyleBackColor = false;
+            this.deleteProductButton.Click += new System.EventHandler(this.DeleteProductButton_Click);
+            // 
+            // saveProductButton
+            // 
+            this.saveProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.saveProductButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.saveProductButton.FlatAppearance.BorderSize = 0;
+            this.saveProductButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveProductButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.saveProductButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.saveProductButton.Location = new System.Drawing.Point(254, 542);
+            this.saveProductButton.Name = "saveProductButton";
+            this.saveProductButton.Size = new System.Drawing.Size(215, 41);
+            this.saveProductButton.TabIndex = 25;
+            this.saveProductButton.Text = "SAVE PRODUCT";
+            this.saveProductButton.UseVisualStyleBackColor = false;
+            this.saveProductButton.Click += new System.EventHandler(this.SaveProductButton_Click);
+            // 
+            // editProductButton
+            // 
+            this.editProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.editProductButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.editProductButton.FlatAppearance.BorderSize = 0;
+            this.editProductButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.editProductButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.editProductButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.editProductButton.Location = new System.Drawing.Point(32, 541);
+            this.editProductButton.Name = "editProductButton";
+            this.editProductButton.Size = new System.Drawing.Size(215, 41);
+            this.editProductButton.TabIndex = 25;
+            this.editProductButton.Text = "EDIT PRODUCT";
+            this.editProductButton.UseVisualStyleBackColor = false;
+            this.editProductButton.Click += new System.EventHandler(this.EditProductButton_Click);
+            // 
             // addProductButton
             // 
             this.addProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
@@ -391,7 +445,7 @@
             this.addProductButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addProductButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.addProductButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.addProductButton.Location = new System.Drawing.Point(32, 479);
+            this.addProductButton.Location = new System.Drawing.Point(32, 483);
             this.addProductButton.Name = "addProductButton";
             this.addProductButton.Size = new System.Drawing.Size(437, 41);
             this.addProductButton.TabIndex = 25;
@@ -401,7 +455,7 @@
             // makeDeliveryGroupBox
             // 
             this.makeDeliveryGroupBox.Controls.Add(this.panel2);
-            this.makeDeliveryGroupBox.Controls.Add(this.button1);
+            this.makeDeliveryGroupBox.Controls.Add(this.makeDeliveryButton);
             this.makeDeliveryGroupBox.Controls.Add(this.deliveryQuantityTextBox);
             this.makeDeliveryGroupBox.Controls.Add(this.productComboBox);
             this.makeDeliveryGroupBox.Font = new System.Drawing.Font("Segoe UI", 14.25F);
@@ -420,20 +474,21 @@
             this.panel2.Size = new System.Drawing.Size(200, 5);
             this.panel2.TabIndex = 35;
             // 
-            // button1
+            // makeDeliveryButton
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.button1.BackgroundImage = global::EazyCart.Properties.Resources.MakeDeliveryImage;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.Location = new System.Drawing.Point(142, 85);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(305, 33);
-            this.button1.TabIndex = 29;
-            this.button1.UseVisualStyleBackColor = false;
+            this.makeDeliveryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.makeDeliveryButton.BackgroundImage = global::EazyCart.Properties.Resources.MakeDeliveryImage;
+            this.makeDeliveryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.makeDeliveryButton.FlatAppearance.BorderSize = 0;
+            this.makeDeliveryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.makeDeliveryButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.makeDeliveryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.makeDeliveryButton.Location = new System.Drawing.Point(142, 85);
+            this.makeDeliveryButton.Name = "makeDeliveryButton";
+            this.makeDeliveryButton.Size = new System.Drawing.Size(305, 33);
+            this.makeDeliveryButton.TabIndex = 29;
+            this.makeDeliveryButton.UseVisualStyleBackColor = false;
+            this.makeDeliveryButton.Click += new System.EventHandler(this.MakeDeliveryButton_Click);
             // 
             // deliveryQuantityTextBox
             // 
@@ -543,7 +598,7 @@
             this.categoryColumn.HeaderText = "CATEGORY";
             this.categoryColumn.Name = "categoryColumn";
             this.categoryColumn.ReadOnly = true;
-            this.categoryColumn.Width = 125;
+            this.categoryColumn.Width = 165;
             // 
             // quantityColumn
             // 
@@ -560,10 +615,10 @@
             // 
             // supplierNameColumn
             // 
-            this.supplierNameColumn.HeaderText = "SUP. NAME";
+            this.supplierNameColumn.HeaderText = "SUPPLIER NAME";
             this.supplierNameColumn.Name = "supplierNameColumn";
             this.supplierNameColumn.ReadOnly = true;
-            this.supplierNameColumn.Width = 200;
+            this.supplierNameColumn.Width = 230;
             // 
             // deliveryPriceColumn
             // 
@@ -635,7 +690,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button addProductButton;
         private System.Windows.Forms.GroupBox makeDeliveryGroupBox;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button makeDeliveryButton;
         private System.Windows.Forms.TextBox deliveryQuantityTextBox;
         private System.Windows.Forms.ComboBox productComboBox;
         private System.Windows.Forms.DataGridView allProductsDataGridView;
@@ -645,6 +700,9 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox supplierCityTextBox;
         private System.Windows.Forms.TextBox supplierCountryTextBox;
+        private System.Windows.Forms.Button deleteProductButton;
+        private System.Windows.Forms.Button saveProductButton;
+        private System.Windows.Forms.Button editProductButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn categoryColumn;

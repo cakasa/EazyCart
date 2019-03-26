@@ -22,6 +22,9 @@ namespace EazyCart
         private CountryBusiness countryBusiness = new CountryBusiness();
         private CityBusiness cityBusiness = new CityBusiness();
 
+        Color enabledButtonColor = Color.FromArgb(44, 62, 80);
+        Color disabledButtonColor = Color.FromArgb(127, 140, 141);
+
         public WarehouseUserControl()
         {
             InitializeComponent();
@@ -246,6 +249,7 @@ namespace EazyCart
             else
             {
                 MessageBox.Show("Please select an unit");
+                return;
             }
 
             try
@@ -286,24 +290,16 @@ namespace EazyCart
             kilogramRadioButton.Checked = false;
             litreRadioButton.Checked = false;
             CalculateNetProfit();
+            UpdateDeliveryProductComboBox();
+            UpdateDataGridView();
+        }
 
-            allProductsDataGridView.Rows.Clear();
-            List<Product> allProducts = productBusiness.GetAll();
-            foreach (var product in allProducts)
-            {
-                DataGridViewRow newRow = allProductsDataGridView.Rows[allProductsDataGridView.Rows.Add()];
-                var category = categoryBusiness.Get(product.CategoryId);
-                var unit = unitBusiness.Get(product.UnitId);
-                var supplier = supplierBusiness.Get(product.SupplierId);
-                newRow.Cells[0].Value = product.Code;
-                newRow.Cells[1].Value = product.Name;
-                newRow.Cells[2].Value = category.Name;
-                newRow.Cells[3].Value = product.Quantity;
-                newRow.Cells[4].Value = unit.Code;
-                newRow.Cells[5].Value = supplier.Name;
-                newRow.Cells[6].Value = product.DeliveryPrice;
-                newRow.Cells[7].Value = product.SellingPrice;
-            }
+        private void UpdateDeliveryProductComboBox()
+        {
+            List<string> allProducts = new List<string>();
+            allProducts.Add("Select Product");
+            allProducts.AddRange(productBusiness.GetAllNames());
+            productComboBox.DataSource = allProducts;
         }
 
         private void AreValuesCorrect(string productCode, string category, string productName, string quantityString,
@@ -341,44 +337,24 @@ namespace EazyCart
             }
         }
 
-        private void UpdateDataGrid()
+        private void UpdateDataGridView()
         {
-            List<Product> allProducts = productBusiness.GetAll();
             allProductsDataGridView.Rows.Clear();
-
-            foreach(var product in allProducts)
+            List<Product> allProducts = productBusiness.GetAll();
+            foreach (var product in allProducts)
             {
                 DataGridViewRow newRow = allProductsDataGridView.Rows[allProductsDataGridView.Rows.Add()];
-
-                var category = categoryBusiness
-                                    .GetAll()
-                                    .First(x => x.Id == product.CategoryId);
-
-                var unit = unitBusiness
-                                .GetAll()
-                                .First(x => x.Id == product.UnitId);
-
-                var supplier = supplierBusiness
-                                    .GetAll()
-                                    .First(x => x.Id == product.SupplierId);
-                var city = cityBusiness
-                                .GetAll()
-                                .First(x => x.Id == supplier.CityId);
-
-                var country = countryBusiness
-                                .GetAll()
-                                .First(x => x.Id == city.CountryId);
-
+                var category = categoryBusiness.Get(product.CategoryId);
+                var unit = unitBusiness.Get(product.UnitId);
+                var supplier = supplierBusiness.Get(product.SupplierId);
                 newRow.Cells[0].Value = product.Code;
                 newRow.Cells[1].Value = product.Name;
                 newRow.Cells[2].Value = category.Name;
                 newRow.Cells[3].Value = product.Quantity;
                 newRow.Cells[4].Value = unit.Code;
                 newRow.Cells[5].Value = supplier.Name;
-                newRow.Cells[6].Value = country.Name;
-                newRow.Cells[7].Value = city.Name;
-                newRow.Cells[8].Value = product.DeliveryPrice;
-                newRow.Cells[9].Value = product.SellingPrice;
+                newRow.Cells[6].Value = product.DeliveryPrice;
+                newRow.Cells[7].Value = product.SellingPrice;
             }
         }
 
@@ -433,6 +409,179 @@ namespace EazyCart
                     return sellingPrice - deliveryPrice;
                 }
             }
+        }
+
+        private void EditProductButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                productCodeMaskedTextBox.Enabled = false;
+                var item = allProductsDataGridView.SelectedRows[0].Cells;
+                string productCode = (string)item[0].Value;
+                Product product = productBusiness.Get(productCode);
+                productCodeMaskedTextBox.Text = product.Code;
+                productCodeMaskedTextBox.ForeColor = SystemColors.WindowText;
+                productNameTextBox.Text = product.Name;
+                productNameTextBox.ForeColor = SystemColors.WindowText;
+                inventoryQuantityTextBox.Text = product.Quantity.ToString();
+                inventoryQuantityTextBox.ForeColor = SystemColors.WindowText;
+                deliveryPriceTextBox.Text = product.DeliveryPrice.ToString();
+                deliveryPriceTextBox.ForeColor = SystemColors.WindowText;
+                sellingPriceTextBox.Text = product.SellingPrice.ToString();
+                sellingPriceTextBox.ForeColor = SystemColors.WindowText;
+                var category = categoryBusiness.Get(product.CategoryId);
+                categoryComboBox.SelectedItem = category.Name;
+                var supplier = supplierBusiness.Get(product.SupplierId);
+                supplierNameComboBox.SelectedItem = supplier.Name;
+                var city = cityBusiness.Get(supplier.CityId);
+                supplierCityTextBox.Text = city.Name;
+                var country = countryBusiness.Get(city.CountryId);
+                supplierCountryTextBox.Text = country.Name;
+                var unitIndex = product.UnitId;
+
+                switch (unitIndex)
+                {
+                    case 1:
+                        unitRadioButton.Checked = true;
+                        break;
+                    case 2:
+                        kilogramRadioButton.Checked = true;
+                        break;
+                    case 3:
+                        litreRadioButton.Checked = true;
+                        break;
+                }              
+            }
+            catch
+            {
+                MessageBox.Show("You haven't selected a row");
+                return;
+            }
+
+            ToggleProductEditSave();
+            CalculateNetProfit();
+        }
+
+        private void ToggleProductEditSave()
+        {
+            if (editProductButton.Enabled)
+            {
+                editProductButton.Enabled = false;
+                editProductButton.BackColor = disabledButtonColor;
+
+                saveProductButton.Enabled = true;
+                saveProductButton.BackColor = enabledButtonColor;
+            }
+            else
+            {
+                editProductButton.Enabled = true;
+                editProductButton.BackColor = enabledButtonColor;
+
+                saveProductButton.Enabled = false;
+                saveProductButton.BackColor = disabledButtonColor;
+            }
+        }
+
+        private void SaveProductButton_Click(object sender, EventArgs e)
+        {
+            string productCode = productCodeMaskedTextBox.Text;
+            string category = (string)categoryComboBox.SelectedItem;
+            string productName = productNameTextBox.Text;
+            string quantityString = inventoryQuantityTextBox.Text;
+            string supplierName = (string)supplierNameComboBox.SelectedItem;
+            string sellingPriceString = sellingPriceTextBox.Text;
+            string deliveryPriceString = deliveryPriceTextBox.Text;
+            string unit = "";
+
+            if (unitRadioButton.Checked) unit = "Unit";
+            else if (kilogramRadioButton.Checked) unit = "Kilogram";
+            else if (litreRadioButton.Checked) unit = "Litre";
+            else
+            {
+                MessageBox.Show("Please select an unit");
+                return;
+            }
+
+            try
+            {
+                AreValuesCorrect(productCode, category, productName, quantityString, supplierName, deliveryPriceString, sellingPriceString, unit);
+                decimal quantity = decimal.Parse(quantityString);
+                decimal deliveryPrice = decimal.Parse(deliveryPriceString);
+                decimal sellingPrice = decimal.Parse(sellingPriceString);
+                productBusiness.Update(productCode, category, productName, quantity, supplierName, deliveryPrice, sellingPrice, unit);
+            }
+            catch (ArgumentException exc)
+            {
+                MessageBox.Show(exc.Message);
+                return;
+            }
+
+            UpdateProductTab();
+
+            productCodeMaskedTextBox.Enabled = true;
+            ToggleProductEditSave();
+            UpdateProductTab();
+        }
+
+        private void DeleteProductButton_Click(object sender, EventArgs e)
+        {
+            string productCode = "";
+            try
+            {
+                var item = allProductsDataGridView.SelectedRows[0].Cells;
+                productCode = item[0].Value.ToString();
+            }
+            catch
+            {
+                MessageBox.Show("You haven't selected a row");
+                return;
+            }
+
+            try
+            {
+                productBusiness.Delete(productCode);
+            }
+            catch (ArgumentException exc)
+            {
+                MessageBox.Show(exc.Message);
+                return;
+            }
+
+            UpdateProductTab();
+        }
+
+        private void MakeDeliveryButton_Click(object sender, EventArgs e)
+        {
+            string productName = (string)productComboBox.SelectedItem;
+            string quantityString = deliveryQuantityTextBox.Text;
+            decimal quantity;
+            bool canQuantityStringBeParsed = decimal.TryParse(quantityString, out quantity);
+
+            if (!canQuantityStringBeParsed || productName == "Select Product")
+            {
+                MessageBox.Show("Invalid values");
+                return;
+            }
+
+            try
+            {
+                productBusiness.MakeDelivery(productName, quantity);
+            }
+            catch (ArgumentException exc)
+            {
+                MessageBox.Show(exc.Message);
+                return;
+            }
+
+            UpdateDeliveryTab();
+        }
+
+        private void UpdateDeliveryTab()
+        {
+            deliveryQuantityTextBox.Text = "Quantity";
+            deliveryQuantityTextBox.ForeColor = SystemColors.WindowFrame;
+            productComboBox.SelectedIndex = 0;
+            UpdateDataGridView();
         }
     }
 }
