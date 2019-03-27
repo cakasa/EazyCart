@@ -7,11 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Business;
+using Data.Models;
 
 namespace EazyCart
 {
     public partial class CashRegisterUserControl : UserControl
     {
+        private CategoryBusiness categoryBusiness;
+        private ProductBusiness productBusiness;
+        private ProductReceiptBusiness productReceiptBusiness;
+        private ReceiptBusiness receiptBusiness;
+        private int highestProductReceiptId;
+        private int currentProductReceiptId;
+        private Color enabledButtonColor = Color.FromArgb(44, 62, 80);
+        private Color disabledButtonColor = Color.FromArgb(127, 140, 141);
+
         public CashRegisterUserControl()
         {
             InitializeComponent();
@@ -19,20 +30,70 @@ namespace EazyCart
 
         private void CashRegisterUserControl_Load(object sender, EventArgs e)
         {
-            DataTable dataTable = new DataTable();
-            dataTable.Columns.Add("Code", typeof(string));
-            dataTable.Columns.Add("Name", typeof(string));
-            dataTable.Columns.Add("Category", typeof(string));
-            dataTable.Columns.Add("Unit Price", typeof(double));
+            categoryBusiness = new CategoryBusiness();
+            productBusiness = new ProductBusiness();
+            productReceiptBusiness = new ProductReceiptBusiness();
+            receiptBusiness = new ReceiptBusiness();
+            UpdateSelectProductTab();
+            UpdateReceiptTab();
+            highestProductReceiptId = productReceiptBusiness.GetHighestId();
+            currentProductReceiptId = highestProductReceiptId + 1;
+        }
 
-            dataTable.Rows.Add("#000001", "Apples", "Fruit", 2.05);
-            dataTable.Rows.Add("#000002", "Water, 500ml", "Drink" ,1.00);
+        private void UpdateReceiptTab()
+        {
+            receiptBusiness.DeleteLastReceiptIfEmpty();
+            int receiptNumber = receiptBusiness.GetNextReceiptNumber();
+            orderNumberTextBox.Text = receiptNumber.ToString();
+            receiptBusiness.AddNewReceipt(receiptNumber);
+            UpdateReceiptDataGridView();
+        }
 
-            availableProductsDataGridView.Rows.Add("#000001", "Apples", "Fruit", 2.05);
-            availableProductsDataGridView.Rows.Add("#000002", "Water, 500ml", "Drink",1.00);
+        private void UpdateReceiptDataGridView()
+        {
+            receiptDataGridView.Rows.Clear();
+            List<ProductReceipt> productReceipts =
+                productReceiptBusiness.GetAllByReceipt(int.Parse(orderNumberTextBox.Text));
 
-            receiptDataGridView.Rows.Add("#000001", "Apples", 2.05, 3, 23, 2.05 * 3 * 77);
-            receiptDataGridView.Rows.Add("#000002", "Water, 500ml", 3.42, 5, 10, 3.42 * 5 * 0.9);
+            decimal total = 0;
+            foreach (var productReceipt in productReceipts)
+            {
+                DataGridViewRow row = receiptDataGridView.Rows[receiptDataGridView.Rows.Add()];
+                var product = productBusiness.Get(productReceipt.ProductCode);
+                decimal totalForProduct = (product.SellingPrice * productReceipt.Quantity) * (1 - 0.01M * (decimal)productReceipt.DiscountPercentage);
+                row.Cells[0].Value = productReceipt.Id;
+                row.Cells[1].Value = product.Code;
+                row.Cells[2].Value = product.Name;
+                row.Cells[3].Value = product.SellingPrice;
+                row.Cells[4].Value = productReceipt.Quantity;
+                row.Cells[5].Value = productReceipt.DiscountPercentage;
+                row.Cells[6].Value = totalForProduct;
+                total += totalForProduct;
+            }
+            totalToPayLabel.Text = string.Format("$ {0:f2}", total);
+        }
+
+        public void UpdateSelectProductTab()
+        {
+            UpdateCategoryComboBox();
+            categoryComboBox.SelectedIndex = 0;
+            searchBoxTextBox.Text = "Enter a product's name or its id";
+            searchBoxTextBox.ForeColor = SystemColors.WindowFrame;
+            quantityTextBox.Text = "Enter Quantity";
+            quantityTextBox.ForeColor = SystemColors.WindowFrame;
+            discountCheckBox.Checked = false;
+            discountPercentageTextBox.Enabled = false;
+            discountPercentageTextBox.Text = "Enter Discount (%)";
+            discountPercentageTextBox.ForeColor = SystemColors.WindowFrame;
+            UpdateAvailableProductsDataGrid(productBusiness.GetAll());
+        }
+
+        private void UpdateCategoryComboBox()
+        {
+            var categories = new List<string>();
+            categories.Add("Select Category");
+            categories.AddRange(categoryBusiness.GetAllNames());
+            categoryComboBox.DataSource = categories;
         }
 
         // All of the following methods are connected with maintaining a clean UI
@@ -43,7 +104,7 @@ namespace EazyCart
                 discountPercentageTextBox.Enabled = true;
             }
             else discountPercentageTextBox.Enabled = false;
-            
+
         }
 
         private void SearchBoxTextBox_Enter(object sender, EventArgs e)
@@ -90,6 +151,221 @@ namespace EazyCart
                 textBox.Text = prompt;
                 textBox.ForeColor = SystemColors.WindowFrame;
             }
+        }
+
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateSearchResults();
+        }
+        private void SearchBoxTextBox_TextChanged(object sender, EventArgs e)
+        {
+            UpdateSearchResults();
+        }
+
+        private void UpdateSearchResults()
+        {
+            string categoryString = (string)categoryComboBox.Text;
+            string searchPhrase = searchBoxTextBox.Text;
+
+            if (categoryString == "Select Category" && searchPhrase == "Enter a product's name or its id")
+            {
+                var products = productBusiness.GetAll();
+                UpdateAvailableProductsDataGrid(products);
+            }
+            else if (categoryString == "Select Category")
+            {
+                var products = productBusiness.GetAllByNameOrId(searchPhrase);
+                UpdateAvailableProductsDataGrid(products);
+            }
+            else if (searchPhrase == "Enter a product's name or its id")
+            {
+                var products = productBusiness.GetAllByCategory(categoryString);
+                UpdateAvailableProductsDataGrid(products);
+            }
+            else
+            {
+                var products = productBusiness.GetAllByCategoryAndNameOrId(categoryString, searchPhrase);
+                UpdateAvailableProductsDataGrid(products);
+            }
+        }
+
+        private void UpdateAvailableProductsDataGrid(List<Product> products)
+        {
+            availableProductsDataGridView.Rows.Clear();
+            foreach (var product in products)
+            {
+                DataGridViewRow newRow = availableProductsDataGridView.Rows[availableProductsDataGridView.Rows.Add()];
+                var category = categoryBusiness.Get(product.CategoryId);
+                newRow.Cells[0].Value = product.Code;
+                newRow.Cells[1].Value = product.Name;
+                newRow.Cells[2].Value = category.Name;
+                newRow.Cells[3].Value = product.SellingPrice;
+            }
+        }
+
+        private void AvailableProductsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void AddProductButton_Click(object sender, EventArgs e)
+        {
+            string productCode = (string)availableProductsDataGridView.SelectedRows[0].Cells[0].Value;
+            string quantity = quantityTextBox.Text;
+            try
+            {
+                string discount = "0";
+                if (discountCheckBox.Checked)
+                {
+                    discount = discountPercentageTextBox.Text;
+                }
+                productReceiptBusiness.Add(currentProductReceiptId, productCode, quantity, discount);
+            }
+            catch (ArgumentException exc)
+            {
+                MessageBox.Show(exc.Message);
+                return;
+            }
+
+            highestProductReceiptId++;
+            currentProductReceiptId++;
+            UpdateSelectProductTab();
+            UpdateReceiptDataGridView();
+        }
+
+        private void EditProductButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var selectedRow = receiptDataGridView.Rows[0];
+                string productCode = (string)selectedRow.Cells[1].Value;
+                var product = productBusiness.Get(productCode);
+                int productReceiptIndex = (int)selectedRow.Cells[0].Value;
+                var productReceipt = productReceiptBusiness.Get(productReceiptIndex);
+                var category = categoryBusiness.Get(product.CategoryId);
+                categoryComboBox.SelectedItem = category.Name;
+                searchBoxTextBox.Text = product.Name;
+                searchBoxTextBox.ForeColor = SystemColors.WindowText;
+                quantityTextBox.Text = productReceipt.Quantity.ToString();
+                quantityTextBox.ForeColor = SystemColors.WindowText;
+                if (productReceipt.DiscountPercentage != 0)
+                {
+                    discountCheckBox.Checked = true;
+                    discountPercentageTextBox.Text = productReceipt.DiscountPercentage.ToString();
+                    discountPercentageTextBox.ForeColor = SystemColors.WindowText;
+                }
+
+                currentProductReceiptId = productReceipt.Id;
+            }
+            catch
+            {
+                MessageBox.Show("You haven't selected a row");
+                return;
+            }
+            UpdateSearchResults();
+            ToggleProductReceiptEditSave();
+        }
+
+        private void ToggleProductReceiptEditSave()
+        {
+            if (editProductButton.Enabled)
+            {
+                editProductButton.Enabled = false;
+                editProductButton.BackColor = disabledButtonColor;
+
+                saveProductButton.Enabled = true;
+                saveProductButton.BackColor = enabledButtonColor;
+            }
+            else
+            {
+                editProductButton.Enabled = true;
+                editProductButton.BackColor = enabledButtonColor;
+
+                saveProductButton.Enabled = false;
+                saveProductButton.BackColor = disabledButtonColor;
+            }
+        }
+
+        private void SaveProductButton_Click(object sender, EventArgs e)
+        {
+            string productCode = (string)availableProductsDataGridView.SelectedRows[0].Cells[0].Value;
+            string quantity = quantityTextBox.Text;
+            try
+            {
+                string discount = "0";
+                if (discountCheckBox.Checked)
+                {
+                    discount = discountPercentageTextBox.Text;
+                }
+                productReceiptBusiness.Update(currentProductReceiptId, productCode, quantity, discount);
+            }
+            catch (ArgumentException exc)
+            {
+                MessageBox.Show(exc.Message);
+                return;
+            }
+
+            UpdateSelectProductTab();
+            UpdateReceiptDataGridView();
+            currentProductReceiptId = highestProductReceiptId + 1;
+            ToggleProductReceiptEditSave();
+        }
+
+        private void DeleteProduct_Click(object sender, EventArgs e)
+        {
+            int productReceiptId = 0;
+            try
+            {
+                var row = receiptDataGridView.SelectedRows[0].Cells;
+                productReceiptId = (int)row[0].Value;
+            }
+            catch
+            {
+                MessageBox.Show("You haven't selected a row");
+                return;
+            }
+
+            try
+            {
+                productReceiptBusiness.Delete(productReceiptId);
+            }
+            catch (ArgumentException exc)
+            {
+                MessageBox.Show(exc.Message);
+                return;
+            }
+
+            UpdateReceiptDataGridView();
+        }
+
+        private void CompleteOrderButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                receiptBusiness.Update(int.Parse(orderNumberTextBox.Text));
+            }
+            catch(ArgumentException exc)
+            {
+                MessageBox.Show(exc.Message);
+                return;
+            }
+            UpdateSelectProductTab();
+            UpdateReceiptTab();
+            UpdateProductDataGridViewOnWarehouseUserControl();
+        }
+
+        private void UpdateProductDataGridViewOnWarehouseUserControl()
+        {
+            EazyCartForm eazyCartForm = (EazyCartForm)EazyCartForm.ActiveForm;
+            eazyCartForm.warehouseUserControl.UpdateDataGridView();
+
+        }
+
+        private void CancelOrderButton_Click(object sender, EventArgs e)
+        {
+            receiptBusiness.Delete(int.Parse(orderNumberTextBox.Text));
+            UpdateSelectProductTab();
+            UpdateReceiptTab();
         }
     }
 }

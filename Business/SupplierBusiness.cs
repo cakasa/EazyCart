@@ -99,10 +99,6 @@ namespace Business
             }
         }
 
-        
-
-        
-
         public void Delete(int id)
         {
             using (eazyCartContext = new EazyCartContext())

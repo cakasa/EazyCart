@@ -164,5 +164,40 @@ namespace Business
                 eazyCartContext.SaveChanges();
             }
         }
+
+        public List<Product> GetAllByCategoryAndNameOrId(string categoryString, string searchPhrase)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                var category = eazyCartContext.Categories.First(x => x.Name == categoryString);
+                var products = eazyCartContext
+                                    .Products
+                                    .Where(x => x.CategoryId == category.Id && (x.Name.ToUpper().Contains(searchPhrase.ToUpper()) || x.Code.ToUpper().Contains(searchPhrase.ToUpper())))
+                                    .ToList();
+
+                return products;
+            }
+        }
+
+        public List<Product> GetAllByCategory(string categoryString)
+        {
+            using(eazyCartContext = new EazyCartContext())
+            {
+                var category = eazyCartContext.Categories.First(x => x.Name == categoryString);
+                var products = eazyCartContext.Products.Where(x => x.CategoryId == category.Id).ToList();
+
+                return products;
+            }
+        }
+
+        public List<Product> GetAllByNameOrId(string searchPhrase)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                var products = eazyCartContext.Products.Where(x => x.Name.ToUpper().Contains(searchPhrase.ToUpper()) || x.Code.ToUpper().Contains(searchPhrase.ToUpper())).ToList();
+
+                return products;
+            }
+        }
     }
 }

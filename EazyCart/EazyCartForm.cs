@@ -12,7 +12,7 @@ namespace EazyCart
 {
     public partial class EazyCartForm : Form
     {
-        private CashRegisterUserControl cashRegisterUserControl;
+        public CashRegisterUserControl cashRegisterUserControl;
         public WarehouseUserControl warehouseUserControl;
         private StatisticsUserContol statisticsUserContol;
         private SettingsUserControl settingsUserControl;

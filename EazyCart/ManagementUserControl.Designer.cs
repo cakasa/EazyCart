@@ -282,6 +282,7 @@
             this.countryNameTextBox.Size = new System.Drawing.Size(250, 33);
             this.countryNameTextBox.TabIndex = 4;
             this.countryNameTextBox.Text = "Country Name";
+            this.countryNameTextBox.TextChanged += new System.EventHandler(this.CountryNameTextBox_TextChanged);
             this.countryNameTextBox.Enter += new System.EventHandler(this.CountryNameTextBox_Enter);
             this.countryNameTextBox.Leave += new System.EventHandler(this.CountryNameTextBox_Leave);
             // 

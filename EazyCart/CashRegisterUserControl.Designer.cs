@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
             this.totalLinePanel = new System.Windows.Forms.Panel();
             this.totalLabel = new System.Windows.Forms.Label();
             this.totalToPayLabel = new System.Windows.Forms.Label();
@@ -48,6 +49,7 @@
             this.categoryTextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unitPriceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.receiptDataGridView = new System.Windows.Forms.DataGridView();
+            this.receiptProductColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,11 +58,14 @@
             this.totalPriceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.discountPercentageTextBox = new System.Windows.Forms.TextBox();
             this.discountCheckBox = new System.Windows.Forms.CheckBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.saveProductButton = new System.Windows.Forms.Button();
+            this.editProductButton = new System.Windows.Forms.Button();
+            this.addProductButton = new System.Windows.Forms.Button();
             this.cancelOrderButton = new System.Windows.Forms.Button();
             this.completeOrderButton = new System.Windows.Forms.Button();
+            this.orderNumberLabel = new System.Windows.Forms.Label();
+            this.orderNumberTextBox = new System.Windows.Forms.TextBox();
+            this.deleteProduct = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.availableProductsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.receiptDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -80,7 +85,7 @@
             this.totalLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.totalLabel.Location = new System.Drawing.Point(414, 766);
             this.totalLabel.Name = "totalLabel";
-            this.totalLabel.Size = new System.Drawing.Size(87, 40);
+            this.totalLabel.Size = new System.Drawing.Size(84, 40);
             this.totalLabel.TabIndex = 10;
             this.totalLabel.Text = "Total:";
             // 
@@ -106,6 +111,7 @@
             this.searchBoxTextBox.Size = new System.Drawing.Size(729, 33);
             this.searchBoxTextBox.TabIndex = 13;
             this.searchBoxTextBox.Text = "Enter a product\'s name or its id";
+            this.searchBoxTextBox.TextChanged += new System.EventHandler(this.SearchBoxTextBox_TextChanged);
             this.searchBoxTextBox.Enter += new System.EventHandler(this.SearchBoxTextBox_Enter);
             this.searchBoxTextBox.Leave += new System.EventHandler(this.SearchBoxTextBox_Leave);
             // 
@@ -137,6 +143,7 @@
             this.categoryComboBox.Name = "categoryComboBox";
             this.categoryComboBox.Size = new System.Drawing.Size(729, 33);
             this.categoryComboBox.TabIndex = 15;
+            this.categoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
             // 
             // availableProductsDataGridView
             // 
@@ -148,15 +155,15 @@
             this.availableProductsDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.availableProductsDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.availableProductsDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle49.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle49.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle49.ForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle49.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            dataGridViewCellStyle49.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle49.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle49.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.availableProductsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle49;
+            dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle46.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle46.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle46.ForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle46.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle46.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle46.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle46.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.availableProductsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle46;
             this.availableProductsDataGridView.ColumnHeadersHeight = 30;
             this.availableProductsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.availableProductsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -164,14 +171,14 @@
             this.nameColumn,
             this.categoryTextBox,
             this.unitPriceColumn});
-            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle51.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle51.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            dataGridViewCellStyle51.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle51.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle51.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle51.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.availableProductsDataGridView.DefaultCellStyle = dataGridViewCellStyle51;
+            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle48.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle48.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            dataGridViewCellStyle48.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle48.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle48.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle48.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.availableProductsDataGridView.DefaultCellStyle = dataGridViewCellStyle48;
             this.availableProductsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.availableProductsDataGridView.EnableHeadersVisualStyles = false;
             this.availableProductsDataGridView.Location = new System.Drawing.Point(853, 93);
@@ -179,14 +186,14 @@
             this.availableProductsDataGridView.Name = "availableProductsDataGridView";
             this.availableProductsDataGridView.ReadOnly = true;
             this.availableProductsDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle52.BackColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle52.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle52.ForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle52.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle52.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle52.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.availableProductsDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle52;
+            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle49.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle49.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle49.ForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle49.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle49.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle49.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.availableProductsDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle49;
             this.availableProductsDataGridView.RowHeadersWidth = 4;
             this.availableProductsDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.availableProductsDataGridView.RowTemplate.Height = 30;
@@ -195,6 +202,7 @@
             this.availableProductsDataGridView.Size = new System.Drawing.Size(729, 558);
             this.availableProductsDataGridView.TabIndex = 26;
             this.availableProductsDataGridView.TabStop = false;
+            this.availableProductsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.AvailableProductsDataGridView_CellContentClick);
             // 
             // codeColumn
             // 
@@ -218,9 +226,9 @@
             // 
             // unitPriceColumn
             // 
-            dataGridViewCellStyle50.Format = "N2";
-            dataGridViewCellStyle50.NullValue = null;
-            this.unitPriceColumn.DefaultCellStyle = dataGridViewCellStyle50;
+            dataGridViewCellStyle47.Format = "N2";
+            dataGridViewCellStyle47.NullValue = null;
+            this.unitPriceColumn.DefaultCellStyle = dataGridViewCellStyle47;
             this.unitPriceColumn.HeaderText = "UNIT PRICE";
             this.unitPriceColumn.Name = "unitPriceColumn";
             this.unitPriceColumn.ReadOnly = true;
@@ -237,55 +245,63 @@
             this.receiptDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.receiptDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.receiptDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle53.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle53.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle53.ForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle53.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            dataGridViewCellStyle53.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle53.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle53.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.receiptDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle53;
+            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle50.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle50.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle50.ForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle50.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle50.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle50.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle50.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.receiptDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle50;
             this.receiptDataGridView.ColumnHeadersHeight = 30;
             this.receiptDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.receiptDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.receiptProductColumn,
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn4,
             this.quantityColumn,
             this.discountColumn,
             this.totalPriceColumn});
-            dataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle55.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle55.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            dataGridViewCellStyle55.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle55.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle55.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle55.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.receiptDataGridView.DefaultCellStyle = dataGridViewCellStyle55;
+            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle53.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle53.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            dataGridViewCellStyle53.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle53.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle53.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle53.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.receiptDataGridView.DefaultCellStyle = dataGridViewCellStyle53;
             this.receiptDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.receiptDataGridView.EnableHeadersVisualStyles = false;
-            this.receiptDataGridView.Location = new System.Drawing.Point(13, 15);
+            this.receiptDataGridView.Location = new System.Drawing.Point(13, 54);
             this.receiptDataGridView.MultiSelect = false;
             this.receiptDataGridView.Name = "receiptDataGridView";
             this.receiptDataGridView.ReadOnly = true;
             this.receiptDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle56.BackColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle56.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle56.ForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle56.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle56.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle56.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.receiptDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle56;
+            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle54.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle54.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle54.ForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle54.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle54.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle54.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.receiptDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle54;
             this.receiptDataGridView.RowHeadersWidth = 4;
             this.receiptDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.receiptDataGridView.RowTemplate.Height = 30;
             this.receiptDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.receiptDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.receiptDataGridView.Size = new System.Drawing.Size(825, 714);
+            this.receiptDataGridView.Size = new System.Drawing.Size(825, 675);
             this.receiptDataGridView.TabIndex = 28;
             this.receiptDataGridView.TabStop = false;
+            // 
+            // receiptProductColumn
+            // 
+            this.receiptProductColumn.HeaderText = "RECEIPTPRODUCTID";
+            this.receiptProductColumn.Name = "receiptProductColumn";
+            this.receiptProductColumn.ReadOnly = true;
+            this.receiptProductColumn.Visible = false;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -303,9 +319,9 @@
             // 
             // dataGridViewTextBoxColumn4
             // 
-            dataGridViewCellStyle54.Format = "N2";
-            dataGridViewCellStyle54.NullValue = null;
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle54;
+            dataGridViewCellStyle51.Format = "N2";
+            dataGridViewCellStyle51.NullValue = null;
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle51;
             this.dataGridViewTextBoxColumn4.HeaderText = "UNIT PRICE";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
@@ -328,6 +344,9 @@
             // 
             // totalPriceColumn
             // 
+            dataGridViewCellStyle52.Format = "N2";
+            dataGridViewCellStyle52.NullValue = null;
+            this.totalPriceColumn.DefaultCellStyle = dataGridViewCellStyle52;
             this.totalPriceColumn.HeaderText = "TOTAL";
             this.totalPriceColumn.Name = "totalPriceColumn";
             this.totalPriceColumn.ReadOnly = true;
@@ -356,50 +375,54 @@
             this.discountCheckBox.UseVisualStyleBackColor = true;
             this.discountCheckBox.CheckedChanged += new System.EventHandler(this.DiscountCheckBox_CheckedChanged);
             // 
-            // button3
+            // saveProductButton
             // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.button3.BackgroundImage = global::EazyCart.Properties.Resources.saveProductPlaceholder;
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button3.Location = new System.Drawing.Point(1341, 743);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(240, 82);
-            this.button3.TabIndex = 27;
-            this.button3.UseVisualStyleBackColor = false;
+            this.saveProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
+            this.saveProductButton.BackgroundImage = global::EazyCart.Properties.Resources.saveProductPlaceholder;
+            this.saveProductButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.saveProductButton.Enabled = false;
+            this.saveProductButton.FlatAppearance.BorderSize = 0;
+            this.saveProductButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveProductButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.saveProductButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.saveProductButton.Location = new System.Drawing.Point(1221, 743);
+            this.saveProductButton.Name = "saveProductButton";
+            this.saveProductButton.Size = new System.Drawing.Size(178, 82);
+            this.saveProductButton.TabIndex = 27;
+            this.saveProductButton.UseVisualStyleBackColor = false;
+            this.saveProductButton.Click += new System.EventHandler(this.SaveProductButton_Click);
             // 
-            // button2
+            // editProductButton
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.button2.BackgroundImage = global::EazyCart.Properties.Resources.ModifyProductPlaceHolder;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button2.Location = new System.Drawing.Point(1097, 743);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(240, 82);
-            this.button2.TabIndex = 18;
-            this.button2.UseVisualStyleBackColor = false;
+            this.editProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.editProductButton.BackgroundImage = global::EazyCart.Properties.Resources.ModifyProductPlaceHolder;
+            this.editProductButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.editProductButton.FlatAppearance.BorderSize = 0;
+            this.editProductButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.editProductButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.editProductButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.editProductButton.Location = new System.Drawing.Point(1037, 743);
+            this.editProductButton.Name = "editProductButton";
+            this.editProductButton.Size = new System.Drawing.Size(178, 82);
+            this.editProductButton.TabIndex = 18;
+            this.editProductButton.UseVisualStyleBackColor = false;
+            this.editProductButton.Click += new System.EventHandler(this.EditProductButton_Click);
             // 
-            // button1
+            // addProductButton
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.button1.BackgroundImage = global::EazyCart.Properties.Resources.AddProductPlaceHolder;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.Location = new System.Drawing.Point(853, 743);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(240, 82);
-            this.button1.TabIndex = 12;
-            this.button1.UseVisualStyleBackColor = false;
+            this.addProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.addProductButton.BackgroundImage = global::EazyCart.Properties.Resources.AddProductPlaceHolder;
+            this.addProductButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.addProductButton.FlatAppearance.BorderSize = 0;
+            this.addProductButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addProductButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.addProductButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.addProductButton.Location = new System.Drawing.Point(853, 743);
+            this.addProductButton.Name = "addProductButton";
+            this.addProductButton.Size = new System.Drawing.Size(178, 82);
+            this.addProductButton.TabIndex = 12;
+            this.addProductButton.UseVisualStyleBackColor = false;
+            this.addProductButton.Click += new System.EventHandler(this.AddProductButton_Click);
             // 
             // cancelOrderButton
             // 
@@ -415,6 +438,7 @@
             this.cancelOrderButton.TabIndex = 7;
             this.cancelOrderButton.Tag = "";
             this.cancelOrderButton.UseVisualStyleBackColor = false;
+            this.cancelOrderButton.Click += new System.EventHandler(this.CancelOrderButton_Click);
             // 
             // completeOrderButton
             // 
@@ -430,21 +454,60 @@
             this.completeOrderButton.Size = new System.Drawing.Size(337, 82);
             this.completeOrderButton.TabIndex = 1;
             this.completeOrderButton.UseVisualStyleBackColor = false;
+            this.completeOrderButton.Click += new System.EventHandler(this.CompleteOrderButton_Click);
+            // 
+            // orderNumberLabel
+            // 
+            this.orderNumberLabel.AutoSize = true;
+            this.orderNumberLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.orderNumberLabel.Location = new System.Drawing.Point(263, 18);
+            this.orderNumberLabel.Name = "orderNumberLabel";
+            this.orderNumberLabel.Size = new System.Drawing.Size(87, 25);
+            this.orderNumberLabel.TabIndex = 31;
+            this.orderNumberLabel.Text = "ORDER #";
+            // 
+            // orderNumberTextBox
+            // 
+            this.orderNumberTextBox.Enabled = false;
+            this.orderNumberTextBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.orderNumberTextBox.Location = new System.Drawing.Point(363, 15);
+            this.orderNumberTextBox.Name = "orderNumberTextBox";
+            this.orderNumberTextBox.Size = new System.Drawing.Size(161, 33);
+            this.orderNumberTextBox.TabIndex = 32;
+            // 
+            // deleteProduct
+            // 
+            this.deleteProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.deleteProduct.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.deleteProduct.FlatAppearance.BorderSize = 0;
+            this.deleteProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteProduct.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.deleteProduct.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.deleteProduct.Location = new System.Drawing.Point(1404, 743);
+            this.deleteProduct.Name = "deleteProduct";
+            this.deleteProduct.Size = new System.Drawing.Size(178, 82);
+            this.deleteProduct.TabIndex = 33;
+            this.deleteProduct.Text = "DELETE PRODUCT";
+            this.deleteProduct.UseVisualStyleBackColor = false;
+            this.deleteProduct.Click += new System.EventHandler(this.DeleteProduct_Click);
             // 
             // CashRegisterUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.deleteProduct);
+            this.Controls.Add(this.orderNumberTextBox);
+            this.Controls.Add(this.orderNumberLabel);
             this.Controls.Add(this.discountCheckBox);
             this.Controls.Add(this.discountPercentageTextBox);
             this.Controls.Add(this.receiptDataGridView);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.saveProductButton);
             this.Controls.Add(this.availableProductsDataGridView);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.editProductButton);
             this.Controls.Add(this.categoryComboBox);
             this.Controls.Add(this.quantityTextBox);
             this.Controls.Add(this.searchBoxTextBox);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.addProductButton);
             this.Controls.Add(this.totalToPayLabel);
             this.Controls.Add(this.totalLabel);
             this.Controls.Add(this.totalLinePanel);
@@ -466,25 +529,29 @@
         private System.Windows.Forms.Panel totalLinePanel;
         private System.Windows.Forms.Label totalLabel;
         private System.Windows.Forms.Label totalToPayLabel;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button addProductButton;
         private System.Windows.Forms.TextBox searchBoxTextBox;
         private System.Windows.Forms.TextBox quantityTextBox;
         private System.Windows.Forms.ComboBox categoryComboBox;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button editProductButton;
         private System.Windows.Forms.DataGridView availableProductsDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn codeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn categoryTextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn unitPriceColumn;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button saveProductButton;
         private System.Windows.Forms.DataGridView receiptDataGridView;
+        private System.Windows.Forms.TextBox discountPercentageTextBox;
+        private System.Windows.Forms.CheckBox discountCheckBox;
+        private System.Windows.Forms.Label orderNumberLabel;
+        private System.Windows.Forms.TextBox orderNumberTextBox;
+        private System.Windows.Forms.Button deleteProduct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn receiptProductColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn discountColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalPriceColumn;
-        private System.Windows.Forms.TextBox discountPercentageTextBox;
-        private System.Windows.Forms.CheckBox discountCheckBox;
     }
 }

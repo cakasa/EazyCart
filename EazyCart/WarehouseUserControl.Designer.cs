@@ -35,7 +35,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.generalPropertiesGroupBox = new System.Windows.Forms.GroupBox();
             this.inventoryQuantityTextBox = new System.Windows.Forms.TextBox();
-            this.addCategoryButton = new System.Windows.Forms.Button();
             this.categoryComboBox = new System.Windows.Forms.ComboBox();
             this.productNameTextBox = new System.Windows.Forms.TextBox();
             this.productCodeMaskedTextBox = new System.Windows.Forms.MaskedTextBox();
@@ -43,7 +42,6 @@
             this.supplierInformationGroupBox = new System.Windows.Forms.GroupBox();
             this.supplierCityTextBox = new System.Windows.Forms.TextBox();
             this.supplierCountryTextBox = new System.Windows.Forms.TextBox();
-            this.addSupplierButton = new System.Windows.Forms.Button();
             this.supplierNameComboBox = new System.Windows.Forms.ComboBox();
             this.pricingGroupBox = new System.Windows.Forms.GroupBox();
             this.unitsGroupBox = new System.Windows.Forms.GroupBox();
@@ -88,7 +86,6 @@
             // generalPropertiesGroupBox
             // 
             this.generalPropertiesGroupBox.Controls.Add(this.inventoryQuantityTextBox);
-            this.generalPropertiesGroupBox.Controls.Add(this.addCategoryButton);
             this.generalPropertiesGroupBox.Controls.Add(this.categoryComboBox);
             this.generalPropertiesGroupBox.Controls.Add(this.productNameTextBox);
             this.generalPropertiesGroupBox.Controls.Add(this.productCodeMaskedTextBox);
@@ -113,23 +110,6 @@
             this.inventoryQuantityTextBox.Enter += new System.EventHandler(this.InventoryQuantityTextBox_Enter);
             this.inventoryQuantityTextBox.Leave += new System.EventHandler(this.InventoryQuantityTextBox_Leave);
             // 
-            // addCategoryButton
-            // 
-            this.addCategoryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.addCategoryButton.BackgroundImage = global::EazyCart.Properties.Resources.addCategoryImage;
-            this.addCategoryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.addCategoryButton.FlatAppearance.BorderSize = 0;
-            this.addCategoryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addCategoryButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.addCategoryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.addCategoryButton.Location = new System.Drawing.Point(101, 32);
-            this.addCategoryButton.Name = "addCategoryButton";
-            this.addCategoryButton.Size = new System.Drawing.Size(33, 33);
-            this.addCategoryButton.TabIndex = 5;
-            this.addCategoryButton.TabStop = false;
-            this.addCategoryButton.UseVisualStyleBackColor = false;
-            this.addCategoryButton.Click += new System.EventHandler(this.AddCategoryButton_Click);
-            // 
             // categoryComboBox
             // 
             this.categoryComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
@@ -137,10 +117,11 @@
             this.categoryComboBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.categoryComboBox.ForeColor = System.Drawing.SystemColors.WindowText;
             this.categoryComboBox.FormattingEnabled = true;
-            this.categoryComboBox.Location = new System.Drawing.Point(133, 32);
+            this.categoryComboBox.Location = new System.Drawing.Point(101, 32);
             this.categoryComboBox.Name = "categoryComboBox";
-            this.categoryComboBox.Size = new System.Drawing.Size(330, 33);
+            this.categoryComboBox.Size = new System.Drawing.Size(362, 33);
             this.categoryComboBox.TabIndex = 6;
+            this.categoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
             // 
             // productNameTextBox
             // 
@@ -161,10 +142,9 @@
             this.productCodeMaskedTextBox.Location = new System.Drawing.Point(26, 32);
             this.productCodeMaskedTextBox.Mask = "000000";
             this.productCodeMaskedTextBox.Name = "productCodeMaskedTextBox";
-            this.productCodeMaskedTextBox.PromptChar = ' ';
+            this.productCodeMaskedTextBox.PromptChar = '0';
             this.productCodeMaskedTextBox.Size = new System.Drawing.Size(69, 33);
             this.productCodeMaskedTextBox.TabIndex = 4;
-            this.productCodeMaskedTextBox.Text = "000000";
             this.productCodeMaskedTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.productCodeMaskedTextBox.ValidatingType = typeof(int);
             this.productCodeMaskedTextBox.Enter += new System.EventHandler(this.ProductCodeMaskedTextBox_Enter);
@@ -184,7 +164,6 @@
             // 
             this.supplierInformationGroupBox.Controls.Add(this.supplierCityTextBox);
             this.supplierInformationGroupBox.Controls.Add(this.supplierCountryTextBox);
-            this.supplierInformationGroupBox.Controls.Add(this.addSupplierButton);
             this.supplierInformationGroupBox.Controls.Add(this.supplierNameComboBox);
             this.supplierInformationGroupBox.Font = new System.Drawing.Font("Segoe UI", 11.25F);
             this.supplierInformationGroupBox.Location = new System.Drawing.Point(6, 174);
@@ -198,7 +177,7 @@
             // 
             this.supplierCityTextBox.Enabled = false;
             this.supplierCityTextBox.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.supplierCityTextBox.Location = new System.Drawing.Point(271, 71);
+            this.supplierCityTextBox.Location = new System.Drawing.Point(271, 72);
             this.supplierCityTextBox.Name = "supplierCityTextBox";
             this.supplierCityTextBox.Size = new System.Drawing.Size(192, 33);
             this.supplierCityTextBox.TabIndex = 13;
@@ -215,23 +194,6 @@
             this.supplierCountryTextBox.TabIndex = 12;
             this.supplierCountryTextBox.Text = "Country";
             // 
-            // addSupplierButton
-            // 
-            this.addSupplierButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.addSupplierButton.BackgroundImage = global::EazyCart.Properties.Resources.addCategoryImage;
-            this.addSupplierButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.addSupplierButton.FlatAppearance.BorderSize = 0;
-            this.addSupplierButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addSupplierButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.addSupplierButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.addSupplierButton.Location = new System.Drawing.Point(26, 32);
-            this.addSupplierButton.Name = "addSupplierButton";
-            this.addSupplierButton.Size = new System.Drawing.Size(33, 33);
-            this.addSupplierButton.TabIndex = 10;
-            this.addSupplierButton.TabStop = false;
-            this.addSupplierButton.UseVisualStyleBackColor = false;
-            this.addSupplierButton.Click += new System.EventHandler(this.AddSupplierButton_Click);
-            // 
             // supplierNameComboBox
             // 
             this.supplierNameComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
@@ -239,9 +201,9 @@
             this.supplierNameComboBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.supplierNameComboBox.ForeColor = System.Drawing.SystemColors.WindowText;
             this.supplierNameComboBox.FormattingEnabled = true;
-            this.supplierNameComboBox.Location = new System.Drawing.Point(59, 32);
+            this.supplierNameComboBox.Location = new System.Drawing.Point(26, 32);
             this.supplierNameComboBox.Name = "supplierNameComboBox";
-            this.supplierNameComboBox.Size = new System.Drawing.Size(404, 33);
+            this.supplierNameComboBox.Size = new System.Drawing.Size(437, 33);
             this.supplierNameComboBox.TabIndex = 11;
             this.supplierNameComboBox.SelectedIndexChanged += new System.EventHandler(this.supplierNameComboBox_SelectedIndexChanged);
             // 
@@ -288,7 +250,7 @@
             this.kilogramRadioButton.AutoSize = true;
             this.kilogramRadioButton.Location = new System.Drawing.Point(6, 58);
             this.kilogramRadioButton.Name = "kilogramRadioButton";
-            this.kilogramRadioButton.Size = new System.Drawing.Size(121, 24);
+            this.kilogramRadioButton.Size = new System.Drawing.Size(120, 24);
             this.kilogramRadioButton.TabIndex = 23;
             this.kilogramRadioButton.TabStop = true;
             this.kilogramRadioButton.Text = "Kilogram (KG)";
@@ -314,7 +276,7 @@
             this.netProfitAmountLabel.Name = "netProfitAmountLabel";
             this.netProfitAmountLabel.Size = new System.Drawing.Size(130, 20);
             this.netProfitAmountLabel.TabIndex = 20;
-            this.netProfitAmountLabel.Text = "$0.33";
+            this.netProfitAmountLabel.Text = "$0.00";
             this.netProfitAmountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // netProfitTextLabel
@@ -366,7 +328,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 14.25F);
             this.groupBox1.Location = new System.Drawing.Point(9, 20);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(489, 647);
+            this.groupBox1.Size = new System.Drawing.Size(489, 659);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Add Product";
@@ -674,9 +636,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox productNameTextBox;
         private System.Windows.Forms.ComboBox categoryComboBox;
-        private System.Windows.Forms.Button addCategoryButton;
         private System.Windows.Forms.GroupBox supplierInformationGroupBox;
-        private System.Windows.Forms.Button addSupplierButton;
         private System.Windows.Forms.ComboBox supplierNameComboBox;
         private System.Windows.Forms.GroupBox pricingGroupBox;
         private System.Windows.Forms.GroupBox unitsGroupBox;
