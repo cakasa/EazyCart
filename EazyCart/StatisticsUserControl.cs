@@ -13,11 +13,16 @@ using LiveCharts.WinForms; //the WinForm wrappers
 using Data.Models;
 using System.Windows.Media;
 using Business;
+using System.Windows;
+using System.Windows.Media.Imaging;
+using System.IO;
+
 namespace EazyCart
 {
     public partial class StatisticsUserContol : UserControl
     {
         private ProductBusiness productBusiness;
+        private ReceiptBusiness receiptBusiness;
         private System.Windows.Media.Color color = System.Windows.Media.Color.FromRgb(44, 62, 80);
         private System.Windows.Media.Brush brush;
 
@@ -30,6 +35,7 @@ namespace EazyCart
         {
             reportCategoryComboBox.SelectedIndex = 0;
             productBusiness = new ProductBusiness();
+            receiptBusiness = new ReceiptBusiness();
             brush = new System.Windows.Media.SolidColorBrush(color);
         }
 
@@ -72,7 +78,7 @@ namespace EazyCart
                 case 3:
                     {
                         dataSource.Add("Number of orders for a period");
-                        dataSource.Add("Average number of products in an order for a period");
+                        dataSource.Add("Average number of different products in an order for a period");
                         dataSource.Add("Number of orders featuring discount for a period");
                         break;
                     }
@@ -106,17 +112,17 @@ namespace EazyCart
 
             if (categoryIndex == 0)
             {
-                MessageBox.Show("Please select a report category");
+                System.Windows.Forms.MessageBox.Show("Please select a report category");
                 return;
             }
             else if (typeIndex == 0)
             {
-                MessageBox.Show("Please select a report type");
+                System.Windows.Forms.MessageBox.Show("Please select a report type");
                 return;
             }
             else if ((categoryIndex == 1 || categoryIndex == 3) && (periodIndex == 0))
             {
-                MessageBox.Show("Please select a period");
+                System.Windows.Forms.MessageBox.Show("Please select a period");
                 return;
             }
             else GetReportNumber(categoryIndex, typeIndex, periodIndex);
@@ -165,6 +171,488 @@ namespace EazyCart
                         GenerateProductsByCategoryReport();
                         break;
                     }
+                case 5:
+                    {
+                        GenerateProductsByCountryReport();
+                        break;
+                    }
+                case 6:
+                    {
+                        GenerateProductsByNetProfitForSingleUnit();
+                        break;
+                    }
+                case 7:
+                    {
+                        GenerateOrdersNumber(periodIndex);
+                        break;
+                    }
+                case 8:
+                    {
+                        GenerateAverageNumberOfDifferentProducts(periodIndex);
+                        break;
+                    }
+                case 9:
+                    {
+                        GenerateOrdersFeaturingDiscounts(periodIndex);
+                        break;
+                    }
+            }
+        }
+
+        private void GenerateOrdersFeaturingDiscounts(int periodIndex)
+        {
+            if(periodIndex == 1)
+            {
+                GenerateDailyOrdersFeaturingDiscounts();
+            }
+            else if(periodIndex == 2)
+            {
+                GenerateMonthlyOrdersFeaturingDiscounts();
+            }
+            else if(periodIndex == 3)
+            {
+                GenerateYearlyOrdersFeaturingDiscounts();
+            }
+        }
+
+        private void GenerateYearlyOrdersFeaturingDiscounts()
+        {
+            reportChart.Series = new SeriesCollection();
+            DateTime currentDateTime = DateTime.Now;
+
+            int[] ordersFeaturingDiscountByMonth = receiptBusiness.GetYearlyDiscountOrders(currentDateTime);
+
+            reportChart.Series.Add(new ColumnSeries
+            {
+                Title = "",
+                Values = new ChartValues<int>(),
+                DataLabels = true,
+                Fill = brush,
+                LabelPoint = value => string.Format($"{value.Y}"),
+                FontSize = 15,
+                LabelsPosition = BarLabelPosition.Parallel,
+                Foreground = System.Windows.Media.Brushes.GhostWhite
+            });
+
+            string[] labels = new string[]
+            {
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            };
+
+            InitializeAxes("Month", labels, "Number of orders featuring discount", 0);
+
+            foreach (var numberOfOrders in ordersFeaturingDiscountByMonth)
+            {
+                reportChart.Series[0].Values.Add(numberOfOrders);
+            }
+        }
+
+        private void GenerateMonthlyOrdersFeaturingDiscounts()
+        {
+            reportChart.Series = new SeriesCollection();
+            DateTime currentDateTime = DateTime.Now;
+
+            int[] dailyNumberOfOrdersWithDiscount = receiptBusiness.GetMonthlyDiscountOrders(currentDateTime);
+
+            reportChart.Series.Add(new ColumnSeries
+            {
+                Title = "",
+                Values = new ChartValues<int>(),
+                DataLabels = true,
+                Fill = brush,
+                LabelPoint = value => string.Format($"{value.Y}"),
+                FontSize = 15,
+                LabelsPosition = BarLabelPosition.Parallel,
+                Foreground = System.Windows.Media.Brushes.GhostWhite
+            });
+
+            string[] labels = new string[dailyNumberOfOrdersWithDiscount.Length];
+            for (int i = 0; i < dailyNumberOfOrdersWithDiscount.Length; i++)
+            {
+                labels[i] = string.Format($"{i + 1}");
+            }
+
+            InitializeAxes("Day", labels, "Number of orders featuring discount", 0);
+            foreach (var numberOfOrders in dailyNumberOfOrdersWithDiscount)
+            {
+                reportChart.Series[0].Values.Add(numberOfOrders);
+            }
+        }
+
+        private void GenerateDailyOrdersFeaturingDiscounts()
+        {
+            reportChart.Series = new SeriesCollection();
+            DateTime currentDateTime = DateTime.Now;
+
+            int[] hourlyNumberOfOrdersWithDiscount = receiptBusiness.GetDailyDiscountOrders(currentDateTime);
+
+            reportChart.Series.Add(new ColumnSeries
+            {
+                Title = "",
+                Values = new ChartValues<int>(),
+                DataLabels = true,
+                Fill = brush,
+                LabelPoint = value => string.Format($"{value.Y}"),
+                FontSize = 15,
+                LabelsPosition = BarLabelPosition.Parallel,
+                Foreground = System.Windows.Media.Brushes.GhostWhite
+            });
+
+            string[] labels = new string[]
+            {
+                "0:00 - 2:59",
+                "3:00 - 5:59",
+                "6:00 - 8:59",
+                "9:00 - 11:59",
+                "12:00 - 14:59",
+                "15:00 - 17:59",
+                "18:00 - 20:59",
+                "21:00 - 23:59"
+            };
+
+            InitializeAxes("Hour", labels, "Number of orders featuring discount", 0);
+            foreach (var numberOfOrders in hourlyNumberOfOrdersWithDiscount)
+            {
+                reportChart.Series[0].Values.Add(numberOfOrders);
+            }
+        }
+
+        private void GenerateAverageNumberOfDifferentProducts(int periodIndex)
+        {
+            if (periodIndex == 1)
+            {
+                GenerateDailyAverageNumberOfDifferentProducts();
+            }
+            else if (periodIndex == 2)
+            {
+                GenerateMonthlyAverageNumberOfDifferentProducts();
+            }
+            else if (periodIndex == 3)
+            {
+                GenerateYearlyMonthlyAverageNumberOfDifferentProducts();
+            }
+        }
+
+        private void GenerateYearlyMonthlyAverageNumberOfDifferentProducts()
+        {
+            reportChart.Series = new SeriesCollection();
+            DateTime currentDateTime = DateTime.Now;
+
+            decimal[] averageNumberOfDifferentProductInOrders = receiptBusiness.GetYearlyAverageAmountOfDifferentProducts(currentDateTime);
+
+            reportChart.Series.Add(new ColumnSeries
+            {
+                Title = "",
+                Values = new ChartValues<decimal>(),
+                DataLabels = true,
+                Fill = brush,
+                LabelPoint = value => string.Format($"{value.Y:f2}"),
+                FontSize = 15,
+                LabelsPosition = BarLabelPosition.Parallel,
+                Foreground = System.Windows.Media.Brushes.GhostWhite
+            });
+
+            string[] labels = new string[]
+            {
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            };
+
+            InitializeAxes("Month", labels, "Average number of products", 0);
+
+            foreach (var averageNumberOfProducts in averageNumberOfDifferentProductInOrders)
+            {
+                reportChart.Series[0].Values.Add(averageNumberOfProducts);
+            }
+        }
+
+        private void GenerateMonthlyAverageNumberOfDifferentProducts()
+        {
+            reportChart.Series = new SeriesCollection();
+            DateTime currentDateTime = DateTime.Now;
+
+            decimal[] averageNumberOfDifferentProductInOrders = receiptBusiness.GetMonthlyverageAmountOfDifferentProducts(currentDateTime);
+
+            reportChart.Series.Add(new ColumnSeries
+            {
+                Title = "",
+                Values = new ChartValues<decimal>(),
+                DataLabels = true,
+                Fill = brush,
+                LabelPoint = value => string.Format($"{value.Y:f2}"),
+                FontSize = 15,
+                LabelsPosition = BarLabelPosition.Parallel,
+                Foreground = System.Windows.Media.Brushes.GhostWhite
+            });
+
+            string[] labels = new string[averageNumberOfDifferentProductInOrders.Length];
+            for (int i = 0; i < averageNumberOfDifferentProductInOrders.Length; i++)
+            {
+                labels[i] = string.Format($"{i + 1}");
+            }
+
+            InitializeAxes("Day", labels, "Average number of products", 0);
+            foreach (var averageNumberOfProducts in averageNumberOfDifferentProductInOrders)
+            {
+                reportChart.Series[0].Values.Add(averageNumberOfProducts);
+            }
+        }
+
+        private void GenerateDailyAverageNumberOfDifferentProducts()
+        {
+            reportChart.Series = new SeriesCollection();
+            DateTime currentDateTime = DateTime.Now;
+
+            decimal[] averageNumberOfDifferentProductInOrders = receiptBusiness.GetDailyAverageAmountOfDifferentProducts(currentDateTime);
+
+            reportChart.Series.Add(new ColumnSeries
+            {
+                Title = "",
+                Values = new ChartValues<decimal>(),
+                DataLabels = true,
+                Fill = brush,
+                LabelPoint = value => string.Format($"{value.Y:f2}"),
+                FontSize = 15,
+                LabelsPosition = BarLabelPosition.Parallel,
+                Foreground = System.Windows.Media.Brushes.GhostWhite
+            });
+
+            string[] labels = new string[]
+            {
+                "0:00 - 2:59",
+                "3:00 - 5:59",
+                "6:00 - 8:59",
+                "9:00 - 11:59",
+                "12:00 - 14:59",
+                "15:00 - 17:59",
+                "18:00 - 20:59",
+                "21:00 - 23:59"
+            };
+
+            InitializeAxes("Hour", labels, "Average number of products", 0);
+            foreach (var averageNumberOfProducts in averageNumberOfDifferentProductInOrders)
+            {
+                reportChart.Series[0].Values.Add(averageNumberOfProducts);
+            }
+        }
+
+        private void GenerateOrdersNumber(int periodIndex)
+        {
+            if(periodIndex == 1)
+            {
+                GenerateDailyOrdersNumber();
+            }
+            else if(periodIndex == 2)
+            {
+                GenerateWMonthlyOrdersNumber();
+            }
+            else if(periodIndex == 3)
+            {
+                GenerateYearlyOrdersNumber();
+            }
+        }
+
+        private void GenerateYearlyOrdersNumber()
+        {
+            reportChart.Series = new SeriesCollection();
+            DateTime currentDateTime = DateTime.Now;
+
+            int[] totalOrdersByMonth = receiptBusiness.GetYearlyOrders(currentDateTime);
+
+            reportChart.Series.Add(new ColumnSeries
+            {
+                Title = "",
+                Values = new ChartValues<int>(),
+                DataLabels = true,
+                Fill = brush,
+                LabelPoint = value => string.Format($"{value.Y}"),
+                FontSize = 15,
+                LabelsPosition = BarLabelPosition.Parallel,
+                Foreground = System.Windows.Media.Brushes.GhostWhite
+            });
+
+            string[] labels = new string[]
+            {
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            };
+
+            InitializeAxes("Month", labels, "Number of orders", 0);
+
+            foreach (var totalRevenue in totalOrdersByMonth)
+            {
+                reportChart.Series[0].Values.Add(totalRevenue);
+            }
+        }
+
+        private void GenerateWMonthlyOrdersNumber()
+        {
+            reportChart.Series = new SeriesCollection();
+            DateTime currentDateTime = DateTime.Now;
+
+            int[] dailyNumberOfOrders = receiptBusiness.GetMonthlyOrders(currentDateTime);
+
+            reportChart.Series.Add(new ColumnSeries
+            {
+                Title = "",
+                Values = new ChartValues<int>(),
+                DataLabels = true,
+                Fill = brush,
+                LabelPoint = value => string.Format($"{value.Y}"),
+                FontSize = 15,
+                LabelsPosition = BarLabelPosition.Parallel,
+                Foreground = System.Windows.Media.Brushes.GhostWhite
+            });
+
+            string[] labels = new string[dailyNumberOfOrders.Length];
+            for (int i = 0; i < dailyNumberOfOrders.Length; i++)
+            {
+                labels[i] = string.Format($"{i + 1}");
+            }
+
+            InitializeAxes("Day", labels, "Number of orders", 0);
+            foreach (var numberOfOrders in dailyNumberOfOrders)
+            {
+                reportChart.Series[0].Values.Add(numberOfOrders);
+            }
+        }
+
+        private void GenerateDailyOrdersNumber()
+        {
+            reportChart.Series = new SeriesCollection();
+            DateTime currentDateTime = DateTime.Now;
+
+            int[] hourlyNumberOfOrders = receiptBusiness.GetDailyOrders(currentDateTime);
+
+            reportChart.Series.Add(new ColumnSeries
+            {
+                Title = "",
+                Values = new ChartValues<int>(),
+                DataLabels = true,
+                Fill = brush,
+                LabelPoint = value => string.Format($"{value.Y}"),
+                FontSize = 15,
+                LabelsPosition = BarLabelPosition.Parallel,
+                Foreground = System.Windows.Media.Brushes.GhostWhite
+            });
+
+            string[] labels = new string[]
+            {
+                "0:00 - 2:59",
+                "3:00 - 5:59",
+                "6:00 - 8:59",
+                "9:00 - 11:59",
+                "12:00 - 14:59",
+                "15:00 - 17:59",
+                "18:00 - 20:59",
+                "21:00 - 23:59"
+            };
+
+            InitializeAxes("Hour", labels, "Number of orders", 0);
+            foreach (var numberOfOrders in hourlyNumberOfOrders)
+            {
+                reportChart.Series[0].Values.Add(numberOfOrders);
+            }
+        }
+
+        private void GenerateProductsByNetProfitForSingleUnit()
+        {
+            reportChart.Series = new SeriesCollection();
+
+            Dictionary<string, decimal> netProfitByProduct = productBusiness.GetNetProfitByProduct();
+
+            reportChart.Series.Add(new ColumnSeries
+            {
+                Title = "",
+                Values = new ChartValues<decimal>(),
+                DataLabels = true,
+                LabelPoint = value => string.Format($"$ {value.Y:f2}"),
+                FontSize = 15,
+                Fill = brush,
+                LabelsPosition = BarLabelPosition.Parallel,
+                Foreground = System.Windows.Media.Brushes.GhostWhite
+            });
+
+            string[] labels = new string[netProfitByProduct.Count()];
+            int index = 0;
+            foreach (var netProfit in netProfitByProduct)
+            {
+                labels[index] = netProfit.Key;
+                index++;
+            }
+
+            int labelsRotation = 0;
+            if (netProfitByProduct.Count > 30) labelsRotation = 45;
+            InitializeAxes("Product", labels, "Net Profit", labelsRotation);
+            foreach (var productProfitPair in netProfitByProduct)
+            {
+                reportChart.Series[0].Values.Add(productProfitPair.Value);
+            }
+        }
+
+        private void GenerateProductsByCountryReport()
+        {
+            reportChart.Series = new SeriesCollection();
+
+            Dictionary<string, int> productCountByCountry = productBusiness.GetCountOfProductsByCountry();
+
+            reportChart.Series.Add(new ColumnSeries
+            {
+                Title = "",
+                Values = new ChartValues<int>(),
+                DataLabels = true,
+                LabelPoint = value => string.Format($"{value.Y}"),
+                FontSize = 15,
+                Fill = brush,
+                LabelsPosition = BarLabelPosition.Parallel,
+                Foreground = System.Windows.Media.Brushes.GhostWhite
+            });
+
+            string[] labels = new string[productCountByCountry.Count()];
+            int index = 0;
+            foreach (var productQuantity in productCountByCountry)
+            {
+                labels[index] = productQuantity.Key;
+                index++;
+            }
+
+            int labelsRotation = 0;
+            if (productCountByCountry.Count > 30) labelsRotation = 45;
+            InitializeAxes("Country", labels, "Number of products", labelsRotation);
+            foreach (var countryProductPair in productCountByCountry)
+            {
+                reportChart.Series[0].Values.Add(countryProductPair.Value);
             }
         }
 
@@ -425,6 +913,30 @@ namespace EazyCart
                 FontFamily = new System.Windows.Media.FontFamily("Segoe UI"),
                 Foreground = System.Windows.Media.Brushes.Black
             });         
+        }
+
+        private void ExportReportButton_Click(object sender, EventArgs e)
+        {
+            SaveToPng(reportChart, "chart.png");
+            System.Windows.Forms.MessageBox.Show("Image was successfully saved");
+        }
+
+       private void SaveToPng(FrameworkElement visual, string fileName)
+        {
+            var encoder = new PngBitmapEncoder();
+            EncodeVisual(visual, fileName, encoder);
+        }
+
+        private static void EncodeVisual(FrameworkElement visual, string fileName, BitmapEncoder encoder)
+        {
+            var bitmap = new RenderTargetBitmap((int)visual.ActualWidth, (int)visual.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+            bitmap.Render(visual);
+            var frame = BitmapFrame.Create(bitmap);
+            encoder.Frames.Add(frame);
+            using (var stream = File.Create(fileName))
+            {
+                encoder.Save(stream);
+            }
         }
     }
 }

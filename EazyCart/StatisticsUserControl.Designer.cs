@@ -45,12 +45,13 @@
             this.exportReportButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.exportReportButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.exportReportButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.exportReportButton.Location = new System.Drawing.Point(1315, 355);
+            this.exportReportButton.Location = new System.Drawing.Point(1315, 366);
             this.exportReportButton.Name = "exportReportButton";
             this.exportReportButton.Size = new System.Drawing.Size(254, 65);
             this.exportReportButton.TabIndex = 36;
             this.exportReportButton.Text = "Export Report";
             this.exportReportButton.UseVisualStyleBackColor = false;
+            this.exportReportButton.Click += new System.EventHandler(this.ExportReportButton_Click);
             // 
             // generateReportButton
             // 

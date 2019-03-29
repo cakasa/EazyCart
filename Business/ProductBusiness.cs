@@ -182,6 +182,46 @@ namespace Business
             }
         }
 
+        public Dictionary<string, decimal> GetNetProfitByProduct()
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                var netProfitByProduct = new Dictionary<string, decimal>();
+                var allProducts = eazyCartContext.Products.ToList();
+                foreach (var product in allProducts)
+                {
+                    decimal netProfit = product.SellingPrice - product.DeliveryPrice;
+                    netProfitByProduct.Add(product.Name, netProfit);
+                }
+
+                return netProfitByProduct;
+            }
+        }
+
+        public Dictionary<string, int> GetCountOfProductsByCountry()
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                var productCountByCountry = new Dictionary<string, int>();
+                var allProducts = eazyCartContext.Products.ToList();
+                var allCountries = eazyCartContext.Countries.ToList();
+                foreach(var country in allCountries)
+                {
+                    productCountByCountry.Add(country.Name, 0);
+                }
+
+                foreach(var product in allProducts)
+                {
+                    var supplier = eazyCartContext.Suppliers.Find(product.SupplierId);
+                    var city = eazyCartContext.Cities.Find(supplier.CityId);
+                    var country = eazyCartContext.Countries.Find(city.CountryId);
+                    productCountByCountry[country.Name]++;
+                }
+
+                return productCountByCountry;
+            }
+        }
+
         public Dictionary<string, int> GetCountOfProductsBySuppliers()
         {
             using (eazyCartContext = new EazyCartContext())
