@@ -1,4 +1,6 @@
-﻿namespace EazyCart
+﻿using System;
+
+namespace EazyCart
 {
     partial class WarehouseUserControl
     {
@@ -121,7 +123,6 @@
             this.categoryComboBox.Name = "categoryComboBox";
             this.categoryComboBox.Size = new System.Drawing.Size(362, 33);
             this.categoryComboBox.TabIndex = 6;
-            this.categoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
             // 
             // productNameTextBox
             // 
@@ -133,7 +134,7 @@
             this.productNameTextBox.TabIndex = 7;
             this.productNameTextBox.Text = "Product Name";
             this.productNameTextBox.Enter += new System.EventHandler(this.productNameTextBox_Enter);
-            this.productNameTextBox.Leave += new System.EventHandler(this.productNameTextBox_Leave);
+            this.productNameTextBox.Leave += new System.EventHandler(this.ProductNameTextBox_Leave);
             // 
             // productCodeMaskedTextBox
             // 
@@ -205,7 +206,6 @@
             this.supplierNameComboBox.Name = "supplierNameComboBox";
             this.supplierNameComboBox.Size = new System.Drawing.Size(437, 33);
             this.supplierNameComboBox.TabIndex = 11;
-            this.supplierNameComboBox.SelectedIndexChanged += new System.EventHandler(this.supplierNameComboBox_SelectedIndexChanged);
             // 
             // pricingGroupBox
             // 
@@ -298,7 +298,7 @@
             this.sellingPriceTextBox.Size = new System.Drawing.Size(200, 33);
             this.sellingPriceTextBox.TabIndex = 18;
             this.sellingPriceTextBox.Text = "Selling Price";
-            this.sellingPriceTextBox.TextChanged += new System.EventHandler(this.sellingPriceTextBox_TextChanged);
+            this.sellingPriceTextBox.TextChanged += new System.EventHandler(this.SellingPriceTextBox_TextChanged);
             this.sellingPriceTextBox.Enter += new System.EventHandler(this.SellingPriceTextBox_Enter);
             this.sellingPriceTextBox.Leave += new System.EventHandler(this.SellingPriceTextBox_Leave);
             // 
@@ -311,7 +311,7 @@
             this.deliveryPriceTextBox.Size = new System.Drawing.Size(200, 33);
             this.deliveryPriceTextBox.TabIndex = 17;
             this.deliveryPriceTextBox.Text = "Delivery Price";
-            this.deliveryPriceTextBox.TextChanged += new System.EventHandler(this.deliveryPriceTextBox_TextChanged);
+            this.deliveryPriceTextBox.TextChanged += new System.EventHandler(this.DeliveryPriceTextBox_TextChanged);
             this.deliveryPriceTextBox.Enter += new System.EventHandler(this.DeliveryPriceTextBox_Enter);
             this.deliveryPriceTextBox.Leave += new System.EventHandler(this.DeliveryPriceTextBox_Leave);
             // 
@@ -331,7 +331,7 @@
             this.groupBox1.Size = new System.Drawing.Size(489, 659);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Add Product";
+            this.groupBox1.Text = "Products";
             // 
             // totalLinePanel
             // 

@@ -55,7 +55,7 @@
             this.cityIdTextBox = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.countryForCityComboBox = new System.Windows.Forms.ComboBox();
-            this.deteleteCityButton = new System.Windows.Forms.Button();
+            this.deleteCityButton = new System.Windows.Forms.Button();
             this.saveChangesForCityButton = new System.Windows.Forms.Button();
             this.editCityButton = new System.Windows.Forms.Button();
             this.citiesDataGridView = new System.Windows.Forms.DataGridView();
@@ -282,7 +282,6 @@
             this.countryNameTextBox.Size = new System.Drawing.Size(250, 33);
             this.countryNameTextBox.TabIndex = 4;
             this.countryNameTextBox.Text = "Country Name";
-            this.countryNameTextBox.TextChanged += new System.EventHandler(this.CountryNameTextBox_TextChanged);
             this.countryNameTextBox.Enter += new System.EventHandler(this.CountryNameTextBox_Enter);
             this.countryNameTextBox.Leave += new System.EventHandler(this.CountryNameTextBox_Leave);
             // 
@@ -291,7 +290,7 @@
             this.citiesGroupBox.Controls.Add(this.cityIdTextBox);
             this.citiesGroupBox.Controls.Add(this.panel3);
             this.citiesGroupBox.Controls.Add(this.countryForCityComboBox);
-            this.citiesGroupBox.Controls.Add(this.deteleteCityButton);
+            this.citiesGroupBox.Controls.Add(this.deleteCityButton);
             this.citiesGroupBox.Controls.Add(this.saveChangesForCityButton);
             this.citiesGroupBox.Controls.Add(this.editCityButton);
             this.citiesGroupBox.Controls.Add(this.citiesDataGridView);
@@ -304,7 +303,6 @@
             this.citiesGroupBox.TabIndex = 10;
             this.citiesGroupBox.TabStop = false;
             this.citiesGroupBox.Text = "Cities";
-            this.citiesGroupBox.Enter += new System.EventHandler(this.GroupBox3_Enter);
             // 
             // cityIdTextBox
             // 
@@ -339,21 +337,21 @@
             this.countryForCityComboBox.TabIndex = 12;
             this.countryForCityComboBox.Text = "Select Country";
             // 
-            // deteleteCityButton
+            // deleteCityButton
             // 
-            this.deteleteCityButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
-            this.deteleteCityButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.deteleteCityButton.FlatAppearance.BorderSize = 0;
-            this.deteleteCityButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.deteleteCityButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.deteleteCityButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.deteleteCityButton.Location = new System.Drawing.Point(97, 786);
-            this.deteleteCityButton.Name = "deteleteCityButton";
-            this.deteleteCityButton.Size = new System.Drawing.Size(195, 34);
-            this.deteleteCityButton.TabIndex = 19;
-            this.deteleteCityButton.Text = "DELETE CITY";
-            this.deteleteCityButton.UseVisualStyleBackColor = false;
-            this.deteleteCityButton.Click += new System.EventHandler(this.DeleteCityButton_Click);
+            this.deleteCityButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.deleteCityButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.deleteCityButton.FlatAppearance.BorderSize = 0;
+            this.deleteCityButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteCityButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.deleteCityButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.deleteCityButton.Location = new System.Drawing.Point(97, 786);
+            this.deleteCityButton.Name = "deleteCityButton";
+            this.deleteCityButton.Size = new System.Drawing.Size(195, 34);
+            this.deleteCityButton.TabIndex = 19;
+            this.deleteCityButton.Text = "DELETE CITY";
+            this.deleteCityButton.UseVisualStyleBackColor = false;
+            this.deleteCityButton.Click += new System.EventHandler(this.DeleteCityButton_Click);
             // 
             // saveChangesForCityButton
             // 
@@ -948,7 +946,7 @@
         private System.Windows.Forms.TextBox countryNameTextBox;
         private System.Windows.Forms.GroupBox citiesGroupBox;
         private System.Windows.Forms.ComboBox countryForCityComboBox;
-        private System.Windows.Forms.Button deteleteCityButton;
+        private System.Windows.Forms.Button deleteCityButton;
         private System.Windows.Forms.Button saveChangesForCityButton;
         private System.Windows.Forms.Button editCityButton;
         private System.Windows.Forms.DataGridView citiesDataGridView;

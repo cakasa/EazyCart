@@ -11,7 +11,6 @@ namespace Business
     public class CategoryBusiness
     {
         private EazyCartContext eazyCartContext;
-        private ProductBusiness productBusiness = new ProductBusiness();
 
         public void Add(string categoryName, int categoryId)
         {
@@ -64,11 +63,14 @@ namespace Business
             using (eazyCartContext = new EazyCartContext())
             {
                 var category = eazyCartContext.Categories.Find(id);
-                if(productBusiness.GetAll().Any(x=>x.CategoryId == category.Id))
+                var allProducts = eazyCartContext.Products.ToList();
+                foreach (var product in allProducts)
                 {
-                    throw new ArgumentException("One or more products are related to this category.");
+                    if (product.CategoryId == category.Id)
+                    {
+                        throw new ArgumentException("One or more products are related to this category.");
+                    }
                 }
-
                 eazyCartContext.Categories.Remove(category);
                 eazyCartContext.SaveChanges();
             }
@@ -109,10 +111,6 @@ namespace Business
                 eazyCartContext.Categories.Add(category);
                 eazyCartContext.SaveChanges();
             }
-        }
-
-        
-
-        
+        }       
     }
 }

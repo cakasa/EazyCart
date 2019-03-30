@@ -18,10 +18,14 @@ namespace EazyCart
         private ProductBusiness productBusiness;
         private ProductReceiptBusiness productReceiptBusiness;
         private ReceiptBusiness receiptBusiness;
+
+        private readonly Color enabledButtonColor = Color.FromArgb(44, 62, 80);
+        private readonly Color disabledButtonColor = Color.FromArgb(127, 140, 141);
+        private readonly Color promptTextColor = SystemColors.WindowFrame;
+        private readonly Color activeTextColor = SystemColors.WindowText;
+
         private int highestProductReceiptId;
         private int currentProductReceiptId;
-        private Color enabledButtonColor = Color.FromArgb(44, 62, 80);
-        private Color disabledButtonColor = Color.FromArgb(127, 140, 141);
 
         public CashRegisterUserControl()
         {
@@ -29,6 +33,11 @@ namespace EazyCart
         }
 
         private void CashRegisterUserControl_Load(object sender, EventArgs e)
+        {
+            UpdateUserControl();
+        }
+
+        private void UpdateUserControl()
         {
             categoryBusiness = new CategoryBusiness();
             productBusiness = new ProductBusiness();
@@ -40,11 +49,26 @@ namespace EazyCart
             currentProductReceiptId = highestProductReceiptId + 1;
         }
 
+        public void UpdateSelectProductTab()
+        {
+            UpdateCategoryComboBox();
+            categoryComboBox.SelectedIndex = 0;
+            searchBoxTextBox.Text = "Enter a product's name or its id";
+            searchBoxTextBox.ForeColor = SystemColors.WindowFrame;
+            quantityTextBox.Text = "Enter Quantity";
+            quantityTextBox.ForeColor = SystemColors.WindowFrame;
+            discountCheckBox.Checked = false;
+            discountPercentageTextBox.Enabled = false;
+            discountPercentageTextBox.Text = "Enter Discount (%)";
+            discountPercentageTextBox.ForeColor = SystemColors.WindowFrame;
+            UpdateAvailableProductsDataGrid(productBusiness.GetAll());
+        }
+
         private void UpdateReceiptTab()
         {
             receiptBusiness.DeleteLastReceiptIfEmpty();
             int receiptNumber = receiptBusiness.GetNextReceiptNumber();
-            orderNumberTextBox.Text = receiptNumber.ToString();
+            receiptNumberTextBox.Text = receiptNumber.ToString();
             receiptBusiness.AddNewReceipt(receiptNumber);
             UpdateReceiptDataGridView();
         }
@@ -53,7 +77,7 @@ namespace EazyCart
         {
             receiptDataGridView.Rows.Clear();
             List<ProductReceipt> productReceipts =
-                productReceiptBusiness.GetAllByReceipt(int.Parse(orderNumberTextBox.Text));
+                productReceiptBusiness.GetAllByReceipt(int.Parse(receiptNumberTextBox.Text));
 
             decimal total = 0;
             foreach (var productReceipt in productReceipts)
@@ -73,93 +97,12 @@ namespace EazyCart
             totalToPayLabel.Text = string.Format("$ {0:f2}", total);
         }
 
-        public void UpdateSelectProductTab()
-        {
-            UpdateCategoryComboBox();
-            categoryComboBox.SelectedIndex = 0;
-            searchBoxTextBox.Text = "Enter a product's name or its id";
-            searchBoxTextBox.ForeColor = SystemColors.WindowFrame;
-            quantityTextBox.Text = "Enter Quantity";
-            quantityTextBox.ForeColor = SystemColors.WindowFrame;
-            discountCheckBox.Checked = false;
-            discountPercentageTextBox.Enabled = false;
-            discountPercentageTextBox.Text = "Enter Discount (%)";
-            discountPercentageTextBox.ForeColor = SystemColors.WindowFrame;
-            UpdateAvailableProductsDataGrid(productBusiness.GetAll());
-        }
-
         private void UpdateCategoryComboBox()
         {
             var categories = new List<string>();
             categories.Add("Select Category");
             categories.AddRange(categoryBusiness.GetAllNames());
             categoryComboBox.DataSource = categories;
-        }
-
-        // All of the following methods are connected with maintaining a clean UI
-        private void DiscountCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (discountCheckBox.Checked)
-            {
-                discountPercentageTextBox.Enabled = true;
-            }
-            else discountPercentageTextBox.Enabled = false;
-
-        }
-
-        private void SearchBoxTextBox_Enter(object sender, EventArgs e)
-        {
-            RemovePromptFromTextBoxWhenTyping(searchBoxTextBox, "Enter a product's name or its id");
-        }
-
-        private void SearchBoxTextBox_Leave(object sender, EventArgs e)
-        {
-            AddPromptToTextBoxIfEmpty(searchBoxTextBox, "Enter a product's name or its id");
-        }
-
-        private void QuantityTextBox_Enter(object sender, EventArgs e)
-        {
-            RemovePromptFromTextBoxWhenTyping(quantityTextBox, "Enter Quantity");
-        }
-
-        private void QuantityTextBox_Leave(object sender, EventArgs e)
-        {
-            AddPromptToTextBoxIfEmpty(quantityTextBox, "Enter Quantity");
-        }
-        private void DiscountPercentageTextBox_Enter(object sender, EventArgs e)
-        {
-            RemovePromptFromTextBoxWhenTyping(discountPercentageTextBox, "Enter Discount (%)");
-        }
-
-        private void DiscountPercentageTextBox_Leave(object sender, EventArgs e)
-        {
-            AddPromptToTextBoxIfEmpty(discountPercentageTextBox, "Enter Discount (%)");
-        }
-        private void RemovePromptFromTextBoxWhenTyping(TextBox textBox, string prompt)
-        {
-            if (textBox.Text == prompt)
-            {
-                textBox.Text = string.Empty;
-                textBox.ForeColor = SystemColors.WindowText;
-            }
-        }
-
-        private void AddPromptToTextBoxIfEmpty(TextBox textBox, string prompt)
-        {
-            if (textBox.Text == string.Empty)
-            {
-                textBox.Text = prompt;
-                textBox.ForeColor = SystemColors.WindowFrame;
-            }
-        }
-
-        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdateSearchResults();
-        }
-        private void SearchBoxTextBox_TextChanged(object sender, EventArgs e)
-        {
-            UpdateSearchResults();
         }
 
         private void UpdateSearchResults()
@@ -203,9 +146,20 @@ namespace EazyCart
             }
         }
 
-        private void AvailableProductsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void UpdateProductDataGridViewOnWarehouseUserControl()
         {
+            EazyCartForm eazyCartForm = (EazyCartForm)EazyCartForm.ActiveForm;
+            eazyCartForm.warehouseUserControl.UpdateProductDataGridView();
+        }
 
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateSearchResults();
+        }
+
+        private void SearchBoxTextBox_TextChanged(object sender, EventArgs e)
+        {
+            UpdateSearchResults();
         }
 
         private void AddProductButton_Click(object sender, EventArgs e)
@@ -263,28 +217,8 @@ namespace EazyCart
                 return;
             }
             UpdateSearchResults();
-            ToggleProductReceiptEditSave();
-        }
-
-        private void ToggleProductReceiptEditSave()
-        {
-            if (editProductButton.Enabled)
-            {
-                editProductButton.Enabled = false;
-                editProductButton.BackColor = disabledButtonColor;
-
-                saveProductButton.Enabled = true;
-                saveProductButton.BackColor = enabledButtonColor;
-            }
-            else
-            {
-                editProductButton.Enabled = true;
-                editProductButton.BackColor = enabledButtonColor;
-
-                saveProductButton.Enabled = false;
-                saveProductButton.BackColor = disabledButtonColor;
-            }
-        }
+            ToggleEditSave();
+        }       
 
         private void SaveProductButton_Click(object sender, EventArgs e)
         {
@@ -308,7 +242,7 @@ namespace EazyCart
             UpdateSelectProductTab();
             UpdateReceiptDataGridView();
             currentProductReceiptId = highestProductReceiptId + 1;
-            ToggleProductReceiptEditSave();
+            ToggleEditSave();
         }
 
         private void DeleteProduct_Click(object sender, EventArgs e)
@@ -342,9 +276,9 @@ namespace EazyCart
         {
             try
             {
-                receiptBusiness.Update(int.Parse(orderNumberTextBox.Text));
+                receiptBusiness.Update(int.Parse(receiptNumberTextBox.Text));
             }
-            catch(ArgumentException exc)
+            catch (ArgumentException exc)
             {
                 MessageBox.Show(exc.Message);
                 return;
@@ -352,20 +286,91 @@ namespace EazyCart
             UpdateSelectProductTab();
             UpdateReceiptTab();
             UpdateProductDataGridViewOnWarehouseUserControl();
-        }
-
-        private void UpdateProductDataGridViewOnWarehouseUserControl()
-        {
-            EazyCartForm eazyCartForm = (EazyCartForm)EazyCartForm.ActiveForm;
-            eazyCartForm.warehouseUserControl.UpdateDataGridView();
-
-        }
+        }      
 
         private void CancelOrderButton_Click(object sender, EventArgs e)
         {
-            receiptBusiness.Delete(int.Parse(orderNumberTextBox.Text));
+            receiptBusiness.Delete(int.Parse(receiptNumberTextBox.Text));
             UpdateSelectProductTab();
             UpdateReceiptTab();
+        }
+
+        private void ToggleEditSave()
+        {
+            if (editProductButton.Enabled)
+            {
+                editProductButton.Enabled = false;
+                editProductButton.BackColor = disabledButtonColor;
+
+                saveProductButton.Enabled = true;
+                saveProductButton.BackColor = enabledButtonColor;
+            }
+            else
+            {
+                editProductButton.Enabled = true;
+                editProductButton.BackColor = enabledButtonColor;
+
+                saveProductButton.Enabled = false;
+                saveProductButton.BackColor = disabledButtonColor;
+            }
+        }
+
+        // All of the following methods are connected with maintaining a clean UI
+        private void DiscountCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (discountCheckBox.Checked)
+            {
+                discountPercentageTextBox.Enabled = true;
+            }
+            else discountPercentageTextBox.Enabled = false;
+        }
+
+        private void SearchBoxTextBox_Enter(object sender, EventArgs e)
+        {
+            RemovePromptFromTextBoxWhenTyping(searchBoxTextBox, "Enter a product's name or its id");
+        }
+
+        private void SearchBoxTextBox_Leave(object sender, EventArgs e)
+        {
+            AddPromptToTextBoxIfEmpty(searchBoxTextBox, "Enter a product's name or its id");
+        }
+
+        private void QuantityTextBox_Enter(object sender, EventArgs e)
+        {
+            RemovePromptFromTextBoxWhenTyping(quantityTextBox, "Enter Quantity");
+        }
+
+        private void QuantityTextBox_Leave(object sender, EventArgs e)
+        {
+            AddPromptToTextBoxIfEmpty(quantityTextBox, "Enter Quantity");
+        }
+
+        private void DiscountPercentageTextBox_Enter(object sender, EventArgs e)
+        {
+            RemovePromptFromTextBoxWhenTyping(discountPercentageTextBox, "Enter Discount (%)");
+        }
+
+        private void DiscountPercentageTextBox_Leave(object sender, EventArgs e)
+        {
+            AddPromptToTextBoxIfEmpty(discountPercentageTextBox, "Enter Discount (%)");
+        }
+
+        private void RemovePromptFromTextBoxWhenTyping(TextBox textBox, string prompt)
+        {
+            if (textBox.Text == prompt)
+            {
+                textBox.Text = string.Empty;
+                textBox.ForeColor = SystemColors.WindowText;
+            }
+        }
+
+        private void AddPromptToTextBoxIfEmpty(TextBox textBox, string prompt)
+        {
+            if (textBox.Text == string.Empty)
+            {
+                textBox.Text = prompt;
+                textBox.ForeColor = SystemColors.WindowFrame;
+            }
         }
     }
 }

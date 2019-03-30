@@ -13,17 +13,23 @@ using Business;
 
 namespace EazyCart
 {
+    /// <summary>
+    /// This user control is responsible for the products available for sale
+    /// and their management.
+    /// </summary>
     public partial class WarehouseUserControl : UserControl
     {
-        private ProductBusiness productBusiness = new ProductBusiness();
-        private CategoryBusiness categoryBusiness = new CategoryBusiness();
-        private SupplierBusiness supplierBusiness = new SupplierBusiness();
-        private UnitBusiness unitBusiness = new UnitBusiness();
-        private CountryBusiness countryBusiness = new CountryBusiness();
-        private CityBusiness cityBusiness = new CityBusiness();
+        private ProductBusiness productBusiness;
+        private CategoryBusiness categoryBusiness;
+        private SupplierBusiness supplierBusiness;
+        private UnitBusiness unitBusiness;
+        private CountryBusiness countryBusiness;
+        private CityBusiness cityBusiness;
 
-        Color enabledButtonColor = Color.FromArgb(44, 62, 80);
-        Color disabledButtonColor = Color.FromArgb(127, 140, 141);
+        private readonly Color enabledButtonColor = Color.FromArgb(44, 62, 80);
+        private readonly Color disabledButtonColor = Color.FromArgb(127, 140, 141);
+        private readonly Color promptTextColor = SystemColors.WindowFrame;
+        private readonly Color activeTextColor = SystemColors.WindowText;
 
         public WarehouseUserControl()
         {
@@ -32,54 +38,267 @@ namespace EazyCart
 
         private void WarehouseUserControl_Load(object sender, EventArgs e)
         {
-            UpdateCategoryComboBox();
-            UpdateSupplierComboBox();
-            UpdateProductTab();
+            this.UpdateUserControl();
         }
 
+        // The following methods are responsible for updating information when it is changed.
+        /// <summary>
+        /// Updates the user control every time it is loaded.
+        /// </summary>
+        private void UpdateUserControl()
+        {
+            this.productBusiness = new ProductBusiness();
+            this.categoryBusiness = new CategoryBusiness();
+            this.supplierBusiness = new SupplierBusiness();
+            this.unitBusiness = new UnitBusiness();
+            this.countryBusiness = new CountryBusiness();
+            this.cityBusiness = new CityBusiness();
+            this.ClearAndUpdateProductTab();
+            this.ClearAndUpdateDeliveryTab();
+        }
+
+        /// <summary>
+        /// Clears and updates the product tab.
+        /// </summary>
+        private void ClearAndUpdateProductTab()
+        {
+            // Update comboBoxes 
+            this.UpdateCategoryComboBox();
+            this.UpdateSupplierComboBox();
+
+            // Sets the fields for input to default values.
+            this.productCodeMaskedTextBox.Text = string.Empty;
+            this.productCodeMaskedTextBox.ForeColor = promptTextColor;
+            this.productNameTextBox.Text = "Product Name";
+            this.productNameTextBox.ForeColor = promptTextColor;
+            this.inventoryQuantityTextBox.Text = "Quantity";
+            this.inventoryQuantityTextBox.ForeColor = promptTextColor;
+            this.deliveryPriceTextBox.Text = "Delivery Price";
+            this.deliveryPriceTextBox.ForeColor = promptTextColor;
+            this.sellingPriceTextBox.Text = "Selling Price";
+            this.sellingPriceTextBox.ForeColor = promptTextColor;
+            this.categoryComboBox.SelectedIndex = 0;
+            this.supplierNameComboBox.SelectedIndex = 0;
+            this.supplierCountryTextBox.Text = "Country";
+            this.supplierCityTextBox.Text = "City";
+
+            this.unitRadioButton.Checked = false;
+            this.kilogramRadioButton.Checked = false;
+            this.litreRadioButton.Checked = false;
+
+            // Update other details and the data grid.
+            this.CalculateNetProfit();
+            this.UpdateDeliveryProductComboBox();
+            this.UpdateProductDataGridView();
+        }
+
+        /// <summary>
+        /// Clears and updates the make delivery tab.
+        /// </summary>
+        private void ClearAndUpdateDeliveryTab()
+        {
+            this.UpdateDeliveryProductComboBox();
+
+            // Setting the input field values to default.
+            this.deliveryQuantityTextBox.Text = "Quantity";
+            this.deliveryQuantityTextBox.ForeColor = this.promptTextColor;
+            this.productComboBox.SelectedIndex = 0;
+
+            this.UpdateProductDataGridView();
+        }
+
+        /// <summary>
+        /// Update the dataGridView, which displays products.
+        /// </summary>
+        public void UpdateProductDataGridView()
+        {
+            this.allProductsDataGridView.Rows.Clear();
+            List<Product> allProducts = productBusiness.GetAll();
+
+            // Inserting data into the grid.
+            foreach (var product in allProducts)
+            {
+                var newRow = this.allProductsDataGridView.Rows[allProductsDataGridView.Rows.Add()];
+                var category = this.categoryBusiness.Get(product.CategoryId);
+                var unit = this.unitBusiness.Get(product.UnitId);
+                var supplier = this.supplierBusiness.Get(product.SupplierId);
+                newRow.Cells[0].Value = product.Code;
+                newRow.Cells[1].Value = product.Name;
+                newRow.Cells[2].Value = category.Name;
+                newRow.Cells[3].Value = product.Quantity;
+                newRow.Cells[4].Value = unit.Code;
+                newRow.Cells[5].Value = supplier.Name;
+                newRow.Cells[6].Value = product.DeliveryPrice;
+                newRow.Cells[7].Value = product.SellingPrice;
+            }
+        }
+
+        /// <summary>
+        /// Updates the category comboBox.
+        /// </summary>
         public void UpdateCategoryComboBox()
         {
-            List<string> allCategories = new List<string>();
+            var allCategories = new List<string>();
+
+            // Extract all category names
             allCategories.Add("Select Category");
-            allCategories.AddRange(categoryBusiness.GetAllNames());
-            categoryComboBox.DataSource = allCategories;
+            allCategories.AddRange(this.categoryBusiness.GetAllNames());
+
+            this.categoryComboBox.DataSource = allCategories;
         }
 
+        /// <summary>
+        /// Updates the supplier comboBox
+        /// </summary>
         public void UpdateSupplierComboBox()
         {
-            List<string> allSuppliers = new List<string>();
+            var allSuppliers = new List<string>();
+
+            //Extracts all supplier names.
             allSuppliers.Add("Select Supplier");
-            allSuppliers.AddRange(supplierBusiness.GetAllNames());
-            supplierNameComboBox.DataSource = allSuppliers;
+            allSuppliers.AddRange(this.supplierBusiness.GetAllNames());
+
+            this.supplierNameComboBox.DataSource = allSuppliers;
         }
 
+        /// <summary>
+        /// Updates the product for delivery comboBox
+        /// </summary>
+        private void UpdateDeliveryProductComboBox()
+        {
+            var allProducts = new List<string>();
+
+            // Extract all product names
+            allProducts.Add("Select Product");
+            allProducts.AddRange(this.productBusiness.GetAllNames());
+
+            this.productComboBox.DataSource = allProducts;
+        }
+
+        /// <summary>
+        /// This method is responsible for inserting the product values into
+        /// the correct textBoxes when a user wants to edit a given item
+        /// </summary>
+        /// <param name="product"></param>
+        private void UpdateProductTabFieldsOnEdit(Product product)
+        {
+            // Update fields with product values.
+            this.productCodeMaskedTextBox.Text = product.Code;
+            this.productCodeMaskedTextBox.ForeColor = activeTextColor;
+            this.productNameTextBox.Text = product.Name;
+            this.productNameTextBox.ForeColor = activeTextColor;
+            this.inventoryQuantityTextBox.Text = product.Quantity.ToString();
+            this.inventoryQuantityTextBox.ForeColor = activeTextColor;
+            this.deliveryPriceTextBox.Text = product.DeliveryPrice.ToString();
+            this.deliveryPriceTextBox.ForeColor = activeTextColor;
+            this.sellingPriceTextBox.Text = product.SellingPrice.ToString();
+            this.sellingPriceTextBox.ForeColor = activeTextColor;
+            var category = this.categoryBusiness.Get(product.CategoryId);
+            this.categoryComboBox.SelectedItem = category.Name;
+            var supplier = this.supplierBusiness.Get(product.SupplierId);
+            this.supplierNameComboBox.SelectedItem = supplier.Name;
+            var city = this.cityBusiness.Get(supplier.CityId);
+            this.supplierCityTextBox.Text = city.Name;
+            var country = this.countryBusiness.Get(city.CountryId);
+            this.supplierCountryTextBox.Text = country.Name;
+            var unitId = product.UnitId;
+
+            // Check the appropriate unit radioButton.
+            switch (unitId)
+            {
+                case 1:
+                    {
+                        this.unitRadioButton.Checked = true;
+                        break;
+                    }
+                case 2:
+                    {
+                        this.kilogramRadioButton.Checked = true;
+                        break;
+                    }
+                case 3:
+                    {
+                        this.litreRadioButton.Checked = true;
+                        break;
+                    }
+            }
+        }
+
+        /// <summary>
+        /// Updates the product tab when a product is featured in a receipt.
+        /// Used when a new product is added so that this is reflected in
+        /// the cash register user control.
+        /// </summary>
+        private void UpdateSelectProductTabOnCashRegisterUserControl()
+        {
+            var eazyCartForm = (EazyCartForm)EazyCartForm.ActiveForm;
+            eazyCartForm.cashRegisterUserControl.UpdateSelectProductTab();
+        }
+
+        // The following methods are related to user interaction with the user control.
+        /// <summary>
+        /// The event triggers when the supplier comboBox has a change in the 
+        /// selected item. It is used to update the city and country textBoxes
+        /// the supplier is said to be in.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SupplierNameComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedSupplier = (string)this.supplierNameComboBox.SelectedItem;
+
+            // Displays the name of the country and city the
+            // supplier is in. If no supplier is selected, displays
+            // default values for city and country.
+            if (selectedSupplier == "Select Supplier")
+            {
+                this.supplierCountryTextBox.Text = "Country";
+                this.supplierCityTextBox.Text = "City";
+            }
+            else
+            {
+                string supplier = (string)this.supplierNameComboBox.SelectedItem;
+                string countryName = this.countryBusiness.GetNameBySupplier(supplier);
+                string cityName = this.cityBusiness.GetNameBySupplier(supplier);
+                this.supplierCityTextBox.Text = cityName;
+                this.supplierCountryTextBox.Text = countryName;
+            }
+        }
+
+        /// <summary>
+        /// This event triggers when the "Add Product" button is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddProductButton_Click(object sender, EventArgs e)
         {
-            string productCode = productCodeMaskedTextBox.Text;
-            string category = (string)categoryComboBox.SelectedItem;
-            string productName = productNameTextBox.Text;
-            string quantityString = inventoryQuantityTextBox.Text;
-            string supplierName = (string)supplierNameComboBox.SelectedItem;
-            string deliveryPriceString = deliveryPriceTextBox.Text;
-            string sellingPriceString = sellingPriceTextBox.Text;
-            string unit = "";
+            var productCode = this.productCodeMaskedTextBox.Text;
+            var category = (string)this.categoryComboBox.SelectedItem;
+            var productName = this.productNameTextBox.Text;
+            var quantityString = this.inventoryQuantityTextBox.Text;
+            var supplierName = (string)this.supplierNameComboBox.SelectedItem;
+            var deliveryPriceString = this.deliveryPriceTextBox.Text;
+            var sellingPriceString = this.sellingPriceTextBox.Text;
+            var unit = string.Empty;
 
-            if (unitRadioButton.Checked) unit = "Unit";
-            else if (kilogramRadioButton.Checked) unit = "Kilogram";
-            else if (litreRadioButton.Checked) unit = "Litre";
+            // Check that a unit is selected.
+            if (this.unitRadioButton.Checked) unit = "Unit";
+            else if (this.kilogramRadioButton.Checked) unit = "Kilogram";
+            else if (this.litreRadioButton.Checked) unit = "Litre";
             else
             {
                 MessageBox.Show("Please select an unit");
                 return;
             }
 
+            // Add product to the database. If the validation fails, a messageBox pops up.
             try
             {
-                AreValuesCorrect(productCode, category, productName, quantityString, supplierName, deliveryPriceString, sellingPriceString, unit);
-                decimal quantity = decimal.Parse(quantityString);
-                decimal deliveryPrice = decimal.Parse(deliveryPriceString);
-                decimal sellingPrice = decimal.Parse(sellingPriceString);
-                productBusiness.Add(productCode, category, productName, quantity, supplierName, deliveryPrice, sellingPrice, unit);
+                this.CheckIfValuesAreCorrect(productCode, category, productName, quantityString, supplierName, deliveryPriceString, sellingPriceString, unit);
+                var quantity = decimal.Parse(quantityString);
+                var deliveryPrice = decimal.Parse(deliveryPriceString);
+                var sellingPrice = decimal.Parse(sellingPriceString);
+                this.productBusiness.Add(productCode, category, productName, quantity, supplierName, deliveryPrice, sellingPrice, unit);
             }
             catch (ArgumentException exc)
             {
@@ -87,51 +306,145 @@ namespace EazyCart
                 return;
             }
 
-            UpdateProductTab();
-            UpdateSelectProductTabOnCashRegisterUserControl();
+            // Update appropriate tabs.
+            this.ClearAndUpdateProductTab();
+            this.UpdateSelectProductTabOnCashRegisterUserControl();
         }
 
-        private void UpdateSelectProductTabOnCashRegisterUserControl()
+        /// <summary>
+        /// This event triggers when the "Edit Product" button is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EditProductButton_Click(object sender, EventArgs e)
         {
-            EazyCartForm eazyCartForm = (EazyCartForm)EazyCartForm.ActiveForm;
-            eazyCartForm.cashRegisterUserControl.UpdateSelectProductTab();
+            // Try to insert values to the fields for the user to modify.
+            // If a row has not been selected a messageBox is shown.
+            try
+            {
+                // Lock ID, so the user can't intentionally change the ID.
+                this.productCodeMaskedTextBox.Enabled = false;
+
+                // Extract the item to change
+                var item = this.allProductsDataGridView.SelectedRows[0].Cells;
+                var productCode = (string)item[0].Value;
+                var product = this.productBusiness.Get(productCode);
+
+                // Update the fields according to the product values.
+                this.UpdateProductTabFieldsOnEdit(product);
+            }
+            catch
+            {
+                MessageBox.Show("You haven't selected a row");
+                return;
+            }
+
+            this.ToggleEditSave();
+            this.CalculateNetProfit();
         }
 
-        private void UpdateProductTab()
+        /// <summary>
+        /// The event triggers when the "Save Product" button is clicked. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveProductButton_Click(object sender, EventArgs e)
         {
-            productCodeMaskedTextBox.Text = string.Empty;
-            productCodeMaskedTextBox.ForeColor = SystemColors.WindowFrame;
-            productNameTextBox.Text = "Product Name";
-            productNameTextBox.ForeColor = SystemColors.WindowFrame;
-            inventoryQuantityTextBox.Text = "Quantity";
-            inventoryQuantityTextBox.ForeColor = SystemColors.WindowFrame;
-            deliveryPriceTextBox.Text = "Delivery Price";
-            deliveryPriceTextBox.ForeColor = SystemColors.WindowFrame;
-            sellingPriceTextBox.Text = "Selling Price";
-            sellingPriceTextBox.ForeColor = SystemColors.WindowFrame;
-            categoryComboBox.SelectedIndex = 0;
-            supplierNameComboBox.SelectedIndex = 0;
-            supplierCountryTextBox.Text = "Country";
-            supplierCityTextBox.Text = "City";
-            unitRadioButton.Checked = false;
-            kilogramRadioButton.Checked = false;
-            litreRadioButton.Checked = false;
-            CalculateNetProfit();
-            UpdateDeliveryProductComboBox();
-            UpdateDataGridView();
+            var productCode = this.productCodeMaskedTextBox.Text;
+            var category = (string)this.categoryComboBox.SelectedItem;
+            var productName = this.productNameTextBox.Text;
+            var quantityString = this.inventoryQuantityTextBox.Text;
+            var supplierName = (string)this.supplierNameComboBox.SelectedItem;
+            var sellingPriceString = this.sellingPriceTextBox.Text;
+            var deliveryPriceString = this.deliveryPriceTextBox.Text;
+            var unit = string.Empty;
+
+            // Check that a unit is selected.
+            if (this.unitRadioButton.Checked) unit = "Unit";
+            else if (this.kilogramRadioButton.Checked) unit = "Kilogram";
+            else if (this.litreRadioButton.Checked) unit = "Litre";
+            else
+            {
+                MessageBox.Show("Please select an unit");
+                return;
+            }
+
+            // Update the given product. If the validation fails, a messageBox is shown.
+            try
+            {
+                CheckIfValuesAreCorrect(productCode, category, productName, quantityString, supplierName, deliveryPriceString, sellingPriceString, unit);
+                var quantity = decimal.Parse(quantityString);
+                var deliveryPrice = decimal.Parse(deliveryPriceString);
+                var sellingPrice = decimal.Parse(sellingPriceString);
+                productBusiness.Update(productCode, category, productName, quantity, supplierName, deliveryPrice, sellingPrice, unit);
+            }
+            catch (ArgumentException exc)
+            {
+                MessageBox.Show(exc.Message);
+                return;
+            }
+
+            this.productCodeMaskedTextBox.Enabled = true;
+
+            // Update the appropriate tabs.
+            this.ClearAndUpdateProductTab();
+            this.ToggleEditSave();
+            this.UpdateSelectProductTabOnCashRegisterUserControl();
         }
 
-        private void UpdateDeliveryProductComboBox()
+        /// <summary>
+        /// This event triggers when the "Delete Product" button is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteProductButton_Click(object sender, EventArgs e)
         {
-            List<string> allProducts = new List<string>();
-            allProducts.Add("Select Product");
-            allProducts.AddRange(productBusiness.GetAllNames());
-            productComboBox.DataSource = allProducts;
+            var productCode = string.Empty;
+
+            // Validate that a row is selected. If not, a messageBox is shown.
+            try
+            {
+                var item = this.allProductsDataGridView.SelectedRows[0].Cells;
+                productCode = (string)item[0].Value;
+            }
+            catch
+            {
+                MessageBox.Show("You haven't selected a row");
+                return;
+            }
+
+            // Try to delete the product. If validation fails, a messageBox is shown.
+            try
+            {
+                this.productBusiness.Delete(productCode);
+            }
+            catch (ArgumentException exc)
+            {
+                MessageBox.Show(exc.Message);
+                return;
+            }
+
+            // Update the appropriate tabs.
+            this.ClearAndUpdateProductTab();
+            this.UpdateSelectProductTabOnCashRegisterUserControl();
         }
 
-        private void AreValuesCorrect(string productCode, string category, string productName, string quantityString,
+        /// <summary>
+        /// This method is responsible for checkin whether all values are correct.
+        /// In other words, it performs validation of the passed values.
+        /// </summary>
+        /// <param name="productCode"></param>
+        /// <param name="category"></param>
+        /// <param name="productName"></param>
+        /// <param name="quantityString"></param>
+        /// <param name="supplierName"></param>
+        /// <param name="deliveryPriceString"></param>
+        /// <param name="sellingPriceString"></param>
+        /// <param name="unit"></param>
+        private void CheckIfValuesAreCorrect(string productCode, string category, string productName, string quantityString,
             string supplierName, string deliveryPriceString, string sellingPriceString, string unit)
         {
+            // Check if product code consists of digits only
             foreach (var letter in productCode)
             {
                 if (!Char.IsDigit(letter))
@@ -140,6 +453,7 @@ namespace EazyCart
                 }
             }
 
+            // Check if product code has length of exactly six characters.
             if (productCode.Length != 6)
             {
                 throw new ArgumentException("Code must be exactly 6 digits!");
@@ -152,249 +466,47 @@ namespace EazyCart
             bool deliveryPriceStringCanBeParsed = decimal.TryParse(deliveryPriceString, out deliveryPrice);
             bool sellingPriceStringCanBeParsed = decimal.TryParse(sellingPriceString, out sellingPrice);
 
-            if (quantity != Math.Floor(quantity) && unit == "Unit")
-            {
-                throw new ArgumentException("Quantity must be a whole number");
-            }
-
+            // Validate that a category and a supplier have been selected, check that each numeric
+            // value can be successfully parsed and see whether the product name is valid.
             if (category == "Select Category" || productName == "Product Name" || supplierName == "Select Supplier"
                 || !quantityStringCanBeParsed || !deliveryPriceStringCanBeParsed || !sellingPriceStringCanBeParsed)
             {
                 throw new ArgumentException("Invalid Values!");
             }
-        }
 
-        public void UpdateDataGridView()
-        {
-            allProductsDataGridView.Rows.Clear();
-            List<Product> allProducts = productBusiness.GetAll();
-            foreach (var product in allProducts)
+            // If the selected unit type is unit and quantity is not a whole number, 
+            // then it is invalid and an exception needs to be thrown.
+            if (quantity != Math.Floor(quantity) && unit == "Unit")
             {
-                DataGridViewRow newRow = allProductsDataGridView.Rows[allProductsDataGridView.Rows.Add()];
-                var category = categoryBusiness.Get(product.CategoryId);
-                var unit = unitBusiness.Get(product.UnitId);
-                var supplier = supplierBusiness.Get(product.SupplierId);
-                newRow.Cells[0].Value = product.Code;
-                newRow.Cells[1].Value = product.Name;
-                newRow.Cells[2].Value = category.Name;
-                newRow.Cells[3].Value = product.Quantity;
-                newRow.Cells[4].Value = unit.Code;
-                newRow.Cells[5].Value = supplier.Name;
-                newRow.Cells[6].Value = product.DeliveryPrice;
-                newRow.Cells[7].Value = product.SellingPrice;
+                throw new ArgumentException("Quantity must be a whole number");
             }
         }
 
-        private void supplierNameComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if ((string)supplierNameComboBox.SelectedItem != "Select Supplier")
-            {
-                string supplier = (string)supplierNameComboBox.SelectedItem;
-                string countryName = countryBusiness.GetNameBySupplier(supplier);
-                string cityName = cityBusiness.GetNameBySupplier(supplier);
-                supplierCityTextBox.Text = cityName;
-                supplierCountryTextBox.Text = countryName;
-            }
-            else
-            {
-                supplierCountryTextBox.Text = "Country";
-                supplierCityTextBox.Text = "City";
-            }
-        }
-
-        private void deliveryPriceTextBox_TextChanged(object sender, EventArgs e)
-        {
-            netProfitAmountLabel.Text = string.Format("$ {0:f2}", CalculateNetProfit());
-        }
-
-        private void sellingPriceTextBox_TextChanged(object sender, EventArgs e)
-        {
-            netProfitAmountLabel.Text = string.Format("$ {0:f2}", CalculateNetProfit());
-        }
-
-        private double CalculateNetProfit()
-        {
-            string deliveryPriceString = deliveryPriceTextBox.Text;
-            string sellingPriceString = sellingPriceTextBox.Text;
-            if (deliveryPriceString == "Delivery Price" || sellingPriceString == "Selling Price")
-            {
-                return 0;
-            }
-            else
-            {
-                double deliveryPrice = 0;
-                double sellingPrice = 0;
-                bool deliveryPriceCanBeParsed = double.TryParse(deliveryPriceString, out deliveryPrice);
-                bool sellingPriceCanBeParsed = double.TryParse(sellingPriceString, out sellingPrice);
-
-                if (!deliveryPriceCanBeParsed || !sellingPriceCanBeParsed)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return sellingPrice - deliveryPrice;
-                }
-            }
-        }
-
-        private void EditProductButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                productCodeMaskedTextBox.Enabled = false;
-                var item = allProductsDataGridView.SelectedRows[0].Cells;
-                string productCode = (string)item[0].Value;
-                Product product = productBusiness.Get(productCode);
-                productCodeMaskedTextBox.Text = product.Code;
-                productCodeMaskedTextBox.ForeColor = SystemColors.WindowText;
-                productNameTextBox.Text = product.Name;
-                productNameTextBox.ForeColor = SystemColors.WindowText;
-                inventoryQuantityTextBox.Text = product.Quantity.ToString();
-                inventoryQuantityTextBox.ForeColor = SystemColors.WindowText;
-                deliveryPriceTextBox.Text = product.DeliveryPrice.ToString();
-                deliveryPriceTextBox.ForeColor = SystemColors.WindowText;
-                sellingPriceTextBox.Text = product.SellingPrice.ToString();
-                sellingPriceTextBox.ForeColor = SystemColors.WindowText;
-                var category = categoryBusiness.Get(product.CategoryId);
-                categoryComboBox.SelectedItem = category.Name;
-                var supplier = supplierBusiness.Get(product.SupplierId);
-                supplierNameComboBox.SelectedItem = supplier.Name;
-                var city = cityBusiness.Get(supplier.CityId);
-                supplierCityTextBox.Text = city.Name;
-                var country = countryBusiness.Get(city.CountryId);
-                supplierCountryTextBox.Text = country.Name;
-                var unitIndex = product.UnitId;
-
-                switch (unitIndex)
-                {
-                    case 1:
-                        unitRadioButton.Checked = true;
-                        break;
-                    case 2:
-                        kilogramRadioButton.Checked = true;
-                        break;
-                    case 3:
-                        litreRadioButton.Checked = true;
-                        break;
-                }
-            }
-            catch
-            {
-                MessageBox.Show("You haven't selected a row");
-                return;
-            }
-
-            ToggleProductEditSave();
-            CalculateNetProfit();
-        }
-
-        private void ToggleProductEditSave()
-        {
-            if (editProductButton.Enabled)
-            {
-                editProductButton.Enabled = false;
-                editProductButton.BackColor = disabledButtonColor;
-
-                saveProductButton.Enabled = true;
-                saveProductButton.BackColor = enabledButtonColor;
-            }
-            else
-            {
-                editProductButton.Enabled = true;
-                editProductButton.BackColor = enabledButtonColor;
-
-                saveProductButton.Enabled = false;
-                saveProductButton.BackColor = disabledButtonColor;
-            }
-        }
-
-        private void SaveProductButton_Click(object sender, EventArgs e)
-        {
-            string productCode = productCodeMaskedTextBox.Text;
-            string category = (string)categoryComboBox.SelectedItem;
-            string productName = productNameTextBox.Text;
-            string quantityString = inventoryQuantityTextBox.Text;
-            string supplierName = (string)supplierNameComboBox.SelectedItem;
-            string sellingPriceString = sellingPriceTextBox.Text;
-            string deliveryPriceString = deliveryPriceTextBox.Text;
-            string unit = "";
-
-            if (unitRadioButton.Checked) unit = "Unit";
-            else if (kilogramRadioButton.Checked) unit = "Kilogram";
-            else if (litreRadioButton.Checked) unit = "Litre";
-            else
-            {
-                MessageBox.Show("Please select an unit");
-                return;
-            }
-
-            try
-            {
-                AreValuesCorrect(productCode, category, productName, quantityString, supplierName, deliveryPriceString, sellingPriceString, unit);
-                decimal quantity = decimal.Parse(quantityString);
-                decimal deliveryPrice = decimal.Parse(deliveryPriceString);
-                decimal sellingPrice = decimal.Parse(sellingPriceString);
-                productBusiness.Update(productCode, category, productName, quantity, supplierName, deliveryPrice, sellingPrice, unit);
-            }
-            catch (ArgumentException exc)
-            {
-                MessageBox.Show(exc.Message);
-                return;
-            }
-
-            UpdateProductTab();
-
-            productCodeMaskedTextBox.Enabled = true;
-            ToggleProductEditSave();
-            UpdateProductTab();
-            UpdateSelectProductTabOnCashRegisterUserControl();
-        }
-
-        private void DeleteProductButton_Click(object sender, EventArgs e)
-        {
-            string productCode = "";
-            try
-            {
-                var item = allProductsDataGridView.SelectedRows[0].Cells;
-                productCode = item[0].Value.ToString();
-            }
-            catch
-            {
-                MessageBox.Show("You haven't selected a row");
-                return;
-            }
-
-            try
-            {
-                productBusiness.Delete(productCode);
-            }
-            catch (ArgumentException exc)
-            {
-                MessageBox.Show(exc.Message);
-                return;
-            }
-
-            UpdateProductTab();
-            UpdateSelectProductTabOnCashRegisterUserControl();
-        }
-
+        /// <summary>
+        /// The event is triggered when the make delivery button is clicked.
+        /// Adds the specified amount of product to its quantity
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MakeDeliveryButton_Click(object sender, EventArgs e)
         {
-            string productName = (string)productComboBox.SelectedItem;
-            string quantityString = deliveryQuantityTextBox.Text;
+            var productName = (string)this.productComboBox.SelectedItem;
+            var quantityString = this.deliveryQuantityTextBox.Text;
             decimal quantity;
             bool canQuantityStringBeParsed = decimal.TryParse(quantityString, out quantity);
 
+            // Perform validation of values.
             if (!canQuantityStringBeParsed || productName == "Select Product")
             {
                 MessageBox.Show("Invalid values");
                 return;
             }
 
+            // Try to make the delivery, if some of the information
+            // is not correctly set, a messageBox will be shown.
             try
             {
-                productBusiness.MakeDelivery(productName, quantity);
+                this.productBusiness.MakeDelivery(productName, quantity);
             }
             catch (ArgumentException exc)
             {
@@ -402,108 +514,190 @@ namespace EazyCart
                 return;
             }
 
-            UpdateDeliveryTab();
+            // Update appropriate tab.
+            this.ClearAndUpdateDeliveryTab();
         }
 
-        private void UpdateDeliveryTab()
+        /// <summary>
+        /// The event triggers when the text in the delivery price textBox has been changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeliveryPriceTextBox_TextChanged(object sender, EventArgs e)
         {
-            deliveryQuantityTextBox.Text = "Quantity";
-            deliveryQuantityTextBox.ForeColor = SystemColors.WindowFrame;
-            productComboBox.SelectedIndex = 0;
-            UpdateDataGridView();
+            this.CalculateNetProfit();
+        }
+
+        /// <summary>
+        /// The event triggers when the text in the selling price textBox has been changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SellingPriceTextBox_TextChanged(object sender, EventArgs e)
+        {
+            this.CalculateNetProfit();
+        }
+
+        /// <summary>
+        /// This method is responsible for calculating the net profit in the event
+        /// that the text in selling price or delivery price textBoxes has been
+        /// changed.
+        /// </summary>
+        /// <returns></returns>
+        private decimal CalculateNetProfit()
+        {
+            string deliveryPriceString = this.deliveryPriceTextBox.Text;
+            string sellingPriceString = this.sellingPriceTextBox.Text;
+
+            var deliveryPrice = 0M;
+            var sellingPrice = 0M;
+            bool deliveryPriceCanBeParsed = decimal.TryParse(deliveryPriceString, out deliveryPrice);
+            bool sellingPriceCanBeParsed = decimal.TryParse(sellingPriceString, out sellingPrice);
+
+            // If the value inside the textBox cannot be parsed, we return 0.
+            if (!deliveryPriceCanBeParsed || !sellingPriceCanBeParsed)
+            {
+                return 0;
+            }
+            else
+            {
+                // Net profit is calculated by subtracting the deliveryPrice from the sellingPrice
+                var netProfit = sellingPrice - deliveryPrice;
+                return netProfit;
+            }
+        }
+
+        /// <summary>
+        /// This method is responsible for enabling/disabling the edit/save buttons
+        /// when either of them is clicked.
+        /// </summary>
+        private void ToggleEditSave()
+        {
+            if (editProductButton.Enabled)
+            {
+                // Disable all buttons except the Save Button
+                editProductButton.Enabled = false;
+                editProductButton.BackColor = disabledButtonColor;
+                addProductButton.Enabled = false;
+                addProductButton.BackColor = disabledButtonColor;
+                deleteProductButton.Enabled = false;
+                deleteProductButton.BackColor = disabledButtonColor;
+
+                saveProductButton.Enabled = true;
+                saveProductButton.BackColor = enabledButtonColor;
+            }
+            else
+            {
+                // Enable all buttons and disable the Save Button
+                editProductButton.Enabled = true;
+                editProductButton.BackColor = enabledButtonColor;
+                addProductButton.Enabled = true;
+                addProductButton.BackColor = enabledButtonColor;
+                deleteProductButton.Enabled = true;
+                deleteProductButton.BackColor = enabledButtonColor;
+
+                saveProductButton.Enabled = false;
+                saveProductButton.BackColor = disabledButtonColor;
+            }
         }
 
         // All of the following methods are responsible for maintaining a consistent UI
-
         private void productNameTextBox_Enter(object sender, EventArgs e)
         {
-            RemovePromptFromTextBox(productNameTextBox, "Product Name");
+            this.RemovePromptFromTextBox(this.productNameTextBox, "Product Name");
         }
 
-        private void productNameTextBox_Leave(object sender, EventArgs e)
+        private void ProductNameTextBox_Leave(object sender, EventArgs e)
         {
-            AddPromptToTextBox(productNameTextBox, "Product Name");
+            this.AddPromptToTextBox(this.productNameTextBox, "Product Name");
         }
 
         private void DeliveryPriceTextBox_Enter(object sender, EventArgs e)
         {
-            RemovePromptFromTextBox(deliveryPriceTextBox, "Delivery Price");
+            this.RemovePromptFromTextBox(this.deliveryPriceTextBox, "Delivery Price");
         }
 
         private void DeliveryPriceTextBox_Leave(object sender, EventArgs e)
         {
-            AddPromptToTextBox(deliveryPriceTextBox, "Delivery Price");
+            this.AddPromptToTextBox(this.deliveryPriceTextBox, "Delivery Price");
         }
 
         private void SellingPriceTextBox_Enter(object sender, EventArgs e)
         {
-            RemovePromptFromTextBox(sellingPriceTextBox, "Selling Price");
+            this.RemovePromptFromTextBox(this.sellingPriceTextBox, "Selling Price");
         }
 
         private void SellingPriceTextBox_Leave(object sender, EventArgs e)
         {
-            AddPromptToTextBox(sellingPriceTextBox, "Selling Price");
+            this.AddPromptToTextBox(this.sellingPriceTextBox, "Selling Price");
         }
 
         private void InventoryQuantityTextBox_Enter(object sender, EventArgs e)
         {
-            RemovePromptFromTextBox(inventoryQuantityTextBox, "Quantity");
+            this.RemovePromptFromTextBox(this.inventoryQuantityTextBox, "Quantity");
         }
 
         private void InventoryQuantityTextBox_Leave(object sender, EventArgs e)
         {
-            AddPromptToTextBox(inventoryQuantityTextBox, "Quantity");
+            this.AddPromptToTextBox(this.inventoryQuantityTextBox, "Quantity");
         }
 
         private void DeliveryQuantityTextBox_Enter(object sender, EventArgs e)
         {
-            RemovePromptFromTextBox(deliveryQuantityTextBox, "Quantity");
+            this.RemovePromptFromTextBox(this.deliveryQuantityTextBox, "Quantity");
         }
 
         private void DeliveryQuantityTextBox_Leave(object sender, EventArgs e)
         {
-            AddPromptToTextBox(deliveryQuantityTextBox, "Quantity");
+            this.AddPromptToTextBox(this.deliveryQuantityTextBox, "Quantity");
         }
 
         private void ProductCodeMaskedTextBox_Enter(object sender, EventArgs e)
         {
-            if (productCodeMaskedTextBox.Text == "000000")
+            if (this.productCodeMaskedTextBox.Text == "000000")
             {
-                productCodeMaskedTextBox.Text = string.Empty;
-                productCodeMaskedTextBox.ForeColor = SystemColors.WindowText;
+                this.productCodeMaskedTextBox.Text = string.Empty;
+                this.productCodeMaskedTextBox.ForeColor = activeTextColor;
             }
         }
 
         private void ProductCodeMaskedTextBox_Leave(object sender, EventArgs e)
         {
-            if (productCodeMaskedTextBox.Text == string.Empty)
+            if (this.productCodeMaskedTextBox.Text == string.Empty)
             {
-                productCodeMaskedTextBox.Text = "000000";
-                productCodeMaskedTextBox.ForeColor = SystemColors.WindowFrame;
+                this.productCodeMaskedTextBox.Text = "000000";
+                this.productCodeMaskedTextBox.ForeColor = promptTextColor;
             }
         }
 
+        /// <summary>
+        /// This event is triggerred when one begins typing in a textBox.
+        /// If the textBox had a prompt beforehand, it is removed.
+        /// </summary>
+        /// <param name="textBox"></param>
+        /// <param name="prompt"></param>
         private void RemovePromptFromTextBox(TextBox textBox, string prompt)
         {
             if (textBox.Text == prompt)
             {
                 textBox.Text = string.Empty;
-                textBox.ForeColor = SystemColors.WindowText;
+                textBox.ForeColor = activeTextColor;
             }
         }
 
+        /// <summary>
+        /// This event is triggered when one stops typing in a textBox.
+        /// If the textBox was left empty, a prompt, suitable for the textbox, would be added.
+        /// </summary>
+        /// <param name="textBox"></param>
+        /// <param name="prompt"></param>
         private void AddPromptToTextBox(TextBox textBox, string prompt)
         {
             if (textBox.Text == string.Empty)
             {
                 textBox.Text = prompt;
-                textBox.ForeColor = SystemColors.WindowFrame;
+                textBox.ForeColor = promptTextColor;
             }
-        }
-
-        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

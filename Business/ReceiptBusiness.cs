@@ -10,7 +10,6 @@ namespace Business
     public class ReceiptBusiness
     {
         private EazyCartContext eazyCartContext;
-        private ProductReceiptBusiness productReceiptBusiness = new ProductReceiptBusiness();
 
         public int GetNextReceiptNumber()
         {
