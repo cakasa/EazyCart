@@ -61,6 +61,12 @@ namespace EazyCart
 
         private void CloseButton_Click(object sender, EventArgs e)
         {
+            var receiptDataGridView = (DataGridView) cashRegisterUserControl.Controls["receiptDataGridView"];
+            if (receiptDataGridView.Rows.Count != 0)
+            {
+                MessageBox.Show("You have an uncompleted order.");
+                return;
+            }
             this.Close();
         }
 

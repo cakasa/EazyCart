@@ -39,7 +39,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.totalLinePanel = new System.Windows.Forms.Panel();
             this.totalLabel = new System.Windows.Forms.Label();
-            this.totalToPayLabel = new System.Windows.Forms.Label();
+            this.grandTotalLabel = new System.Windows.Forms.Label();
             this.searchBoxTextBox = new System.Windows.Forms.TextBox();
             this.quantityTextBox = new System.Windows.Forms.TextBox();
             this.categoryComboBox = new System.Windows.Forms.ComboBox();
@@ -91,17 +91,17 @@
             // 
             // totalToPayLabel
             // 
-            this.totalToPayLabel.AutoSize = true;
-            this.totalToPayLabel.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.totalToPayLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.totalToPayLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.totalToPayLabel.Location = new System.Drawing.Point(503, 760);
-            this.totalToPayLabel.MinimumSize = new System.Drawing.Size(330, 40);
-            this.totalToPayLabel.Name = "totalToPayLabel";
-            this.totalToPayLabel.Size = new System.Drawing.Size(330, 47);
-            this.totalToPayLabel.TabIndex = 11;
-            this.totalToPayLabel.Text = " $ 0.00";
-            this.totalToPayLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.grandTotalLabel.AutoSize = true;
+            this.grandTotalLabel.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.grandTotalLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.grandTotalLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.grandTotalLabel.Location = new System.Drawing.Point(503, 760);
+            this.grandTotalLabel.MinimumSize = new System.Drawing.Size(330, 40);
+            this.grandTotalLabel.Name = "totalToPayLabel";
+            this.grandTotalLabel.Size = new System.Drawing.Size(330, 47);
+            this.grandTotalLabel.TabIndex = 11;
+            this.grandTotalLabel.Text = " $ 0.00";
+            this.grandTotalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // searchBoxTextBox
             // 
@@ -507,7 +507,7 @@
             this.Controls.Add(this.quantityTextBox);
             this.Controls.Add(this.searchBoxTextBox);
             this.Controls.Add(this.addProductButton);
-            this.Controls.Add(this.totalToPayLabel);
+            this.Controls.Add(this.grandTotalLabel);
             this.Controls.Add(this.totalLabel);
             this.Controls.Add(this.totalLinePanel);
             this.Controls.Add(this.cancelOrderButton);
@@ -527,7 +527,7 @@
         private System.Windows.Forms.Button cancelOrderButton;
         private System.Windows.Forms.Panel totalLinePanel;
         private System.Windows.Forms.Label totalLabel;
-        private System.Windows.Forms.Label totalToPayLabel;
+        private System.Windows.Forms.Label grandTotalLabel;
         private System.Windows.Forms.Button addProductButton;
         private System.Windows.Forms.TextBox searchBoxTextBox;
         private System.Windows.Forms.TextBox quantityTextBox;

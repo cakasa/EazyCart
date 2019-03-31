@@ -12,11 +12,11 @@ using Data.Models;
 
 namespace EazyCart
 {
+    /// <summary>
+    /// This is the user control responsible for managing orders 
+    /// </summary>
     public partial class CashRegisterUserControl : UserControl
     {
-        /// <summary>
-        /// This is the user control responsible for managing orders 
-        /// </summary>
         private CategoryBusiness categoryBusiness;
         private ProductBusiness productBusiness;
         private ProductReceiptBusiness productReceiptBusiness;
@@ -37,7 +37,7 @@ namespace EazyCart
 
         private void CashRegisterUserControl_Load(object sender, EventArgs e)
         {
-            UpdateUserControl();
+            this.UpdateUserControl();
         }
 
         // The following methods are responsible for updating information when it is changed.
@@ -64,14 +64,14 @@ namespace EazyCart
             this.UpdateCategoryComboBox();
             this.categoryComboBox.SelectedIndex = 0;
             this.searchBoxTextBox.Text = "Enter a product's name or its id";
-            this.searchBoxTextBox.ForeColor = SystemColors.WindowFrame;
+            this.searchBoxTextBox.ForeColor = promptTextColor;
             this.quantityTextBox.Text = "Enter Quantity";
-            this.quantityTextBox.ForeColor = SystemColors.WindowFrame;
+            this.quantityTextBox.ForeColor = promptTextColor;
             this.discountCheckBox.Checked = false;
             this.discountPercentageTextBox.Enabled = false;
             this.discountPercentageTextBox.Text = "Enter Discount (%)";
-            this.discountPercentageTextBox.ForeColor = SystemColors.WindowFrame;
-            this.UpdateAvailableProductsDataGrid(productBusiness.GetAll());
+            this.discountPercentageTextBox.ForeColor = promptTextColor;
+            this.UpdateAvailableProductsDataGrid(this.productBusiness.GetAll());
         }
 
         /// <summary>
@@ -79,8 +79,10 @@ namespace EazyCart
         /// </summary>
         private void UpdateReceiptTab()
         {
+            // Deletes the last receipt, when the program is launched.
             this.receiptBusiness.DeleteLastReceiptIfEmpty();
-            var receiptNumber = receiptBusiness.GetNextReceiptNumber();
+
+            var receiptNumber = this.receiptBusiness.GetNextReceiptNumber();
             this.receiptNumberTextBox.Text = receiptNumber.ToString();
             this.receiptBusiness.AddNewReceipt(receiptNumber);
             this.UpdateReceiptDataGridView();
@@ -93,15 +95,19 @@ namespace EazyCart
         private void UpdateReceiptDataGridView()
         {
             this.receiptDataGridView.Rows.Clear();
+            int receiptNumber = int.Parse(this.receiptNumberTextBox.Text);
             List<ProductReceipt> productReceipts =
-                productReceiptBusiness.GetAllByReceipt(int.Parse(receiptNumberTextBox.Text));
+                this.productReceiptBusiness.GetAllByReceipt(receiptNumber);
 
-            decimal total = 0;
+            // Populate the receipt dataGridView.
+            decimal grandTotal = 0;
             foreach (var productReceipt in productReceipts)
             {
-                var row = receiptDataGridView.Rows[receiptDataGridView.Rows.Add()];
-                var product = productBusiness.Get(productReceipt.ProductCode);
-                decimal totalForProduct = (product.SellingPrice * productReceipt.Quantity) * (1 - 0.01M * (decimal)productReceipt.DiscountPercentage);
+                var row = this.receiptDataGridView.Rows[receiptDataGridView.Rows.Add()];
+                var product = this.productBusiness.Get(productReceipt.ProductCode);
+                decimal basePrice = product.SellingPrice * productReceipt.Quantity;
+                decimal percentageOfBasePrice = 1 - 0.01M * (decimal)productReceipt.DiscountPercentage;
+                decimal totalForProduct = basePrice * percentageOfBasePrice;
                 row.Cells[0].Value = productReceipt.Id;
                 row.Cells[1].Value = product.Code;
                 row.Cells[2].Value = product.Name;
@@ -109,9 +115,9 @@ namespace EazyCart
                 row.Cells[4].Value = productReceipt.Quantity;
                 row.Cells[5].Value = productReceipt.DiscountPercentage;
                 row.Cells[6].Value = totalForProduct;
-                total += totalForProduct;
+                grandTotal += totalForProduct;
             }
-            totalToPayLabel.Text = string.Format("$ {0:f2}", total);
+            grandTotalLabel.Text = string.Format("$ {0:f2}", grandTotal);
         }
 
         /// <summary>
@@ -120,8 +126,11 @@ namespace EazyCart
         private void UpdateCategoryComboBox()
         {
             var categories = new List<string>();
+
+            // Extract all category names
             categories.Add("Select Category");
             categories.AddRange(categoryBusiness.GetAllNames());
+
             this.categoryComboBox.DataSource = categories;
         }
 
@@ -130,34 +139,34 @@ namespace EazyCart
         /// </summary>
         private void UpdateSearchResults()
         {
-            var categoryString = (string)categoryComboBox.Text;
-            var searchPhrase = searchBoxTextBox.Text;
+            var categoryString = this.categoryComboBox.Text;
+            var searchPhrase = this.searchBoxTextBox.Text;
 
             // Search by the certain chosen information type.
             if (categoryString == "Select Category" && searchPhrase == "Enter a product's name or its id")
             {
-                var products = productBusiness.GetAll();
+                var products = this.productBusiness.GetAll();
                 this.UpdateAvailableProductsDataGrid(products);
             }
             else if (categoryString == "Select Category")
             {
-                var products = productBusiness.GetAllByNameOrId(searchPhrase);
+                var products = this.productBusiness.GetAllByNameOrId(searchPhrase);
                 this.UpdateAvailableProductsDataGrid(products);
             }
             else if (searchPhrase == "Enter a product's name or its id")
             {
-                var products = productBusiness.GetAllByCategory(categoryString);
+                var products = this.productBusiness.GetAllByCategory(categoryString);
                 this.UpdateAvailableProductsDataGrid(products);
             }
             else
             {
-                var products = productBusiness.GetAllByCategoryAndNameOrId(categoryString, searchPhrase);
+                var products = this.productBusiness.GetAllByCategoryAndNameOrId(categoryString, searchPhrase);
                 this.UpdateAvailableProductsDataGrid(products);
             }
         }
 
         /// <summary>
-        /// Update the data grid for available products in the cashRegisterUserControl.
+        /// Populate the search results into the dataGrid for available products.
         /// </summary>
         /// <param name="products"></param>
         private void UpdateAvailableProductsDataGrid(List<Product> products)
@@ -165,8 +174,8 @@ namespace EazyCart
             this.availableProductsDataGridView.Rows.Clear();
             foreach (var product in products)
             {
-                var newRow = availableProductsDataGridView.Rows[availableProductsDataGridView.Rows.Add()];
-                var category = categoryBusiness.Get(product.CategoryId);
+                var newRow = this.availableProductsDataGridView.Rows[this.availableProductsDataGridView.Rows.Add()];
+                var category = this.categoryBusiness.Get(product.CategoryId);
                 newRow.Cells[0].Value = product.Code;
                 newRow.Cells[1].Value = product.Name;
                 newRow.Cells[2].Value = category.Name;
@@ -175,7 +184,7 @@ namespace EazyCart
         }
 
         /// <summary>
-        /// Updates the product data grid in the warehouseUserControl.
+        /// Updates the product data grid when a quantity has been added to the receipt.
         /// </summary>
         private void UpdateProductDataGridViewOnWarehouseUserControl()
         {
@@ -183,15 +192,25 @@ namespace EazyCart
             eazyCartForm.warehouseUserControl.UpdateProductDataGridView();
         }
 
+        /// <summary>
+        /// This event triggers the UpdateSearchResults() due to a change in the selected index
+        /// of the category comboBox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Update the results list.
             this.UpdateSearchResults();
         }
 
+        /// <summary>
+        /// This event triggers the UpdateSearchResults() due to a change in the text
+        /// of the searchBox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SearchBoxTextBox_TextChanged(object sender, EventArgs e)
         {
-            // Update the results list.
             this.UpdateSearchResults();
         }
 
@@ -205,7 +224,7 @@ namespace EazyCart
             var productCode = (string)availableProductsDataGridView.SelectedRows[0].Cells[0].Value;
             var quantity = quantityTextBox.Text;
 
-            // Check if needed values have been entered.
+            // Try to add product into the receipt. If validation fails, a messageBox is shown.
             try
             {
                 var discount = "0";
@@ -239,24 +258,24 @@ namespace EazyCart
             try
             {
                 // Take the necessary information.
-                var selectedRow = receiptDataGridView.Rows[0];
+                var selectedRow = this.receiptDataGridView.SelectedRows[0];
                 var productCode = (string)selectedRow.Cells[1].Value;
-                var product = productBusiness.Get(productCode);
+                var product = this.productBusiness.Get(productCode);
                 var productReceiptIndex = (int)selectedRow.Cells[0].Value;
-                var productReceipt = productReceiptBusiness.Get(productReceiptIndex);
+                var productReceipt = this.productReceiptBusiness.Get(productReceiptIndex);
                 var category = categoryBusiness.Get(product.CategoryId);
 
                 // Update textBoxes so that they display correct information.
                 this.categoryComboBox.SelectedItem = category.Name;
                 this.searchBoxTextBox.Text = product.Name;
-                this.searchBoxTextBox.ForeColor = SystemColors.WindowText;
+                this.searchBoxTextBox.ForeColor = activeTextColor;
                 this.quantityTextBox.Text = productReceipt.Quantity.ToString();
-                this.quantityTextBox.ForeColor = SystemColors.WindowText;
+                this.quantityTextBox.ForeColor = activeTextColor;
                 if (productReceipt.DiscountPercentage != 0)
                 {
                     this.discountCheckBox.Checked = true;
                     this.discountPercentageTextBox.Text = productReceipt.DiscountPercentage.ToString();
-                    this.discountPercentageTextBox.ForeColor = SystemColors.WindowText;
+                    this.discountPercentageTextBox.ForeColor = activeTextColor;
                 }
 
                 currentProductReceiptId = productReceipt.Id;
@@ -279,7 +298,7 @@ namespace EazyCart
         /// <param name="e"></param>
         private void SaveProductButton_Click(object sender, EventArgs e)
         {
-            var productCode = (string)availableProductsDataGridView.SelectedRows[0].Cells[0].Value;
+            var productCode = (string)this.availableProductsDataGridView.SelectedRows[0].Cells[0].Value;
             var quantity = quantityTextBox.Text;
 
             // Check if needed values have been entered.
@@ -288,7 +307,7 @@ namespace EazyCart
                 var discount = "0";
                 if (this.discountCheckBox.Checked)
                 {
-                    discount = discountPercentageTextBox.Text;
+                    discount = this.discountPercentageTextBox.Text;
                 }
                 this.productReceiptBusiness.Update(currentProductReceiptId, productCode, quantity, discount);
             }
@@ -317,7 +336,7 @@ namespace EazyCart
             // Check if a row is selected.
             try
             {
-                var row = receiptDataGridView.SelectedRows[0].Cells;
+                var row = this.receiptDataGridView.SelectedRows[0].Cells;
                 productReceiptId = (int)row[0].Value;
             }
             catch
@@ -347,9 +366,11 @@ namespace EazyCart
         /// <param name="e"></param>
         private void CompleteOrderButton_Click(object sender, EventArgs e)
         {
-            // Check if a receipt number has been inputed.
+            // Try to update the product in the receipt. If validation fails,
+            // a messageBox is shown.
             try
             {
+                var receiptNumber = int.Parse(receiptNumberTextBox.Text);
                 this.receiptBusiness.Update(int.Parse(receiptNumberTextBox.Text));
             }
             catch (ArgumentException exc)
@@ -371,7 +392,8 @@ namespace EazyCart
         /// <param name="e"></param>
         private void CancelOrderButton_Click(object sender, EventArgs e)
         {
-            this.receiptBusiness.Delete(int.Parse(receiptNumberTextBox.Text));
+            var receiptNumber = int.Parse(this.receiptNumberTextBox.Text);
+            this.receiptBusiness.Delete(receiptNumber);
 
             // Update the appropriate tabs.
             this.UpdateSelectProductTab();
@@ -397,8 +419,8 @@ namespace EazyCart
                 deleteButton.Enabled = false;
                 deleteButton.BackColor = disabledButtonColor;
 
-                saveProductButton.Enabled = true;
-                saveProductButton.BackColor = enabledButtonColor;
+                saveButton.Enabled = true;
+                saveButton.BackColor = enabledButtonColor;
             }
             else
             {
@@ -410,12 +432,17 @@ namespace EazyCart
                 deleteButton.Enabled = true;
                 deleteButton.BackColor = enabledButtonColor;
 
-                saveProductButton.Enabled = false;
-                saveProductButton.BackColor = disabledButtonColor;
+                saveButton.Enabled = false;
+                saveButton.BackColor = disabledButtonColor;
             }
         }
 
-        // All of the following methods are connected with maintaining a clean UI.
+        /// <summary>
+        /// The event triggers when the discount checkBox has changed its checked state.
+        /// Used to enable/disable the discountPercentageTextBox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DiscountCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (this.discountCheckBox.Checked)
@@ -424,35 +451,36 @@ namespace EazyCart
             }
             else this.discountPercentageTextBox.Enabled = false;
         }
-
+        // All of the following methods are connected with maintaining a clean UI.
+        
         private void SearchBoxTextBox_Enter(object sender, EventArgs e)
         {
-            this.RemovePromptFromTextBoxWhenTyping(searchBoxTextBox, "Enter a product's name or its id");
+            this.RemovePromptFromTextBoxWhenTyping(this.searchBoxTextBox, "Enter a product's name or its id");
         }
 
         private void SearchBoxTextBox_Leave(object sender, EventArgs e)
         {
-            this.AddPromptToTextBoxIfEmpty(searchBoxTextBox, "Enter a product's name or its id");
+            this.AddPromptToTextBoxIfEmpty(this.searchBoxTextBox, "Enter a product's name or its id");
         }
 
         private void QuantityTextBox_Enter(object sender, EventArgs e)
         {
-            this.RemovePromptFromTextBoxWhenTyping(quantityTextBox, "Enter Quantity");
+            this.RemovePromptFromTextBoxWhenTyping(this.quantityTextBox, "Enter Quantity");
         }
 
         private void QuantityTextBox_Leave(object sender, EventArgs e)
         {
-            this.AddPromptToTextBoxIfEmpty(quantityTextBox, "Enter Quantity");
+            this.AddPromptToTextBoxIfEmpty(this.quantityTextBox, "Enter Quantity");
         }
 
         private void DiscountPercentageTextBox_Enter(object sender, EventArgs e)
         {
-            this.RemovePromptFromTextBoxWhenTyping(discountPercentageTextBox, "Enter Discount (%)");
+            this.RemovePromptFromTextBoxWhenTyping(this.discountPercentageTextBox, "Enter Discount (%)");
         }
 
         private void DiscountPercentageTextBox_Leave(object sender, EventArgs e)
         {
-            this.AddPromptToTextBoxIfEmpty(discountPercentageTextBox, "Enter Discount (%)");
+            this.AddPromptToTextBoxIfEmpty(this.discountPercentageTextBox, "Enter Discount (%)");
         }
 
         /// <summary>
@@ -466,7 +494,7 @@ namespace EazyCart
             if (textBox.Text == prompt)
             {
                 textBox.Text = string.Empty;
-                textBox.ForeColor = SystemColors.WindowText;
+                textBox.ForeColor = activeTextColor;
             }
         }
 
@@ -481,7 +509,7 @@ namespace EazyCart
             if (textBox.Text == string.Empty)
             {
                 textBox.Text = prompt;
-                textBox.ForeColor = SystemColors.WindowFrame;
+                textBox.ForeColor = promptTextColor;
             }
         }
     }

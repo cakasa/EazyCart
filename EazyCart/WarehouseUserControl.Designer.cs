@@ -206,6 +206,7 @@ namespace EazyCart
             this.supplierNameComboBox.Name = "supplierNameComboBox";
             this.supplierNameComboBox.Size = new System.Drawing.Size(437, 33);
             this.supplierNameComboBox.TabIndex = 11;
+            this.supplierNameComboBox.SelectedIndexChanged += new System.EventHandler(this.SupplierNameComboBox_SelectedIndexChanged);
             // 
             // pricingGroupBox
             // 

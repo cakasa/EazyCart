@@ -35,6 +35,8 @@
             this.reportCategoryComboBox = new System.Windows.Forms.ComboBox();
             this.reportPeriodComboBox = new System.Windows.Forms.ComboBox();
             this.reportTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.fileNameTextBox = new System.Windows.Forms.TextBox();
+            this.fileNameLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // exportReportButton
@@ -45,7 +47,7 @@
             this.exportReportButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.exportReportButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.exportReportButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.exportReportButton.Location = new System.Drawing.Point(1315, 404);
+            this.exportReportButton.Location = new System.Drawing.Point(1315, 424);
             this.exportReportButton.Name = "exportReportButton";
             this.exportReportButton.Size = new System.Drawing.Size(254, 65);
             this.exportReportButton.TabIndex = 36;
@@ -126,12 +128,31 @@
             this.reportTypeComboBox.Name = "reportTypeComboBox";
             this.reportTypeComboBox.Size = new System.Drawing.Size(590, 33);
             this.reportTypeComboBox.TabIndex = 40;
-            this.reportTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.ReportTypeComboBox_SelectedIndexChanged);
+            // 
+            // fileNameTextBox
+            // 
+            this.fileNameTextBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.fileNameTextBox.Location = new System.Drawing.Point(1315, 385);
+            this.fileNameTextBox.Name = "fileNameTextBox";
+            this.fileNameTextBox.Size = new System.Drawing.Size(254, 33);
+            this.fileNameTextBox.TabIndex = 41;
+            // 
+            // fileNameLabel
+            // 
+            this.fileNameLabel.AutoSize = true;
+            this.fileNameLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.fileNameLabel.Location = new System.Drawing.Point(1310, 357);
+            this.fileNameLabel.Name = "fileNameLabel";
+            this.fileNameLabel.Size = new System.Drawing.Size(100, 25);
+            this.fileNameLabel.TabIndex = 42;
+            this.fileNameLabel.Text = "File Name:";
             // 
             // StatisticsUserContol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.fileNameLabel);
+            this.Controls.Add(this.fileNameTextBox);
             this.Controls.Add(this.reportTypeComboBox);
             this.Controls.Add(this.reportPeriodComboBox);
             this.Controls.Add(this.reportCategoryComboBox);
@@ -142,6 +163,7 @@
             this.Size = new System.Drawing.Size(1600, 840);
             this.Load += new System.EventHandler(this.StatisticsUserContol_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -154,5 +176,7 @@
         private System.Windows.Forms.ComboBox reportPeriodComboBox;
         private System.Windows.Forms.ComboBox reportTypeComboBox;
         private LiveCharts.Wpf.CartesianChart reportChart;
+        private System.Windows.Forms.TextBox fileNameTextBox;
+        private System.Windows.Forms.Label fileNameLabel;
     }
 }
