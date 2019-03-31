@@ -11,14 +11,10 @@ namespace Business
     {
         private EazyCartContext eazyCartContext;
 
-        public int GetNextReceiptNumber()
-        {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                return eazyCartContext.Receipts.Count() + 1;
-            }
-        }
-
+        /// <summary>
+        /// Return all receipts.
+        /// </summary>
+        /// <returns></returns>
         public List<Receipt> GetAll()
         {
             using (eazyCartContext = new EazyCartContext())
@@ -27,6 +23,11 @@ namespace Business
             }
         }
 
+        /// <summary>
+        /// Return a certain receipt.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Receipt Get(int id)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -35,98 +36,30 @@ namespace Business
             }
         }
 
-        public void Add(Receipt receipt)
+        /// <summary>
+        /// Return the following receipt number.
+        /// </summary>
+        /// <returns></returns>
+        public int GetNextReceiptNumber()
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                eazyCartContext.Receipts.Add(receipt);
-                eazyCartContext.SaveChanges();
+                return eazyCartContext.Receipts.Count() + 1;
             }
         }
 
-        public void DeleteLastReceiptIfEmpty()
-        {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                if (eazyCartContext.Receipts.Count() > 0)
-                {
-                    var lastReceipt = eazyCartContext.Receipts.Last();
-                    var productReceipts = eazyCartContext.Productsreceipts.Where(x => x.ReceiptId == lastReceipt.Id);
-                    if (productReceipts.Count() == 0)
-                    {
-                        Delete(lastReceipt.Id);
-                    }
-                }
-            }
-        }
-
-        public void Update(int receiptId)
-        {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                var receiptToUpdate = eazyCartContext.Receipts.Find(receiptId);
-                var allProductReceipts = eazyCartContext.Productsreceipts.Where(x => x.ReceiptId == receiptId);
-
-                if (allProductReceipts.Count() == 0)
-                {
-                    throw new ArgumentException("No products in this receipt");
-                }
-
-                decimal grandTotal = 0;
-                foreach (var productReceipt in allProductReceipts)
-                {
-                    var product = eazyCartContext.Products.First(x => x.Code == productReceipt.ProductCode);
-                    product.Quantity -= productReceipt.Quantity;
-                    grandTotal += (product.SellingPrice * productReceipt.Quantity) * (1 - 0.01M * (decimal)productReceipt.DiscountPercentage);
-                }
-                var newReceipt = new Receipt()
-                {
-                    Id = receiptId,
-                    TimeOfPurchase = DateTime.Now,
-                    GrandTotal = grandTotal
-                };
-
-                eazyCartContext.Entry(receiptToUpdate).CurrentValues.SetValues(newReceipt);
-                eazyCartContext.SaveChanges();
-            }
-        }
-
-        public void AddNewReceipt(int id)
-        {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                Receipt receipt = new Receipt
-                {
-                    Id = id,
-                    TimeOfPurchase = DateTime.Now,
-                    GrandTotal = 0
-                };
-
-                eazyCartContext.Receipts.Add(receipt);
-                eazyCartContext.SaveChanges();
-            }
-        }
-
-        public void Delete(int id)
-        {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                var receipt = eazyCartContext.Receipts.Find(id);
-                var productReceipts = eazyCartContext.Productsreceipts.Where(x => x.ReceiptId == id);
-                eazyCartContext.Productsreceipts.RemoveRange(productReceipts);
-
-                eazyCartContext.Receipts.Remove(receipt);
-                eazyCartContext.SaveChanges();
-            }
-        }
-
+        /// <summary>
+        /// Return information about orders for a whole year.
+        /// </summary>
+        /// <param name="currentDateTime"></param>
+        /// <returns></returns>
         public int[] GetYearlyOrders(DateTime currentDateTime)
         {
             using (eazyCartContext = new EazyCartContext())
             {
                 int currentYear = currentDateTime.Year;
                 int[] numberOfOrders = new int[12];
-                var allOrders = eazyCartContext.Receipts.Where(x=>x.TimeOfPurchase.Year == currentDateTime.Year).ToList();
+                var allOrders = eazyCartContext.Receipts.Where(x => x.TimeOfPurchase.Year == currentDateTime.Year).ToList();
 
                 foreach (var order in allOrders)
                 {
@@ -138,13 +71,18 @@ namespace Business
             }
         }
 
+        /// <summary>
+        /// Return information about sold products for a whole month.
+        /// </summary>
+        /// <param name="currentDateTime"></param>
+        /// <returns></returns>
         public int[] GetMonthlyOrders(DateTime currentDateTime)
         {
             using (eazyCartContext = new EazyCartContext())
             {
                 int numberOfMonthDays = DateTime.DaysInMonth(currentDateTime.Year, currentDateTime.Month);
                 int[] numberOfOrders = new int[numberOfMonthDays];
-                var allOrders = eazyCartContext.Receipts.Where(x=>x.TimeOfPurchase.Month == currentDateTime.Month && x.TimeOfPurchase.Year == currentDateTime.Year).ToList();
+                var allOrders = eazyCartContext.Receipts.Where(x => x.TimeOfPurchase.Month == currentDateTime.Month && x.TimeOfPurchase.Year == currentDateTime.Year).ToList();
 
                 foreach (var order in allOrders)
                 {
@@ -156,6 +94,11 @@ namespace Business
             }
         }
 
+        /// <summary>
+        /// Return information about orders for a whole day.
+        /// </summary>
+        /// <param name="currentDateTime"></param>
+        /// <returns></returns>
         public int[] GetDailyOrders(DateTime currentDateTime)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -202,13 +145,18 @@ namespace Business
             }
         }
 
+        /// <summary>
+        /// Return information about orders made on discount for a whole year.
+        /// </summary>
+        /// <param name="currentDateTime"></param>
+        /// <returns></returns>
         public int[] GetYearlyDiscountOrders(DateTime currentDateTime)
         {
             using (eazyCartContext = new EazyCartContext())
             {
                 int currentYear = currentDateTime.Year;
                 int[] numberOfOrdersWithDiscount = new int[12];
-                var allOrders = eazyCartContext.Receipts.Where(x=>x.TimeOfPurchase.Year == currentDateTime.Year).ToList();
+                var allOrders = eazyCartContext.Receipts.Where(x => x.TimeOfPurchase.Year == currentDateTime.Year).ToList();
 
                 foreach (var order in allOrders)
                 {
@@ -227,6 +175,11 @@ namespace Business
             }
         }
 
+        /// <summary>
+        /// Return information about orders made on discount for a whole month.
+        /// </summary>
+        /// <param name="currentDateTime"></param>
+        /// <returns></returns>
         public int[] GetMonthlyDiscountOrders(DateTime currentDateTime)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -234,7 +187,7 @@ namespace Business
                 int numberOfMonthDays = DateTime.DaysInMonth(currentDateTime.Year, currentDateTime.Month);
 
                 int[] numberOfOrdersWithDiscount = new int[numberOfMonthDays];
-                var allOrders = eazyCartContext.Receipts.Where(x=>x.TimeOfPurchase.Year == currentDateTime.Year && x.TimeOfPurchase.Month == currentDateTime.Month).ToList();
+                var allOrders = eazyCartContext.Receipts.Where(x => x.TimeOfPurchase.Year == currentDateTime.Year && x.TimeOfPurchase.Month == currentDateTime.Month).ToList();
 
                 foreach (var order in allOrders)
                 {
@@ -253,6 +206,12 @@ namespace Business
             }
         }
 
+
+        /// <summary>
+        /// Return information about orders made on discount for a whole day.
+        /// </summary>
+        /// <param name="currentDateTime"></param>
+        /// <returns></returns>
         public int[] GetDailyDiscountOrders(DateTime currentDateTime)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -306,6 +265,12 @@ namespace Business
             }
         }
 
+        /// <summary>
+        /// Return information about the ordered products 
+        /// from different types for a whole day.
+        /// </summary>
+        /// <param name="currentDateTime"></param>
+        /// <returns></returns>
         public decimal[] GetDailyAverageAmountOfDifferentProducts(DateTime currentDateTime)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -315,7 +280,7 @@ namespace Business
                 List<Receipt> allOrdersForTheDay = eazyCartContext.Receipts.Where(x => x.TimeOfPurchase.Date == currentDateTime.Date).ToList();
 
                 for (int i = 0; i < 8; i++)
-                {                   
+                {
                     if (allOrdersForTheDay.Count() > 0)
                     {
                         decimal totalCountOfDifferentProducts = 0;
@@ -335,7 +300,13 @@ namespace Business
             }
         }
 
-        public decimal[] GetMonthlyverageAmountOfDifferentProducts(DateTime currentDateTime)
+        /// <summary>
+        /// Return information about the ordered products 
+        /// from different types for a whole month.
+        /// </summary>
+        /// <param name="currentDateTime"></param>
+        /// <returns></returns>
+        public decimal[] GetMonthlyAverageAmountOfDifferentProducts(DateTime currentDateTime)
         {
             using (eazyCartContext = new EazyCartContext())
             {
@@ -362,6 +333,12 @@ namespace Business
             }
         }
 
+        /// <summary>
+        /// Return information about the ordered products 
+        /// from different types for a whole year.
+        /// </summary>
+        /// <param name="currentDateTime"></param>
+        /// <returns></returns>
         public decimal[] GetYearlyAverageAmountOfDifferentProducts(DateTime currentDateTime)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -386,6 +363,115 @@ namespace Business
                 }
 
                 return averageNumberOfDifferentProductsInOrder;
+            }
+        }
+
+        /// <summary>
+        /// Add a new receipt using a parameter of type Receipt.
+        /// </summary>
+        /// <param name="receipt"></param>
+        public void Add(Receipt receipt)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                eazyCartContext.Receipts.Add(receipt);
+                eazyCartContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Add a new receipt using an id.
+        /// </summary>
+        /// <param name="id"></param>
+        public void AddNewReceipt(int id)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                Receipt receipt = new Receipt
+                {
+                    Id = id,
+                    TimeOfPurchase = DateTime.Now,
+                    GrandTotal = 0
+                };
+
+                eazyCartContext.Receipts.Add(receipt);
+                eazyCartContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Update certain receipt's fields by a given receipt id.
+        /// </summary>
+        /// <param name="receiptId"></param>
+        public void Update(int receiptId)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                // Find the needed receipt.
+                var receiptToUpdate = eazyCartContext.Receipts.Find(receiptId);
+                var allProductReceipts = eazyCartContext.Productsreceipts.Where(x => x.ReceiptId == receiptId);
+
+                if (allProductReceipts.Count() == 0)
+                {
+                    throw new ArgumentException("No products in this receipt");
+                }
+
+                decimal grandTotal = 0;
+                foreach (var productReceipt in allProductReceipts)
+                {
+                    var product = eazyCartContext.Products.First(x => x.Code == productReceipt.ProductCode);
+                    product.Quantity -= productReceipt.Quantity;
+                    grandTotal += (product.SellingPrice * productReceipt.Quantity) * (1 - 0.01M * (decimal)productReceipt.DiscountPercentage);
+                }
+
+                // Update the receipt's fields.
+                var newReceipt = new Receipt()
+                {
+                    Id = receiptId,
+                    TimeOfPurchase = DateTime.Now,
+                    GrandTotal = grandTotal
+                };
+
+                // Set the updated supplier's fields.
+                eazyCartContext.Entry(receiptToUpdate).CurrentValues.SetValues(newReceipt);
+                eazyCartContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Delete a certain receipt.
+        /// </summary>
+        /// <param name="id"></param>
+        public void Delete(int id)
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                var receipt = eazyCartContext.Receipts.Find(id);
+                var productReceipts = eazyCartContext.Productsreceipts.Where(x => x.ReceiptId == id);
+                eazyCartContext.Productsreceipts.RemoveRange(productReceipts);
+
+                eazyCartContext.Receipts.Remove(receipt);
+                eazyCartContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Delete the last receipt if it is empty.
+        /// </summary>
+        public void DeleteLastReceiptIfEmpty()
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                if (eazyCartContext.Receipts.Count() > 0)
+                {
+                    var lastReceipt = eazyCartContext.Receipts.Last();
+                    var productReceipts = eazyCartContext.Productsreceipts.Where(x => x.ReceiptId == lastReceipt.Id);
+                    if (productReceipts.Count() == 0)
+                    {
+                        // Calls the delete method
+                        Delete(lastReceipt.Id);
+                    }
+                }
             }
         }
     }

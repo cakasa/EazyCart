@@ -11,6 +11,10 @@ namespace Business
     {
         private EazyCartContext eazyCartContext;
 
+        /// <summary>
+        /// Return all unit types.
+        /// </summary>
+        /// <returns></returns>
         public List<Unit> GetAll()
         {
             using (eazyCartContext = new EazyCartContext())
@@ -19,6 +23,11 @@ namespace Business
             }
         }
 
+        /// <summary>
+        /// Return a certain unit type.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Unit Get(int id)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -27,6 +36,10 @@ namespace Business
             }
         }
 
+        /// <summary>
+        /// Add a new unit type.
+        /// </summary>
+        /// <param name="unit"></param>
         public void Add(Unit unit)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -36,6 +49,10 @@ namespace Business
             }
         }
 
+        /// <summary>
+        /// Update certain unit's fields.
+        /// </summary>
+        /// <param name="unit"></param>
         public void Update(Unit unit)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -49,6 +66,10 @@ namespace Business
             }
         }
 
+        /// <summary>
+        /// Delete a certain unit type.
+        /// </summary>
+        /// <param name="id"></param>
         public void Delete(int id)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -56,6 +77,7 @@ namespace Business
                 var unit = eazyCartContext.Units.Find(id);
                 if (unit != null)
                 {
+                    // Remove the chosen unit and save the changes in the context.
                     eazyCartContext.Units.Remove(unit);
                     eazyCartContext.SaveChanges();
                 }
