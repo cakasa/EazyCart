@@ -1,16 +1,14 @@
 ﻿using Business;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EazyCart
 {
+    /// <summary>
+    /// This is the main form, containing all the user controls.
+    /// </summary>
     public partial class EazyCartForm : Form
     {
         public CashRegisterUserControl cashRegisterUserControl { get; private set; }
@@ -34,6 +32,10 @@ namespace EazyCart
             LoadEazyCartForm();
         }
 
+        /// <summary>
+        /// This method is called when the application is first started to
+        /// initialize everything.
+        /// </summary>
         private void LoadEazyCartForm()
         {
             InitializeFormUserControls();
@@ -41,6 +43,10 @@ namespace EazyCart
             AddUnitsIfTheyAreNotInTheDatabase();         
         }
 
+        /// <summary>
+        /// Initialize the User Controls, add them to the form
+        /// and set their position
+        /// </summary>
         private void InitializeFormUserControls()
         {
             cashRegisterUserControl = new CashRegisterUserControl();
@@ -64,6 +70,10 @@ namespace EazyCart
             managementUserControl.Visible = false;
         }
 
+        /// <summary>
+        /// Add units the first time the application is started or when
+        /// the database is reset.
+        /// </summary>
         private void AddUnitsIfTheyAreNotInTheDatabase()
         {
             unitBusiness = new UnitBusiness();
@@ -76,9 +86,18 @@ namespace EazyCart
             }
         }
 
+        /// <summary>
+        /// This event is triggered when the user clicks the 'Close' button.
+        /// If no order has been initialized, the application closes successfully.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CloseButton_Click(object sender, EventArgs e)
         {
             var receiptDataGridView = (DataGridView) cashRegisterUserControl.Controls["receiptDataGridView"];
+
+            // If the receipt is not empty, prompt the user to cancel it 
+            // before closing it.
             if (receiptDataGridView.Rows.Count != 0)
             {
                 MessageBox.Show("You have an uncompleted order.");
@@ -87,45 +106,11 @@ namespace EazyCart
             this.Close();
         }
 
-        private void WarehouseButton_Click(object sender, EventArgs e)
-        {
-            var userControlsToMakeInvisible = new List<UserControl>
-            {
-                cashRegisterUserControl,
-                managementUserControl,
-                statisticsUserContol,
-            };
-
-            Point mainMenuPanelLocationPoint = new Point(598, 57);
-            UserControlChanged(userControlsToMakeInvisible, warehouseUserControl, mainMenuPanelLocationPoint);
-        }
-
-        private void UserControlChanged
-            (List<UserControl> userControlsToInvisible, UserControl userControlToVisible, Point mainMenuPanelLocationPoint)
-        {
-            foreach(var userControl in userControlsToInvisible)
-            {
-                userControl.Visible = false;
-            }
-            userControlToVisible.Visible = true;
-
-            mainMenuPanel.Visible = true;
-            mainMenuPanel.Location = mainMenuPanelLocationPoint;
-        }
-
-        private void StatisticsButton_Click(object sender, EventArgs e)
-        {
-            var userControlsToMakeInvisible = new List<UserControl>
-            {
-                cashRegisterUserControl,
-                managementUserControl,
-                warehouseUserControl,
-            };
-
-            Point mainMenuPanelLocationPoint = new Point(1110, 57);
-            UserControlChanged(userControlsToMakeInvisible, statisticsUserContol, mainMenuPanelLocationPoint);
-        }
-        
+        /// <summary>
+        /// This event is triggered when the user clicks on the 'Cash Register' button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CashRegisterButton_Click(object sender, EventArgs e)
         {
             var userControlsToMakeInvisible = new List<UserControl>
@@ -139,6 +124,29 @@ namespace EazyCart
             UserControlChanged(userControlsToMakeInvisible, cashRegisterUserControl, mainMenuPanelLocationPoint);
         }
 
+        /// <summary>
+        /// This event is triggered when the user clicks on the 'Warehouse' button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void WarehouseButton_Click(object sender, EventArgs e)
+        {
+            var userControlsToMakeInvisible = new List<UserControl>
+            {
+                cashRegisterUserControl,
+                managementUserControl,
+                statisticsUserContol,
+            };
+
+            Point mainMenuPanelLocationPoint = new Point(598, 57);
+            UserControlChanged(userControlsToMakeInvisible, warehouseUserControl, mainMenuPanelLocationPoint);
+        }
+
+        /// <summary>
+        /// This event is triggered when the user clicks on the 'Management' button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ManagementButton_Click(object sender, EventArgs e)
         {
             var userControlsToMakeInvisible = new List<UserControl>
@@ -151,8 +159,52 @@ namespace EazyCart
             Point mainMenuPanelLocationPoint = new Point(854, 57);
             UserControlChanged(userControlsToMakeInvisible, managementUserControl, mainMenuPanelLocationPoint);
         }
-                
-        // Making the app movable with the use of the menu panel 
+
+        /// <summary>
+        /// This event is triggered when the user clicks on the 'Statistics' button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StatisticsButton_Click(object sender, EventArgs e)
+        {
+            var userControlsToMakeInvisible = new List<UserControl>
+            {
+                cashRegisterUserControl,
+                managementUserControl,
+                warehouseUserControl,
+            };
+
+            Point mainMenuPanelLocationPoint = new Point(1110, 57);
+            UserControlChanged(userControlsToMakeInvisible, statisticsUserContol, mainMenuPanelLocationPoint);
+        }
+        
+        /// <summary>
+        /// This method is supposed to change the state of the userControls
+        /// so the one, which is called becomes visible and the others, invisible
+        /// Also moves the highlight panel to the appropriate space
+        /// </summary>
+        /// <param name="userControlsToInvisible">List of the userControls to become invisible</param>
+        /// <param name="userControlToVisible">The userControl to become visible</param>
+        /// <param name="mainMenuPanelLocationPoint">A point, which sets the location of the highlight panel</param>
+        private void UserControlChanged
+            (List<UserControl> userControlsToInvisible, UserControl userControlToVisible, Point mainMenuPanelLocationPoint)
+        {
+            foreach (var userControl in userControlsToInvisible)
+            {
+                userControl.Visible = false;
+            }
+            userControlToVisible.Visible = true;
+
+            mainMenuPanel.Visible = true;
+            mainMenuPanel.Location = mainMenuPanelLocationPoint;
+        }
+
+        // Making the app movable with the use of the menu panel
+        /// <summary>
+        /// The event triggers when the user holds down the panel with a mouse.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuPanel_MouseDown(object sender, MouseEventArgs e)
         {
             mouseDown = true;
@@ -160,6 +212,11 @@ namespace EazyCart
             mouseY = e.Y;
         }
 
+        /// <summary>
+        /// The event triggers when the user moves the mouse to the desired position.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuPanel_MouseMove(object sender, MouseEventArgs e)
         {
             if (mouseDown == true)
@@ -168,6 +225,11 @@ namespace EazyCart
             }
         }
 
+        /// <summary>
+        /// The event triggers when the user stops holding the panel with a mouse.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuPanel_MouseUp(object sender, MouseEventArgs e)
         {
             mouseDown = false;
