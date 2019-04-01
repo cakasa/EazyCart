@@ -12,9 +12,9 @@ namespace Business
         private EazyCartContext eazyCartContext;
 
         /// <summary>
-        /// Return all products.
+        /// Get all products.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of all products.</returns>
         public List<Product> GetAll()
         {
             using (eazyCartContext = new EazyCartContext())
@@ -24,9 +24,9 @@ namespace Business
         }
 
         /// <summary>
-        /// Return all products' names.
+        /// Get all products' names.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of all products' names.</returns>
         public List<string> GetAllNames()
         {
             using (eazyCartContext = new EazyCartContext())
@@ -39,10 +39,10 @@ namespace Business
         }
 
         /// <summary>
-        /// Return a certain product.
+        /// Get a certain product.
         /// </summary>
-        /// <param name="code"></param>
-        /// <returns></returns>
+        /// <param name="code">Give the code of the searched product.</param>
+        /// <returns>Return the first product of type Product with the wanted code.</returns>
         public Product Get(string code)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -52,9 +52,11 @@ namespace Business
         }
 
         /// <summary>
-        /// Return the the count of all products for each category
+        /// Get the the count of all products for each category.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Return a dictionary with key containing the name of the
+        /// category and value containing the count of the products
+        /// from the relevant category.</returns>
         public Dictionary<string, int> GetCountOfProductsByCategory()
         {
             using (eazyCartContext = new EazyCartContext())
@@ -73,9 +75,10 @@ namespace Business
         }
 
         /// <summary>
-        /// Return the profit made by the products.
-        /// </summary>
-        /// <returns></returns>
+        /// Get the profit made by the products.
+        /// </summary> 
+        /// <returns>Return a dictionary with key containing the name of the
+        /// product and value containing the net profit made by each products.</returns>
         public Dictionary<string, decimal> GetNetProfitByProduct()
         {
             using (eazyCartContext = new EazyCartContext())
@@ -93,9 +96,11 @@ namespace Business
         }
 
         /// <summary>
-        /// Return the count of all products for each country.
+        /// Get the count of all products for each country.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Return a dictionary with key containing the name of the
+        /// country and value containing the count of each products based on
+        /// the country from which they come from.</returns>
         public Dictionary<string, int> GetCountOfProductsByCountry()
         {
             using (eazyCartContext = new EazyCartContext())
@@ -121,9 +126,10 @@ namespace Business
         }
 
         /// <summary>
-        /// Return the count of all products for each supplier.
+        /// Get the count of all products for each supplier.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Return a dictionary with key containing the name of the
+        /// supplier and value containing the count of products it provides.</returns>
         public Dictionary<string, int> GetCountOfProductsBySuppliers()
         {
             using (eazyCartContext = new EazyCartContext())
@@ -142,9 +148,10 @@ namespace Business
         }
 
         /// <summary>
-        /// Return the quantity of all products.
+        /// Get the quantity of all products.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns a dictionary with key containing the name of the
+        /// product and value containing its count.</returns>
         public Dictionary<string, decimal> GetAllQuantities()
         {
             using (eazyCartContext = new EazyCartContext())
@@ -160,10 +167,11 @@ namespace Business
         }
 
         /// <summary>
-        /// Return information about sold products for a whole day.
+        /// Get information about sold products for a whole day.
         /// </summary>
-        /// <param name="currentDateTime"></param>
-        /// <returns></returns>
+        /// <param name="currentDateTime">Give the current datetime we want to
+        /// have the revenue.</param>
+        /// <returns>Return an array containing the revenue for each hour.</returns>
         public decimal[] GetDailyRevenue(DateTime currentDateTime)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -211,10 +219,11 @@ namespace Business
         }
 
         /// <summary>
-        /// Return information about sold products for a whole year.
+        /// Get information about sold products for a whole year.
         /// </summary>
-        /// <param name="currentDateTime"></param>
-        /// <returns></returns>
+        /// <param name="currentDateTime">Give the current datetime we want to
+        /// have the revenue.</param>
+        /// <returns>Return an array containing the revenue for each month.</returns>
         public decimal[] GetYearlyRevenue(DateTime currentDateTime)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -232,15 +241,20 @@ namespace Business
         }
 
         /// <summary>
-        /// Return information about sold products for a whole month.
+        /// Get information about sold products for a whole month.
         /// </summary>
-        /// <param name="currentDateTime"></param>
-        /// <returns></returns>
+        /// <param name="currentDateTime">Give the current datetime we want to
+        /// have the revenue.</param>
+        /// <returns>Return an array containing the revenue for each day.</returns>
         public decimal[] GetMonthlyRevenue(DateTime currentDateTime)
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                List<Receipt> receipts = eazyCartContext.Receipts.Where(x => x.TimeOfPurchase.Month == currentDateTime.Month).ToList();
+                var receipts = eazyCartContext
+                                            .Receipts
+                                            .Where(x => x.TimeOfPurchase.Month == currentDateTime.Month)
+                                            .ToList();
+
                 decimal[] revenueByDay = new decimal[DateTime.DaysInMonth(currentDateTime.Year, currentDateTime.Month)];
                 foreach (var receipt in receipts)
                 {
@@ -252,12 +266,12 @@ namespace Business
         }
 
         /// <summary>
-        /// Return all products that match a typed 
+        /// Get all products that match a typed 
         /// search phrase or a given category name.
         /// </summary>
-        /// <param name="categoryString"></param>
-        /// <param name="searchPhrase"></param>
-        /// <returns></returns>
+        /// <param name="categoryString">Give the name of the category.</param>
+        /// <param name="searchPhrase">Give the searched string.</param>
+        /// <returns>Return a list of the products that suit the given condition.</returns>
         public List<Product> GetAllByCategoryAndNameOrId(string categoryString, string searchPhrase)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -273,10 +287,10 @@ namespace Business
         }
 
         /// <summary>
-        /// Return all products by a given category name.
+        /// Get all products whose category corresponds to the given name.
         /// </summary>
-        /// <param name="categoryString"></param>
-        /// <returns></returns>
+        /// <param name="categoryString">Give the name of the category.</param>
+        /// <returns>Return a list of the products from a wanted catrgory.</returns>
         public List<Product> GetAllByCategory(string categoryString)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -289,10 +303,10 @@ namespace Business
         }
 
         /// <summary>
-        /// Return all products that match a typed search phrase.
+        /// Get all products that match a typed search phrase.
         /// </summary>
-        /// <param name="searchPhrase"></param>
-        /// <returns></returns>
+        /// <param name="searchPhrase">Give the searched string.</param>
+        /// <returns>Return a list of the products that suit the given condition.</returns>
         public List<Product> GetAllByNameOrId(string searchPhrase)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -304,37 +318,34 @@ namespace Business
         }
 
         /// <summary>
-        /// Add a new product.
-        /// </summary>
-        /// <param name="product"></param>
-        public void Add(Product product)
-        {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                eazyCartContext.Products.Add(product);
-                eazyCartContext.SaveChanges();
-            }
-        }
-
-        /// <summary>
         /// Add a certain product by providing information about
         /// each of product's fields.
         /// </summary>
-        /// <param name="productCode"></param>
-        /// <param name="categoryName"></param>
-        /// <param name="productName"></param>
-        /// <param name="quantity"></param>
-        /// <param name="supplierName"></param>
-        /// <param name="deliveryPrice"></param>
-        /// <param name="sellingPrice"></param>
-        /// <param name="unitName"></param>
+        /// <param name="productCode">Give the product's code to add.</param>
+        /// <param name="categoryName">Give the product's category to add.</param>
+        /// <param name="productName">Give the product's name to add.</param>
+        /// <param name="quantity">Give the product's quantity to add.</param>
+        /// <param name="supplierName">Give the product's supplier name to add.</param>
+        /// <param name="deliveryPrice">Give the product's delivery price to add.</param>
+        /// <param name="sellingPrice">Give the product's selling price to add.</param>
+        /// <param name="unitName">Give the product's unit name to add.</param>
         public void Add(string productCode, string categoryName, string productName, decimal quantity, string supplierName,
             decimal deliveryPrice, decimal sellingPrice, string unitName)
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                var category = eazyCartContext.Categories.First(x => x.Name == categoryName);
-                var supplier = eazyCartContext.Suppliers.First(x => x.Name == supplierName);
+                Category category;
+                Supplier supplier;
+                try
+                {
+                    category = eazyCartContext.Categories.First(x => x.Name == categoryName);
+                    supplier = eazyCartContext.Suppliers.First(x => x.Name == supplierName);
+                }
+                catch
+                {
+                    throw new ArgumentException("Invalid category/supplier information.");
+                }
+
                 var unit = eazyCartContext.Units.First(x => x.Name == unitName);
 
                 var product = new Product
@@ -365,7 +376,7 @@ namespace Business
         /// <summary>
         /// Update certain product's fields.
         /// </summary>
-        /// <param name="product"></param>
+        /// <param name="product">Give the object of type Product to add.</param>
         public void Update(Product product)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -385,21 +396,30 @@ namespace Business
         /// Update a certain product by providing information about
         /// each of product's fields.
         /// </summary>
-        /// <param name="productCode"></param>
-        /// <param name="categoryName"></param>
-        /// <param name="productName"></param>
-        /// <param name="quantity"></param>
-        /// <param name="supplierName"></param>
-        /// <param name="deliveryPrice"></param>
-        /// <param name="sellingPrice"></param>
-        /// <param name="unitName"></param>
+        /// <param name="productCode">Give the product's code to upgrade.</param>
+        /// <param name="categoryName">Give the product's category to upgrade.</param>
+        /// <param name="productName">Give the product's name to upgrade.</param>
+        /// <param name="quantity">Give the product's quantity to upgrade.</param>
+        /// <param name="supplierName">Give the product's supplier name to upgrade.</param>
+        /// <param name="deliveryPrice">Give the product's delivery price to upgrade.</param>
+        /// <param name="sellingPrice">Give the product's selling price to upgrade.</param>
+        /// <param name="unitName">Give the product's unit name to upgrade.</param>
         public void Update(string productCode, string categoryName, string productName, decimal quantity,
             string supplierName, decimal deliveryPrice, decimal sellingPrice, string unitName)
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                var category = eazyCartContext.Categories.First(x => x.Name == categoryName);
-                var supplier = eazyCartContext.Suppliers.First(x => x.Name == supplierName);
+                Category category;
+                Supplier supplier;
+                try
+                {
+                    category = eazyCartContext.Categories.First(x => x.Name == categoryName);
+                    supplier = eazyCartContext.Suppliers.First(x => x.Name == supplierName);
+                }
+                catch
+                {
+                    throw new ArgumentException("Invalid information about category/supplier.");
+                }
                 var unit = eazyCartContext.Units.First(x => x.Name == unitName);
 
                 // Update the supplier's fields.
@@ -426,8 +446,8 @@ namespace Business
         /// <summary>
         /// Make a delivery for a certain product.
         /// </summary>
-        /// <param name="productName"></param>
-        /// <param name="quantity"></param>
+        /// <param name="productName">Give the name of the product.</param>
+        /// <param name="quantity">Give the quantity from the wanted product.</param>
         public void MakeDelivery(string productName, decimal quantity)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -464,7 +484,7 @@ namespace Business
         /// <summary>
         /// Delete a certain product.
         /// </summary>
-        /// <param name="productCode"></param>
+        /// <param name="productCode">Give the code of the product to delete.</param>
         public void Delete(string productCode)
         {
             using (eazyCartContext = new EazyCartContext())

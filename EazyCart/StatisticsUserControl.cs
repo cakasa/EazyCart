@@ -414,7 +414,7 @@ namespace EazyCart
             else if (periodIndex == 2)
             {
                 decimal[] averageNumberOfDifferentProductsByDay = 
-                    this.receiptBusiness.GetMonthlyverageAmountOfDifferentProducts(currentDateTime);
+                    this.receiptBusiness.GetMonthlyAverageAmountOfDifferentProducts(currentDateTime);
 
                 string[] labels = this.dayLabels;
                 this.GenerateReport(averageNumberOfDifferentProductsByDay, labels, "Day", "Average number of different products", 0, isMoneyReport);

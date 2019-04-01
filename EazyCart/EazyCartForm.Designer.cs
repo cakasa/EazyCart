@@ -50,13 +50,13 @@
             // 
             this.menuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
             this.menuPanel.Controls.Add(this.settingsButton);
-            this.menuPanel.Controls.Add(this.managementButton);
             this.menuPanel.Controls.Add(this.mainMenuPanel);
             this.menuPanel.Controls.Add(this.statisticsButton);
             this.menuPanel.Controls.Add(this.warehouseButton);
             this.menuPanel.Controls.Add(this.titleLabel);
             this.menuPanel.Controls.Add(this.shoppingCartPIctureBox);
             this.menuPanel.Controls.Add(this.cashRegisterButton);
+            this.menuPanel.Controls.Add(this.managementButton);
             this.menuPanel.Location = new System.Drawing.Point(0, 0);
             this.menuPanel.Name = "menuPanel";
             this.menuPanel.Size = new System.Drawing.Size(1600, 60);
@@ -78,7 +78,6 @@
             this.settingsButton.TabIndex = 5;
             this.settingsButton.TabStop = false;
             this.settingsButton.UseVisualStyleBackColor = false;
-            this.settingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 
             // managementButton
             // 
@@ -87,7 +86,7 @@
             this.managementButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.managementButton.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.managementButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.managementButton.Location = new System.Drawing.Point(1114, 0);
+            this.managementButton.Location = new System.Drawing.Point(852, 0);
             this.managementButton.Name = "managementButton";
             this.managementButton.Size = new System.Drawing.Size(256, 60);
             this.managementButton.TabIndex = 7;
@@ -111,7 +110,7 @@
             this.statisticsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.statisticsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.statisticsButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.statisticsButton.Location = new System.Drawing.Point(852, 0);
+            this.statisticsButton.Location = new System.Drawing.Point(1108, 0);
             this.statisticsButton.Name = "statisticsButton";
             this.statisticsButton.Size = new System.Drawing.Size(256, 60);
             this.statisticsButton.TabIndex = 4;
@@ -141,7 +140,7 @@
             this.titleLabel.ForeColor = System.Drawing.SystemColors.Control;
             this.titleLabel.Location = new System.Drawing.Point(61, 15);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(96, 30);
+            this.titleLabel.Size = new System.Drawing.Size(97, 30);
             this.titleLabel.TabIndex = 1;
             this.titleLabel.Text = "EazyCart";
             // 
@@ -190,7 +189,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
-            this.ClientSize = new System.Drawing.Size(1600, 900);
+            this.ClientSize = new System.Drawing.Size(1386, 788);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.menuPanel);
             this.ForeColor = System.Drawing.SystemColors.ControlText;

@@ -19,7 +19,7 @@ namespace Data.Models
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<ProductReceipt> Productsreceipts { get; set; }
+        public virtual DbSet<ProductReceipt> ProductsReceipts { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<Receipt> Receipts { get; set; }
         public virtual DbSet<Unit> Units { get; set; }

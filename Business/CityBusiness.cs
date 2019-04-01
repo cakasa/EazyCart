@@ -7,14 +7,18 @@ using System.Threading.Tasks;
 
 namespace Business
 {
+    /// <summary>
+    /// This business logic class is responsible for managing the
+    /// cities from the database
+    /// </summary>
     public class CityBusiness
     {
         private EazyCartContext eazyCartContext;
 
         /// <summary>
-        /// Return all cities.
+        /// Get All Cities
         /// </summary>
-        /// <returns></returns>
+        /// <returns> A List of all cities.</returns>
         public List<City> GetAll()
         {
             using (eazyCartContext = new EazyCartContext())
@@ -24,10 +28,10 @@ namespace Business
         }
 
         /// <summary>
-        /// Return a certain city.
+        /// Get a city by its Id 
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">Id of the city to return.</param>
+        /// <returns>A city, corresponding to the given Id</returns>
         public City Get(int id)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -37,14 +41,14 @@ namespace Business
         }
 
         /// <summary>
-        /// Return a list containing all cities' names.
+        /// Get a list containing all cities' names.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A List of string containing all names.</returns>
         public List<string> GetAllNames()
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                List<City> cities = eazyCartContext.Cities.ToList();
+                var cities = eazyCartContext.Cities.ToList();
                 var cityNames = new List<string>();
                 cityNames.AddRange(cities.Select(x => x.Name).ToList());
                 return cityNames;
@@ -52,10 +56,11 @@ namespace Business
         }
 
         /// <summary>
-        /// Return a list containing all cities' names from a wanted country.
+        /// Return a list containing all cities' names from a given country name.
         /// </summary>
-        /// <param name="countryName"></param>
-        /// <returns></returns>
+        /// <param name="countryName">The name of the country all cities are in.</param>
+        /// <returns>A List of type string containing all city names, corresponding 
+        /// to the country name.</returns>
         public List<string> GetAllCityNamesFromCountry(string countryName)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -70,10 +75,10 @@ namespace Business
         }
 
         /// <summary>
-        /// Return a city using a supplier's name
+        /// Get a city using a supplier's name.
         /// </summary>
-        /// <param name="supplierName"></param>
-        /// <returns></returns>
+        /// <param name="supplierName">Name of the supplier.</param>
+        /// <returns>A string containing the name of the city the supplier is situated in.</returns>
         public string GetNameBySupplier(string supplierName)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -85,43 +90,25 @@ namespace Business
         }
 
         /// <summary>
-        /// Return a city using two parameters from Country type and string cityName.
+        /// Add a new city by given parameters.
         /// </summary>
-        /// <param name="country"></param>
-        /// <param name="city"></param>
-        /// <returns></returns>
-        public City GetByCountryAndName(Country country, string city)
+        /// <param name="cityName">The name of the city to add.</param>
+        /// <param name="cityId">The Id of the city to add.</param>
+        /// <param name="cityCountryName">The name of the country the city is located in.</param>
+        public void Add(string cityName, int cityId, string cityCountryName)
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                return this.GetAll().First(x => x.Name == city && x.CountryId == country.Id);
-            }
-        }
+                Country country;
+                try
+                {
+                    country = eazyCartContext.Countries.First(x => x.Name == cityCountryName);
+                }
+                catch
+                {
+                    throw new ArgumentException("Such country does not exist.");
+                }
 
-        /// <summary>
-        /// Return all suppliers from a certain city.
-        /// </summary>
-        /// <param name="selectedCity"></param>
-        /// <returns></returns>
-        public List<Supplier> GetSuppliers(City selectedCity)
-        {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                return selectedCity.Suppliers.ToList();
-            }
-        }
-
-        /// <summary>
-        /// Add a new city.
-        /// </summary>
-        /// <param name="cityName"></param>
-        /// <param name="cityId"></param>
-        /// <param name="cityCountry"></param>
-        public void Add(string cityName, int cityId, string cityCountry)
-        {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                var country = eazyCartContext.Countries.First(x => x.Name == cityCountry);
                 City city = new City
                 {
                     Id = cityId,
@@ -142,42 +129,24 @@ namespace Business
         }
 
         /// <summary>
-        /// Add a new city with an object from City type. 
-        /// </summary>
-        /// <param name="city"></param>
-        public void Add(City city)
-        {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                eazyCartContext.Cities.Add(city);
-                eazyCartContext.SaveChanges();
-            }
-        }
-
-        /// <summary>
-        /// Add a new a supplier from a certain city.
-        /// </summary>
-        /// <param name="selectedCity"></param>
-        /// <param name="supplier"></param>
-        public void AddSupplierToCity(City selectedCity, Supplier supplier)
-        {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                selectedCity.Suppliers.Add(supplier);
-            }
-        }
-
-        /// <summary>
         /// Update certain city's fields.
         /// </summary>
-        /// <param name="cityName"></param>
-        /// <param name="cityId"></param>
-        /// <param name="countryName"></param>
+        /// <param name="cityName">The new name of the city.</param>
+        /// <param name="cityId">The Id of the city to update.</param>
+        /// <param name="countryName">The new country name of the city.</param>
         public void Update(string cityName, int cityId, string countryName)
         {
             using (eazyCartContext = new EazyCartContext())
             {
-                var country = eazyCartContext.Countries.First(x => x.Name == countryName);
+                Country country;
+                try
+                {
+                    country = eazyCartContext.Countries.First(x => x.Name == countryName);
+                }
+                catch
+                {
+                    throw new ArgumentException("No such country exists");
+                }
 
                 // Update the city's fields.
                 var newCity = new City()
@@ -196,9 +165,9 @@ namespace Business
         }
 
         /// <summary>
-        /// Delete a certain city.
+        /// Delete a certain city by a given Id.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Id of the city to delete.</param>
         public void Delete(int id)
         {
             using (eazyCartContext = new EazyCartContext())

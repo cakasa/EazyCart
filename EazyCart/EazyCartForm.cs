@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Business;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,16 +13,32 @@ namespace EazyCart
 {
     public partial class EazyCartForm : Form
     {
-        public CashRegisterUserControl cashRegisterUserControl;
-        public WarehouseUserControl warehouseUserControl;
+        public CashRegisterUserControl cashRegisterUserControl { get; private set; }
+        public WarehouseUserControl warehouseUserControl { get; private set; }
         private StatisticsUserContol statisticsUserContol;
-        private SettingsUserControl settingsUserControl;
         private ManagementUserControl managementUserControl;
+
+        private int mouseX = 0;
+        private int mouseY = 0;
+        private bool mouseDown;
+
+        private UnitBusiness unitBusiness;
 
         public EazyCartForm()
         {
             InitializeComponent();
+        }
+
+        private void EazyCartForm_Load(object sender, EventArgs e)
+        {
+            LoadEazyCartForm();
+        }
+
+        private void LoadEazyCartForm()
+        {
             InitializeFormUserControls();
+            mainMenuPanel.Visible = false;
+            AddUnitsIfTheyAreNotInTheDatabase();         
         }
 
         private void InitializeFormUserControls()
@@ -29,34 +46,34 @@ namespace EazyCart
             cashRegisterUserControl = new CashRegisterUserControl();
             warehouseUserControl = new WarehouseUserControl();
             statisticsUserContol = new StatisticsUserContol();
-            settingsUserControl = new SettingsUserControl();
             managementUserControl = new ManagementUserControl();
-        }
 
-        int mouseX = 0, mouseY = 0;
-        bool mouseDown;
-
-        private void EazyCartForm_Load(object sender, EventArgs e)
-        {
             cashRegisterUserControl.Dock = DockStyle.Bottom;
             warehouseUserControl.Dock = DockStyle.Bottom;
             statisticsUserContol.Dock = DockStyle.Bottom;
-            settingsUserControl.Dock = DockStyle.Bottom;
             managementUserControl.Dock = DockStyle.Bottom;
 
             this.Controls.Add(cashRegisterUserControl);
             this.Controls.Add(warehouseUserControl);
             this.Controls.Add(statisticsUserContol);
-            this.Controls.Add(settingsUserControl);
             this.Controls.Add(managementUserControl);
 
             cashRegisterUserControl.Visible = false;
             warehouseUserControl.Visible = false;
             statisticsUserContol.Visible = false;
-            settingsUserControl.Visible = false;
             managementUserControl.Visible = false;
+        }
 
-            mainMenuPanel.Visible = false;
+        private void AddUnitsIfTheyAreNotInTheDatabase()
+        {
+            unitBusiness = new UnitBusiness();
+            if (unitBusiness.GetNumberOfUnits() == 0)
+            {
+                unitBusiness = new UnitBusiness();
+                unitBusiness.Add(1, "Unit", "UN");
+                unitBusiness.Add(2, "Kilogram", "KG");
+                unitBusiness.Add(3, "Litre", "L");
+            }
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -72,76 +89,67 @@ namespace EazyCart
 
         private void WarehouseButton_Click(object sender, EventArgs e)
         {
-            // User control switching
-            statisticsUserContol.Visible = false;
-            cashRegisterUserControl.Visible = false;
-            settingsUserControl.Visible = false;
-            managementUserControl.Visible = false;
+            var userControlsToMakeInvisible = new List<UserControl>
+            {
+                cashRegisterUserControl,
+                managementUserControl,
+                statisticsUserContol,
+            };
 
-            warehouseUserControl.Visible = true;
+            Point mainMenuPanelLocationPoint = new Point(598, 57);
+            UserControlChanged(userControlsToMakeInvisible, warehouseUserControl, mainMenuPanelLocationPoint);
+        }
 
-            // Main Menu Panel Movement
+        private void UserControlChanged
+            (List<UserControl> userControlsToInvisible, UserControl userControlToVisible, Point mainMenuPanelLocationPoint)
+        {
+            foreach(var userControl in userControlsToInvisible)
+            {
+                userControl.Visible = false;
+            }
+            userControlToVisible.Visible = true;
+
             mainMenuPanel.Visible = true;
-            mainMenuPanel.Location = new Point(598, 57);
+            mainMenuPanel.Location = mainMenuPanelLocationPoint;
         }
 
         private void StatisticsButton_Click(object sender, EventArgs e)
         {
-            // User control switching
-            warehouseUserControl.Visible = false;
-            cashRegisterUserControl.Visible = false;
-            settingsUserControl.Visible = false;
-            managementUserControl.Visible = false;
+            var userControlsToMakeInvisible = new List<UserControl>
+            {
+                cashRegisterUserControl,
+                managementUserControl,
+                warehouseUserControl,
+            };
 
-            statisticsUserContol.Visible = true;
-
-            // Main Menu Panel Movement
-            mainMenuPanel.Visible = true;
-            mainMenuPanel.Location = new Point(854, 57);
+            Point mainMenuPanelLocationPoint = new Point(1110, 57);
+            UserControlChanged(userControlsToMakeInvisible, statisticsUserContol, mainMenuPanelLocationPoint);
         }
         
         private void CashRegisterButton_Click(object sender, EventArgs e)
         {
-            // User control switching
-            warehouseUserControl.Visible = false;
-            statisticsUserContol.Visible = false;
-            settingsUserControl.Visible = false;
-            managementUserControl.Visible = false;
+            var userControlsToMakeInvisible = new List<UserControl>
+            {
+                statisticsUserContol,
+                managementUserControl,
+                warehouseUserControl,
+            };
 
-            cashRegisterUserControl.Visible = true;
-
-            // Main Menu Panel Movement
-            mainMenuPanel.Visible = true;
-            mainMenuPanel.Location = new Point(342, 57);
-        }
-
-        private void SettingsButton_Click(object sender, EventArgs e)
-        {
-            // User control switching
-            warehouseUserControl.Visible = false;
-            statisticsUserContol.Visible = false;
-            cashRegisterUserControl.Visible = false;
-            managementUserControl.Visible = false;
-
-            settingsUserControl.Visible = true;
-
-            // Main Menu Panel Movement
-            mainMenuPanel.Visible = true;
-            mainMenuPanel.Location = new Point(1110, 57);
+            Point mainMenuPanelLocationPoint = new Point(342, 57);
+            UserControlChanged(userControlsToMakeInvisible, cashRegisterUserControl, mainMenuPanelLocationPoint);
         }
 
         private void ManagementButton_Click(object sender, EventArgs e)
         {
-            warehouseUserControl.Visible = false;
-            statisticsUserContol.Visible = false;
-            cashRegisterUserControl.Visible = false;
-            settingsUserControl.Visible = false;
+            var userControlsToMakeInvisible = new List<UserControl>
+            {
+                statisticsUserContol,
+                cashRegisterUserControl,
+                warehouseUserControl,
+            };
 
-            managementUserControl.Visible = true;
-
-            // Main Menu Panel Movement
-            mainMenuPanel.Visible = true;
-            mainMenuPanel.Location = new Point(1110, 57);
+            Point mainMenuPanelLocationPoint = new Point(854, 57);
+            UserControlChanged(userControlsToMakeInvisible, managementUserControl, mainMenuPanelLocationPoint);
         }
                 
         // Making the app movable with the use of the menu panel 

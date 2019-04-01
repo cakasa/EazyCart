@@ -621,7 +621,16 @@ namespace EazyCart
                 return;
             }
 
-            this.cityBusiness.Update(cityName, cityId, countryName);
+            try
+            {
+                this.cityBusiness.Update(cityName, cityId, countryName);
+            }
+            catch(ArgumentException exc)
+            {
+                MessageBox.Show(exc.Message);
+                return;
+            }
+
             this.cityIdTextBox.Enabled = true;
 
             // Update appropriate tab.
@@ -757,7 +766,15 @@ namespace EazyCart
                 return;
             }
 
-            this.supplierBusiness.Update(supplierName, supplierId, countryName, cityName);
+            try
+            {
+                this.supplierBusiness.Update(supplierName, supplierId, countryName, cityName);
+            }
+            catch(ArgumentException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+
             this.supplierIdTextBox.Enabled = true;
 
             // Update the appropriate tabs

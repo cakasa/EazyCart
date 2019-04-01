@@ -8,14 +8,18 @@ using System.Data;
 
 namespace Business
 {
+    /// <summary>
+    /// This business logic class is responsible for managing the
+    /// categories from the database.
+    /// </summary>
     public class CategoryBusiness
     {
         private EazyCartContext eazyCartContext;
 
         /// <summary>
-        /// Return all categories.
+        /// Get all categories.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A List of all categories.</returns>
         public List<Category> GetAll()
         {
             using (eazyCartContext = new EazyCartContext())
@@ -25,10 +29,10 @@ namespace Business
         }
 
         /// <summary>
-        /// Return a certain category.
+        /// Return a certain category by given Id.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">Id of the category.</param>
+        /// <returns>A category, corresponding to the given Id.</returns>
         public Category Get(int id)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -38,9 +42,9 @@ namespace Business
         }
 
         /// <summary>
-        /// Return a list containing all categories' names.
+        /// Get a list containing all categories' names.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A List of type string, containing all names of categories.</returns>
         public List<string> GetAllNames()
         {
             using (eazyCartContext = new EazyCartContext())
@@ -60,8 +64,8 @@ namespace Business
         /// <summary>
         /// Add a new category.
         /// </summary>
-        /// <param name="categoryName"></param>
-        /// <param name="categoryId"></param>
+        /// <param name="categoryName">Name of the category.</param>
+        /// <param name="categoryId">Id of the category.</param>
         public void Add(string categoryName, int categoryId)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -87,13 +91,13 @@ namespace Business
         /// <summary>
         /// Update certain category's fields.
         /// </summary>
-        /// <param name="categoryName"></param>
-        /// <param name="categoryId"></param>
+        /// <param name="categoryName">Give the name of the category.</param>
+        /// <param name="categoryId">Give the id of the category.</param>
         public void Update(string categoryName, int categoryId)
         {         
             using (eazyCartContext = new EazyCartContext())
             {
-                // // Update the category's fields.
+                // // Set the new category's fields.
                 var newCategory = new Category()
                 {
                     Name = categoryName,
@@ -109,14 +113,15 @@ namespace Business
         }
 
         /// <summary>
-        /// Delete a certain category.
+        /// Delete a category by a given Id.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Id of the supplier to delete.</param>
         public void Delete(int id)
         {
             using (eazyCartContext = new EazyCartContext())
             {
                 var category = eazyCartContext.Categories.Find(id);
+
                 var allProducts = eazyCartContext.Products.ToList();
                 foreach (var product in allProducts)
                 {
@@ -131,18 +136,5 @@ namespace Business
                 eazyCartContext.SaveChanges();
             }
         }
-
-        /// <summary>
-        /// Add a new category.
-        /// </summary>
-        /// <param name="category"></param>
-        public void Add(Category category)
-        {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                eazyCartContext.Categories.Add(category);
-                eazyCartContext.SaveChanges();
-            }
-        }       
     }
 }

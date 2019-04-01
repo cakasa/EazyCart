@@ -7,27 +7,19 @@ using System.Threading.Tasks;
 
 namespace Business
 {
+    /// <summary>
+    /// This business logic class is responsible for managing the
+    /// unit types from the database.
+    /// </summary>
     public class UnitBusiness
     {
         private EazyCartContext eazyCartContext;
 
         /// <summary>
-        /// Return all unit types.
+        /// Return a certain unit by a given ID.
         /// </summary>
-        /// <returns></returns>
-        public List<Unit> GetAll()
-        {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                return eazyCartContext.Units.ToList();
-            }
-        }
-
-        /// <summary>
-        /// Return a certain unit type.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">The Id of the unit.</param>
+        /// <returns>Unit, corresponding to the ID.</returns>
         public Unit Get(int id)
         {
             using (eazyCartContext = new EazyCartContext())
@@ -37,50 +29,36 @@ namespace Business
         }
 
         /// <summary>
+        /// Get the count of units, stored in the database.
+        /// </summary>
+        /// <returns>Number of units in the databases.</returns>
+        public int GetNumberOfUnits()
+        {
+            using (eazyCartContext = new EazyCartContext())
+            {
+                return eazyCartContext.Units.Count();
+            }
+        }
+
+        /// <summary>
         /// Add a new unit type.
         /// </summary>
-        /// <param name="unit"></param>
-        public void Add(Unit unit)
+        /// <param name="unitId">The Id of the unit to add.</param>
+        /// <param name="code">The name of the unit.</param>
+        /// <param name="name">The code/abbreviation of the unit.</param>
+        public void Add(int unitId, string name, string code)
         {
             using (eazyCartContext = new EazyCartContext())
             {
+                var unit = new Unit
+                {
+                    Id = unitId,
+                    Name = name,
+                    Code = code
+                };
+
                 eazyCartContext.Units.Add(unit);
                 eazyCartContext.SaveChanges();
-            }
-        }
-
-        /// <summary>
-        /// Update certain unit's fields.
-        /// </summary>
-        /// <param name="unit"></param>
-        public void Update(Unit unit)
-        {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                var unitToUpdate = eazyCartContext.Units.Find(unit.Id);
-                if (unitToUpdate != null)
-                {
-                    eazyCartContext.Entry(unitToUpdate).CurrentValues.SetValues(unit);
-                    eazyCartContext.SaveChanges();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Delete a certain unit type.
-        /// </summary>
-        /// <param name="id"></param>
-        public void Delete(int id)
-        {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                var unit = eazyCartContext.Units.Find(id);
-                if (unit != null)
-                {
-                    // Remove the chosen unit and save the changes in the context.
-                    eazyCartContext.Units.Remove(unit);
-                    eazyCartContext.SaveChanges();
-                }
             }
         }
     }
