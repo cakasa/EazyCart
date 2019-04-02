@@ -1,4 +1,5 @@
 ﻿using Business;
+using Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -76,10 +77,10 @@ namespace EazyCart
         /// </summary>
         private void AddUnitsIfTheyAreNotInTheDatabase()
         {
-            unitBusiness = new UnitBusiness();
+            var eazyCartContext = new EazyCartContext();
+            unitBusiness = new UnitBusiness(eazyCartContext);
             if (unitBusiness.GetNumberOfUnits() == 0)
             {
-                unitBusiness = new UnitBusiness();
                 unitBusiness.Add(1, "Unit", "UN");
                 unitBusiness.Add(2, "Kilogram", "KG");
                 unitBusiness.Add(3, "Litre", "L");

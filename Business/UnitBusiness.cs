@@ -15,11 +15,6 @@ namespace Business
     {
         private EazyCartContext eazyCartContext;
 
-        public UnitBusiness()
-        {
-            this.eazyCartContext = new EazyCartContext();
-        }
-
         public UnitBusiness(EazyCartContext eazyCartContext)
         {
             this.eazyCartContext = eazyCartContext;
@@ -32,7 +27,7 @@ namespace Business
         /// <returns>Unit, corresponding to the ID.</returns>
         public Unit Get(int id)
         {
-            return eazyCartContext.Units.Find(id);
+            return eazyCartContext.Units.FirstOrDefault(x=> x.Id == id);
         }
 
         /// <summary>

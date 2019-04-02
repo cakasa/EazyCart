@@ -11,11 +11,6 @@ namespace Business
     {
         private EazyCartContext eazyCartContext;
 
-        public ReceiptBusiness()
-        {
-            this.eazyCartContext = new EazyCartContext();
-        }
-
         public ReceiptBusiness(EazyCartContext eazyCartContext)
         {
             this.eazyCartContext = eazyCartContext;
@@ -37,7 +32,7 @@ namespace Business
         /// <returns>Return the searched object of type receipt.</returns>
         public Receipt Get(int id)
         {
-            return eazyCartContext.Receipts.Find(id);
+            return eazyCartContext.Receipts.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
@@ -353,20 +348,10 @@ namespace Business
         }
 
         /// <summary>
-        /// Add a new receipt using a parameter of type Receipt.
-        /// </summary>
-        /// <param name="receipt">Give an object of type Receipt to add.</param>
-        public void Add(Receipt receipt)
-        {
-            eazyCartContext.Receipts.Add(receipt);
-            eazyCartContext.SaveChanges();
-        }
-
-        /// <summary>
         /// Add a new receipt using an id.
         /// </summary>
         /// <param name="id">Give the if of the new receipt to add.</param>
-        public void AddNewReceipt(int id)
+        public void Add(int id)
         {
             Receipt receipt = new Receipt
             {
@@ -386,7 +371,7 @@ namespace Business
         public void Update(int receiptId)
         {
             // Find the needed receipt.
-            var receiptToUpdate = eazyCartContext.Receipts.Find(receiptId);
+            var receiptToUpdate = eazyCartContext.Receipts.FirstOrDefault(x => x.Id == receiptId);
             var allProductReceipts = eazyCartContext.ProductsReceipts.Where(x => x.ReceiptId == receiptId);
 
             if (allProductReceipts.Count() == 0)
@@ -410,7 +395,7 @@ namespace Business
                 GrandTotal = grandTotal
             };
 
-            // Set the updated supplier's fields.
+            // Set the updated receipt's fields.
             eazyCartContext.Entry(receiptToUpdate).CurrentValues.SetValues(newReceipt);
             eazyCartContext.SaveChanges();
         }

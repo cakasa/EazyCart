@@ -13,23 +13,9 @@ namespace Business
     {
         private EazyCartContext eazyCartContext;
 
-        public ProductReceiptBusiness()
-        {
-            this.eazyCartContext = new EazyCartContext();
-        }
-
         public ProductReceiptBusiness(EazyCartContext eazyCartContext)
         {
             this.eazyCartContext = eazyCartContext;
-        }
-
-        /// <summary>
-        /// Get all product receipts.
-        /// </summary>
-        /// <returns>Return a list of all ProductReceipts.</returns>
-        public List<ProductReceipt> GetAll()
-        {
-            return eazyCartContext.ProductsReceipts.ToList();
         }
 
         /// <summary>
@@ -39,7 +25,7 @@ namespace Business
         /// <returns>Return a ProductReceipt object, corresponding to the given Id.</returns>
         public ProductReceipt Get(int id)
         {
-            return eazyCartContext.ProductsReceipts.Find(id);
+            return eazyCartContext.ProductsReceipts.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
@@ -58,17 +44,15 @@ namespace Business
         /// <summary>
         /// Get the productReceipts of a given order.
         /// </summary>
-        /// <param name="receiptNumber">The Id of the receipt, all productReceipts are
+        /// <param name="receiptId">The Id of the receipt, all productReceipts are
         /// a part of.</param>
         /// <returns>A List of ProductReceipt with objects, corresponding to the
         /// receipt number.</returns>
-        public List<ProductReceipt> GetAllByReceipt(int receiptNumber)
+        public List<ProductReceipt> GetAllByReceiptId(int receiptId)
         {
-
             var productsReceipt =
-                eazyCartContext.ProductsReceipts.Where(x => x.ReceiptId == receiptNumber).ToList();
+                eazyCartContext.ProductsReceipts.Where(x => x.ReceiptId == receiptId).ToList();
             return productsReceipt;
-
         }
 
         /// <summary>
@@ -91,7 +75,7 @@ namespace Business
             {
                 throw new ArgumentException("Wrong values for quantity/discount");
             }
-            var product = eazyCartContext.Products.First(x => x.Code == productCode);
+            var product = eazyCartContext.Products.FirstOrDefault(x => x.Code == productCode);
             if (product.Quantity < quantity)
             {
                 throw new ArgumentException("Insufficient quantity");
@@ -123,23 +107,6 @@ namespace Business
         }
 
         /// <summary>
-        /// Update certain product receipt's fields by a given parameter
-        /// of ProductReceipt type.
-        /// </summary>
-        /// <param name="productReceipt">Give an object of type ProductReceipt to update.</param>
-        public void Update(ProductReceipt productReceipt)
-        {
-            // Find the needed product receipt.
-            var productReceiptToUpdate = eazyCartContext.ProductsReceipts.Find(productReceipt.Id);
-            if (productReceiptToUpdate != null)
-            {
-                // Set the updated product receipt's fields.
-                eazyCartContext.Entry(productReceiptToUpdate).CurrentValues.SetValues(productReceipt);
-                eazyCartContext.SaveChanges();
-            }
-        }
-
-        /// <summary>
         /// Update certain product receipt's fields using four parameters.
         /// </summary>
         /// <param name="productReceiptId">Give the id of the receipt to update.</param>
@@ -159,7 +126,7 @@ namespace Business
             {
                 throw new ArgumentException("Wrong values for quantity/discount");
             }
-            var product = eazyCartContext.Products.First(x => x.Code == productCode);
+            var product = eazyCartContext.Products.FirstOrDefault(x => x.Code == productCode);
 
             if (quantity > product.Quantity)
             {
@@ -182,7 +149,7 @@ namespace Business
                 ReceiptId = receipt.Id
             };
 
-            var productReceiptToUpdate = eazyCartContext.ProductsReceipts.First(x => x.Id == productReceiptId);
+            var productReceiptToUpdate = eazyCartContext.ProductsReceipts.FirstOrDefault(x => x.Id == productReceiptId);
 
             // Set the updated supplier's fields.
             eazyCartContext.Entry(productReceiptToUpdate).CurrentValues.SetValues(newProductReceipt);
@@ -195,7 +162,7 @@ namespace Business
         /// <param name="id">Give the id of the product to delete.</param>
         public void Delete(int id)
         {
-            var productReceipt = eazyCartContext.ProductsReceipts.Find(id);
+            var productReceipt = eazyCartContext.ProductsReceipts.FirstOrDefault(x => x.Id == id);
             if (productReceipt != null)
             {
                 // Remove the chosen product receipt and save the changes in the context.

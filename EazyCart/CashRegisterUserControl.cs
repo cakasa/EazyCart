@@ -41,10 +41,11 @@ namespace EazyCart
         /// </summary>
         private void UpdateUserControl()
         {
-            this.categoryBusiness = new CategoryBusiness();
-            this.productBusiness = new ProductBusiness();
-            this.productReceiptBusiness = new ProductReceiptBusiness();
-            this.receiptBusiness = new ReceiptBusiness();
+            var eazyCartContext = new EazyCartContext();
+            this.categoryBusiness = new CategoryBusiness(eazyCartContext);
+            this.productBusiness = new ProductBusiness(eazyCartContext);
+            this.productReceiptBusiness = new ProductReceiptBusiness(eazyCartContext);
+            this.receiptBusiness = new ReceiptBusiness(eazyCartContext);
             this.UpdateSelectProductTab();
             this.UpdateReceiptTab();
             this.highestProductReceiptId = productReceiptBusiness.GetHighestId();
@@ -79,7 +80,7 @@ namespace EazyCart
 
             var receiptNumber = this.receiptBusiness.GetNextReceiptNumber();
             this.receiptNumberTextBox.Text = receiptNumber.ToString();
-            this.receiptBusiness.AddNewReceipt(receiptNumber);
+            this.receiptBusiness.Add(receiptNumber);
             this.UpdateReceiptDataGridView();
         }
 
@@ -92,7 +93,7 @@ namespace EazyCart
             this.receiptDataGridView.Rows.Clear();
             int receiptNumber = int.Parse(this.receiptNumberTextBox.Text);
             List<ProductReceipt> productReceipts =
-                this.productReceiptBusiness.GetAllByReceipt(receiptNumber);
+                this.productReceiptBusiness.GetAllByReceiptId(receiptNumber);
 
             // Populate the receipt dataGridView.
             decimal grandTotal = 0;

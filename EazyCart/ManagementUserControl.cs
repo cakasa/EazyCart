@@ -39,10 +39,11 @@ namespace EazyCart
         /// </summary>
         private void UpdateUserControl()
         {
-            this.cityBusiness = new CityBusiness();
-            this.countryBusiness = new CountryBusiness();
-            this.categoryBusiness = new CategoryBusiness();
-            this.supplierBusiness = new SupplierBusiness();
+            var eazyCartContext = new EazyCartContext();
+            this.cityBusiness = new CityBusiness(eazyCartContext);
+            this.countryBusiness = new CountryBusiness(eazyCartContext);
+            this.categoryBusiness = new CategoryBusiness(eazyCartContext);
+            this.supplierBusiness = new SupplierBusiness(eazyCartContext);
             this.ClearAndUpdateCategoryTab();
             this.ClearAndUpdateCountryTab();
             this.ClearAndUpdateCityTab();

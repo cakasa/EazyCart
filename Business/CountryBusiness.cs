@@ -1,4 +1,5 @@
 ﻿using Data.Models;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,6 @@ namespace Business
     public class CountryBusiness
     {
         private EazyCartContext eazyCartContext;
-
-        public CountryBusiness()
-        {
-            this.eazyCartContext = new EazyCartContext();
-        }
 
         public CountryBusiness(EazyCartContext eazyCartContext)
         {
@@ -41,7 +37,7 @@ namespace Business
         /// <returns>JA country, corresponding to the given Id.</returns>
         public Country Get(int id)
         {
-            return eazyCartContext.Countries.Find(id);
+            return eazyCartContext.Countries.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
@@ -107,7 +103,8 @@ namespace Business
                 Name = countryName
             };
 
-            var countryToUpdate = eazyCartContext.Countries.Find(countryId);
+            var countryToUpdate = 
+                eazyCartContext.Countries.FirstOrDefault(x => x.Id == countryId);
 
             // Set the updated county's fields.
             eazyCartContext.Entry(countryToUpdate).CurrentValues.SetValues(newCountry);
@@ -120,7 +117,7 @@ namespace Business
         /// <param name="id">Id of the country to delete.</param>
         public void Delete(int id)
         {
-            var country = eazyCartContext.Countries.Find(id);
+            var country = eazyCartContext.Countries.FirstOrDefault(x=>x.Id == id);
             var citiesFromCountry =
                 eazyCartContext.Cities.Where(x => x.CountryId == country.Id).ToList();
 

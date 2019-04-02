@@ -10,6 +10,7 @@ using Business;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.IO;
+using Data.Models;
 
 namespace EazyCart
 {
@@ -52,8 +53,9 @@ namespace EazyCart
         /// </summary>
         private void UpdateUserControl()
         {
-            this.productBusiness = new ProductBusiness();
-            this.receiptBusiness = new ReceiptBusiness();
+            var eazyCartContext = new EazyCartContext();
+            this.productBusiness = new ProductBusiness(eazyCartContext);
+            this.receiptBusiness = new ReceiptBusiness(eazyCartContext);
 
             Color reportBarColor = Color.FromRgb(44, 62, 80);           
             this.reportBarColoredBrush = new SolidColorBrush(reportBarColor);

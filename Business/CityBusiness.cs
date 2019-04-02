@@ -15,11 +15,6 @@ namespace Business
     {
         private EazyCartContext eazyCartContext;
 
-        public CityBusiness()
-        {
-            this.eazyCartContext = new EazyCartContext();
-        }
-
         public CityBusiness(EazyCartContext eazyCartContext)
         {
             this.eazyCartContext = eazyCartContext;
