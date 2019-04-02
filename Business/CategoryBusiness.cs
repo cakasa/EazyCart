@@ -37,7 +37,7 @@ namespace Business
         /// <returns>A category, corresponding to the given Id.</returns>
         public Category Get(int id)
         {
-            return eazyCartContext.Categories.Find(id);
+            return eazyCartContext.Categories.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Business
         /// <param name="id">Id of the supplier to delete.</param>
         public void Delete(int id)
         {
-            var category = eazyCartContext.Categories.Find(id);
+            var category = eazyCartContext.Categories.FirstOrDefault(x => x.Id == id);
 
             var allProducts = eazyCartContext.Products.ToList();
             foreach (var product in allProducts)

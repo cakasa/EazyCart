@@ -36,7 +36,7 @@ namespace Business
         /// <returns>A city, corresponding to the given Id</returns>
         public City Get(int id)
         {
-            return eazyCartContext.Cities.Find(id);
+            return eazyCartContext.Cities.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace Business
         /// <param name="id">Id of the city to delete.</param>
         public void Delete(int id)
         {
-            var city = eazyCartContext.Cities.Find(id);
+            var city = eazyCartContext.Cities.FirstOrDefault(x => x.Id == id);
 
             List<Supplier> supplierFromCity = eazyCartContext.Suppliers.Where(x => x.CityId == city.Id).ToList();
             if (supplierFromCity.Count > 0)
