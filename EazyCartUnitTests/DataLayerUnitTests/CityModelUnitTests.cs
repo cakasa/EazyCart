@@ -29,7 +29,7 @@ namespace EazyCartUnitTests.DataLayerUnitTests
             city.Id = 2;
 
             // Assert
-            Assert.Equals(city.Id == 2, "City Id Not Set");
+            Assert.AreEqual(2, city.Id, "City Id Not Set");
         }
 
         /*

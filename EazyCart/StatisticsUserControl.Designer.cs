@@ -128,6 +128,7 @@
             this.reportTypeComboBox.Name = "reportTypeComboBox";
             this.reportTypeComboBox.Size = new System.Drawing.Size(590, 33);
             this.reportTypeComboBox.TabIndex = 40;
+            this.reportTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.ReportTypeComboBox_SelectedIndexChanged);
             // 
             // fileNameTextBox
             // 

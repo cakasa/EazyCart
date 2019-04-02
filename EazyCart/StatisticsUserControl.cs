@@ -171,6 +171,15 @@ namespace EazyCart
         }
 
         /// <summary>
+        /// This event triggers when the type of report comboBox
+        /// index has been changed.
+        /// </summary>
+        private void ReportTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ModifyPeriodComboBox();
+        }
+
+        /// <summary>
         /// This method is responsible for filling the types of reports
         /// which suit a given category.
         /// </summary>
@@ -212,8 +221,9 @@ namespace EazyCart
         {
             // THe period comboBox is only enabled when the selected category is
             // 'Sales Reports' or 'Order Reports'
-            int selectedCategoryIndex = this.reportTypeComboBox.SelectedIndex;
-            if (selectedCategoryIndex == 0)
+            int selectedCategoryIndex = this.reportCategoryComboBox.SelectedIndex;
+            int selectedTypeIndex = this.reportTypeComboBox.SelectedIndex;
+            if (selectedTypeIndex == 0)
             {
                 this.reportPeriodComboBox.Enabled = false;
             }

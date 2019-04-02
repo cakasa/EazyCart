@@ -99,7 +99,7 @@ namespace Business
 
                 eazyCartContext.Suppliers.Add(supplier);
 
-                // Chech whether a supplier with the given ID already exists.
+                // Check whether a supplier with the given ID already exists.
                 try
                 {
                     eazyCartContext.SaveChanges();
@@ -166,7 +166,7 @@ namespace Business
             {
                 var supplier = eazyCartContext.Suppliers.Find(id);
 
-                List<Product> productsFromSupplier =
+                var productsFromSupplier =
                     eazyCartContext.Products.Where(x => x.SupplierId == supplier.Id).ToList();
                 if (productsFromSupplier.Count > 0)
                 {

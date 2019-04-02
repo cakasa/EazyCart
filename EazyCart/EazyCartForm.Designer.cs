@@ -31,13 +31,13 @@
             this.components = new System.ComponentModel.Container();
             this.menuPanel = new System.Windows.Forms.Panel();
             this.settingsButton = new System.Windows.Forms.Button();
-            this.managementButton = new System.Windows.Forms.Button();
             this.mainMenuPanel = new System.Windows.Forms.Panel();
             this.statisticsButton = new System.Windows.Forms.Button();
             this.warehouseButton = new System.Windows.Forms.Button();
             this.titleLabel = new System.Windows.Forms.Label();
             this.shoppingCartPIctureBox = new System.Windows.Forms.PictureBox();
             this.cashRegisterButton = new System.Windows.Forms.Button();
+            this.managementButton = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.closeButton = new System.Windows.Forms.Button();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
@@ -78,22 +78,6 @@
             this.settingsButton.TabIndex = 5;
             this.settingsButton.TabStop = false;
             this.settingsButton.UseVisualStyleBackColor = false;
-            // 
-            // managementButton
-            // 
-            this.managementButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.managementButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.managementButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.managementButton.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.managementButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.managementButton.Location = new System.Drawing.Point(852, 0);
-            this.managementButton.Name = "managementButton";
-            this.managementButton.Size = new System.Drawing.Size(256, 60);
-            this.managementButton.TabIndex = 7;
-            this.managementButton.TabStop = false;
-            this.managementButton.Text = "Management";
-            this.managementButton.UseVisualStyleBackColor = false;
-            this.managementButton.Click += new System.EventHandler(this.ManagementButton_Click);
             // 
             // mainMenuPanel
             // 
@@ -169,6 +153,22 @@
             this.cashRegisterButton.UseVisualStyleBackColor = false;
             this.cashRegisterButton.Click += new System.EventHandler(this.CashRegisterButton_Click);
             // 
+            // managementButton
+            // 
+            this.managementButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.managementButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.managementButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.managementButton.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.managementButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.managementButton.Location = new System.Drawing.Point(852, 0);
+            this.managementButton.Name = "managementButton";
+            this.managementButton.Size = new System.Drawing.Size(256, 60);
+            this.managementButton.TabIndex = 7;
+            this.managementButton.TabStop = false;
+            this.managementButton.Text = "Management";
+            this.managementButton.UseVisualStyleBackColor = false;
+            this.managementButton.Click += new System.EventHandler(this.ManagementButton_Click);
+            // 
             // closeButton
             // 
             this.closeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
@@ -189,7 +189,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
-            this.ClientSize = new System.Drawing.Size(1386, 788);
+            this.ClientSize = new System.Drawing.Size(1600, 900);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.menuPanel);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
