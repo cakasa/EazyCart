@@ -15,16 +15,23 @@ namespace Business
     {
         private EazyCartContext eazyCartContext;
 
+        public SupplierBusiness()
+        {
+            this.eazyCartContext = new EazyCartContext();
+        }
+
+        public SupplierBusiness(EazyCartContext eazyCartContext)
+        {
+            this.eazyCartContext = eazyCartContext;
+        }
+
         /// <summary>
         /// Get all suppliers.
         /// </summary>
         /// <returns>A List of all suppliers.</returns>
         public List<Supplier> GetAll()
         {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                return eazyCartContext.Suppliers.ToList();
-            }
+            return eazyCartContext.Suppliers.ToList();
         }
 
         /// <summary>
@@ -34,10 +41,7 @@ namespace Business
         /// <returns>Supplier, corresponding to the given Id.</returns>
         public Supplier Get(int id)
         {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                return eazyCartContext.Suppliers.Find(id);
-            }
+            return eazyCartContext.Suppliers.Find(id);
         }
 
         /// <summary>
@@ -46,18 +50,15 @@ namespace Business
         /// <returns>A List of strings, containing supplier names.</returns>
         public List<string> GetAllNames()
         {
-            using (eazyCartContext = new EazyCartContext())
+            List<Supplier> suppliers = eazyCartContext.Suppliers.ToList();
+            var supplierNames = new List<string>();
+
+            foreach (var supplier in suppliers)
             {
-                List<Supplier> suppliers = eazyCartContext.Suppliers.ToList();
-                var supplierNames = new List<string>();
-
-                foreach (var supplier in suppliers)
-                {
-                    supplierNames.Add(supplier.Name);
-                }
-
-                return supplierNames;
+                supplierNames.Add(supplier.Name);
             }
+
+            return supplierNames;
         }
 
         /// <summary>
@@ -69,45 +70,42 @@ namespace Business
         /// <param name="supplierCountryName">The country name of the supplier.</param>
         public void Add(string supplierName, int supplierId, string supplierCityName, string supplierCountryName)
         {
-            using (eazyCartContext = new EazyCartContext())
+            List<City> allCitiesWithGivenName = eazyCartContext
+                                                    .Cities
+                                                    .Where(x => x.Name == supplierCityName)
+                                                    .ToList();
+
+            // Find the city and the country of the new supplier.
+            Country country;
+            City city;
+            try
             {
-                List<City> allCitiesWithGivenName = eazyCartContext
-                                                        .Cities
-                                                        .Where(x => x.Name == supplierCityName)
-                                                        .ToList();
+                country = eazyCartContext.Countries.First(x => x.Name == supplierCountryName);
+                city = allCitiesWithGivenName.First(x => x.CountryId == country.Id);
+            }
+            catch
+            {
+                throw new ArgumentException("No such country/city exists");
+            }
 
-                // Find the city and the country of the new supplier.
-                Country country;
-                City city;
-                try
-                {
-                    country = eazyCartContext.Countries.First(x => x.Name == supplierCountryName);
-                    city = allCitiesWithGivenName.First(x => x.CountryId == country.Id);
-                }
-                catch
-                {
-                    throw new ArgumentException("No such country/city exists");
-                }
+            // Initialize the new supplier's fields.
+            var supplier = new Supplier
+            {
+                Id = supplierId,
+                Name = supplierName,
+                CityId = city.Id
+            };
 
-                // Initialize the new supplier's fields.
-                var supplier = new Supplier
-                {
-                    Id = supplierId,
-                    Name = supplierName,
-                    CityId = city.Id
-                };
+            eazyCartContext.Suppliers.Add(supplier);
 
-                eazyCartContext.Suppliers.Add(supplier);
-
-                // Check whether a supplier with the given ID already exists.
-                try
-                {
-                    eazyCartContext.SaveChanges();
-                }
-                catch
-                {
-                    throw new ArgumentException($"Supplier with ID {supplierId} already exists.");
-                }
+            // Check whether a supplier with the given ID already exists.
+            try
+            {
+                eazyCartContext.SaveChanges();
+            }
+            catch
+            {
+                throw new ArgumentException($"Supplier with ID {supplierId} already exists.");
             }
         }
 
@@ -120,40 +118,37 @@ namespace Business
         /// <param name="cityName">The new city name of the supplier.</param>
         public void Update(string supplierName, int supplierId, string countryName, string cityName)
         {
-            using (eazyCartContext = new EazyCartContext())
+            List<City> allCitiesWithGivenName = eazyCartContext
+                                                    .Cities
+                                                    .Where(x => x.Name == cityName)
+                                                    .ToList();
+
+            // Find the city and the country of the selected supplier.
+            Country country;
+            City city;
+            try
             {
-                List<City> allCitiesWithGivenName = eazyCartContext
-                                                        .Cities
-                                                        .Where(x => x.Name == cityName)
-                                                        .ToList();
-
-                // Find the city and the country of the selected supplier.
-                Country country;
-                City city;
-                try
-                {
-                    country = eazyCartContext.Countries.First(x => x.Name == countryName);
-                    city = allCitiesWithGivenName.First(x => x.CountryId == country.Id);
-                }
-                catch
-                {
-                    throw new ArgumentException("No such country/city exists.");
-                }
-
-                // Set the new supplier's fields.
-                var newSupplier = new Supplier()
-                {
-                    Id = supplierId,
-                    Name = supplierName,
-                    CityId = city.Id
-                };
-
-                var supplierToUpdate = eazyCartContext.Suppliers.Find(supplierId);
-
-                // Set the updated supplier's fields.
-                eazyCartContext.Entry(supplierToUpdate).CurrentValues.SetValues(newSupplier);
-                eazyCartContext.SaveChanges();
+                country = eazyCartContext.Countries.First(x => x.Name == countryName);
+                city = allCitiesWithGivenName.First(x => x.CountryId == country.Id);
             }
+            catch
+            {
+                throw new ArgumentException("No such country/city exists.");
+            }
+
+            // Set the new supplier's fields.
+            var newSupplier = new Supplier()
+            {
+                Id = supplierId,
+                Name = supplierName,
+                CityId = city.Id
+            };
+
+            var supplierToUpdate = eazyCartContext.Suppliers.Find(supplierId);
+
+            // Set the updated supplier's fields.
+            eazyCartContext.Entry(supplierToUpdate).CurrentValues.SetValues(newSupplier);
+            eazyCartContext.SaveChanges();
         }
 
         /// <summary>
@@ -162,21 +157,18 @@ namespace Business
         /// <param name="id">The ID of the supplier.</param>
         public void Delete(int id)
         {
-            using (eazyCartContext = new EazyCartContext())
+            var supplier = eazyCartContext.Suppliers.Find(id);
+
+            var productsFromSupplier =
+                eazyCartContext.Products.Where(x => x.SupplierId == supplier.Id).ToList();
+            if (productsFromSupplier.Count > 0)
             {
-                var supplier = eazyCartContext.Suppliers.Find(id);
-
-                var productsFromSupplier =
-                    eazyCartContext.Products.Where(x => x.SupplierId == supplier.Id).ToList();
-                if (productsFromSupplier.Count > 0)
-                {
-                    throw new ArgumentException("One or more products are related to this supplier.");
-                }
-
-                // Remove the chosen supplier and save the changes in the context.
-                eazyCartContext.Suppliers.Remove(supplier);
-                eazyCartContext.SaveChanges();
+                throw new ArgumentException("One or more products are related to this supplier.");
             }
+
+            // Remove the chosen supplier and save the changes in the context.
+            eazyCartContext.Suppliers.Remove(supplier);
+            eazyCartContext.SaveChanges();
         }
     }
 }

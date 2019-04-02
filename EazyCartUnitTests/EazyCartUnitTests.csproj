@@ -152,21 +152,7 @@
     <Compile Include="BusinessUnitTests\ReceiptBusinessUnitTests.cs" />
     <Compile Include="BusinessUnitTests\SupplierBusinessUnitBusiness.cs" />
     <Compile Include="BusinessUnitTests\UnitBusinessUnitTests.cs" />
-    <Compile Include="DataLayerUnitTests\CategoryModelUnitTests.cs" />
-    <Compile Include="DataLayerUnitTests\CityModelUnitTests.cs" />
-    <Compile Include="DataLayerUnitTests\CountryModelUnitTests.cs" />
-    <Compile Include="DataLayerUnitTests\EazyCartContextUnitTests.cs" />
-    <Compile Include="DataLayerUnitTests\ProductModelUnitTests.cs" />
-    <Compile Include="DataLayerUnitTests\ProductReceiptModelBusinessTests.cs" />
-    <Compile Include="DataLayerUnitTests\ReceiptModelBusiness.cs" />
-    <Compile Include="DataLayerUnitTests\SupplierModelUnitTests.cs" />
-    <Compile Include="DataLayerUnitTests\UnitModelUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UIBackendUnitTests\CashRegisterUserControlUnitTests.cs" />
-    <Compile Include="UIBackendUnitTests\EazyCartFormUnitTests.cs" />
-    <Compile Include="UIBackendUnitTests\ManagementUserControlUnitTests.cs" />
-    <Compile Include="UIBackendUnitTests\StatisticsUserControlUnitTests.cs" />
-    <Compile Include="UIBackendUnitTests\WarehouseUserControlUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

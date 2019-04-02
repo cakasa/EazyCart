@@ -15,16 +15,23 @@ namespace Business
     {
         private EazyCartContext eazyCartContext;
 
+        public CountryBusiness()
+        {
+            this.eazyCartContext = new EazyCartContext();
+        }
+
+        public CountryBusiness(EazyCartContext eazyCartContext)
+        {
+            this.eazyCartContext = eazyCartContext;
+        }
+
         /// <summary>
         /// Get all countries.
         /// </summary>
         /// <returns>A List of all countries.</returns>
         public List<Country> GetAll()
         {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                return eazyCartContext.Countries.ToList();
-            }
+            return eazyCartContext.Countries.ToList();
         }
 
         /// <summary>
@@ -34,10 +41,7 @@ namespace Business
         /// <returns>JA country, corresponding to the given Id.</returns>
         public Country Get(int id)
         {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                return eazyCartContext.Countries.Find(id);
-            }
+            return eazyCartContext.Countries.Find(id);
         }
 
         /// <summary>
@@ -46,12 +50,9 @@ namespace Business
         /// <returns>A List of type string containing all country names.</returns>
         public List<string> GetAllNames()
         {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                var countries = eazyCartContext.Countries.ToList();
-                var allCountriesNames = countries.Select(x => x.Name).ToList();
-                return allCountriesNames;
-            }
+            var countries = eazyCartContext.Countries.ToList();
+            var allCountriesNames = countries.Select(x => x.Name).ToList();
+            return allCountriesNames;
         }
 
         /// <summary>
@@ -61,14 +62,11 @@ namespace Business
         /// <returns>Name of the country, the supplier is located in.</returns>
         public string GetNameBySupplier(string supplierName)
         {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                var supplier = eazyCartContext.Suppliers.First(x => x.Name == supplierName);
-                var city = eazyCartContext.Cities.First(x => x.Id == supplier.CityId);
-                var country = eazyCartContext.Countries.First(x => x.Id == city.CountryId);
-                return country.Name;
-            }
-        }     
+            var supplier = eazyCartContext.Suppliers.First(x => x.Name == supplierName);
+            var city = eazyCartContext.Cities.First(x => x.Id == supplier.CityId);
+            var country = eazyCartContext.Countries.First(x => x.Id == city.CountryId);
+            return country.Name;
+        }
 
         /// <summary>
         /// Add a new country by given paramters.
@@ -77,24 +75,21 @@ namespace Business
         /// <param name="countryId">Id of the country to add.</param>
         public void Add(string countryName, int countryId)
         {
-            using (eazyCartContext = new EazyCartContext())
+            var country = new Country
             {
-                var country = new Country
-                {
-                    Id = countryId,
-                    Name = countryName
-                };
+                Id = countryId,
+                Name = countryName
+            };
 
-                eazyCartContext.Countries.Add(country);
+            eazyCartContext.Countries.Add(country);
 
-                try
-                {
-                    eazyCartContext.SaveChanges();
-                }
-                catch
-                {
-                    throw new ArgumentException($"Country with ID {countryId} already exists.");
-                }
+            try
+            {
+                eazyCartContext.SaveChanges();
+            }
+            catch
+            {
+                throw new ArgumentException($"Country with ID {countryId} already exists.");
             }
         }
 
@@ -105,21 +100,18 @@ namespace Business
         /// <param name="countryId">The Id of the country to update.</param>
         public void Update(string countryName, int countryId)
         {
-            using (eazyCartContext = new EazyCartContext())
+            //  Update the country's fields.
+            var newCountry = new Country()
             {
-                //  Update the country's fields.
-                var newCountry = new Country()
-                {
-                    Id = countryId,
-                    Name = countryName
-                };
+                Id = countryId,
+                Name = countryName
+            };
 
-                var countryToUpdate = eazyCartContext.Countries.Find(countryId);
+            var countryToUpdate = eazyCartContext.Countries.Find(countryId);
 
-                // Set the updated county's fields.
-                eazyCartContext.Entry(countryToUpdate).CurrentValues.SetValues(newCountry);
-                eazyCartContext.SaveChanges();
-            }
+            // Set the updated county's fields.
+            eazyCartContext.Entry(countryToUpdate).CurrentValues.SetValues(newCountry);
+            eazyCartContext.SaveChanges();
         }
 
         /// <summary>
@@ -128,21 +120,18 @@ namespace Business
         /// <param name="id">Id of the country to delete.</param>
         public void Delete(int id)
         {
-            using (eazyCartContext = new EazyCartContext())
+            var country = eazyCartContext.Countries.Find(id);
+            var citiesFromCountry =
+                eazyCartContext.Cities.Where(x => x.CountryId == country.Id).ToList();
+
+            if (citiesFromCountry.Count > 0)
             {
-                var country = eazyCartContext.Countries.Find(id);
-                var citiesFromCountry = 
-                    eazyCartContext.Cities.Where(x => x.CountryId == country.Id).ToList();
-
-                if (citiesFromCountry.Count > 0)
-                {
-                    throw new ArgumentException("One or more cities are related to this country.");
-                }
-
-                // Remove the chosen country and save the changes in the context.
-                eazyCartContext.Countries.Remove(country);
-                eazyCartContext.SaveChanges();
+                throw new ArgumentException("One or more cities are related to this country.");
             }
+
+            // Remove the chosen country and save the changes in the context.
+            eazyCartContext.Countries.Remove(country);
+            eazyCartContext.SaveChanges();
         }
     }
 }

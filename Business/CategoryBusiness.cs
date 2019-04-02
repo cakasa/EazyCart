@@ -16,16 +16,23 @@ namespace Business
     {
         private EazyCartContext eazyCartContext;
 
+        public CategoryBusiness()
+        {
+            this.eazyCartContext = new EazyCartContext();
+        }
+
+        public CategoryBusiness(EazyCartContext eazyCartContext)
+        {
+            this.eazyCartContext = eazyCartContext;
+        }
+
         /// <summary>
         /// Get all categories.
         /// </summary>
         /// <returns>A List of all categories.</returns>
         public List<Category> GetAll()
         {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                return eazyCartContext.Categories.ToList();
-            }
+            return eazyCartContext.Categories.ToList();
         }
 
         /// <summary>
@@ -35,10 +42,7 @@ namespace Business
         /// <returns>A category, corresponding to the given Id.</returns>
         public Category Get(int id)
         {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                return eazyCartContext.Categories.Find(id);
-            }
+            return eazyCartContext.Categories.Find(id);
         }
 
         /// <summary>
@@ -47,18 +51,15 @@ namespace Business
         /// <returns>A List of type string, containing all names of categories.</returns>
         public List<string> GetAllNames()
         {
-            using (eazyCartContext = new EazyCartContext())
+            var allCategories = eazyCartContext.Categories.ToList();
+            var allNames = new List<string>();
+
+            foreach (var category in allCategories)
             {
-                var allCategories = eazyCartContext.Categories.ToList();
-                var allNames = new List<string>();
-
-                foreach (var category in allCategories)
-                {
-                    allNames.Add(category.Name);
-                }
-
-                return allNames;
+                allNames.Add(category.Name);
             }
+
+            return allNames;
         }
 
         /// <summary>
@@ -68,23 +69,20 @@ namespace Business
         /// <param name="categoryId">Id of the category.</param>
         public void Add(string categoryName, int categoryId)
         {
-            using (eazyCartContext = new EazyCartContext())
+            var category = new Category
             {
-                var category = new Category
-                {
-                    Id = categoryId,
-                    Name = categoryName
-                };
+                Id = categoryId,
+                Name = categoryName
+            };
 
-                eazyCartContext.Categories.Add(category);
-                try
-                {
-                    eazyCartContext.SaveChanges();
-                }
-                catch
-                {
-                    throw new ArgumentException($"Category with ID {categoryId} already exists.");
-                }               
+            eazyCartContext.Categories.Add(category);
+            try
+            {
+                eazyCartContext.SaveChanges();
+            }
+            catch
+            {
+                throw new ArgumentException($"Category with ID {categoryId} already exists.");
             }
         }
 
@@ -94,22 +92,19 @@ namespace Business
         /// <param name="categoryName">Give the name of the category.</param>
         /// <param name="categoryId">Give the id of the category.</param>
         public void Update(string categoryName, int categoryId)
-        {         
-            using (eazyCartContext = new EazyCartContext())
+        {
+            // // Set the new category's fields.
+            var newCategory = new Category()
             {
-                // // Set the new category's fields.
-                var newCategory = new Category()
-                {
-                    Name = categoryName,
-                    Id = categoryId
-                };
+                Name = categoryName,
+                Id = categoryId
+            };
 
-                var categoryToUpdate = eazyCartContext.Categories.Find(categoryId);
+            var categoryToUpdate = eazyCartContext.Categories.Find(categoryId);
 
-                // Set the updated category's fields.
-                eazyCartContext.Entry(categoryToUpdate).CurrentValues.SetValues(newCategory);
-                eazyCartContext.SaveChanges();
-            }
+            // Set the updated category's fields.
+            eazyCartContext.Entry(categoryToUpdate).CurrentValues.SetValues(newCategory);
+            eazyCartContext.SaveChanges();
         }
 
         /// <summary>
@@ -118,23 +113,20 @@ namespace Business
         /// <param name="id">Id of the supplier to delete.</param>
         public void Delete(int id)
         {
-            using (eazyCartContext = new EazyCartContext())
+            var category = eazyCartContext.Categories.Find(id);
+
+            var allProducts = eazyCartContext.Products.ToList();
+            foreach (var product in allProducts)
             {
-                var category = eazyCartContext.Categories.Find(id);
-
-                var allProducts = eazyCartContext.Products.ToList();
-                foreach (var product in allProducts)
+                if (product.CategoryId == category.Id)
                 {
-                    if (product.CategoryId == category.Id)
-                    {
-                        throw new ArgumentException("One or more products are related to this category.");
-                    }
+                    throw new ArgumentException("One or more products are related to this category.");
                 }
-
-                // Remove the chosen category and save the changes in the context.
-                eazyCartContext.Categories.Remove(category);
-                eazyCartContext.SaveChanges();
             }
+
+            // Remove the chosen category and save the changes in the context.
+            eazyCartContext.Categories.Remove(category);
+            eazyCartContext.SaveChanges();
         }
     }
 }

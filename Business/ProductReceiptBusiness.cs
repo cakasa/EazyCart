@@ -13,16 +13,23 @@ namespace Business
     {
         private EazyCartContext eazyCartContext;
 
+        public ProductReceiptBusiness()
+        {
+            this.eazyCartContext = new EazyCartContext();
+        }
+
+        public ProductReceiptBusiness(EazyCartContext eazyCartContext)
+        {
+            this.eazyCartContext = eazyCartContext;
+        }
+
         /// <summary>
         /// Get all product receipts.
         /// </summary>
         /// <returns>Return a list of all ProductReceipts.</returns>
         public List<ProductReceipt> GetAll()
         {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                return eazyCartContext.ProductsReceipts.ToList();
-            }
+            return eazyCartContext.ProductsReceipts.ToList();
         }
 
         /// <summary>
@@ -32,10 +39,7 @@ namespace Business
         /// <returns>Return a ProductReceipt object, corresponding to the given Id.</returns>
         public ProductReceipt Get(int id)
         {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                return eazyCartContext.ProductsReceipts.Find(id);
-            }
+            return eazyCartContext.ProductsReceipts.Find(id);
         }
 
         /// <summary>
@@ -44,14 +48,11 @@ namespace Business
         /// <returns>Return the Id of the most recently created ProductBusiness entry.</returns>
         public int GetHighestId()
         {
-            using (eazyCartContext = new EazyCartContext())
+            if (eazyCartContext.ProductsReceipts.Count() > 0)
             {
-                if (eazyCartContext.ProductsReceipts.Count() > 0)
-                {
-                    return eazyCartContext.ProductsReceipts.Max(x => x.Id);
-                }
-                else return 0;
+                return eazyCartContext.ProductsReceipts.Max(x => x.Id);
             }
+            else return 0;
         }
 
         /// <summary>
@@ -63,12 +64,11 @@ namespace Business
         /// receipt number.</returns>
         public List<ProductReceipt> GetAllByReceipt(int receiptNumber)
         {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                var productsReceipt = 
-                    eazyCartContext.ProductsReceipts.Where(x => x.ReceiptId == receiptNumber).ToList();
-                return productsReceipt;
-            }
+
+            var productsReceipt =
+                eazyCartContext.ProductsReceipts.Where(x => x.ReceiptId == receiptNumber).ToList();
+            return productsReceipt;
+
         }
 
         /// <summary>
@@ -81,46 +81,44 @@ namespace Business
         /// if it has been given.</param>
         public void Add(int receiptId, string productCode, string quantityString, string discountString)
         {
-            using (eazyCartContext = new EazyCartContext())
+
+            decimal quantity;
+            bool canQuantityBeParsed = decimal.TryParse(quantityString, out quantity);
+            int discountPercentage;
+            bool canDiscountBeParsed = int.TryParse(discountString, out discountPercentage);
+
+            if (!canQuantityBeParsed || !canDiscountBeParsed)
             {
-                decimal quantity;
-                bool canQuantityBeParsed = decimal.TryParse(quantityString, out quantity);
-                int discountPercentage;
-                bool canDiscountBeParsed = int.TryParse(discountString, out discountPercentage);
+                throw new ArgumentException("Wrong values for quantity/discount");
+            }
+            var product = eazyCartContext.Products.First(x => x.Code == productCode);
+            if (product.Quantity < quantity)
+            {
+                throw new ArgumentException("Insufficient quantity");
+            }
+            // When the Unit is 'Unit', the quantity must be a whole number.
+            if (Math.Ceiling(quantity) != quantity && product.UnitId == 1)
+            {
+                throw new ArgumentException("Quantity must be a whole number");
+            }
+            Receipt receipt = eazyCartContext.Receipts.Last();
+            ProductReceipt productReceipt = new ProductReceipt
+            {
+                Id = receiptId,
+                Quantity = quantity,
+                DiscountPercentage = discountPercentage,
+                ProductCode = productCode,
+                ReceiptId = receipt.Id
+            };
 
-                if (!canQuantityBeParsed || !canDiscountBeParsed)
-                {
-                    throw new ArgumentException("Wrong values for quantity/discount");
-                }
-                var product = eazyCartContext.Products.First(x => x.Code == productCode);
-                if (product.Quantity < quantity)
-                {
-                    throw new ArgumentException("Insufficient quantity");
-                }
-                // When the Unit is 'Unit', the quantity must be a whole number.
-                if(Math.Ceiling(quantity) != quantity && product.UnitId == 1)
-                {
-                    throw new ArgumentException("Quantity must be a whole number");
-                }
-                Receipt receipt = eazyCartContext.Receipts.Last();
-                ProductReceipt productReceipt = new ProductReceipt
-                {
-                    Id = receiptId,
-                    Quantity = quantity,
-                    DiscountPercentage = discountPercentage,
-                    ProductCode = productCode,
-                    ReceiptId = receipt.Id
-                };
-
-                eazyCartContext.ProductsReceipts.Add(productReceipt);
-                try
-                {
-                    eazyCartContext.SaveChanges();
-                }
-                catch
-                {
-                    throw new ArgumentException("This product is already added.");
-                }
+            eazyCartContext.ProductsReceipts.Add(productReceipt);
+            try
+            {
+                eazyCartContext.SaveChanges();
+            }
+            catch
+            {
+                throw new ArgumentException("This product is already added.");
             }
         }
 
@@ -131,16 +129,13 @@ namespace Business
         /// <param name="productReceipt">Give an object of type ProductReceipt to update.</param>
         public void Update(ProductReceipt productReceipt)
         {
-            using (eazyCartContext = new EazyCartContext())
+            // Find the needed product receipt.
+            var productReceiptToUpdate = eazyCartContext.ProductsReceipts.Find(productReceipt.Id);
+            if (productReceiptToUpdate != null)
             {
-                // Find the needed product receipt.
-                var productReceiptToUpdate = eazyCartContext.ProductsReceipts.Find(productReceipt.Id);
-                if (productReceiptToUpdate != null)
-                {
-                    // Set the updated product receipt's fields.
-                    eazyCartContext.Entry(productReceiptToUpdate).CurrentValues.SetValues(productReceipt);
-                    eazyCartContext.SaveChanges();
-                }
+                // Set the updated product receipt's fields.
+                eazyCartContext.Entry(productReceiptToUpdate).CurrentValues.SetValues(productReceipt);
+                eazyCartContext.SaveChanges();
             }
         }
 
@@ -154,47 +149,44 @@ namespace Business
         /// if it has been given.</param>
         public void Update(int productReceiptId, string productCode, string quantityString, string discountString)
         {
-            using (eazyCartContext = new EazyCartContext())
+            decimal quantity;
+            bool canQuantityBeParsed = decimal.TryParse(quantityString, out quantity);
+            int discountPercentage;
+            bool canDiscountBeParsed = int.TryParse(discountString, out discountPercentage);
+
+            // Validation for quanity and discount.
+            if (!canQuantityBeParsed || !canDiscountBeParsed)
             {
-                decimal quantity;
-                bool canQuantityBeParsed = decimal.TryParse(quantityString, out quantity);
-                int discountPercentage;
-                bool canDiscountBeParsed = int.TryParse(discountString, out discountPercentage);
-
-                // Validation for quanity and discount.
-                if (!canQuantityBeParsed || !canDiscountBeParsed)
-                {
-                    throw new ArgumentException("Wrong values for quantity/discount");
-                }
-                var product = eazyCartContext.Products.First(x => x.Code == productCode);
-
-                if (quantity > product.Quantity)
-                {
-                    throw new ArgumentException("Insufficient quantity");
-                }
-
-                if (Math.Ceiling(quantity) != quantity && product.UnitId == 1)
-                {
-                    throw new ArgumentException("Quantity must be a whole number");
-                }
-                Receipt receipt = eazyCartContext.Receipts.Last();
-
-                // // Update the supplier's fields.
-                ProductReceipt newProductReceipt = new ProductReceipt
-                {
-                    Id = productReceiptId,
-                    Quantity = quantity,
-                    DiscountPercentage = discountPercentage,
-                    ProductCode = productCode,
-                    ReceiptId = receipt.Id
-                };
-
-                var productReceiptToUpdate = eazyCartContext.ProductsReceipts.First(x => x.Id == productReceiptId);
-
-                // Set the updated supplier's fields.
-                eazyCartContext.Entry(productReceiptToUpdate).CurrentValues.SetValues(newProductReceipt);
-                eazyCartContext.SaveChanges();
+                throw new ArgumentException("Wrong values for quantity/discount");
             }
+            var product = eazyCartContext.Products.First(x => x.Code == productCode);
+
+            if (quantity > product.Quantity)
+            {
+                throw new ArgumentException("Insufficient quantity");
+            }
+
+            if (Math.Ceiling(quantity) != quantity && product.UnitId == 1)
+            {
+                throw new ArgumentException("Quantity must be a whole number");
+            }
+            Receipt receipt = eazyCartContext.Receipts.Last();
+
+            // // Update the supplier's fields.
+            ProductReceipt newProductReceipt = new ProductReceipt
+            {
+                Id = productReceiptId,
+                Quantity = quantity,
+                DiscountPercentage = discountPercentage,
+                ProductCode = productCode,
+                ReceiptId = receipt.Id
+            };
+
+            var productReceiptToUpdate = eazyCartContext.ProductsReceipts.First(x => x.Id == productReceiptId);
+
+            // Set the updated supplier's fields.
+            eazyCartContext.Entry(productReceiptToUpdate).CurrentValues.SetValues(newProductReceipt);
+            eazyCartContext.SaveChanges();
         }
 
         /// <summary>
@@ -203,15 +195,12 @@ namespace Business
         /// <param name="id">Give the id of the product to delete.</param>
         public void Delete(int id)
         {
-            using (eazyCartContext = new EazyCartContext())
+            var productReceipt = eazyCartContext.ProductsReceipts.Find(id);
+            if (productReceipt != null)
             {
-                var productReceipt = eazyCartContext.ProductsReceipts.Find(id);
-                if (productReceipt != null)
-                {
-                    // Remove the chosen product receipt and save the changes in the context.
-                    eazyCartContext.ProductsReceipts.Remove(productReceipt);
-                    eazyCartContext.SaveChanges();
-                }
+                // Remove the chosen product receipt and save the changes in the context.
+                eazyCartContext.ProductsReceipts.Remove(productReceipt);
+                eazyCartContext.SaveChanges();
             }
         }
     }

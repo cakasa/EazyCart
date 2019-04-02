@@ -15,6 +15,16 @@ namespace Business
     {
         private EazyCartContext eazyCartContext;
 
+        public UnitBusiness()
+        {
+            this.eazyCartContext = new EazyCartContext();
+        }
+
+        public UnitBusiness(EazyCartContext eazyCartContext)
+        {
+            this.eazyCartContext = eazyCartContext;
+        }
+
         /// <summary>
         /// Return a certain unit by a given ID.
         /// </summary>
@@ -22,10 +32,7 @@ namespace Business
         /// <returns>Unit, corresponding to the ID.</returns>
         public Unit Get(int id)
         {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                return eazyCartContext.Units.Find(id);
-            }
+            return eazyCartContext.Units.Find(id);
         }
 
         /// <summary>
@@ -34,10 +41,7 @@ namespace Business
         /// <returns>Number of units in the databases.</returns>
         public int GetNumberOfUnits()
         {
-            using (eazyCartContext = new EazyCartContext())
-            {
-                return eazyCartContext.Units.Count();
-            }
+            return eazyCartContext.Units.Count();
         }
 
         /// <summary>
@@ -48,18 +52,15 @@ namespace Business
         /// <param name="name">The code/abbreviation of the unit.</param>
         public void Add(int unitId, string name, string code)
         {
-            using (eazyCartContext = new EazyCartContext())
+            var unit = new Unit
             {
-                var unit = new Unit
-                {
-                    Id = unitId,
-                    Name = name,
-                    Code = code
-                };
+                Id = unitId,
+                Name = name,
+                Code = code
+            };
 
-                eazyCartContext.Units.Add(unit);
-                eazyCartContext.SaveChanges();
-            }
+            eazyCartContext.Units.Add(unit);
+            eazyCartContext.SaveChanges();
         }
     }
 }
