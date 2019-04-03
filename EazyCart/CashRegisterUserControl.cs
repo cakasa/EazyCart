@@ -113,7 +113,7 @@ namespace EazyCart
                 row.Cells[6].Value = totalForProduct;
                 grandTotal += totalForProduct;
             }
-            grandTotalLabel.Text = string.Format("$ {0:f2}", grandTotal);
+            grandTotalCashLabel.Text = string.Format("$ {0:f2}", grandTotal);
         }
 
         /// <summary>

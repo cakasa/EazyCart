@@ -111,9 +111,9 @@
             this.countriesGroupBox.Controls.Add(this.addCountryButton);
             this.countriesGroupBox.Controls.Add(this.countryNameTextBox);
             this.countriesGroupBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.countriesGroupBox.Location = new System.Drawing.Point(3, 3);
+            this.countriesGroupBox.Location = new System.Drawing.Point(3, 13);
             this.countriesGroupBox.Name = "countriesGroupBox";
-            this.countriesGroupBox.Size = new System.Drawing.Size(321, 834);
+            this.countriesGroupBox.Size = new System.Drawing.Size(321, 824);
             this.countriesGroupBox.TabIndex = 1;
             this.countriesGroupBox.TabStop = false;
             this.countriesGroupBox.Text = "Countries";
@@ -146,7 +146,7 @@
             this.deleteCountryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteCountryButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
             this.deleteCountryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.deleteCountryButton.Location = new System.Drawing.Point(61, 786);
+            this.deleteCountryButton.Location = new System.Drawing.Point(61, 776);
             this.deleteCountryButton.Name = "deleteCountryButton";
             this.deleteCountryButton.Size = new System.Drawing.Size(195, 34);
             this.deleteCountryButton.TabIndex = 9;
@@ -239,7 +239,7 @@
             this.countriesDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.countriesDataGridView.RowTemplate.Height = 30;
             this.countriesDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.countriesDataGridView.Size = new System.Drawing.Size(312, 525);
+            this.countriesDataGridView.Size = new System.Drawing.Size(312, 515);
             this.countriesDataGridView.TabIndex = 8;
             this.countriesDataGridView.TabStop = false;
             // 
@@ -297,9 +297,9 @@
             this.citiesGroupBox.Controls.Add(this.addCityButton);
             this.citiesGroupBox.Controls.Add(this.cityNameTextBox);
             this.citiesGroupBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.citiesGroupBox.Location = new System.Drawing.Point(330, 3);
+            this.citiesGroupBox.Location = new System.Drawing.Point(330, 13);
             this.citiesGroupBox.Name = "citiesGroupBox";
-            this.citiesGroupBox.Size = new System.Drawing.Size(391, 834);
+            this.citiesGroupBox.Size = new System.Drawing.Size(391, 824);
             this.citiesGroupBox.TabIndex = 10;
             this.citiesGroupBox.TabStop = false;
             this.citiesGroupBox.Text = "Cities";
@@ -345,7 +345,7 @@
             this.deleteCityButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteCityButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
             this.deleteCityButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.deleteCityButton.Location = new System.Drawing.Point(97, 786);
+            this.deleteCityButton.Location = new System.Drawing.Point(97, 776);
             this.deleteCityButton.Name = "deleteCityButton";
             this.deleteCityButton.Size = new System.Drawing.Size(195, 34);
             this.deleteCityButton.TabIndex = 19;
@@ -439,7 +439,7 @@
             this.citiesDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.citiesDataGridView.RowTemplate.Height = 30;
             this.citiesDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.citiesDataGridView.Size = new System.Drawing.Size(382, 525);
+            this.citiesDataGridView.Size = new System.Drawing.Size(382, 515);
             this.citiesDataGridView.TabIndex = 18;
             this.citiesDataGridView.TabStop = false;
             // 
@@ -503,9 +503,9 @@
             this.categoriesGroupBox.Controls.Add(this.addCategoryButton);
             this.categoriesGroupBox.Controls.Add(this.categoryNameTextBox);
             this.categoriesGroupBox.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.categoriesGroupBox.Location = new System.Drawing.Point(1278, 3);
+            this.categoriesGroupBox.Location = new System.Drawing.Point(1278, 13);
             this.categoriesGroupBox.Name = "categoriesGroupBox";
-            this.categoriesGroupBox.Size = new System.Drawing.Size(319, 837);
+            this.categoriesGroupBox.Size = new System.Drawing.Size(319, 827);
             this.categoriesGroupBox.TabIndex = 31;
             this.categoriesGroupBox.TabStop = false;
             this.categoriesGroupBox.Text = "Categories";
@@ -538,7 +538,7 @@
             this.deleteCategoryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteCategoryButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
             this.deleteCategoryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.deleteCategoryButton.Location = new System.Drawing.Point(61, 786);
+            this.deleteCategoryButton.Location = new System.Drawing.Point(61, 776);
             this.deleteCategoryButton.Name = "deleteCategoryButton";
             this.deleteCategoryButton.Size = new System.Drawing.Size(195, 34);
             this.deleteCategoryButton.TabIndex = 37;
@@ -631,7 +631,7 @@
             this.categoriesDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.categoriesDataGridView.RowTemplate.Height = 30;
             this.categoriesDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.categoriesDataGridView.Size = new System.Drawing.Size(301, 525);
+            this.categoriesDataGridView.Size = new System.Drawing.Size(301, 515);
             this.categoriesDataGridView.TabIndex = 36;
             this.categoriesDataGridView.TabStop = false;
             // 
@@ -759,7 +759,7 @@
             this.suppliersDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.suppliersDataGridView.RowTemplate.Height = 30;
             this.suppliersDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.suppliersDataGridView.Size = new System.Drawing.Size(535, 525);
+            this.suppliersDataGridView.Size = new System.Drawing.Size(535, 515);
             this.suppliersDataGridView.TabIndex = 29;
             this.suppliersDataGridView.TabStop = false;
             // 
@@ -846,7 +846,7 @@
             this.deleteSupplierButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteSupplierButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
             this.deleteSupplierButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.deleteSupplierButton.Location = new System.Drawing.Point(184, 786);
+            this.deleteSupplierButton.Location = new System.Drawing.Point(184, 776);
             this.deleteSupplierButton.Name = "deleteSupplierButton";
             this.deleteSupplierButton.Size = new System.Drawing.Size(195, 34);
             this.deleteSupplierButton.TabIndex = 30;
@@ -901,9 +901,9 @@
             this.suppliersGroupBox.Controls.Add(this.addSupplierButton);
             this.suppliersGroupBox.Controls.Add(this.supplierNameTextBox);
             this.suppliersGroupBox.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.suppliersGroupBox.Location = new System.Drawing.Point(727, 3);
+            this.suppliersGroupBox.Location = new System.Drawing.Point(727, 13);
             this.suppliersGroupBox.Name = "suppliersGroupBox";
-            this.suppliersGroupBox.Size = new System.Drawing.Size(545, 837);
+            this.suppliersGroupBox.Size = new System.Drawing.Size(545, 827);
             this.suppliersGroupBox.TabIndex = 20;
             this.suppliersGroupBox.TabStop = false;
             this.suppliersGroupBox.Text = "Suppliers";

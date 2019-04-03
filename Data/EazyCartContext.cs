@@ -154,7 +154,7 @@ namespace Data.Models
                 entity.Property(e => e.Quantity)
                     .IsRequired()
                     .HasColumnName("quantity")
-                    .HasColumnType("decimal(6,3)");
+                    .HasColumnType("decimal(12,3)");
 
                 entity.Property(e => e.UnitId)
                     .HasColumnName("unitId")

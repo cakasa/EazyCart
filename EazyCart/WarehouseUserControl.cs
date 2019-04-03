@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Data.Models;
 using Business;
+using System.Text;
 
 namespace EazyCart
 {
@@ -184,9 +185,9 @@ namespace EazyCart
             this.productNameTextBox.ForeColor = activeTextColor;
             this.inventoryQuantityTextBox.Text = product.Quantity.ToString();
             this.inventoryQuantityTextBox.ForeColor = activeTextColor;
-            this.deliveryPriceTextBox.Text = product.DeliveryPrice.ToString();
+            this.deliveryPriceTextBox.Text = string.Format($"{product.DeliveryPrice:f2}");
             this.deliveryPriceTextBox.ForeColor = activeTextColor;
-            this.sellingPriceTextBox.Text = product.SellingPrice.ToString();
+            this.sellingPriceTextBox.Text = string.Format($"{product.SellingPrice:f2}");
             this.sellingPriceTextBox.ForeColor = activeTextColor;
             var category = this.categoryBusiness.Get(product.CategoryId);
             this.categoryComboBox.SelectedItem = category.Name;
@@ -268,6 +269,7 @@ namespace EazyCart
         private void AddProductButton_Click(object sender, EventArgs e)
         {
             var productCode = this.productCodeMaskedTextBox.Text;
+            productCode = RefactorCode(productCode);
             var category = (string)this.categoryComboBox.SelectedItem;
             var productName = this.productNameTextBox.Text;
             var quantityString = this.inventoryQuantityTextBox.Text;
@@ -346,6 +348,7 @@ namespace EazyCart
         private void SaveProductButton_Click(object sender, EventArgs e)
         {
             var productCode = this.productCodeMaskedTextBox.Text;
+            productCode = RefactorCode(productCode);
             var category = (string)this.categoryComboBox.SelectedItem;
             var productName = this.productNameTextBox.Text;
             var quantityString = this.inventoryQuantityTextBox.Text;
@@ -520,7 +523,8 @@ namespace EazyCart
         /// <param name="e"></param>
         private void DeliveryPriceTextBox_TextChanged(object sender, EventArgs e)
         {
-            this.CalculateNetProfit();
+            decimal netProfit = this.CalculateNetProfit();
+            this.netProfitAmountLabel.Text = string.Format($"${netProfit:f2}");
         }
 
         /// <summary>
@@ -530,7 +534,8 @@ namespace EazyCart
         /// <param name="e"></param>
         private void SellingPriceTextBox_TextChanged(object sender, EventArgs e)
         {
-            this.CalculateNetProfit();
+            decimal netProfit = this.CalculateNetProfit();
+            this.netProfitAmountLabel.Text = string.Format($"${netProfit:f2}");
         }
 
         /// <summary>
@@ -560,6 +565,23 @@ namespace EazyCart
                 var netProfit = sellingPrice - deliveryPrice;
                 return netProfit;
             }
+        }
+
+        public string RefactorCode(string productCode)
+        {
+            StringBuilder stringBuilder = new StringBuilder(productCode);
+            for (int i = 0; i < stringBuilder.Length; i++)
+            {
+                if (stringBuilder[i] == ' ')
+                {
+                    stringBuilder[i] = '0';
+                }
+            }
+            for (int i = stringBuilder.Length; i < 6; i++)
+            {
+                stringBuilder.Append('0');
+            }
+            return stringBuilder.ToString();
         }
 
         /// <summary>

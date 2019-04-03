@@ -65,12 +65,16 @@ namespace Business
         /// if it has been given.</param>
         public void Add(int receiptId, string productCode, string quantityString, string discountString)
         {
-
             decimal quantity;
             bool canQuantityBeParsed = decimal.TryParse(quantityString, out quantity);
             int discountPercentage;
             bool canDiscountBeParsed = int.TryParse(discountString, out discountPercentage);
 
+            // Validation for quanity.
+            if (quantity <= 0)
+            {
+                throw new ArgumentException("Quantity must be positive.");
+            }
             if (!canQuantityBeParsed || !canDiscountBeParsed)
             {
                 throw new ArgumentException("Wrong values for quantity/discount");
@@ -121,6 +125,11 @@ namespace Business
             int discountPercentage;
             bool canDiscountBeParsed = int.TryParse(discountString, out discountPercentage);
 
+            // Validation for quanity.
+            if (quantity <= 0)
+            {
+                throw new ArgumentException("Quantity must be positive.");
+            }
             // Validation for quanity and discount.
             if (!canQuantityBeParsed || !canDiscountBeParsed)
             {

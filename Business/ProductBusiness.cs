@@ -206,6 +206,18 @@ namespace Business
         public void Add(string productCode, string categoryName, string productName, decimal quantity, string supplierName,
             decimal deliveryPrice, decimal sellingPrice, string unitName)
         {
+            var unit = eazyCartContext.Units.First(x => x.Name == unitName);
+
+            // Validation for quanity.
+            if (quantity != Math.Floor(quantity) && unit.Id == 1)
+            {
+                throw new ArgumentException("Quantity must be a whole number.");
+            }
+            if (quantity <= 0)
+            {
+                throw new ArgumentException("Quantity must be positive.");
+            }
+
             Category category;
             Supplier supplier;
             try
@@ -217,8 +229,6 @@ namespace Business
             {
                 throw new ArgumentException("Invalid category/supplier information.");
             }
-
-            var unit = eazyCartContext.Units.First(x => x.Name == unitName);
 
             var product = new Product
             {
@@ -259,6 +269,18 @@ namespace Business
         public void Update(string productCode, string categoryName, string productName, decimal quantity,
             string supplierName, decimal deliveryPrice, decimal sellingPrice, string unitName)
         {
+            var unit = eazyCartContext.Units.First(x => x.Name == unitName);
+
+            // Validation for quanity.
+            if (quantity != Math.Floor(quantity) && unit.Id == 1)
+            {
+                throw new ArgumentException("Quantity must be a whole number.");
+            }
+            if (quantity <= 0)
+            {
+                throw new ArgumentException("Quantity must be positive.");
+            }
+
             Category category;
             Supplier supplier;
             try
@@ -269,8 +291,7 @@ namespace Business
             catch
             {
                 throw new ArgumentException("Invalid information about category/supplier.");
-            }
-            var unit = eazyCartContext.Units.First(x => x.Name == unitName);
+            }            
 
             // Update the supplier's fields.
             var newProduct = new Product
