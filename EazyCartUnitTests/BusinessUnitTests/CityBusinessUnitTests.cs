@@ -449,7 +449,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void Delete_ThrowsException_WhenSuppliersAreRelated()
+        public void Delete_ThrowsException_WhenSuppliersAreRelatedToTheCity()
         {
             // Arrange
             var cities = new List<City>

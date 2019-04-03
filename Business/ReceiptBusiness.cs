@@ -54,7 +54,10 @@ namespace Business
         {
             int currentYear = currentDateTime.Year;
             int[] numberOfOrders = new int[12];
-            var allOrders = eazyCartContext.Receipts.Where(x => x.TimeOfPurchase.Year == currentDateTime.Year).ToList();
+            var allOrders = eazyCartContext
+                                .Receipts
+                                .Where(x => x.TimeOfPurchase.Year == currentDateTime.Year)
+                                .ToList();
 
             foreach (var order in allOrders)
             {
@@ -75,7 +78,11 @@ namespace Business
         {
             int numberOfMonthDays = DateTime.DaysInMonth(currentDateTime.Year, currentDateTime.Month);
             int[] numberOfOrders = new int[numberOfMonthDays];
-            var allOrders = eazyCartContext.Receipts.Where(x => x.TimeOfPurchase.Month == currentDateTime.Month && x.TimeOfPurchase.Year == currentDateTime.Year).ToList();
+            var allOrders = eazyCartContext
+                                .Receipts
+                                .Where(x => x.TimeOfPurchase.Month == currentDateTime.Month && 
+                                    x.TimeOfPurchase.Year == currentDateTime.Year)
+                                .ToList();
 
             foreach (var order in allOrders)
             {
@@ -94,7 +101,11 @@ namespace Business
         /// <returns>Return an array containing the order for each hour.</returns>
         public int[] GetDailyOrders(DateTime currentDateTime)
         {
-            List<Receipt> allOrders = eazyCartContext.Receipts.Where(x => x.TimeOfPurchase.Date == currentDateTime.Date).ToList();
+            List<Receipt> allOrders = eazyCartContext
+                                        .Receipts
+                                        .Where(x => x.TimeOfPurchase.Date == currentDateTime.Date)
+                                        .ToList();
+
             int[] numberOfOrders = new int[8];
             foreach (var order in allOrders)
             {
@@ -145,7 +156,10 @@ namespace Business
         {
             int currentYear = currentDateTime.Year;
             int[] numberOfOrdersWithDiscount = new int[12];
-            var allOrders = eazyCartContext.Receipts.Where(x => x.TimeOfPurchase.Year == currentDateTime.Year).ToList();
+            var allOrders = eazyCartContext
+                                .Receipts
+                                .Where(x => x.TimeOfPurchase.Year == currentDateTime.Year)
+                                .ToList();
 
             foreach (var order in allOrders)
             {
@@ -174,7 +188,11 @@ namespace Business
             int numberOfMonthDays = DateTime.DaysInMonth(currentDateTime.Year, currentDateTime.Month);
 
             int[] numberOfOrdersWithDiscount = new int[numberOfMonthDays];
-            var allOrders = eazyCartContext.Receipts.Where(x => x.TimeOfPurchase.Year == currentDateTime.Year && x.TimeOfPurchase.Month == currentDateTime.Month).ToList();
+            var allOrders = eazyCartContext
+                                .Receipts
+                                .Where(x => x.TimeOfPurchase.Year == currentDateTime.Year && 
+                                    x.TimeOfPurchase.Month == currentDateTime.Month)
+                                .ToList();
 
             foreach (var order in allOrders)
             {
@@ -201,7 +219,11 @@ namespace Business
         /// <returns>Return an array containing the order for each hour.</returns>
         public int[] GetDailyDiscountOrders(DateTime currentDateTime)
         {
-            List<Receipt> allOrders = eazyCartContext.Receipts.Where(x => x.TimeOfPurchase.Date == currentDateTime.Date).ToList();
+            List<Receipt> allOrders = eazyCartContext
+                                        .Receipts
+                                        .Where(x => x.TimeOfPurchase.Date == currentDateTime.Date)
+                                        .ToList();
+
             int[] numberOfOrders = new int[8];
             foreach (var order in allOrders)
             {
@@ -260,26 +282,45 @@ namespace Business
         public decimal[] GetDailyAverageAmountOfDifferentProducts(DateTime currentDateTime)
         {
             decimal[] averageNumberOfDifferentProductsInOrder = new decimal[8];
-            var allOrders = eazyCartContext.Receipts.ToList();
-            List<Receipt> allOrdersForTheDay = eazyCartContext.Receipts.Where(x => x.TimeOfPurchase.Date == currentDateTime.Date).ToList();
+            List<Receipt> allOrdersForTheDay = eazyCartContext
+                                                    .Receipts
+                                                    .Where(x => x.TimeOfPurchase.Date == currentDateTime.Date)
+                                                    .ToList();
+
+            List<Receipt>[] receiptsByHour = new List<Receipt>[8];
+            for(int i = 0; i < 8; i++)
+            {
+                receiptsByHour[i] = new List<Receipt>();
+                foreach(var order in allOrdersForTheDay)
+                {
+                    int hourOfPurchase = order.TimeOfPurchase.Hour;
+                    if(hourOfPurchase == i*3 || hourOfPurchase == i*3 + 1 || hourOfPurchase == i*3+2)
+                    {
+                        receiptsByHour[i].Add(order);
+                    }
+                }
+            }
 
             for (int i = 0; i < 8; i++)
             {
-                if (allOrdersForTheDay.Count() > 0)
+                if (receiptsByHour[i].Count() > 0)
                 {
-                    decimal totalCountOfDifferentProducts = 0;
-                    foreach (var order in allOrdersForTheDay)
+                    decimal totalProductsByHour = 0;
+                    foreach(var receipt in receiptsByHour[i])
                     {
-                        int hourOfPurchase = order.TimeOfPurchase.Hour;
-                        if (hourOfPurchase == i * 3 || hourOfPurchase == i * 3 + 1 || hourOfPurchase == i * 3 + 2)
-                        {
-                            totalCountOfDifferentProducts += eazyCartContext.ProductsReceipts.Where(x => x.ReceiptId == order.Id).Count();
-                        }
+                        int numberOfProductReceipts = eazyCartContext
+                                                            .ProductsReceipts
+                                                            .Where(x => x.ReceiptId == receipt.Id)
+                                                            .Count();
+
+                        totalProductsByHour += numberOfProductReceipts;
                     }
-                    averageNumberOfDifferentProductsInOrder[i] = totalCountOfDifferentProducts / allOrdersForTheDay.Count();
+
+                    averageNumberOfDifferentProductsInOrder[i] = totalProductsByHour / receiptsByHour[i].Count;
                 }
                 else averageNumberOfDifferentProductsInOrder[i] = 0;
             }
+
             return averageNumberOfDifferentProductsInOrder;
         }
 
@@ -299,7 +340,12 @@ namespace Business
 
             for (int i = 0; i < averageNumberOfDifferentProductsInOrder.Count(); i++)
             {
-                List<Receipt> allOrdersForTheDay = eazyCartContext.Receipts.Where(x => x.TimeOfPurchase.Year == currentDateTime.Year && x.TimeOfPurchase.Month == currentDateTime.Month && x.TimeOfPurchase.Day == i).ToList();
+                List<Receipt> allOrdersForTheDay = eazyCartContext
+                                                        .Receipts
+                                                        .Where(x => x.TimeOfPurchase.Year == currentDateTime.Year && 
+                                                            x.TimeOfPurchase.Month == currentDateTime.Month && 
+                                                            x.TimeOfPurchase.Day == i + 1)
+                                                        .ToList();
                 if (allOrdersForTheDay.Count() > 0)
                 {
                     decimal totalCountOfDifferentProducts = 0;
@@ -331,7 +377,12 @@ namespace Business
 
             for (int i = 0; i < 12; i++)
             {
-                List<Receipt> allOrdersForTheMonth = eazyCartContext.Receipts.Where(x => x.TimeOfPurchase.Year == currentDateTime.Year && x.TimeOfPurchase.Month == i).ToList();
+                List<Receipt> allOrdersForTheMonth = eazyCartContext
+                                                        .Receipts
+                                                        .Where(x => x.TimeOfPurchase.Year == currentDateTime.Year 
+                                                            && x.TimeOfPurchase.Month == i + 1)
+                                                        .ToList();
+
                 if (allOrdersForTheMonth.Count() > 0)
                 {
                     decimal totalCountOfDifferentProducts = 0;
