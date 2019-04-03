@@ -36,7 +36,7 @@ namespace Business
         /// <returns>Supplier, corresponding to the given Id.</returns>
         public Supplier Get(int id)
         {
-            return eazyCartContext.Suppliers.Find(id);
+            return eazyCartContext.Suppliers.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace Business
         /// <param name="id">The ID of the supplier.</param>
         public void Delete(int id)
         {
-            var supplier = eazyCartContext.Suppliers.Find(id);
+            var supplier = eazyCartContext.Suppliers.FirstOrDefault(x => x.Id == id);
 
             var productsFromSupplier =
                 eazyCartContext.Products.Where(x => x.SupplierId == supplier.Id).ToList();

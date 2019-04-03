@@ -103,9 +103,9 @@ namespace Business
 
             foreach (var product in allProducts)
             {
-                var supplier = eazyCartContext.Suppliers.Find(product.SupplierId);
-                var city = eazyCartContext.Cities.Find(supplier.CityId);
-                var country = eazyCartContext.Countries.Find(city.CountryId);
+                var supplier = eazyCartContext.Suppliers.FirstOrDefault(x => x.Id == product.SupplierId);
+                var city = eazyCartContext.Cities.FirstOrDefault(x => x.Id == supplier.CityId);
+                var country = eazyCartContext.Countries.FirstOrDefault(x => x.Id == city.CountryId);
                 productCountByCountry[country.Name]++;
             }
 
@@ -335,22 +335,6 @@ namespace Business
         }
 
         /// <summary>
-        /// Update certain product's fields.
-        /// </summary>
-        /// <param name="product">Give the object of type Product to add.</param>
-        public void Update(Product product)
-        {
-            // Find the needed product.
-            var productToUpdate = eazyCartContext.Products.Find(product.Code);
-            if (productToUpdate != null)
-            {
-                // Set the updated product's fields.
-                eazyCartContext.Entry(productToUpdate).CurrentValues.SetValues(product);
-                eazyCartContext.SaveChanges();
-            }
-        }
-
-        /// <summary>
         /// Update a certain product by providing information about
         /// each of product's fields.
         /// </summary>
@@ -443,7 +427,7 @@ namespace Business
             if (product != null)
             {
 
-                // Remove the chosen country and save the changes in the context.
+                // Remove the chosen product and save the changes in the context.
                 eazyCartContext.Products.Remove(product);
                 eazyCartContext.SaveChanges();
             }
