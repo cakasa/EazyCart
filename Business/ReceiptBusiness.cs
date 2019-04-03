@@ -399,6 +399,97 @@ namespace Business
         }
 
         /// <summary>
+        /// Get information about sold products for a whole day.
+        /// </summary>
+        /// <param name="currentDateTime">Give the current datetime we want to
+        /// have the revenue.</param>
+        /// <returns>Return an array containing the revenue for each hour.</returns>
+        public decimal[] GetDailyRevenue(DateTime currentDateTime)
+        {
+            List<Receipt> receipts = eazyCartContext.Receipts.Where(x => x.TimeOfPurchase.Date == currentDateTime.Date).ToList();
+            decimal[] revenueByHour = new decimal[8];
+            foreach (var receipt in receipts)
+            {
+                int hourOfPurchase = receipt.TimeOfPurchase.Hour;
+                if (hourOfPurchase == 0 || hourOfPurchase == 1 || hourOfPurchase == 2)
+                {
+                    revenueByHour[0] += receipt.GrandTotal;
+                }
+                else if (hourOfPurchase == 3 || hourOfPurchase == 4 || hourOfPurchase == 5)
+                {
+                    revenueByHour[1] += receipt.GrandTotal;
+                }
+                else if (hourOfPurchase == 6 || hourOfPurchase == 7 || hourOfPurchase == 8)
+                {
+                    revenueByHour[2] += receipt.GrandTotal;
+                }
+                else if (hourOfPurchase == 9 || hourOfPurchase == 10 || hourOfPurchase == 11)
+                {
+                    revenueByHour[3] += receipt.GrandTotal;
+                }
+                else if (hourOfPurchase == 12 || hourOfPurchase == 13 || hourOfPurchase == 14)
+                {
+                    revenueByHour[4] += receipt.GrandTotal;
+                }
+                else if (hourOfPurchase == 15 || hourOfPurchase == 16 || hourOfPurchase == 17)
+                {
+                    revenueByHour[5] += receipt.GrandTotal;
+                }
+                else if (hourOfPurchase == 18 || hourOfPurchase == 19 || hourOfPurchase == 20)
+                {
+                    revenueByHour[6] += receipt.GrandTotal;
+                }
+                else
+                {
+                    revenueByHour[7] += receipt.GrandTotal;
+                }
+            }
+            return revenueByHour;
+        }
+
+        /// <summary>
+        /// Get information about sold products for a whole year.
+        /// </summary>
+        /// <param name="currentDateTime">Give the current datetime we want to
+        /// have the revenue.</param>
+        /// <returns>Return an array containing the revenue for each month.</returns>
+        public decimal[] GetYearlyRevenue(DateTime currentDateTime)
+        {
+            List<Receipt> receipts = eazyCartContext.Receipts.Where(x => x.TimeOfPurchase.Year == currentDateTime.Year).ToList();
+            decimal[] revenueByMonth = new decimal[12];
+            foreach (var receipt in receipts)
+            {
+                int month = receipt.TimeOfPurchase.Month;
+                revenueByMonth[month - 1] += receipt.GrandTotal;
+            }
+
+            return revenueByMonth;
+        }
+
+        /// <summary>
+        /// Get information about sold products for a whole month.
+        /// </summary>
+        /// <param name="currentDateTime">Give the current datetime we want to
+        /// have the revenue.</param>
+        /// <returns>Return an array containing the revenue for each day.</returns>
+        public decimal[] GetMonthlyRevenue(DateTime currentDateTime)
+        {
+            var receipts = eazyCartContext
+                                        .Receipts
+                                        .Where(x => x.TimeOfPurchase.Month == currentDateTime.Month &&
+                                            x.TimeOfPurchase.Year == currentDateTime.Year)
+                                        .ToList();
+
+            decimal[] revenueByDay = new decimal[DateTime.DaysInMonth(currentDateTime.Year, currentDateTime.Month)];
+            foreach (var receipt in receipts)
+            {
+                int day = receipt.TimeOfPurchase.Day;
+                revenueByDay[day - 1] += receipt.GrandTotal;
+            }
+            return revenueByDay;
+        }
+
+        /// <summary>
         /// Add a new receipt using an id.
         /// </summary>
         /// <param name="id">Give the if of the new receipt to add.</param>

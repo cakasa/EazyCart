@@ -130,7 +130,7 @@ namespace Business
             }
             catch
             {
-                throw new ArgumentException("No such country exists");
+                throw new ArgumentException("No such country exists.");
             }
 
             // Update the city's fields.

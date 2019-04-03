@@ -1075,11 +1075,11 @@ namespace EazyCartUnitTests.BusinessUnitTests
             var receiptBusiness = new ReceiptBusiness(mockContext.Object);
 
             // Act
-            decimal[] numberOfYearlyAverageNumberOfDifferentProducts = 
+            decimal[] numberOfYearlyAverageNumberOfDifferentProducts =
                 receiptBusiness.GetYearlyAverageAmountOfDifferentProducts(testDateTime);
 
             // Assert
-            decimal[] expectedValues = new decimal[] { 0, 3, 1, 5, 0, 0, 5M/3M , 0, 0, 2, 0, 2.75M};
+            decimal[] expectedValues = new decimal[] { 0, 3, 1, 5, 0, 0, 5M / 3M, 0, 0, 2, 0, 2.75M };
             bool areValuesCorrect = true;
             for (int i = 0; i < numberOfYearlyAverageNumberOfDifferentProducts.Length; i++)
             {
@@ -1326,7 +1326,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
             decimal[] numberOfMonthlyAverageNumberOfDifferentProducts = receiptBusiness.GetMonthlyAverageAmountOfDifferentProducts(testDateTime);
 
             // Assert
-            decimal[] expectedValues = new decimal[] {7M/3M, 4, 1.75M, 2, 2, 4, 1.5M, 0, 0, 0, 2, 0, 1, 0, 8M/3M, 0, 2, 0, 0, 2, 2, 2, 1, 0, 0, 1, 0, 2, 0,2 };
+            decimal[] expectedValues = new decimal[] { 7M / 3M, 4, 1.75M, 2, 2, 4, 1.5M, 0, 0, 0, 2, 0, 1, 0, 8M / 3M, 0, 2, 0, 0, 2, 2, 2, 1, 0, 0, 1, 0, 2, 0, 2 };
             bool areValuesCorrect = true;
             for (int i = 0; i < numberOfMonthlyAverageNumberOfDifferentProducts.Length; i++)
             {
@@ -1452,7 +1452,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
                 new ProductReceipt() {Id = 23, ProductCode = "000001", DiscountPercentage = 1, Quantity = 1,
                     ReceiptId = 9},
                 new ProductReceipt() {Id = 24, ProductCode = "000001", DiscountPercentage = 1, Quantity = 1,
-                    ReceiptId = 10},            
+                    ReceiptId = 10},
                 new ProductReceipt() {Id = 25, ProductCode = "000001", DiscountPercentage = 0, Quantity = 1,
                     ReceiptId = 10},
                 new ProductReceipt() {Id = 26, ProductCode = "000001", DiscountPercentage = 0, Quantity = 1,
@@ -1547,11 +1547,332 @@ namespace EazyCartUnitTests.BusinessUnitTests
             decimal[] numberOfDailyAverageNumberOfDifferentProducts = receiptBusiness.GetDailyAverageAmountOfDifferentProducts(testDateTime);
 
             // Assert
-            decimal[] expectedValues = new decimal[] { 2.25M, 3, 8M/3M, 3, 2.25M, 1.75M, 5M/3M, 0};
+            decimal[] expectedValues = new decimal[] { 2.25M, 3, 8M / 3M, 3, 2.25M, 1.75M, 5M / 3M, 0 };
             bool areValuesCorrect = true;
             for (int i = 0; i < numberOfDailyAverageNumberOfDifferentProducts.Length; i++)
             {
                 if (expectedValues[i] != numberOfDailyAverageNumberOfDifferentProducts[i])
+                {
+                    areValuesCorrect = false;
+                    break;
+                }
+            }
+            Assert.IsTrue(areValuesCorrect, "Values are not correct");
+        }
+
+        [TestMethod]
+        public void GetYearlyRevenue_ReturnsCorrectArrayOfMonthlyRevenues()
+        {
+            // Arrange
+            var testDateTime = DateTime.Parse("2019/01/01 12:00:00");
+            var receipts = new List<Receipt>
+            {
+                // Receipts within year.
+                new Receipt() { Id = 1, GrandTotal = 11,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 00:00:01")},
+                new Receipt() { Id = 2, GrandTotal = 12,
+                    TimeOfPurchase = DateTime.Parse("2019/01/10 00:00:01")},
+                new Receipt() { Id = 3, GrandTotal = 21,
+                    TimeOfPurchase = DateTime.Parse("2019/02/16 00:00:01")},
+                new Receipt() { Id = 4, GrandTotal = 31,
+                    TimeOfPurchase = DateTime.Parse("2019/03/18 00:00:01")},
+                new Receipt() { Id = 5, GrandTotal = 32,
+                    TimeOfPurchase = DateTime.Parse("2019/03/03 00:00:01")},
+                new Receipt() { Id = 6, GrandTotal = 33,
+                    TimeOfPurchase = DateTime.Parse("2019/03/04 00:00:01")},
+                new Receipt() { Id = 7, GrandTotal = 34,
+                    TimeOfPurchase = DateTime.Parse("2019/03/15 00:00:01")},
+                new Receipt() { Id = 8, GrandTotal = 41,
+                    TimeOfPurchase = DateTime.Parse("2019/04/18 00:00:01")},
+                new Receipt() { Id = 9, GrandTotal = 61,
+                    TimeOfPurchase = DateTime.Parse("2019/06/19 00:00:01")},
+                new Receipt() { Id = 10, GrandTotal = 62,
+                    TimeOfPurchase = DateTime.Parse("2019/06/23 00:00:01")},
+                new Receipt() { Id = 11, GrandTotal = 71,
+                    TimeOfPurchase = DateTime.Parse("2019/07/02 00:00:01")},
+                new Receipt() { Id = 12, GrandTotal = 72,
+                    TimeOfPurchase = DateTime.Parse("2019/07/23 00:00:01")},
+                new Receipt() { Id = 13, GrandTotal = 73,
+                    TimeOfPurchase = DateTime.Parse("2019/07/01 00:00:01")},
+                new Receipt() { Id = 14, GrandTotal = 91,
+                    TimeOfPurchase = DateTime.Parse("2019/09/01 00:00:01")},
+                new Receipt() { Id = 15, GrandTotal = 92,
+                    TimeOfPurchase = DateTime.Parse("2019/09/15 00:00:01")},
+                new Receipt() { Id = 16, GrandTotal = 93,
+                    TimeOfPurchase = DateTime.Parse("2019/09/18 00:00:01")},
+                new Receipt() { Id = 17, GrandTotal = 94,
+                    TimeOfPurchase = DateTime.Parse("2019/09/19 00:00:01")},
+                new Receipt() { Id = 18, GrandTotal = 95,
+                    TimeOfPurchase = DateTime.Parse("2019/09/23 00:00:01")},
+                new Receipt() { Id = 19, GrandTotal = 101,
+                    TimeOfPurchase = DateTime.Parse("2019/10/02 00:00:01")},
+                new Receipt() { Id = 20, GrandTotal = 102,
+                    TimeOfPurchase = DateTime.Parse("2019/10/23 00:00:01")},
+                new Receipt() { Id = 21, GrandTotal = 121,
+                    TimeOfPurchase = DateTime.Parse("2019/12/01 00:00:01")},
+                new Receipt() { Id = 22, GrandTotal = 122,
+                    TimeOfPurchase = DateTime.Parse("2019/12/01 00:00:01")},
+
+                // Receipts Out of year
+                new Receipt() { Id = 20, GrandTotal = 10000,
+                    TimeOfPurchase = DateTime.Parse("2017/10/23 00:00:01")},
+                new Receipt() { Id = 21, GrandTotal = 20000,
+                    TimeOfPurchase = DateTime.Parse("2017/12/31 00:00:01")},
+                new Receipt() { Id = 22, GrandTotal = 30000,
+                    TimeOfPurchase = DateTime.Parse("2020/01/01 00:00:01")},
+            }.AsQueryable();
+
+            var receiptMockDbSet = new Mock<DbSet<Receipt>>();
+            receiptMockDbSet.As<IQueryable<Receipt>>().Setup(m => m.Provider).Returns(receipts.Provider);
+            receiptMockDbSet.As<IQueryable<Receipt>>().Setup(m => m.Expression).Returns(receipts.Expression);
+            receiptMockDbSet.As<IQueryable<Receipt>>().Setup(m => m.ElementType).Returns(receipts.ElementType);
+            receiptMockDbSet.As<IQueryable<Receipt>>().Setup(m => m.GetEnumerator()).Returns(receipts.GetEnumerator());
+
+            var mockContext = new Mock<EazyCartContext>();
+            mockContext.Setup(c => c.Receipts).Returns(receiptMockDbSet.Object);
+
+            var receiptBusiness = new ReceiptBusiness(mockContext.Object);
+
+            // Act
+            decimal[] yearlySalesReportValues = receiptBusiness.GetYearlyRevenue(testDateTime);
+
+            // Assert
+            decimal[] expectedValues = new decimal[] { 23, 21, 130, 41, 0, 123, 216, 0, 465, 203, 0, 243 };
+            bool areValuesCorrect = true;
+            for (int i = 0; i < yearlySalesReportValues.Length; i++)
+            {
+                if (expectedValues[i] != yearlySalesReportValues[i])
+                {
+                    areValuesCorrect = false;
+                    break;
+                }
+            }
+            Assert.IsTrue(areValuesCorrect, "Values are not correct");
+        }
+
+        [TestMethod]
+        public void GetMonthlyRevenue_ReturnsCorrectArrayOfDailyRevenues()
+        {
+            // Arrange
+            var testDateTime = DateTime.Parse("2019/01/01 12:00:00");
+            var receipts = new List<Receipt>
+            {
+                // Receipts within month
+                new Receipt() { Id = 1, GrandTotal = 11,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 00:00:01")},
+                new Receipt() { Id = 2, GrandTotal = 12,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 00:00:01")},
+                new Receipt() { Id = 3, GrandTotal = 21,
+                    TimeOfPurchase = DateTime.Parse("2019/01/02 00:00:01")},
+                new Receipt() { Id = 4, GrandTotal = 31,
+                    TimeOfPurchase = DateTime.Parse("2019/01/03 00:00:01")},
+                new Receipt() { Id = 5, GrandTotal = 32,
+                    TimeOfPurchase = DateTime.Parse("2019/01/03 00:00:01")},
+                new Receipt() { Id = 6, GrandTotal = 33,
+                    TimeOfPurchase = DateTime.Parse("2019/01/03 00:00:01")},
+                new Receipt() { Id = 7, GrandTotal = 34,
+                    TimeOfPurchase = DateTime.Parse("2019/01/03 00:00:01")},
+                new Receipt() { Id = 8, GrandTotal = 41,
+                    TimeOfPurchase = DateTime.Parse("2019/01/04 00:00:01")},
+                new Receipt() { Id = 9, GrandTotal = 61,
+                    TimeOfPurchase = DateTime.Parse("2019/01/06 00:00:01")},
+                new Receipt() { Id = 10, GrandTotal = 62,
+                    TimeOfPurchase = DateTime.Parse("2019/01/06 00:00:01")},
+                new Receipt() { Id = 11, GrandTotal = 71,
+                    TimeOfPurchase = DateTime.Parse("2019/01/07 00:00:01")},
+                new Receipt() { Id = 12, GrandTotal = 72,
+                    TimeOfPurchase = DateTime.Parse("2019/01/07 00:00:01")},
+                new Receipt() { Id = 13, GrandTotal = 73,
+                    TimeOfPurchase = DateTime.Parse("2019/01/07 00:00:01")},
+                new Receipt() { Id = 14, GrandTotal = 91,
+                    TimeOfPurchase = DateTime.Parse("2019/01/09 00:00:01")},
+                new Receipt() { Id = 15, GrandTotal = 92,
+                    TimeOfPurchase = DateTime.Parse("2019/01/09 00:00:01")},
+                new Receipt() { Id = 16, GrandTotal = 93,
+                    TimeOfPurchase = DateTime.Parse("2019/01/09 00:00:01")},
+                new Receipt() { Id = 17, GrandTotal = 94,
+                    TimeOfPurchase = DateTime.Parse("2019/01/09 00:00:01")},
+                new Receipt() { Id = 18, GrandTotal = 95,
+                    TimeOfPurchase = DateTime.Parse("2019/01/09 00:00:01")},
+                new Receipt() { Id = 19, GrandTotal = 101,
+                    TimeOfPurchase = DateTime.Parse("2019/01/10 00:00:01")},
+                new Receipt() { Id = 20, GrandTotal = 102,
+                    TimeOfPurchase = DateTime.Parse("2019/01/10 00:00:01")},
+                new Receipt() { Id = 21, GrandTotal = 121,
+                    TimeOfPurchase = DateTime.Parse("2019/01/12 00:00:01")},
+                new Receipt() { Id = 22, GrandTotal = 122,
+                    TimeOfPurchase = DateTime.Parse("2019/01/12 00:00:01")},
+                new Receipt() { Id = 23, GrandTotal = 131,
+                    TimeOfPurchase = DateTime.Parse("2019/01/13 00:00:01")},
+                new Receipt() { Id = 24, GrandTotal = 132,
+                    TimeOfPurchase = DateTime.Parse("2019/01/13 00:00:01")},
+                new Receipt() { Id = 25, GrandTotal = 161,
+                    TimeOfPurchase = DateTime.Parse("2019/01/16 00:00:01")},
+                new Receipt() { Id = 26, GrandTotal = 162,
+                    TimeOfPurchase = DateTime.Parse("2019/01/16 00:00:01")},
+                new Receipt() { Id = 27, GrandTotal = 163,
+                    TimeOfPurchase = DateTime.Parse("2019/01/16 00:00:01")},
+                new Receipt() { Id = 28, GrandTotal = 171,
+                    TimeOfPurchase = DateTime.Parse("2019/01/17 00:00:01")},
+                new Receipt() { Id = 29, GrandTotal = 181,
+                    TimeOfPurchase = DateTime.Parse("2019/01/18 00:00:01")},
+                new Receipt() { Id = 30, GrandTotal = 201,
+                    TimeOfPurchase = DateTime.Parse("2019/01/20 00:00:01")},
+                new Receipt() { Id = 31, GrandTotal = 202,
+                    TimeOfPurchase = DateTime.Parse("2019/01/20 00:00:01")},
+                new Receipt() { Id = 32, GrandTotal = 203,
+                    TimeOfPurchase = DateTime.Parse("2019/01/20 00:00:01")},
+                new Receipt() { Id = 33, GrandTotal = 204,
+                    TimeOfPurchase = DateTime.Parse("2019/01/20 00:00:01")},
+                new Receipt() { Id = 34, GrandTotal = 211,
+                    TimeOfPurchase = DateTime.Parse("2019/01/21 00:00:01")},
+                new Receipt() { Id = 35, GrandTotal = 221,
+                    TimeOfPurchase = DateTime.Parse("2019/01/22 00:00:01")},
+                new Receipt() { Id = 36, GrandTotal = 231,
+                    TimeOfPurchase = DateTime.Parse("2019/01/23 00:00:01")},
+                new Receipt() { Id = 37, GrandTotal = 232,
+                    TimeOfPurchase = DateTime.Parse("2019/01/23 00:00:01")},
+                new Receipt() { Id = 38, GrandTotal = 261,
+                    TimeOfPurchase = DateTime.Parse("2019/01/26 00:00:01")},
+                new Receipt() { Id = 39, GrandTotal = 262,
+                    TimeOfPurchase = DateTime.Parse("2019/01/26 00:00:01")},
+                new Receipt() { Id = 40, GrandTotal = 301,
+                    TimeOfPurchase = DateTime.Parse("2019/01/30 00:00:01")},
+                new Receipt() { Id = 41, GrandTotal = 31.31M,
+                    TimeOfPurchase = DateTime.Parse("2019/01/31 00:00:01")},
+                new Receipt() { Id = 42, GrandTotal = 32.32M,
+                    TimeOfPurchase = DateTime.Parse("2019/01/31 00:00:01")},
+
+                // Receipts out of month
+                new Receipt() { Id = 43, GrandTotal = 10000,
+                    TimeOfPurchase = DateTime.Parse("2019/02/01 00:00:01")},
+                new Receipt() { Id = 44, GrandTotal = 20000,
+                    TimeOfPurchase = DateTime.Parse("2018/12/31 23:59:59")},
+                new Receipt() { Id = 45, GrandTotal = 30000,
+                    TimeOfPurchase = DateTime.Parse("2018/01/05 00:00:01")},
+            }.AsQueryable();
+
+            var receiptMockDbSet = new Mock<DbSet<Receipt>>();
+            receiptMockDbSet.As<IQueryable<Receipt>>().Setup(m => m.Provider).Returns(receipts.Provider);
+            receiptMockDbSet.As<IQueryable<Receipt>>().Setup(m => m.Expression).Returns(receipts.Expression);
+            receiptMockDbSet.As<IQueryable<Receipt>>().Setup(m => m.ElementType).Returns(receipts.ElementType);
+            receiptMockDbSet.As<IQueryable<Receipt>>().Setup(m => m.GetEnumerator()).Returns(receipts.GetEnumerator());
+
+            var mockContext = new Mock<EazyCartContext>();
+            mockContext.Setup(c => c.Receipts).Returns(receiptMockDbSet.Object);
+
+            var receiptBusiness = new ReceiptBusiness(mockContext.Object);
+
+            // Act
+            decimal[] monthlySalesReportValues = receiptBusiness.GetMonthlyRevenue(testDateTime);
+
+            // Assert
+            decimal[] expectedValues = new decimal[] { 23, 21, 130, 41, 0, 123, 216, 0, 465, 203, 0, 243, 263,
+                                                            0, 0, 486, 171, 181, 0, 810, 211, 221, 463, 0, 0, 523, 0, 0, 0, 301, 63.63M};
+            bool areValuesCorrect = true;
+            for (int i = 0; i < monthlySalesReportValues.Length; i++)
+            {
+                if (expectedValues[i] != monthlySalesReportValues[i])
+                {
+                    areValuesCorrect = false;
+                    break;
+                }
+            }
+            Assert.IsTrue(areValuesCorrect, "Values are not correct");
+        }
+
+        [TestMethod]
+        public void GetDailyRevenue_ReturnsCorrectArrayOfHourlyRevenues()
+        {
+            // Arrange
+            var testDateTime = DateTime.Parse("2019/01/01 12:00:00");
+            var receipts = new List<Receipt>
+            {
+                // Receipts within day
+                new Receipt() { Id = 1, GrandTotal = 1,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 00:00:01")},
+                new Receipt() { Id = 2, GrandTotal = 11,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 01:00:01")},
+                new Receipt() { Id = 3, GrandTotal = 21,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 02:00:01")},
+                new Receipt() { Id = 4, GrandTotal = 31,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 03:00:01")},
+                new Receipt() { Id = 5, GrandTotal = 41,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 04:00:01")},
+                new Receipt() { Id = 6, GrandTotal = 61,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 06:00:01")},
+                new Receipt() { Id = 7, GrandTotal = 71,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 07:00:01")},
+                new Receipt() { Id = 8, GrandTotal = 81,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 08:00:01")},
+                new Receipt() { Id = 9, GrandTotal = 83.10M,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 08:30:01")},
+                new Receipt() { Id = 10, GrandTotal = 91,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 09:00:01")},
+                new Receipt() { Id = 11, GrandTotal = 101,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 10:00:01")},
+                new Receipt() { Id = 12, GrandTotal = 111,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 11:00:01")},
+                new Receipt() { Id = 13, GrandTotal = 121,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 12:00:01")},
+                new Receipt() { Id = 14, GrandTotal = 131.51M,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 13:15:01")},
+                new Receipt() { Id = 15, GrandTotal = 134.51M,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 13:45:01")},
+                new Receipt() { Id = 16, GrandTotal = 141,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 14:00:01")},
+                new Receipt() { Id = 17, GrandTotal = 151,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 15:00:01")},
+                new Receipt() { Id = 18, GrandTotal = 161,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 16:00:01")},
+                new Receipt() { Id = 19, GrandTotal = 171,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 17:00:01")},
+                new Receipt() { Id = 20, GrandTotal = 181,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 18:00:01")},
+                new Receipt() { Id = 21, GrandTotal = 191,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 19:00:01")},
+                new Receipt() { Id = 22, GrandTotal = 201,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 20:00:01")},
+                new Receipt() { Id = 23, GrandTotal = 211,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 21:00:01")},
+                new Receipt() { Id = 24, GrandTotal = 221,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 22:00:01")},
+                new Receipt() { Id = 25, GrandTotal = 231,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 23:00:01")},
+                new Receipt() { Id = 26, GrandTotal = 23.31M,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 23:30:01")},
+                new Receipt() { Id = 27, GrandTotal = 235.959M,
+                    TimeOfPurchase = DateTime.Parse("2019/01/01 23:59:59")},
+                
+                // Receipts out of month
+                new Receipt() { Id = 28, GrandTotal = 10000,
+                    TimeOfPurchase = DateTime.Parse("2019/01/02 00:00:01")},
+                new Receipt() { Id = 29, GrandTotal = 20000,
+                    TimeOfPurchase = DateTime.Parse("2018/12/31 00:00:01")},
+                new Receipt() { Id = 30, GrandTotal = 30000,
+                    TimeOfPurchase = DateTime.Parse("2018/01/01 00:00:01")},
+            }.AsQueryable();
+
+            var receiptMockDbSet = new Mock<DbSet<Receipt>>();
+            receiptMockDbSet.As<IQueryable<Receipt>>().Setup(m => m.Provider).Returns(receipts.Provider);
+            receiptMockDbSet.As<IQueryable<Receipt>>().Setup(m => m.Expression).Returns(receipts.Expression);
+            receiptMockDbSet.As<IQueryable<Receipt>>().Setup(m => m.ElementType).Returns(receipts.ElementType);
+            receiptMockDbSet.As<IQueryable<Receipt>>().Setup(m => m.GetEnumerator()).Returns(receipts.GetEnumerator());
+
+            var mockContext = new Mock<EazyCartContext>();
+            mockContext.Setup(c => c.Receipts).Returns(receiptMockDbSet.Object);
+
+            var receiptBusiness = new ReceiptBusiness(mockContext.Object);
+
+            // Act
+            decimal[] dailySalesReportValues = receiptBusiness.GetDailyRevenue(testDateTime);
+
+            // Assert
+            decimal[] expectedValues = new decimal[] { 33, 72, 296.10M, 303, 528.02M, 483, 573, 922.269M };
+            bool areValuesCorrect = true;
+            for (int i = 0; i < dailySalesReportValues.Length; i++)
+            {
+                if (expectedValues[i] != dailySalesReportValues[i])
                 {
                     areValuesCorrect = false;
                     break;

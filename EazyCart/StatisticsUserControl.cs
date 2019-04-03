@@ -640,19 +640,19 @@ namespace EazyCart
             bool isMoneyReport = true;
             if (periodIndex == 1)
             {
-                decimal[] totalRevenueByHours = this.productBusiness.GetDailyRevenue(currentDateTime);
+                decimal[] totalRevenueByHours = this.receiptBusiness.GetDailyRevenue(currentDateTime);
                 string[] labels = this.hourLabels;
                 this.GenerateReport(totalRevenueByHours, labels, "Hour", "Revenue", 0, isMoneyReport);
             }
             else if (periodIndex == 2)
             {
-                decimal[] totalRevenueByDays = this.productBusiness.GetMonthlyRevenue(currentDateTime);
+                decimal[] totalRevenueByDays = this.receiptBusiness.GetMonthlyRevenue(currentDateTime);
                 string[] labels = this.dayLabels;
                 this.GenerateReport(totalRevenueByDays, labels, "Day", "Revenue", 0, isMoneyReport);
             }
             else if (periodIndex == 3)
             {
-                decimal[] totalRevenueByDays = this.productBusiness.GetYearlyRevenue(currentDateTime);
+                decimal[] totalRevenueByDays = this.receiptBusiness.GetYearlyRevenue(currentDateTime);
                 string[] labels = this.monthLabels;
                 this.GenerateReport(totalRevenueByDays, labels, "Month", "Revenue", 0, isMoneyReport);
             }
