@@ -254,7 +254,9 @@ namespace EazyCart
             // Validation of input values
             if (!canBeParsed || categoryName == "Category Name")
             {
-                MessageBox.Show("Invalid values for category");
+                string message = "Invalid values for category";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -264,7 +266,8 @@ namespace EazyCart
             }
             catch (ArgumentException exc)
             {
-                MessageBox.Show(exc.Message);
+                MessageForm messageForm = new MessageForm(exc.Message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -297,7 +300,9 @@ namespace EazyCart
             }
             catch
             {
-                MessageBox.Show("You haven't selected a row");
+                string message = "You haven't selected a row";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -317,7 +322,9 @@ namespace EazyCart
             // Validation for input values.
             if (categoryName == "Category Name")
             {
-                MessageBox.Show("Invalid values for category");
+                string message = "Invalid values for category";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -327,7 +334,8 @@ namespace EazyCart
             }
             catch(ArgumentException exc)
             {
-                MessageBox.Show(exc.Message);
+                MessageForm messageForm = new MessageForm(exc.Message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
             
@@ -355,7 +363,9 @@ namespace EazyCart
             }
             catch
             {
-                MessageBox.Show("You haven't selected a row");
+                string message = "You haven't selected a row";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -365,7 +375,8 @@ namespace EazyCart
             }
             catch (ArgumentException exc)
             {
-                MessageBox.Show(exc.Message);
+                MessageForm messageForm = new MessageForm(exc.Message, MessageFormType.Error);
+                messageForm.ShowDialog();
             }
             
             // Update the appropriate tabs.
@@ -389,7 +400,9 @@ namespace EazyCart
             // Validation of input values
             if (!canBeParsed || countryName == "Country Name")
             {
-                MessageBox.Show("Invalid values for country");
+                string message = "Invalid values for country";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -399,7 +412,8 @@ namespace EazyCart
             }
             catch (ArgumentException exc)
             {
-                MessageBox.Show(exc.Message);
+                MessageForm messageForm = new MessageForm(exc.Message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -431,7 +445,9 @@ namespace EazyCart
             }
             catch
             {
-                MessageBox.Show("You haven't selected a row");
+                string message = "You haven't selected a row";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -451,7 +467,9 @@ namespace EazyCart
             // Validation of input values.
             if (countryName == "Country Name")
             {
-                MessageBox.Show("Invalid values for country");
+                string message = "Invalid values for country";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -482,7 +500,9 @@ namespace EazyCart
             }
             catch
             {
-                MessageBox.Show("You haven't selected a row");
+                string message = "You haven't selected a row";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -492,7 +512,8 @@ namespace EazyCart
             }
             catch (ArgumentException exc)
             {
-                MessageBox.Show(exc.Message);
+                MessageForm messageForm = new MessageForm(exc.Message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -558,7 +579,9 @@ namespace EazyCart
             // Validate input.
             if (!canBeParsed || cityName == "City Name" || cityCategory == "Select Country")
             {
-                MessageBox.Show("Invalid values for city");
+                string message = "Invalid values for city";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -568,7 +591,8 @@ namespace EazyCart
             }
             catch (ArgumentException exc)
             {
-                MessageBox.Show(exc.Message);
+                MessageForm messageForm = new MessageForm(exc.Message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -602,7 +626,9 @@ namespace EazyCart
             }
             catch
             {
-                MessageBox.Show("You haven't selected a row");
+                string message = "You haven't selected a row";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -623,7 +649,9 @@ namespace EazyCart
             // Validate values.
             if (cityName == "City Name" || countryName == "Select Country")
             {
-                MessageBox.Show("Invalid values for city");
+                string message = "Invalid values for city";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -633,7 +661,8 @@ namespace EazyCart
             }
             catch(ArgumentException exc)
             {
-                MessageBox.Show(exc.Message);
+                MessageForm messageForm = new MessageForm(exc.Message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -662,7 +691,9 @@ namespace EazyCart
             }
             catch
             {
-                MessageBox.Show("You haven't selected a row");
+                string message = "You haven't selected a row";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -672,7 +703,8 @@ namespace EazyCart
             }
             catch (ArgumentException exc)
             {
-                MessageBox.Show(exc.Message);
+                MessageForm messageForm = new MessageForm(exc.Message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -698,7 +730,9 @@ namespace EazyCart
             // Perform validation.
             if (!canBeParsed || supplierName == "Supplier Name" || supplierCity == "Select City")
             {
-                MessageBox.Show("Invalid values for supplier");
+                string message = "Invalid values for supplier";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -708,7 +742,8 @@ namespace EazyCart
             }
             catch (ArgumentException exc)
             {
-                MessageBox.Show(exc.Message);
+                MessageForm messageForm = new MessageForm(exc.Message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -746,7 +781,9 @@ namespace EazyCart
             }
             catch
             {
-                MessageBox.Show("You haven't selected a row");
+                string message = "You haven't selected a row";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -769,7 +806,9 @@ namespace EazyCart
             // Perform validation
             if (supplierName == "Supplier Name" || countryName == "Select Country" || cityName == "Select City")
             {
-                MessageBox.Show("Invalid values for supplier");
+                string message = "Invalid values for supplier";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -779,7 +818,8 @@ namespace EazyCart
             }
             catch(ArgumentException exc)
             {
-                MessageBox.Show(exc.Message);
+                MessageForm messageForm = new MessageForm(exc.Message, MessageFormType.Error);
+                messageForm.ShowDialog();
             }
 
             this.supplierIdTextBox.Enabled = true;
@@ -807,7 +847,9 @@ namespace EazyCart
             }
             catch
             {
-                MessageBox.Show("You haven't selected a row");
+                string message = "You haven't selected a row";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -817,7 +859,8 @@ namespace EazyCart
             }
             catch (ArgumentException exc)
             {
-                MessageBox.Show(exc.Message);
+                MessageForm messageForm = new MessageForm(exc.Message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 

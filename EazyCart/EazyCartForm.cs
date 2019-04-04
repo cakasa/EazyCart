@@ -101,7 +101,9 @@ namespace EazyCart
             // before closing it.
             if (receiptDataGridView.Rows.Count != 0)
             {
-                MessageBox.Show("You have an uncompleted order.");
+                string message = "You have an uncompleted order.";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
             this.Close();
@@ -196,7 +198,9 @@ namespace EazyCart
             // before closing it.
             if (receiptDataGridView.Rows.Count != 0)
             {
-                MessageBox.Show("You have an uncompleted order.");
+                string message = "You have an uncompleted order.";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 

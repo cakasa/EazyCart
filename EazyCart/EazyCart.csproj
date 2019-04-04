@@ -181,6 +181,13 @@
     <Compile Include="LogisticsUserControl.Designer.cs">
       <DependentUpon>LogisticsUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="MessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MessageForm.Designer.cs">
+      <DependentUpon>MessageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MessageFormType.cs" />
     <Compile Include="PayForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,6 +221,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LogisticsUserControl.resx">
       <DependentUpon>LogisticsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MessageForm.resx">
+      <DependentUpon>MessageForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PayForm.resx">
       <DependentUpon>PayForm.cs</DependentUpon>
@@ -249,6 +259,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\okButtonPicture.png" />
+    <None Include="Resources\informationMark.png" />
+    <None Include="Resources\exclamationMark.png" />
     <None Include="Resources\exportReportButtonImage.png" />
     <None Include="Resources\generateReportButtonImage.png" />
     <None Include="Resources\makePaymentButtonImage.png" />

@@ -79,13 +79,17 @@ namespace EazyCart
             }
             catch
             {
-                MessageBox.Show("Please enter a valid amount of money");
+                string message = "Please enter a valid amount of money";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
             if(cash < this.grandTotal)
             {
-                MessageBox.Show("Cash amount is less than the amount to pay");
+                string message = "Cash amount is less than the amount to pay";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -101,9 +105,9 @@ namespace EazyCart
         /// <param name="e"></param>
         private void MenuPanel_MouseDown(object sender, MouseEventArgs e)
         {
-            mouseDown = true;
-            mouseX = e.X;
-            mouseY = e.Y;
+            this.mouseDown = true;
+            this.mouseX = e.X;
+            this.mouseY = e.Y;
         }
 
         /// <summary>
@@ -113,9 +117,9 @@ namespace EazyCart
         /// <param name="e"></param>
         private void MenuPanel_MouseMove(object sender, MouseEventArgs e)
         {
-            if (mouseDown == true)
+            if (this.mouseDown == true)
             {
-                this.SetDesktopLocation(MousePosition.X - mouseX, MousePosition.Y - mouseY);
+                this.SetDesktopLocation(MousePosition.X - this.mouseX, MousePosition.Y - this.mouseY);
             }
         }
 
@@ -126,7 +130,7 @@ namespace EazyCart
         /// <param name="e"></param>
         private void MenuPanel_MouseUp(object sender, MouseEventArgs e)
         {
-            mouseDown = false;
+            this.mouseDown = false;
         }
 
         /// <summary>
@@ -149,7 +153,7 @@ namespace EazyCart
         /// <param name="e"></param>
         private void CloseButton_Click(object sender, EventArgs e)
         {
-            Close();
+            this.Close();
         }
     }
 }

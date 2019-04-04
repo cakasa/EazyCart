@@ -127,8 +127,8 @@
   <data name="completeOrderPlaceholder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\completeOrderPlaceholder1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cashRegisterButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cashRegisterButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="exportReportButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\exportReportButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="deleteSupplierButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\deleteSupplierButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -136,11 +136,17 @@
   <data name="deleteCountryButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\deleteCountryButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="saveProductToReceiptButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\saveProductToReceiptButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="informationMark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\informationMark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="exclamationMark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\exclamationMark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="statisticsButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\statisticsButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="saveProductToReceiptButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\saveProductToReceiptButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="addSupplierButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\addSupplierButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -163,14 +169,17 @@
   <data name="editCityButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\editCityButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="smallSaveChangesButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\smallSaveChangesButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cashRegisterButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cashRegisterButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="deleteCategoryButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\deleteCategoryButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="saveProductButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\saveProductButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="smallSaveChangesButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\smallSaveChangesButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="warehouseButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\warehouseButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -223,7 +232,7 @@
   <data name="addCategoryButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\addCategoryButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="exportReportButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\exportReportButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="okButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\okButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

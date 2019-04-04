@@ -260,17 +260,23 @@ namespace EazyCart
             // proceed to generate the report.
             if (categoryIndex == 0)
             {
-                System.Windows.Forms.MessageBox.Show("Please select a report category");
+                string message = "Please select a report category";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
             else if (typeIndex == 0)
             {
-                System.Windows.Forms.MessageBox.Show("Please select a report type");
+                string message = "Please select a report type";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
             else if ((categoryIndex == 1 || categoryIndex == 3) && (periodIndex == 0))
             {
-                System.Windows.Forms.MessageBox.Show("Please select a period");
+                string message = "Please select a period";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
             else this.GetReportNumber(categoryIndex, typeIndex, periodIndex);
@@ -773,7 +779,9 @@ namespace EazyCart
             string fileName = this.fileNameTextBox.Text;
             if(string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(fileName))
             {
-                System.Windows.Forms.MessageBox.Show("Invalid name of file.");
+                string message = "Invalid name of file.";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -788,11 +796,15 @@ namespace EazyCart
                     try
                     {
                         this.SaveToPng(reportChart, path);
-                        System.Windows.Forms.MessageBox.Show($"Image was successfully saved at {path}");
+                        string message = $"Image was successfully saved at {path}";
+                        MessageForm messageForm = new MessageForm(message, MessageFormType.Information);
+                        messageForm.ShowDialog();
                     }
                     catch
                     {
-                        System.Windows.Forms.MessageBox.Show("Image could NOT be saved. Something went wrong.");
+                        string message = "Image could NOT be saved. Something went wrong.";
+                        MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                        messageForm.ShowDialog();
                     }
                 }
             }

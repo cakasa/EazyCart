@@ -285,7 +285,9 @@ namespace EazyCart
             else if (this.litreRadioButton.Checked) unit = "Litre";
             else
             {
-                MessageBox.Show("Please select an unit");
+                string message = "Please select an unit";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -300,7 +302,8 @@ namespace EazyCart
             }
             catch (ArgumentException exc)
             {
-                MessageBox.Show(exc.Message);
+                MessageForm messageForm = new MessageForm(exc.Message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -333,7 +336,9 @@ namespace EazyCart
             }
             catch
             {
-                MessageBox.Show("You haven't selected a row");
+                string message = "You haven't selected a row";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -364,7 +369,9 @@ namespace EazyCart
             else if (this.litreRadioButton.Checked) unit = "Litre";
             else
             {
-                MessageBox.Show("Please select an unit");
+                string message = "Please select an unit";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -379,7 +386,8 @@ namespace EazyCart
             }
             catch (ArgumentException exc)
             {
-                MessageBox.Show(exc.Message);
+                MessageForm messageForm = new MessageForm(exc.Message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -408,7 +416,9 @@ namespace EazyCart
             }
             catch
             {
-                MessageBox.Show("You haven't selected a row");
+                string message = "You haven't selected a row";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -419,7 +429,8 @@ namespace EazyCart
             }
             catch (ArgumentException exc)
             {
-                MessageBox.Show(exc.Message);
+                MessageForm messageForm = new MessageForm(exc.Message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -497,7 +508,9 @@ namespace EazyCart
             // Perform validation of values.
             if (!canQuantityStringBeParsed || productName == "Select Product")
             {
-                MessageBox.Show("Invalid values");
+                string message = "Invalid values";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -505,11 +518,15 @@ namespace EazyCart
             // is not correctly set, a messageBox will be shown.
             try
             {
-                this.productBusiness.MakeDelivery(productName, quantity);
+                decimal totalToPayForDelivery =  this.productBusiness.MakeDelivery(productName, quantity);
+                string message = string.Format($"The delivery of {quantity:f3} x {productName} costs ${totalToPayForDelivery:f2}");
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Information);
+                messageForm.ShowDialog();
             }
             catch (ArgumentException exc)
             {
-                MessageBox.Show(exc.Message);
+                MessageForm messageForm = new MessageForm(exc.Message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 

@@ -30,7 +30,7 @@
         {
             this.menuPanel = new System.Windows.Forms.Panel();
             this.makePaymentLabel = new System.Windows.Forms.Label();
-            this.titleLabel = new System.Windows.Forms.Label();
+            this.logoLabel = new System.Windows.Forms.Label();
             this.grandTotalCashLabel = new System.Windows.Forms.Label();
             this.grandTotalLabel = new System.Windows.Forms.Label();
             this.ornamentalPanel = new System.Windows.Forms.Panel();
@@ -48,7 +48,7 @@
             this.menuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.menuPanel.Controls.Add(this.closeButton);
             this.menuPanel.Controls.Add(this.makePaymentLabel);
-            this.menuPanel.Controls.Add(this.titleLabel);
+            this.menuPanel.Controls.Add(this.logoLabel);
             this.menuPanel.Controls.Add(this.eazyCartLogoPictureBox);
             this.menuPanel.Location = new System.Drawing.Point(0, 0);
             this.menuPanel.Name = "menuPanel";
@@ -65,20 +65,20 @@
             this.makePaymentLabel.ForeColor = System.Drawing.SystemColors.Control;
             this.makePaymentLabel.Location = new System.Drawing.Point(227, 9);
             this.makePaymentLabel.Name = "makePaymentLabel";
-            this.makePaymentLabel.Size = new System.Drawing.Size(150, 30);
+            this.makePaymentLabel.Size = new System.Drawing.Size(151, 30);
             this.makePaymentLabel.TabIndex = 6;
             this.makePaymentLabel.Text = "Make Payment";
             // 
-            // titleLabel
+            // logoLabel
             // 
-            this.titleLabel.AutoSize = true;
-            this.titleLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.titleLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.titleLabel.Location = new System.Drawing.Point(53, 9);
-            this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(97, 30);
-            this.titleLabel.TabIndex = 5;
-            this.titleLabel.Text = "EazyCart";
+            this.logoLabel.AutoSize = true;
+            this.logoLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.logoLabel.ForeColor = System.Drawing.SystemColors.Control;
+            this.logoLabel.Location = new System.Drawing.Point(53, 9);
+            this.logoLabel.Name = "logoLabel";
+            this.logoLabel.Size = new System.Drawing.Size(96, 30);
+            this.logoLabel.TabIndex = 5;
+            this.logoLabel.Text = "EazyCart";
             // 
             // grandTotalCashLabel
             // 
@@ -101,7 +101,7 @@
             this.grandTotalLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.grandTotalLabel.Location = new System.Drawing.Point(12, 62);
             this.grandTotalLabel.Name = "grandTotalLabel";
-            this.grandTotalLabel.Size = new System.Drawing.Size(170, 40);
+            this.grandTotalLabel.Size = new System.Drawing.Size(173, 40);
             this.grandTotalLabel.TabIndex = 13;
             this.grandTotalLabel.Text = "Grand Total:";
             // 
@@ -206,7 +206,7 @@
         #endregion
 
         private System.Windows.Forms.Panel menuPanel;
-        private System.Windows.Forms.Label titleLabel;
+        private System.Windows.Forms.Label logoLabel;
         private System.Windows.Forms.PictureBox eazyCartLogoPictureBox;
         private System.Windows.Forms.Label makePaymentLabel;
         private System.Windows.Forms.Label grandTotalCashLabel;

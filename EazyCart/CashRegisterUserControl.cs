@@ -253,7 +253,7 @@ namespace EazyCart
             var productCode = (string)availableProductsDataGridView.SelectedRows[0].Cells[0].Value;
             var quantity = quantityTextBox.Text;
 
-            // Try to add product into the receipt. If validation fails, a messageBox is shown.
+            // Try to add product into the receipt. If validation fails, a messageForm is shown.
             try
             {
                 var discount = "0";
@@ -265,7 +265,8 @@ namespace EazyCart
             }
             catch (ArgumentException exc)
             {
-                MessageBox.Show(exc.Message);
+                MessageForm messageForm = new MessageForm(exc.Message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -311,7 +312,9 @@ namespace EazyCart
             }
             catch
             {
-                MessageBox.Show("You haven't selected a row");
+                string message = "You haven't selected a row";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -342,7 +345,8 @@ namespace EazyCart
             }
             catch (ArgumentException exc)
             {
-                MessageBox.Show(exc.Message);
+                MessageForm messageForm = new MessageForm(exc.Message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -370,7 +374,9 @@ namespace EazyCart
             }
             catch
             {
-                MessageBox.Show("You haven't selected a row");
+                string message = "You haven't selected a row";
+                MessageForm messageForm = new MessageForm(message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -380,7 +386,8 @@ namespace EazyCart
             }
             catch (ArgumentException exc)
             {
-                MessageBox.Show(exc.Message);
+                MessageForm messageForm = new MessageForm(exc.Message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 
@@ -398,7 +405,7 @@ namespace EazyCart
             var grandTotal = decimal.Parse(this.grandTotalCashLabel.Text.Remove(0, 2));
             var payForm = new PayForm(grandTotal);
             payForm.Show();
-            payForm.VisibleChanged += this.PayFormVisibleChanged;
+            payForm.VisibleChanged += this.PayFormVisibleChanged;          
         }
 
         /// <summary>
@@ -454,7 +461,8 @@ namespace EazyCart
             }
             catch (ArgumentException exc)
             {
-                MessageBox.Show(exc.Message);
+                MessageForm messageForm = new MessageForm(exc.Message, MessageFormType.Error);
+                messageForm.ShowDialog();
                 return;
             }
 

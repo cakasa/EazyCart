@@ -308,7 +308,7 @@ namespace Business
         /// </summary>
         /// <param name="productName">Give the name of the product.</param>
         /// <param name="quantity">Give the quantity from the wanted product.</param>
-        public void MakeDelivery(string productName, decimal quantity)
+        public decimal MakeDelivery(string productName, decimal quantity)
         {
             var product = eazyCartContext.Products.First(x => x.Name == productName);
 
@@ -326,6 +326,8 @@ namespace Business
             productToUpdate.Quantity += quantity;
 
             eazyCartContext.SaveChanges();
+            var totalToPayForDelivery = productToUpdate.DeliveryPrice * quantity;
+            return totalToPayForDelivery;
         }
 
         /// <summary>
