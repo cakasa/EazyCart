@@ -267,7 +267,7 @@ namespace Business
         public void Update(string productCode, string categoryName, string productName, decimal quantity,
             string supplierName, decimal deliveryPrice, decimal sellingPrice, string unitName)
         {
-            var unit = eazyCartContext.Units.First(x => x.Name == unitName);
+            var unit = eazyCartContext.Units.FirstOrDefault(x => x.Name == unitName);
 
             // Validation for quanity.
             if (quantity != Math.Floor(quantity) && unit.Id == 1)
@@ -291,23 +291,15 @@ namespace Business
                 throw new ArgumentException("Invalid information about category/supplier.");
             }
 
-            // Update the supplier's fields.
-            var newProduct = new Product
-            {
-                Code = productCode,
-                CategoryId = category.Id,
-                Name = productName,
-                Quantity = quantity,
-                SupplierId = supplier.Id,
-                DeliveryPrice = deliveryPrice,
-                SellingPrice = sellingPrice,
-                UnitId = unit.Id
-            };
+            var productToUpdate = eazyCartContext.Products.FirstOrDefault(x => x.Code == productCode);
+            productToUpdate.CategoryId = category.Id;
+            productToUpdate.Name = productName;
+            productToUpdate.Quantity = quantity;
+            productToUpdate.SupplierId = supplier.Id;
+            productToUpdate.DeliveryPrice = deliveryPrice;
+            productToUpdate.SellingPrice = sellingPrice;
+            productToUpdate.UnitId = unit.Id;
 
-            var productToUpdate = eazyCartContext.Products.First(x => x.Code == productCode);
-
-            // Set the updated supplier's fields.
-            eazyCartContext.Entry(productToUpdate).CurrentValues.SetValues(newProduct);
             eazyCartContext.SaveChanges();
         }
 
@@ -330,19 +322,9 @@ namespace Business
                 throw new ArgumentException("Quantity must be positive.");
             }
 
-            var newProduct = new Product
-            {
-                Code = product.Code,
-                CategoryId = product.CategoryId,
-                Name = product.Name,
-                Quantity = product.Quantity + quantity,
-                SupplierId = product.SupplierId,
-                DeliveryPrice = product.DeliveryPrice,
-                SellingPrice = product.SellingPrice,
-                UnitId = product.UnitId
-            };
+            var productToUpdate = eazyCartContext.Products.FirstOrDefault(x => x.Name == productName);
+            productToUpdate.Quantity += quantity;
 
-            eazyCartContext.Entry(product).CurrentValues.SetValues(newProduct);
             eazyCartContext.SaveChanges();
         }
 

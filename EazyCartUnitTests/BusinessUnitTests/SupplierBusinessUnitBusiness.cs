@@ -329,6 +329,57 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
+        public void Update_SuccessfullyUpdatesSupplier()
+        {
+            // Arrange
+            var countries = new List<Country>
+            {
+                new Country {Name = "TestCountry1", Id = 1}
+            }.AsQueryable();
+
+            var cities = new List<City>
+            {
+                new City {Name = "TestCity1", Id = 1, CountryId = 1}
+            }.AsQueryable();
+
+            var suppliers = new List<Supplier>
+            {
+                new Supplier {Name = "TestSupplier1", Id = 1, CityId = 1}
+            }.AsQueryable();
+
+            var mockDbCountrySet = new Mock<DbSet<Country>>();
+            mockDbCountrySet.As<IQueryable<Country>>().Setup(m => m.Provider).Returns(countries.Provider);
+            mockDbCountrySet.As<IQueryable<Country>>().Setup(m => m.Expression).Returns(countries.Expression);
+            mockDbCountrySet.As<IQueryable<Country>>().Setup(m => m.ElementType).Returns(countries.ElementType);
+            mockDbCountrySet.As<IQueryable<Country>>().Setup(m => m.GetEnumerator()).Returns(countries.GetEnumerator());
+
+            var mockDbCitySet = new Mock<DbSet<City>>();
+            mockDbCitySet.As<IQueryable<City>>().Setup(m => m.Provider).Returns(cities.Provider);
+            mockDbCitySet.As<IQueryable<City>>().Setup(m => m.Expression).Returns(cities.Expression);
+            mockDbCitySet.As<IQueryable<City>>().Setup(m => m.ElementType).Returns(cities.ElementType);
+            mockDbCitySet.As<IQueryable<City>>().Setup(m => m.GetEnumerator()).Returns(cities.GetEnumerator());
+
+            var suppliermockDbSet = new Mock<DbSet<Supplier>>();
+            suppliermockDbSet.As<IQueryable<Supplier>>().Setup(m => m.Provider).Returns(suppliers.Provider);
+            suppliermockDbSet.As<IQueryable<Supplier>>().Setup(m => m.Expression).Returns(suppliers.Expression);
+            suppliermockDbSet.As<IQueryable<Supplier>>().Setup(m => m.ElementType).Returns(suppliers.ElementType);
+            suppliermockDbSet.As<IQueryable<Supplier>>().Setup(m => m.GetEnumerator()).Returns(suppliers.GetEnumerator());
+
+            var mockContext = new Mock<EazyCartContext>();
+            mockContext.Setup(c => c.Suppliers).Returns(suppliermockDbSet.Object);
+            mockContext.Setup(c => c.Cities).Returns(mockDbCitySet.Object);
+            mockContext.Setup(c => c.Countries).Returns(mockDbCountrySet.Object);
+
+            var supplierBusiness = new SupplierBusiness(mockContext.Object);
+
+            // Act
+            supplierBusiness.Update("TestSupplier2", 1, "TestCountry1", "TestCity1");
+
+            // Assert
+            mockContext.Verify(m => m.SaveChanges(), Times.Once());
+        }
+
+        [TestMethod]
         public void Update_ThrowsExceptionWhenInformationIsNotValid()
         {
             // Arrange

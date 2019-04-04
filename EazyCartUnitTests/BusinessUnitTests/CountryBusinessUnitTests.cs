@@ -281,41 +281,32 @@ namespace EazyCartUnitTests.BusinessUnitTests
             }
         }
 
-        //[TestMethod]
-        public void Update_SuccessfullyUpdatesAnExistingCountry()
+        [TestMethod]
+        public void Update_SuccessfullyUpdatesCountry()
         {
             // Arrange
-            int id = 1;
-            var countryToUpdate = new Country
-            {
-                Id = id,
-                Name = "TestCountry1"
-            };
-
             var countries = new List<Country>
             {
-                countryToUpdate,
+                new Country {Name = "TestCountry1", Id = 1},
+                new Country {Name = "TestCountry2", Id = 2}
             }.AsQueryable();
 
-            var countryMockDbSet = new Mock<DbSet<Country>>();
-            countryMockDbSet.As<IQueryable<Country>>().Setup(m => m.Provider).Returns(countries.Provider);
-            countryMockDbSet.As<IQueryable<Country>>().Setup(m => m.Expression).Returns(countries.Expression);
-            countryMockDbSet.As<IQueryable<Country>>().Setup(m => m.ElementType).Returns(countries.ElementType);
-            countryMockDbSet.As<IQueryable<Country>>().Setup(m => m.GetEnumerator()).Returns(countries.GetEnumerator());
+            var countrymockDbSet = new Mock<DbSet<Country>>();
+            countrymockDbSet.As<IQueryable<Country>>().Setup(m => m.Provider).Returns(countries.Provider);
+            countrymockDbSet.As<IQueryable<Country>>().Setup(m => m.Expression).Returns(countries.Expression);
+            countrymockDbSet.As<IQueryable<Country>>().Setup(m => m.ElementType).Returns(countries.ElementType);
+            countrymockDbSet.As<IQueryable<Country>>().Setup(m => m.GetEnumerator()).Returns(countries.GetEnumerator());
 
             var mockContext = new Mock<EazyCartContext>();
-            mockContext.Setup(c => c.Countries).Returns(countryMockDbSet.Object);
-            //mockContext.Setup(c => c.Entry(countryToUpdate)).Returns(entityEntry.);
+            mockContext.Setup(c => c.Countries).Returns(countrymockDbSet.Object);
+
             var countryBusiness = new CountryBusiness(mockContext.Object);
 
-            string newCountryName = "NewTestCountry";
-
             // Act
-            countryBusiness.Update(newCountryName, id);
+            countryBusiness.Update("UpdatedCategory", 1);
 
             // Assert
-            countryMockDbSet.Verify(x => x.Update(It.IsAny<Country>()), Times.Once);
-            mockContext.Verify(x => x.SaveChanges(), Times.Once);
+            mockContext.Verify(m => m.SaveChanges(), Times.Once());
         }
 
         [TestMethod]

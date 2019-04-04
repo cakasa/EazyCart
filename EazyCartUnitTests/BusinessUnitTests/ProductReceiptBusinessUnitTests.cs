@@ -412,6 +412,58 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
+        public void Update_SuccessfullyUpdatesProductReceipt_WhenValuesAreCorrect()
+        {
+            var products = new List<Product>()
+            {
+                new Product() {Code = "000001", CategoryId = 1, SupplierId = 1, Quantity = 2,
+                  DeliveryPrice = 1, SellingPrice = 1, Name = "TestProduct", UnitId = 1}
+            }.AsQueryable();
+
+            var receiptDateTime = DateTime.Parse("2009/02/26 18:37:58");
+            var receipts = new List<Receipt>()
+            {
+                new Receipt() {Id = 1, GrandTotal = 0, TimeOfPurchase = receiptDateTime},
+            }.AsQueryable();
+
+            var productReceipts = new List<ProductReceipt>
+            {
+                new ProductReceipt {Id = 1, ProductCode = "000001", Quantity = 1, DiscountPercentage = 0 },
+            }.AsQueryable();
+
+            var productMockDbSet = new Mock<DbSet<Product>>();
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.Provider).Returns(products.Provider);
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.Expression).Returns(products.Expression);
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.ElementType).Returns(products.ElementType);
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.GetEnumerator()).Returns(products.GetEnumerator());
+
+            var receiptMockDbSet = new Mock<DbSet<Receipt>>();
+            receiptMockDbSet.As<IQueryable<Receipt>>().Setup(m => m.Provider).Returns(receipts.Provider);
+            receiptMockDbSet.As<IQueryable<Receipt>>().Setup(m => m.Expression).Returns(receipts.Expression);
+            receiptMockDbSet.As<IQueryable<Receipt>>().Setup(m => m.ElementType).Returns(receipts.ElementType);
+            receiptMockDbSet.As<IQueryable<Receipt>>().Setup(m => m.GetEnumerator()).Returns(receipts.GetEnumerator());
+
+            var productReceiptMockDbSet = new Mock<DbSet<ProductReceipt>>();
+            productReceiptMockDbSet.As<IQueryable<ProductReceipt>>().Setup(m => m.Provider).Returns(productReceipts.Provider);
+            productReceiptMockDbSet.As<IQueryable<ProductReceipt>>().Setup(m => m.Expression).Returns(productReceipts.Expression);
+            productReceiptMockDbSet.As<IQueryable<ProductReceipt>>().Setup(m => m.ElementType).Returns(productReceipts.ElementType);
+            productReceiptMockDbSet.As<IQueryable<ProductReceipt>>().Setup(m => m.GetEnumerator()).Returns(productReceipts.GetEnumerator());
+
+            var mockContext = new Mock<EazyCartContext>();
+            mockContext.Setup(m => m.Products).Returns(productMockDbSet.Object);
+            mockContext.Setup(m => m.ProductsReceipts).Returns(productReceiptMockDbSet.Object);
+            mockContext.Setup(m => m.Receipts).Returns(receiptMockDbSet.Object);
+
+            var productReceiptBusiness = new ProductReceiptBusiness(mockContext.Object);
+
+            // Act
+            productReceiptBusiness.Update(1, "000001", "1", "0");
+
+            // Assert
+            mockContext.Verify(m => m.SaveChanges(), Times.Once());
+        }
+
+        [TestMethod]
         public void Update_ThrowsArgumentException_WhenQuantityCannotBeParsed()
         {
             // Arrange
@@ -532,7 +584,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
             // Act & Assert
             try
             {
-                productReceiptBusiness.Add(1, "000001", "1", "0");
+                productReceiptBusiness.Update(1, "000001", "1", "0");
                 Assert.Fail("No exception is thrown");
             }
             catch (ArgumentException exc)

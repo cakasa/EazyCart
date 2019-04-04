@@ -88,17 +88,9 @@ namespace Business
         /// <param name="categoryId">Give the id of the category.</param>
         public void Update(string categoryName, int categoryId)
         {
-            // // Set the new category's fields.
-            var newCategory = new Category()
-            {
-                Name = categoryName,
-                Id = categoryId
-            };
+            var categoryToUpdate = eazyCartContext.Categories.FirstOrDefault(x =>x.Id == categoryId);
+            categoryToUpdate.Name = categoryName;
 
-            var categoryToUpdate = eazyCartContext.Categories.Find(categoryId);
-
-            // Set the updated category's fields.
-            eazyCartContext.Entry(categoryToUpdate).CurrentValues.SetValues(newCategory);
             eazyCartContext.SaveChanges();
         }
 

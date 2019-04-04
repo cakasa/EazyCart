@@ -527,20 +527,12 @@ namespace Business
             {
                 var product = eazyCartContext.Products.FirstOrDefault(x => x.Code == productReceipt.ProductCode);
                 product.Quantity -= productReceipt.Quantity;
-                eazyCartContext.SaveChanges();
                 grandTotal += (product.SellingPrice * productReceipt.Quantity) * (1 - 0.01M * (decimal)productReceipt.DiscountPercentage);
             }
 
-            // Update the receipt's fields.
-            var newReceipt = new Receipt()
-            {
-                Id = receiptId,
-                TimeOfPurchase = DateTime.Now,
-                GrandTotal = grandTotal
-            };
+            receiptToUpdate.TimeOfPurchase = DateTime.Now;
+            receiptToUpdate.GrandTotal = grandTotal;
 
-            // Set the updated receipt's fields.
-            eazyCartContext.Entry(receiptToUpdate).CurrentValues.SetValues(newReceipt);
             eazyCartContext.SaveChanges();
         }
 

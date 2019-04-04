@@ -132,18 +132,10 @@ namespace Business
                 throw new ArgumentException("No such country exists.");
             }
 
-            // Update the city's fields.
-            var newCity = new City()
-            {
-                Id = cityId,
-                Name = cityName,
-                CountryId = country.Id
-            };
+            var cityToUpdate = eazyCartContext.Cities.FirstOrDefault(x => x.Id == cityId);
+            cityToUpdate.Name = cityName;
+            cityToUpdate.CountryId = country.Id;
 
-            var cityToUpdate = eazyCartContext.Cities.Find(cityId);
-
-            // Set the updated city's fields.
-            eazyCartContext.Entry(cityToUpdate).CurrentValues.SetValues(newCity);
             eazyCartContext.SaveChanges();
         }
 

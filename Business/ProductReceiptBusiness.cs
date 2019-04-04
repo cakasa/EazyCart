@@ -104,7 +104,7 @@ namespace Business
             };
 
             var allProductReceiptsWithGivenId = eazyCartContext.ProductsReceipts.Where(x => x.Id == receiptId);
-            if(allProductReceiptsWithGivenId.Count() > 0)
+            if (allProductReceiptsWithGivenId.Count() > 0)
             {
                 throw new ArgumentException("Such productReceipt is already added.");
             }
@@ -136,7 +136,7 @@ namespace Business
             {
                 throw new ArgumentException("Quantity must be positive.");
             }
-            if(discountPercentage < 0)
+            if (discountPercentage < 0)
             {
                 throw new ArgumentException("Discount must NOT be negative.");
             }
@@ -153,20 +153,12 @@ namespace Business
             }
             Receipt receipt = eazyCartContext.Receipts.Last();
 
-            // // Update the supplier's fields.
-            ProductReceipt newProductReceipt = new ProductReceipt
-            {
-                Id = productReceiptId,
-                Quantity = quantity,
-                DiscountPercentage = discountPercentage,
-                ProductCode = productCode,
-                ReceiptId = receipt.Id
-            };
-
             var productReceiptToUpdate = eazyCartContext.ProductsReceipts.FirstOrDefault(x => x.Id == productReceiptId);
+            productReceiptToUpdate.Quantity = quantity;
+            productReceiptToUpdate.DiscountPercentage = discountPercentage;
+            productReceiptToUpdate.ProductCode = productCode;
+            productReceiptToUpdate.ReceiptId = receipt.Id;
 
-            // Set the updated supplier's fields.
-            eazyCartContext.Entry(productReceiptToUpdate).CurrentValues.SetValues(newProductReceipt);
             eazyCartContext.SaveChanges();
         }
 

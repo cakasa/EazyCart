@@ -160,6 +160,34 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
+        public void Update_SuccessfullyUpdatesCategory()
+        {
+            // Arrange
+            var categories = new List<Category>
+            {
+                new Category {Name = "TestCategory1", Id = 1},
+                new Category {Name = "TestCategory2", Id = 2}
+            }.AsQueryable();
+
+            var categorymockDbSet = new Mock<DbSet<Category>>();
+            categorymockDbSet.As<IQueryable<Category>>().Setup(m => m.Provider).Returns(categories.Provider);
+            categorymockDbSet.As<IQueryable<Category>>().Setup(m => m.Expression).Returns(categories.Expression);
+            categorymockDbSet.As<IQueryable<Category>>().Setup(m => m.ElementType).Returns(categories.ElementType);
+            categorymockDbSet.As<IQueryable<Category>>().Setup(m => m.GetEnumerator()).Returns(categories.GetEnumerator());
+
+            var mockContext = new Mock<EazyCartContext>();
+            mockContext.Setup(c => c.Categories).Returns(categorymockDbSet.Object);
+
+            var categoryBusiness = new CategoryBusiness(mockContext.Object);
+
+            // Act
+            categoryBusiness.Update("UpdatedCategory", 1);
+
+            // Assert
+            mockContext.Verify(m => m.SaveChanges(), Times.Once());
+        }
+
+        [TestMethod]
         public void Delete_SuccessfullyDeletesCategory_WhenNoProductsAreRelated()
         {
             // Arrange

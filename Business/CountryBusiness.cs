@@ -94,18 +94,10 @@ namespace Business
         /// <param name="countryId">The Id of the country to update.</param>
         public void Update(string countryName, int countryId)
         {
-            //  Update the country's fields.
-            var newCountry = new Country()
-            {
-                Id = countryId,
-                Name = countryName
-            };
-
             var countryToUpdate = 
                 eazyCartContext.Countries.FirstOrDefault(x => x.Id == countryId);
+            countryToUpdate.Name = countryName;
 
-            // Set the updated county's fields.
-            eazyCartContext.Entry(countryToUpdate).CurrentValues.SetValues(newCountry);
             eazyCartContext.SaveChanges();
         }
 

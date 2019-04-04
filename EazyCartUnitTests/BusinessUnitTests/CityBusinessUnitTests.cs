@@ -403,12 +403,52 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void Update_ThrowsExceptionWhenInformationIsNotValid()
+        public void Update_SuccessfullyUpdatesCity()
         {
             // Arrange
             var countryData = new List<Country>
             {
                 new Country {Name = "TestCountry1", Id = 1}
+            }.AsQueryable();
+
+            var cities = new List<City>
+            {
+                new City {Name = "TestCity1", Id = 1},
+                new City {Name = "TestCity2", Id = 2}
+            }.AsQueryable();
+
+            var mockDbCountrySet = new Mock<DbSet<Country>>();
+            mockDbCountrySet.As<IQueryable<Country>>().Setup(m => m.Provider).Returns(countryData.Provider);
+            mockDbCountrySet.As<IQueryable<Country>>().Setup(m => m.Expression).Returns(countryData.Expression);
+            mockDbCountrySet.As<IQueryable<Country>>().Setup(m => m.ElementType).Returns(countryData.ElementType);
+            mockDbCountrySet.As<IQueryable<Country>>().Setup(m => m.GetEnumerator()).Returns(countryData.GetEnumerator());
+
+            var citymockDbSet = new Mock<DbSet<City>>();
+            citymockDbSet.As<IQueryable<City>>().Setup(m => m.Provider).Returns(cities.Provider);
+            citymockDbSet.As<IQueryable<City>>().Setup(m => m.Expression).Returns(cities.Expression);
+            citymockDbSet.As<IQueryable<City>>().Setup(m => m.ElementType).Returns(cities.ElementType);
+            citymockDbSet.As<IQueryable<City>>().Setup(m => m.GetEnumerator()).Returns(cities.GetEnumerator());
+
+            var mockContext = new Mock<EazyCartContext>();
+            mockContext.Setup(c => c.Cities).Returns(citymockDbSet.Object);
+            mockContext.Setup(c => c.Countries).Returns(mockDbCountrySet.Object);
+
+            var cityBusiness = new CityBusiness(mockContext.Object);
+
+            // Act
+            cityBusiness.Update("UpdatedCity", 1, "TestCountry1");
+
+            // Assert
+            mockContext.Verify(m => m.SaveChanges(), Times.Once());
+        }
+
+        [TestMethod]
+        public void Update_ThrowsException_WhenCountryIdDoesNotExist()
+        {
+            // Arrange
+            var countryData = new List<Country>
+            {
+                new Country {Name = "Bulgaria", Id = 1}
             }.AsQueryable();
 
             var cityData = new List<City>
@@ -431,17 +471,16 @@ namespace EazyCartUnitTests.BusinessUnitTests
             var mockContext = new Mock<EazyCartContext>();
             mockContext.Setup(c => c.Cities).Returns(mockDbCitySet.Object);
             mockContext.Setup(c => c.Countries).Returns(mockDbCountrySet.Object);
-            mockContext.Setup(c => c.SaveChanges()).Throws(new Exception());
 
-            var CityBusiness = new CityBusiness(mockContext.Object);
+            var cityBusiness = new CityBusiness(mockContext.Object);
 
             // Act & Assert
             try
             {
-                CityBusiness.Update("TestCity1", 1, "TestCountry2");
+                cityBusiness.Update("UpdatedCity1", 1, "TestCountry1");
                 Assert.Fail("No exception was thrown");
             }
-            catch (Exception ex)
+            catch (ArgumentException ex)
             {
                 string expectedMessage = string.Format("No such country exists.");
                 Assert.AreEqual(expectedMessage, ex.Message, "Wrong exception was thrown.");
