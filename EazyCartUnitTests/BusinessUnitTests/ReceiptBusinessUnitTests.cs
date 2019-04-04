@@ -122,7 +122,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
 
             // Act
             int idToAdd = 1;
-            receiptBusiness.Add(1);
+            receiptBusiness.Add(idToAdd);
 
             // Assert
             receiptMockDbSet.Verify(m => m.Add(It.IsAny<Receipt>()), Times.Once());

@@ -225,12 +225,19 @@ namespace EazyCartUnitTests.BusinessUnitTests
         public void AddCountry_SuccessfullyAddsACountry_WhenAllValuesAreCorrect()
         {
             // Arrange
+            var countries = new List<Country>().AsQueryable();
+
             var countryMockDbSet = new Mock<DbSet<Country>>();
+            countryMockDbSet.As<IQueryable<Country>>().Setup(m => m.Provider).Returns(countries.Provider);
+            countryMockDbSet.As<IQueryable<Country>>().Setup(m => m.Expression).Returns(countries.Expression);
+            countryMockDbSet.As<IQueryable<Country>>().Setup(m => m.ElementType).Returns(countries.ElementType);
+            countryMockDbSet.As<IQueryable<Country>>().Setup(m => m.GetEnumerator()).Returns(countries.GetEnumerator());
 
             var mockContext = new Mock<EazyCartContext>();
             mockContext.Setup(m => m.Countries).Returns(countryMockDbSet.Object);
 
             var countryBusiness = new CountryBusiness(mockContext.Object);
+            
 
             // Act
             countryBusiness.Add("TestCountry", 1);

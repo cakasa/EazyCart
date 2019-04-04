@@ -58,18 +58,19 @@
             this.totalPriceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.discountPercentageTextBox = new System.Windows.Forms.TextBox();
             this.discountCheckBox = new System.Windows.Forms.CheckBox();
-            this.saveProductButton = new System.Windows.Forms.Button();
-            this.editProductButton = new System.Windows.Forms.Button();
-            this.addProductButton = new System.Windows.Forms.Button();
-            this.cancelOrderButton = new System.Windows.Forms.Button();
-            this.completeOrderButton = new System.Windows.Forms.Button();
             this.receiptNumberLabel = new System.Windows.Forms.Label();
             this.receiptNumberTextBox = new System.Windows.Forms.TextBox();
             this.deleteProductButton = new System.Windows.Forms.Button();
             this.paidLabel = new System.Windows.Forms.Label();
             this.changeLabel = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.changeCashLabel = new System.Windows.Forms.Label();
             this.paidCashLabel = new System.Windows.Forms.Label();
+            this.saveProductButton = new System.Windows.Forms.Button();
+            this.editProductButton = new System.Windows.Forms.Button();
+            this.addProductButton = new System.Windows.Forms.Button();
+            this.cancelOrderButton = new System.Windows.Forms.Button();
+            this.completeOrderButton = new System.Windows.Forms.Button();
+            this.makePaymentButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.availableProductsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.receiptDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -89,7 +90,7 @@
             this.grandTotalLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.grandTotalLabel.Location = new System.Drawing.Point(414, 723);
             this.grandTotalLabel.Name = "grandTotalLabel";
-            this.grandTotalLabel.Size = new System.Drawing.Size(173, 40);
+            this.grandTotalLabel.Size = new System.Drawing.Size(170, 40);
             this.grandTotalLabel.TabIndex = 10;
             this.grandTotalLabel.Text = "Grand Total:";
             // 
@@ -378,6 +379,91 @@
             this.discountCheckBox.UseVisualStyleBackColor = true;
             this.discountCheckBox.CheckedChanged += new System.EventHandler(this.DiscountCheckBox_CheckedChanged);
             // 
+            // receiptNumberLabel
+            // 
+            this.receiptNumberLabel.AutoSize = true;
+            this.receiptNumberLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.receiptNumberLabel.Location = new System.Drawing.Point(283, 18);
+            this.receiptNumberLabel.Name = "receiptNumberLabel";
+            this.receiptNumberLabel.Size = new System.Drawing.Size(97, 25);
+            this.receiptNumberLabel.TabIndex = 31;
+            this.receiptNumberLabel.Text = "RECEIPT #";
+            // 
+            // receiptNumberTextBox
+            // 
+            this.receiptNumberTextBox.Enabled = false;
+            this.receiptNumberTextBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.receiptNumberTextBox.Location = new System.Drawing.Point(380, 15);
+            this.receiptNumberTextBox.Name = "receiptNumberTextBox";
+            this.receiptNumberTextBox.Size = new System.Drawing.Size(161, 33);
+            this.receiptNumberTextBox.TabIndex = 32;
+            // 
+            // deleteProductButton
+            // 
+            this.deleteProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.deleteProductButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.deleteProductButton.FlatAppearance.BorderSize = 0;
+            this.deleteProductButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteProductButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.deleteProductButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.deleteProductButton.Location = new System.Drawing.Point(1404, 743);
+            this.deleteProductButton.Name = "deleteProductButton";
+            this.deleteProductButton.Size = new System.Drawing.Size(178, 82);
+            this.deleteProductButton.TabIndex = 10;
+            this.deleteProductButton.Text = "DELETE PRODUCT";
+            this.deleteProductButton.UseVisualStyleBackColor = false;
+            this.deleteProductButton.Click += new System.EventHandler(this.DeleteProduct_Click);
+            // 
+            // paidLabel
+            // 
+            this.paidLabel.AutoSize = true;
+            this.paidLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.paidLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.paidLabel.Location = new System.Drawing.Point(416, 773);
+            this.paidLabel.Name = "paidLabel";
+            this.paidLabel.Size = new System.Drawing.Size(116, 25);
+            this.paidLabel.TabIndex = 10;
+            this.paidLabel.Text = "Paid in cash:";
+            // 
+            // changeLabel
+            // 
+            this.changeLabel.AutoSize = true;
+            this.changeLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.changeLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.changeLabel.Location = new System.Drawing.Point(416, 800);
+            this.changeLabel.Name = "changeLabel";
+            this.changeLabel.Size = new System.Drawing.Size(82, 25);
+            this.changeLabel.TabIndex = 10;
+            this.changeLabel.Text = "Change:";
+            // 
+            // changeCashLabel
+            // 
+            this.changeCashLabel.AutoSize = true;
+            this.changeCashLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.changeCashLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.changeCashLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.changeCashLabel.Location = new System.Drawing.Point(588, 800);
+            this.changeCashLabel.MinimumSize = new System.Drawing.Size(250, 0);
+            this.changeCashLabel.Name = "changeCashLabel";
+            this.changeCashLabel.Size = new System.Drawing.Size(250, 25);
+            this.changeCashLabel.TabIndex = 11;
+            this.changeCashLabel.Text = " $ 0.00";
+            this.changeCashLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // paidCashLabel
+            // 
+            this.paidCashLabel.AutoSize = true;
+            this.paidCashLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.paidCashLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.paidCashLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.paidCashLabel.Location = new System.Drawing.Point(588, 773);
+            this.paidCashLabel.MinimumSize = new System.Drawing.Size(250, 0);
+            this.paidCashLabel.Name = "paidCashLabel";
+            this.paidCashLabel.Size = new System.Drawing.Size(250, 25);
+            this.paidCashLabel.TabIndex = 11;
+            this.paidCashLabel.Text = " $ 0.00";
+            this.paidCashLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // saveProductButton
             // 
             this.saveProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
@@ -437,7 +523,7 @@
             this.cancelOrderButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
             this.cancelOrderButton.Location = new System.Drawing.Point(350, 706);
             this.cancelOrderButton.Name = "cancelOrderButton";
-            this.cancelOrderButton.Size = new System.Drawing.Size(38, 119);
+            this.cancelOrderButton.Size = new System.Drawing.Size(41, 119);
             this.cancelOrderButton.TabIndex = 13;
             this.cancelOrderButton.Tag = "";
             this.cancelOrderButton.UseVisualStyleBackColor = false;
@@ -452,102 +538,34 @@
             this.completeOrderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.completeOrderButton.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.completeOrderButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.completeOrderButton.Location = new System.Drawing.Point(13, 706);
+            this.completeOrderButton.Location = new System.Drawing.Point(13, 758);
             this.completeOrderButton.Name = "completeOrderButton";
-            this.completeOrderButton.Size = new System.Drawing.Size(337, 119);
+            this.completeOrderButton.Size = new System.Drawing.Size(337, 67);
             this.completeOrderButton.TabIndex = 12;
             this.completeOrderButton.UseVisualStyleBackColor = false;
             this.completeOrderButton.Click += new System.EventHandler(this.CompleteOrderButton_Click);
             // 
-            // receiptNumberLabel
+            // makePaymentButton
             // 
-            this.receiptNumberLabel.AutoSize = true;
-            this.receiptNumberLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.receiptNumberLabel.Location = new System.Drawing.Point(283, 18);
-            this.receiptNumberLabel.Name = "receiptNumberLabel";
-            this.receiptNumberLabel.Size = new System.Drawing.Size(97, 25);
-            this.receiptNumberLabel.TabIndex = 31;
-            this.receiptNumberLabel.Text = "RECEIPT #";
-            // 
-            // receiptNumberTextBox
-            // 
-            this.receiptNumberTextBox.Enabled = false;
-            this.receiptNumberTextBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.receiptNumberTextBox.Location = new System.Drawing.Point(380, 15);
-            this.receiptNumberTextBox.Name = "receiptNumberTextBox";
-            this.receiptNumberTextBox.Size = new System.Drawing.Size(161, 33);
-            this.receiptNumberTextBox.TabIndex = 32;
-            // 
-            // deleteProductButton
-            // 
-            this.deleteProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
-            this.deleteProductButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.deleteProductButton.FlatAppearance.BorderSize = 0;
-            this.deleteProductButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.deleteProductButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.deleteProductButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.deleteProductButton.Location = new System.Drawing.Point(1404, 743);
-            this.deleteProductButton.Name = "deleteProductButton";
-            this.deleteProductButton.Size = new System.Drawing.Size(178, 82);
-            this.deleteProductButton.TabIndex = 10;
-            this.deleteProductButton.Text = "DELETE PRODUCT";
-            this.deleteProductButton.UseVisualStyleBackColor = false;
-            this.deleteProductButton.Click += new System.EventHandler(this.DeleteProduct_Click);
-            // 
-            // paidLabel
-            // 
-            this.paidLabel.AutoSize = true;
-            this.paidLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.paidLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.paidLabel.Location = new System.Drawing.Point(416, 773);
-            this.paidLabel.Name = "paidLabel";
-            this.paidLabel.Size = new System.Drawing.Size(117, 25);
-            this.paidLabel.TabIndex = 10;
-            this.paidLabel.Text = "Paid in cash:";
-            // 
-            // changeLabel
-            // 
-            this.changeLabel.AutoSize = true;
-            this.changeLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.changeLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.changeLabel.Location = new System.Drawing.Point(416, 800);
-            this.changeLabel.Name = "changeLabel";
-            this.changeLabel.Size = new System.Drawing.Size(82, 25);
-            this.changeLabel.TabIndex = 10;
-            this.changeLabel.Text = "Change:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.label2.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.label2.Location = new System.Drawing.Point(588, 800);
-            this.label2.MinimumSize = new System.Drawing.Size(250, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(250, 25);
-            this.label2.TabIndex = 11;
-            this.label2.Text = " $ 0.00";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // paidCashLabel
-            // 
-            this.paidCashLabel.AutoSize = true;
-            this.paidCashLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.paidCashLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.paidCashLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.paidCashLabel.Location = new System.Drawing.Point(588, 773);
-            this.paidCashLabel.MinimumSize = new System.Drawing.Size(250, 0);
-            this.paidCashLabel.Name = "paidCashLabel";
-            this.paidCashLabel.Size = new System.Drawing.Size(250, 25);
-            this.paidCashLabel.TabIndex = 11;
-            this.paidCashLabel.Text = " $ 0.00";
-            this.paidCashLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.makePaymentButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.makePaymentButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.makePaymentButton.FlatAppearance.BorderSize = 0;
+            this.makePaymentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.makePaymentButton.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.makePaymentButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.makePaymentButton.Location = new System.Drawing.Point(13, 706);
+            this.makePaymentButton.Name = "makePaymentButton";
+            this.makePaymentButton.Size = new System.Drawing.Size(337, 52);
+            this.makePaymentButton.TabIndex = 33;
+            this.makePaymentButton.Text = "Make Payment";
+            this.makePaymentButton.UseVisualStyleBackColor = false;
+            this.makePaymentButton.Click += new System.EventHandler(this.MakePaymentButton_Click);
             // 
             // CashRegisterUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.makePaymentButton);
             this.Controls.Add(this.deleteProductButton);
             this.Controls.Add(this.receiptNumberTextBox);
             this.Controls.Add(this.receiptNumberLabel);
@@ -561,7 +579,7 @@
             this.Controls.Add(this.quantityTextBox);
             this.Controls.Add(this.searchBoxTextBox);
             this.Controls.Add(this.addProductButton);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.changeCashLabel);
             this.Controls.Add(this.paidCashLabel);
             this.Controls.Add(this.changeLabel);
             this.Controls.Add(this.grandTotalCashLabel);
@@ -612,7 +630,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn totalPriceColumn;
         private System.Windows.Forms.Label paidLabel;
         private System.Windows.Forms.Label changeLabel;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label changeCashLabel;
         private System.Windows.Forms.Label paidCashLabel;
+        private System.Windows.Forms.Button makePaymentButton;
     }
 }

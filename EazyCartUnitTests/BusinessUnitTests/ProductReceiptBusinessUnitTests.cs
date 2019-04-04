@@ -148,6 +148,8 @@ namespace EazyCartUnitTests.BusinessUnitTests
                 new Receipt() {Id = 1, GrandTotal = 0, TimeOfPurchase = receiptDateTime},
             }.AsQueryable();
 
+            var productReceipts = new List<ProductReceipt>().AsQueryable();
+
             var productMockDbSet = new Mock<DbSet<Product>>();
             productMockDbSet.As<IQueryable<Product>>().Setup(m => m.Provider).Returns(products.Provider);
             productMockDbSet.As<IQueryable<Product>>().Setup(m => m.Expression).Returns(products.Expression);
@@ -161,6 +163,11 @@ namespace EazyCartUnitTests.BusinessUnitTests
             receiptMockDbSet.As<IQueryable<Receipt>>().Setup(m => m.GetEnumerator()).Returns(receipts.GetEnumerator());
 
             var productReceiptMockDbSet = new Mock<DbSet<ProductReceipt>>();
+            productReceiptMockDbSet.As<IQueryable<ProductReceipt>>().Setup(m => m.Provider).Returns(productReceipts.Provider);
+            productReceiptMockDbSet.As<IQueryable<ProductReceipt>>().Setup(m => m.Expression).Returns(productReceipts.Expression);
+            productReceiptMockDbSet.As<IQueryable<ProductReceipt>>().Setup(m => m.ElementType).Returns(productReceipts.ElementType);
+            productReceiptMockDbSet.As<IQueryable<ProductReceipt>>().Setup(m => m.GetEnumerator()).Returns(productReceipts.GetEnumerator());
+
             var mockContext = new Mock<EazyCartContext>();
             mockContext.Setup(m => m.Products).Returns(productMockDbSet.Object);
             mockContext.Setup(m => m.ProductsReceipts).Returns(productReceiptMockDbSet.Object);
@@ -220,6 +227,54 @@ namespace EazyCartUnitTests.BusinessUnitTests
             catch (ArgumentException exc)
             {
                 string expectedMessage = "Wrong values for quantity/discount";
+                Assert.AreEqual(expectedMessage, exc.Message, "Different exception was thrown");
+            }
+        }
+
+        [TestMethod]
+        public void Add_ThrowsArgumentException_WhenQuantityIsNotPositive()
+        {
+            // Arrange
+            var productReceiptMockDbSet = new Mock<DbSet<ProductReceipt>>();
+
+            var mockContext = new Mock<EazyCartContext>();
+            mockContext.Setup(m => m.ProductsReceipts).Returns(productReceiptMockDbSet.Object);
+
+            var productReceiptBusiness = new ProductReceiptBusiness(mockContext.Object);
+
+            // Act & Assert
+            try
+            {
+                productReceiptBusiness.Add(1, "000001", "-1", "0");
+                Assert.Fail("No exception was thrown");
+            }
+            catch (ArgumentException exc)
+            {
+                string expectedMessage = "Quantity must be positive.";
+                Assert.AreEqual(expectedMessage, exc.Message, "Different exception was thrown");
+            }
+        }
+
+        [TestMethod]
+        public void Add_ThrowsArgumentException_WhenDiscountPercentageIsNegative()
+        {
+            // Arrange
+            var productReceiptMockDbSet = new Mock<DbSet<ProductReceipt>>();
+
+            var mockContext = new Mock<EazyCartContext>();
+            mockContext.Setup(m => m.ProductsReceipts).Returns(productReceiptMockDbSet.Object);
+
+            var productReceiptBusiness = new ProductReceiptBusiness(mockContext.Object);
+
+            // Act & Assert
+            try
+            {
+                productReceiptBusiness.Add(1, "000001", "1", "-1");
+                Assert.Fail("No exception was thrown");
+            }
+            catch (ArgumentException exc)
+            {
+                string expectedMessage = "Discount must NOT be negative.";
                 Assert.AreEqual(expectedMessage, exc.Message, "Different exception was thrown");
             }
         }
@@ -312,6 +367,11 @@ namespace EazyCartUnitTests.BusinessUnitTests
                 new Receipt() {Id = 1, GrandTotal = 0, TimeOfPurchase = receiptDateTime},
             }.AsQueryable();
 
+            var productReceipts = new List<ProductReceipt>
+            {
+                new ProductReceipt {Id = 1, ProductCode = "000001", Quantity = 1, DiscountPercentage = 0 },
+            }.AsQueryable();
+
             var productMockDbSet = new Mock<DbSet<Product>>();
             productMockDbSet.As<IQueryable<Product>>().Setup(m => m.Provider).Returns(products.Provider);
             productMockDbSet.As<IQueryable<Product>>().Setup(m => m.Expression).Returns(products.Expression);
@@ -325,6 +385,11 @@ namespace EazyCartUnitTests.BusinessUnitTests
             receiptMockDbSet.As<IQueryable<Receipt>>().Setup(m => m.GetEnumerator()).Returns(receipts.GetEnumerator());
 
             var productReceiptMockDbSet = new Mock<DbSet<ProductReceipt>>();
+            productReceiptMockDbSet.As<IQueryable<ProductReceipt>>().Setup(m => m.Provider).Returns(productReceipts.Provider);
+            productReceiptMockDbSet.As<IQueryable<ProductReceipt>>().Setup(m => m.Expression).Returns(productReceipts.Expression);
+            productReceiptMockDbSet.As<IQueryable<ProductReceipt>>().Setup(m => m.ElementType).Returns(productReceipts.ElementType);
+            productReceiptMockDbSet.As<IQueryable<ProductReceipt>>().Setup(m => m.GetEnumerator()).Returns(productReceipts.GetEnumerator());
+
             var mockContext = new Mock<EazyCartContext>();
             mockContext.Setup(m => m.Products).Returns(productMockDbSet.Object);
             mockContext.Setup(m => m.ProductsReceipts).Returns(productReceiptMockDbSet.Object);
@@ -341,7 +406,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
             }
             catch(ArgumentException exc)
             {
-                var expectedMessage = "This product is already added.";
+                var expectedMessage = "Such productReceipt is already added.";
                 Assert.AreEqual(expectedMessage, exc.Message, "Different exception is thrown.");
             }
         }
@@ -390,6 +455,53 @@ namespace EazyCartUnitTests.BusinessUnitTests
             catch (ArgumentException exc)
             {
                 string expectedMessage = "Wrong values for quantity/discount";
+                Assert.AreEqual(expectedMessage, exc.Message, "Different exception was thrown");
+            }
+        }
+        [TestMethod]
+        public void Update_ThrowsArgumentException_WhenQuantityIsNotPositive()
+        {
+            // Arrange
+            var productReceiptMockDbSet = new Mock<DbSet<ProductReceipt>>();
+
+            var mockContext = new Mock<EazyCartContext>();
+            mockContext.Setup(m => m.ProductsReceipts).Returns(productReceiptMockDbSet.Object);
+
+            var productReceiptBusiness = new ProductReceiptBusiness(mockContext.Object);
+
+            // Act & Assert
+            try
+            {
+                productReceiptBusiness.Update(1, "000001", "-1", "0");
+                Assert.Fail("No exception was thrown");
+            }
+            catch (ArgumentException exc)
+            {
+                string expectedMessage = "Quantity must be positive.";
+                Assert.AreEqual(expectedMessage, exc.Message, "Different exception was thrown");
+            }
+        }
+
+        [TestMethod]
+        public void Update_ThrowsArgumentException_WhenDiscountPercentageIsNegative()
+        {
+            // Arrange
+            var productReceiptMockDbSet = new Mock<DbSet<ProductReceipt>>();
+
+            var mockContext = new Mock<EazyCartContext>();
+            mockContext.Setup(m => m.ProductsReceipts).Returns(productReceiptMockDbSet.Object);
+
+            var productReceiptBusiness = new ProductReceiptBusiness(mockContext.Object);
+
+            // Act & Assert
+            try
+            {
+                productReceiptBusiness.Update(1, "000001", "1", "-1");
+                Assert.Fail("No exception was thrown");
+            }
+            catch (ArgumentException exc)
+            {
+                string expectedMessage = "Discount must NOT be negative.";
                 Assert.AreEqual(expectedMessage, exc.Message, "Different exception was thrown");
             }
         }

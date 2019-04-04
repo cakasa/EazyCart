@@ -70,15 +70,15 @@ namespace Business
                 Name = categoryName
             };
 
-            eazyCartContext.Categories.Add(category);
-            try
-            {
-                eazyCartContext.SaveChanges();
-            }
-            catch
+            var allCountriesWithGivenId = eazyCartContext.Categories.Where(x => x.Id == categoryId);
+
+            if (allCountriesWithGivenId.Count() > 0)
             {
                 throw new ArgumentException($"Category with ID {categoryId} already exists.");
             }
+
+            eazyCartContext.Categories.Add(category);
+            eazyCartContext.SaveChanges();
         }
 
         /// <summary>

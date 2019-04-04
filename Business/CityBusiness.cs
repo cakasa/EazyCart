@@ -104,15 +104,14 @@ namespace Business
                 CountryId = country.Id
             };
 
-            eazyCartContext.Cities.Add(city);
-            try
-            {
-                eazyCartContext.SaveChanges();
-            }
-            catch
+            var allCitiesWithGivenId = eazyCartContext.Cities.Where(x => x.Id == cityId);
+            if (allCitiesWithGivenId.Count() > 0)
             {
                 throw new ArgumentException($"City with ID {cityId} already exists.");
             }
+
+            eazyCartContext.Cities.Add(city);
+            eazyCartContext.SaveChanges();
         }
 
         /// <summary>

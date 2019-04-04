@@ -221,16 +221,18 @@ namespace EazyCart
         private void UpdateCategoryComboBoxOnWarehouseUserControl()
         {
             var eazyCartForm = (EazyCartForm)EazyCartForm.ActiveForm;
-            eazyCartForm.warehouseUserControl.UpdateCategoryComboBox();
+            eazyCartForm.warehouseUserControl.UpdateUserControl();
+            eazyCartForm.cashRegisterUserControl.UpdateUserControl();
         }
 
         /// <summary>
         /// Updates comboBoxes related to suppliers in the warehouseUserControl
         /// </summary>
-        private void UpdateSupplierComboBoxOnWarehouseUserControl()
+        private void UpdateWarehouseAndCashRegisterTabs()
         {
             var eazyCartForm = (EazyCartForm)EazyCartForm.ActiveForm;
-            eazyCartForm.warehouseUserControl.UpdateSupplierComboBox();
+            eazyCartForm.warehouseUserControl.UpdateUserControl();
+            eazyCartForm.cashRegisterUserControl.UpdateUserControl();
         }
 
         // The following methods are related to user interaction with the user control.
@@ -458,6 +460,8 @@ namespace EazyCart
             this.countryIdTextBox.Enabled = true;
             this.ToggleEditSave(editCountryButton, saveChangesForCountryButton, addCountryButton, deleteCountryButton);
             this.ClearAndUpdateCountryTab();
+            this.ClearAndUpdateCityTab();
+            this.ClearAndUpdateSupplierTab();
         }
 
         /// <summary>
@@ -637,6 +641,7 @@ namespace EazyCart
             // Update appropriate tab.
             this.ToggleEditSave(editCityButton, saveChangesForCityButton, addCityButton, deleteCityButton);
             this.ClearAndUpdateCityTab();
+            this.ClearAndUpdateSupplierTab();
         }
 
         /// <summary>
@@ -708,7 +713,7 @@ namespace EazyCart
 
             // Update appropriate tabs.
             this.ClearAndUpdateSupplierTab();
-            this.UpdateSupplierComboBoxOnWarehouseUserControl();
+            this.UpdateWarehouseAndCashRegisterTabs();
         }
 
         /// <summary>
@@ -781,7 +786,7 @@ namespace EazyCart
             // Update the appropriate tabs
             this.ToggleEditSave(editSupplierButton, saveChangesForSupplierButton, addSupplierButton, deleteSupplierButton);
             this.ClearAndUpdateSupplierTab();
-            this.UpdateSupplierComboBoxOnWarehouseUserControl();
+            this.UpdateWarehouseAndCashRegisterTabs();
         }
 
         /// <summary>
@@ -817,7 +822,7 @@ namespace EazyCart
 
             // Update appropriate tabs.
             ClearAndUpdateSupplierTab();
-            UpdateSupplierComboBoxOnWarehouseUserControl();
+            UpdateWarehouseAndCashRegisterTabs();
         }
 
         /// <summary>

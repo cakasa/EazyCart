@@ -71,13 +71,17 @@ namespace Business
             bool canDiscountBeParsed = int.TryParse(discountString, out discountPercentage);
 
             // Validation for quanity.
+            if (!canQuantityBeParsed || !canDiscountBeParsed)
+            {
+                throw new ArgumentException("Wrong values for quantity/discount");
+            }
             if (quantity <= 0)
             {
                 throw new ArgumentException("Quantity must be positive.");
             }
-            if (!canQuantityBeParsed || !canDiscountBeParsed)
+            if (discountPercentage < 0)
             {
-                throw new ArgumentException("Wrong values for quantity/discount");
+                throw new ArgumentException("Discount must NOT be negative.");
             }
             var product = eazyCartContext.Products.FirstOrDefault(x => x.Code == productCode);
             if (product.Quantity < quantity)
@@ -99,15 +103,13 @@ namespace Business
                 ReceiptId = receipt.Id
             };
 
+            var allProductReceiptsWithGivenId = eazyCartContext.ProductsReceipts.Where(x => x.Id == receiptId);
+            if(allProductReceiptsWithGivenId.Count() > 0)
+            {
+                throw new ArgumentException("Such productReceipt is already added.");
+            }
             eazyCartContext.ProductsReceipts.Add(productReceipt);
-            try
-            {
-                eazyCartContext.SaveChanges();
-            }
-            catch
-            {
-                throw new ArgumentException("This product is already added.");
-            }
+            eazyCartContext.SaveChanges();
         }
 
         /// <summary>
@@ -125,15 +127,18 @@ namespace Business
             int discountPercentage;
             bool canDiscountBeParsed = int.TryParse(discountString, out discountPercentage);
 
-            // Validation for quanity.
-            if (quantity <= 0)
-            {
-                throw new ArgumentException("Quantity must be positive.");
-            }
             // Validation for quanity and discount.
             if (!canQuantityBeParsed || !canDiscountBeParsed)
             {
                 throw new ArgumentException("Wrong values for quantity/discount");
+            }
+            if (quantity <= 0)
+            {
+                throw new ArgumentException("Quantity must be positive.");
+            }
+            if(discountPercentage < 0)
+            {
+                throw new ArgumentException("Discount must NOT be negative.");
             }
             var product = eazyCartContext.Products.FirstOrDefault(x => x.Code == productCode);
 

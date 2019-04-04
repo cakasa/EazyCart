@@ -40,7 +40,7 @@ namespace EazyCart
         /// <summary>
         /// Updates the user control every time it is loaded.
         /// </summary>
-        private void UpdateUserControl()
+        public void UpdateUserControl()
         {
             var eazyCartContext = new EazyCartContext();
             this.productBusiness = new ProductBusiness(eazyCartContext);
@@ -106,7 +106,7 @@ namespace EazyCart
         /// <summary>
         /// Update the dataGridView, which displays products.
         /// </summary>
-        public void UpdateProductDataGridView()
+        private void UpdateProductDataGridView()
         {
             this.allProductsDataGridView.Rows.Clear();
             List<Product> allProducts = productBusiness.GetAll();
@@ -132,7 +132,7 @@ namespace EazyCart
         /// <summary>
         /// Updates the category comboBox.
         /// </summary>
-        public void UpdateCategoryComboBox()
+        private void UpdateCategoryComboBox()
         {
             var allCategories = new List<string>();
 
@@ -146,7 +146,7 @@ namespace EazyCart
         /// <summary>
         /// Updates the supplier comboBox
         /// </summary>
-        public void UpdateSupplierComboBox()
+        private void UpdateSupplierComboBox()
         {
             var allSuppliers = new List<string>();
 
@@ -225,10 +225,10 @@ namespace EazyCart
         /// Used when a new product is added so that this is reflected in
         /// the cash register user control.
         /// </summary>
-        private void UpdateSelectProductTabOnCashRegisterUserControl()
+        private void UpdateCashRegisterUserControl()
         {
             var eazyCartForm = (EazyCartForm)EazyCartForm.ActiveForm;
-            eazyCartForm.cashRegisterUserControl.UpdateSelectProductTab();
+            eazyCartForm.cashRegisterUserControl.UpdateUserControl();
         }
 
         // The following methods are related to user interaction with the user control.
@@ -305,7 +305,7 @@ namespace EazyCart
 
             // Update appropriate tabs.
             this.ClearAndUpdateProductTab();
-            this.UpdateSelectProductTabOnCashRegisterUserControl();
+            this.UpdateCashRegisterUserControl();
         }
 
         /// <summary>
@@ -387,7 +387,7 @@ namespace EazyCart
             // Update the appropriate tabs.
             this.ClearAndUpdateProductTab();
             this.ToggleEditSave();
-            this.UpdateSelectProductTabOnCashRegisterUserControl();
+            this.UpdateCashRegisterUserControl();
         }
 
         /// <summary>
@@ -424,7 +424,7 @@ namespace EazyCart
 
             // Update the appropriate tabs.
             this.ClearAndUpdateProductTab();
-            this.UpdateSelectProductTabOnCashRegisterUserControl();
+            this.UpdateCashRegisterUserControl();
         }
 
         /// <summary>
@@ -514,6 +514,7 @@ namespace EazyCart
 
             // Update appropriate tab.
             this.ClearAndUpdateDeliveryTab();
+            this.UpdateCashRegisterUserControl();
         }
 
         /// <summary>

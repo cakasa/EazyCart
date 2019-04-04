@@ -514,18 +514,20 @@ namespace Business
         {
             // Find the needed receipt.
             var receiptToUpdate = eazyCartContext.Receipts.FirstOrDefault(x => x.Id == receiptId);
-            var allProductReceipts = eazyCartContext.ProductsReceipts.Where(x => x.ReceiptId == receiptId);
+            var allProductReceipts = eazyCartContext.ProductsReceipts.Where(x => x.ReceiptId == receiptId).ToList();
 
             if (allProductReceipts.Count() == 0)
             {
                 throw new ArgumentException("No products in this receipt");
             }
 
+            //Update Product Quantities
             decimal grandTotal = 0;
             foreach (var productReceipt in allProductReceipts)
             {
-                var product = eazyCartContext.Products.First(x => x.Code == productReceipt.ProductCode);
+                var product = eazyCartContext.Products.FirstOrDefault(x => x.Code == productReceipt.ProductCode);
                 product.Quantity -= productReceipt.Quantity;
+                eazyCartContext.SaveChanges();
                 grandTotal += (product.SellingPrice * productReceipt.Quantity) * (1 - 0.01M * (decimal)productReceipt.DiscountPercentage);
             }
 

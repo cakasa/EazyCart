@@ -77,16 +77,14 @@ namespace Business
                 Name = countryName
             };
 
-            eazyCartContext.Countries.Add(country);
-
-            try
-            {
-                eazyCartContext.SaveChanges();
-            }
-            catch
+            var countriesWithGivenId = eazyCartContext.Countries.Where(x=>x.Id == countryId);
+            if(countriesWithGivenId.Count() > 0)
             {
                 throw new ArgumentException($"Country with ID {countryId} already exists.");
             }
+
+            eazyCartContext.Countries.Add(country);
+            eazyCartContext.SaveChanges();
         }
 
         /// <summary>

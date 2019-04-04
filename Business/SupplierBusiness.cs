@@ -91,17 +91,17 @@ namespace Business
                 CityId = city.Id
             };
 
-            eazyCartContext.Suppliers.Add(supplier);
-
             // Check whether a supplier with the given ID already exists.
-            try
-            {
-                eazyCartContext.SaveChanges();
-            }
-            catch
+            var allSuppliersWithGivenId = eazyCartContext.Suppliers.Where(x => x.Id == supplierId);
+            if (allSuppliersWithGivenId.Count() > 0)
             {
                 throw new ArgumentException($"Supplier with ID {supplierId} already exists.");
             }
+
+
+            eazyCartContext.Suppliers.Add(supplier);
+            eazyCartContext.SaveChanges();
+
         }
 
         /// <summary>

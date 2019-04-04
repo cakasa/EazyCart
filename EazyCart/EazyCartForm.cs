@@ -190,6 +190,16 @@ namespace EazyCart
         private void UserControlChanged
             (List<UserControl> userControlsToInvisible, UserControl userControlToVisible, Point mainMenuPanelLocationPoint)
         {
+            var receiptDataGridView = (DataGridView)cashRegisterUserControl.Controls["receiptDataGridView"];
+
+            // If the receipt is not empty, prompt the user to cancel it 
+            // before closing it.
+            if (receiptDataGridView.Rows.Count != 0)
+            {
+                MessageBox.Show("You have an uncompleted order.");
+                return;
+            }
+
             foreach (var userControl in userControlsToInvisible)
             {
                 userControl.Visible = false;

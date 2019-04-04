@@ -33,7 +33,6 @@ namespace EazyCartUnitTests.BusinessUnitTests
             mockContext.Setup(c => c.Categories).Returns(mockSet.Object);
 
             var categoryBusiness = new CategoryBusiness(mockContext.Object);
-            data.ToList().ForEach(c => categoryBusiness.Add(c.Name, c.Id));
 
             // Act
             var categories = categoryBusiness.GetAll();
@@ -62,7 +61,6 @@ namespace EazyCartUnitTests.BusinessUnitTests
             mockContext.Setup(c => c.Categories).Returns(mockSet.Object);
 
             var categoryBusiness = new CategoryBusiness(mockContext.Object);
-            data.ToList().ForEach(c => categoryBusiness.Add(c.Name, c.Id));
 
             // Act
             int expectedId = 1;
@@ -92,7 +90,6 @@ namespace EazyCartUnitTests.BusinessUnitTests
             mockContext.Setup(c => c.Categories).Returns(mockSet.Object);
 
             var categoryBusiness = new CategoryBusiness(mockContext.Object);
-            data.ToList().ForEach(c => categoryBusiness.Add(c.Name, c.Id));
 
             // Act
             string expectedName = "TestCategory1";
@@ -106,7 +103,13 @@ namespace EazyCartUnitTests.BusinessUnitTests
         public void Add_SuccessfullyAddsCategory_WhenIdDoesNotExist()
         {
             // Arrange
+            var categories = new List<Category>().AsQueryable();
+
             var mockSet = new Mock<DbSet<Category>>();
+            mockSet.As<IQueryable<Category>>().Setup(m => m.Provider).Returns(categories.Provider);
+            mockSet.As<IQueryable<Category>>().Setup(m => m.Expression).Returns(categories.Expression);
+            mockSet.As<IQueryable<Category>>().Setup(m => m.ElementType).Returns(categories.ElementType);
+            mockSet.As<IQueryable<Category>>().Setup(m => m.GetEnumerator()).Returns(categories.GetEnumerator());
 
             var mockContext = new Mock<EazyCartContext>();
             mockContext.Setup(m => m.Categories).Returns(mockSet.Object);

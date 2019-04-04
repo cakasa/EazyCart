@@ -282,11 +282,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
                 new Country {Name = "TestCountry1", Id = 1}
             }.AsQueryable();
 
-            var cityData = new List<City>
-            {
-                new City {Name = "TestCity1", Id = 1, CountryId = 1}
-            }.AsQueryable();
-
+            var cityData = new List<City>().AsQueryable();
             var mockDbCountrySet = new Mock<DbSet<Country>>();
             mockDbCountrySet.As<IQueryable<Country>>().Setup(m => m.Provider).Returns(countryData.Provider);
             mockDbCountrySet.As<IQueryable<Country>>().Setup(m => m.Expression).Returns(countryData.Expression);

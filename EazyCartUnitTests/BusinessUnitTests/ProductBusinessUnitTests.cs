@@ -655,11 +655,157 @@ namespace EazyCartUnitTests.BusinessUnitTests
             var productBusiness = new ProductBusiness(mockContext.Object);
 
             // Act
-            productBusiness.Add("000000", "TestCategory1", "TestProduct1", 4, "TestSupplier1", 15, 17, "TestUnit1");
+            productBusiness.Add("000003", "TestCategory1", "TestProduct1", 4, "TestSupplier1", 15, 17, "TestUnit1");
 
             // Assert
             productMockDbSet.Verify(m => m.Add(It.IsAny<Product>()), Times.Once());
             mockContext.Verify(m => m.SaveChanges(), Times.Once());
+        }
+
+        [TestMethod]
+        public void Add_ThrowsException_WhenQuantityIsAFloatingPointNumber_AndItIsRequiredToBeAWholeNumber()
+        {
+            // Arrange
+            var categories = new List<Category>
+            {
+                new Category {Name = "TestCategory1", Id = 1},
+                new Category {Name = "TestCategory2", Id = 2}
+            }.AsQueryable();
+
+            var suppliers = new List<Supplier>
+            {
+                new Supplier { Name = "TestSupplier1", Id = 1,},
+                new Supplier { Name = "TestSupplier2", Id = 2},
+            }.AsQueryable();
+
+            var products = new List<Product>
+            {
+                new Product { Name = "TestProduct1", Code = "000000", CategoryId = 1 },
+                new Product { Name = "TestProduct2", Code = "000001", CategoryId = 1 },
+                new Product { Name = "TestProduct3", Code = "000002", CategoryId = 2 }
+            }.AsQueryable();
+
+            var units = new List<Unit>
+            {
+                new Unit {Name = "TestUnit1", Id = 1}
+            }.AsQueryable();
+
+            var categoryMockDbSet = new Mock<DbSet<Category>>();
+            categoryMockDbSet.As<IQueryable<Category>>().Setup(m => m.Provider).Returns(categories.Provider);
+            categoryMockDbSet.As<IQueryable<Category>>().Setup(m => m.Expression).Returns(categories.Expression);
+            categoryMockDbSet.As<IQueryable<Category>>().Setup(m => m.ElementType).Returns(categories.ElementType);
+            categoryMockDbSet.As<IQueryable<Category>>().Setup(m => m.GetEnumerator()).Returns(categories.GetEnumerator());
+
+            var supplierMockDbSet = new Mock<DbSet<Supplier>>();
+            supplierMockDbSet.As<IQueryable<Supplier>>().Setup(m => m.Provider).Returns(suppliers.Provider);
+            supplierMockDbSet.As<IQueryable<Supplier>>().Setup(m => m.Expression).Returns(suppliers.Expression);
+            supplierMockDbSet.As<IQueryable<Supplier>>().Setup(m => m.ElementType).Returns(suppliers.ElementType);
+            supplierMockDbSet.As<IQueryable<Supplier>>().Setup(m => m.GetEnumerator()).Returns(suppliers.GetEnumerator());
+
+            var productMockDbSet = new Mock<DbSet<Product>>();
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.Provider).Returns(products.Provider);
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.Expression).Returns(products.Expression);
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.ElementType).Returns(products.ElementType);
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.GetEnumerator()).Returns(products.GetEnumerator());
+
+            var unitMockDbSet = new Mock<DbSet<Unit>>();
+            unitMockDbSet.As<IQueryable<Unit>>().Setup(m => m.Provider).Returns(units.Provider);
+            unitMockDbSet.As<IQueryable<Unit>>().Setup(m => m.Expression).Returns(units.Expression);
+            unitMockDbSet.As<IQueryable<Unit>>().Setup(m => m.ElementType).Returns(units.ElementType);
+            unitMockDbSet.As<IQueryable<Unit>>().Setup(m => m.GetEnumerator()).Returns(units.GetEnumerator());
+
+            var mockContext = new Mock<EazyCartContext>();
+            mockContext.Setup(c => c.Products).Returns(productMockDbSet.Object);
+            mockContext.Setup(c => c.Categories).Returns(categoryMockDbSet.Object);
+            mockContext.Setup(c => c.Suppliers).Returns(supplierMockDbSet.Object);
+            mockContext.Setup(c => c.Units).Returns(unitMockDbSet.Object);
+
+            var productBusiness = new ProductBusiness(mockContext.Object);
+
+            // Act & Assert
+            try
+            {
+                productBusiness.Add("000000", "TestCategory1", "TestProduct1", 10.5M, "TestSupplier1", 15, 17, "TestUnit1");
+                Assert.Fail("No exception is thrown");
+            }
+            catch(ArgumentException exc)
+            {
+                string expectedMessage = "Quantity must be a whole number.";
+                Assert.AreEqual(expectedMessage, exc.Message, "A different exception was thrown");
+            }
+        }
+
+        [TestMethod]
+        public void Add_ThrowsException_WhenQuantityNotPositive()
+        {
+            // Arrange
+            var categories = new List<Category>
+            {
+                new Category {Name = "TestCategory1", Id = 1},
+                new Category {Name = "TestCategory2", Id = 2}
+            }.AsQueryable();
+
+            var suppliers = new List<Supplier>
+            {
+                new Supplier { Name = "TestSupplier1", Id = 1,},
+                new Supplier { Name = "TestSupplier2", Id = 2},
+            }.AsQueryable();
+
+            var products = new List<Product>
+            {
+                new Product { Name = "TestProduct1", Code = "000000", CategoryId = 1 },
+                new Product { Name = "TestProduct2", Code = "000001", CategoryId = 1 },
+                new Product { Name = "TestProduct3", Code = "000002", CategoryId = 2 }
+            }.AsQueryable();
+
+            var units = new List<Unit>
+            {
+                new Unit {Name = "TestUnit1", Id = 1}
+            }.AsQueryable();
+
+            var categoryMockDbSet = new Mock<DbSet<Category>>();
+            categoryMockDbSet.As<IQueryable<Category>>().Setup(m => m.Provider).Returns(categories.Provider);
+            categoryMockDbSet.As<IQueryable<Category>>().Setup(m => m.Expression).Returns(categories.Expression);
+            categoryMockDbSet.As<IQueryable<Category>>().Setup(m => m.ElementType).Returns(categories.ElementType);
+            categoryMockDbSet.As<IQueryable<Category>>().Setup(m => m.GetEnumerator()).Returns(categories.GetEnumerator());
+
+            var supplierMockDbSet = new Mock<DbSet<Supplier>>();
+            supplierMockDbSet.As<IQueryable<Supplier>>().Setup(m => m.Provider).Returns(suppliers.Provider);
+            supplierMockDbSet.As<IQueryable<Supplier>>().Setup(m => m.Expression).Returns(suppliers.Expression);
+            supplierMockDbSet.As<IQueryable<Supplier>>().Setup(m => m.ElementType).Returns(suppliers.ElementType);
+            supplierMockDbSet.As<IQueryable<Supplier>>().Setup(m => m.GetEnumerator()).Returns(suppliers.GetEnumerator());
+
+            var productMockDbSet = new Mock<DbSet<Product>>();
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.Provider).Returns(products.Provider);
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.Expression).Returns(products.Expression);
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.ElementType).Returns(products.ElementType);
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.GetEnumerator()).Returns(products.GetEnumerator());
+
+            var unitMockDbSet = new Mock<DbSet<Unit>>();
+            unitMockDbSet.As<IQueryable<Unit>>().Setup(m => m.Provider).Returns(units.Provider);
+            unitMockDbSet.As<IQueryable<Unit>>().Setup(m => m.Expression).Returns(units.Expression);
+            unitMockDbSet.As<IQueryable<Unit>>().Setup(m => m.ElementType).Returns(units.ElementType);
+            unitMockDbSet.As<IQueryable<Unit>>().Setup(m => m.GetEnumerator()).Returns(units.GetEnumerator());
+
+            var mockContext = new Mock<EazyCartContext>();
+            mockContext.Setup(c => c.Products).Returns(productMockDbSet.Object);
+            mockContext.Setup(c => c.Categories).Returns(categoryMockDbSet.Object);
+            mockContext.Setup(c => c.Suppliers).Returns(supplierMockDbSet.Object);
+            mockContext.Setup(c => c.Units).Returns(unitMockDbSet.Object);
+
+            var productBusiness = new ProductBusiness(mockContext.Object);
+
+            // Act & Assert
+            try
+            {
+                productBusiness.Add("000000", "TestCategory1", "TestProduct1", -2, "TestSupplier1", 15, 17, "TestUnit1");
+                Assert.Fail("No exception is thrown");
+            }
+            catch (ArgumentException exc)
+            {
+                string expectedMessage = "Quantity must be positive.";
+                Assert.AreEqual(expectedMessage, exc.Message, "A different exception was thrown");
+            }
         }
 
         [TestMethod]
@@ -736,7 +882,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void Add_ThrowsException_WhenProductIdDoesAlreadyExist()
+        public void Add_ThrowsException_WhenProductIdAlreadyExists()
         {
             // Arrange
             var categories = new List<Category>
@@ -867,13 +1013,14 @@ namespace EazyCartUnitTests.BusinessUnitTests
             mockContext.Setup(c => c.Products).Returns(productMockDbSet.Object);
             mockContext.Setup(c => c.Categories).Returns(categoryMockDbSet.Object);
             mockContext.Setup(c => c.Suppliers).Returns(supplierMockDbSet.Object);
+            mockContext.Setup(c => c.Units).Returns(unitMockDbSet.Object);
 
             var productBusiness = new ProductBusiness(mockContext.Object);
 
             // Act & Assert
             try
             {
-                productBusiness.Update("000000", "TestCategory3", "TestProduct1", 5, "TestSupplier3", 13, 16, "Unit");
+                productBusiness.Update("000000", "TestCategory3", "TestProduct1", 5, "TestSupplier3", 13, 16, "TestUnit1");
                 Assert.Fail("No exception was thrown");
             }
             catch (Exception ex)
@@ -884,6 +1031,151 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
+        public void Update_ThrowsException_WhenQuantityIsAFloatingPointNumber_AndItIsRequiredToBeAWholeNumber()
+        {
+            // Arrange
+            var categories = new List<Category>
+            {
+                new Category {Name = "TestCategory1", Id = 1},
+                new Category {Name = "TestCategory2", Id = 2}
+            }.AsQueryable();
+
+            var suppliers = new List<Supplier>
+            {
+                new Supplier { Name = "TestSupplier1", Id = 1,},
+                new Supplier { Name = "TestSupplier2", Id = 2},
+            }.AsQueryable();
+
+            var products = new List<Product>
+            {
+                new Product { Name = "TestProduct1", Code = "000000", CategoryId = 1 },
+                new Product { Name = "TestProduct2", Code = "000001", CategoryId = 1 },
+                new Product { Name = "TestProduct3", Code = "000002", CategoryId = 2 }
+            }.AsQueryable();
+
+            var units = new List<Unit>
+            {
+                new Unit {Name = "TestUnit1", Id = 1}
+            }.AsQueryable();
+
+            var categoryMockDbSet = new Mock<DbSet<Category>>();
+            categoryMockDbSet.As<IQueryable<Category>>().Setup(m => m.Provider).Returns(categories.Provider);
+            categoryMockDbSet.As<IQueryable<Category>>().Setup(m => m.Expression).Returns(categories.Expression);
+            categoryMockDbSet.As<IQueryable<Category>>().Setup(m => m.ElementType).Returns(categories.ElementType);
+            categoryMockDbSet.As<IQueryable<Category>>().Setup(m => m.GetEnumerator()).Returns(categories.GetEnumerator());
+
+            var supplierMockDbSet = new Mock<DbSet<Supplier>>();
+            supplierMockDbSet.As<IQueryable<Supplier>>().Setup(m => m.Provider).Returns(suppliers.Provider);
+            supplierMockDbSet.As<IQueryable<Supplier>>().Setup(m => m.Expression).Returns(suppliers.Expression);
+            supplierMockDbSet.As<IQueryable<Supplier>>().Setup(m => m.ElementType).Returns(suppliers.ElementType);
+            supplierMockDbSet.As<IQueryable<Supplier>>().Setup(m => m.GetEnumerator()).Returns(suppliers.GetEnumerator());
+
+            var productMockDbSet = new Mock<DbSet<Product>>();
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.Provider).Returns(products.Provider);
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.Expression).Returns(products.Expression);
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.ElementType).Returns(products.ElementType);
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.GetEnumerator()).Returns(products.GetEnumerator());
+
+            var unitMockDbSet = new Mock<DbSet<Unit>>();
+            unitMockDbSet.As<IQueryable<Unit>>().Setup(m => m.Provider).Returns(units.Provider);
+            unitMockDbSet.As<IQueryable<Unit>>().Setup(m => m.Expression).Returns(units.Expression);
+            unitMockDbSet.As<IQueryable<Unit>>().Setup(m => m.ElementType).Returns(units.ElementType);
+            unitMockDbSet.As<IQueryable<Unit>>().Setup(m => m.GetEnumerator()).Returns(units.GetEnumerator());
+
+            var mockContext = new Mock<EazyCartContext>();
+            mockContext.Setup(c => c.Products).Returns(productMockDbSet.Object);
+            mockContext.Setup(c => c.Categories).Returns(categoryMockDbSet.Object);
+            mockContext.Setup(c => c.Suppliers).Returns(supplierMockDbSet.Object);
+            mockContext.Setup(c => c.Units).Returns(unitMockDbSet.Object);
+
+            var productBusiness = new ProductBusiness(mockContext.Object);
+
+            // Act & Assert
+            try
+            {
+                productBusiness.Update("000000", "TestCategory1", "TestProduct1", 10.5M, "TestSupplier1", 15, 17, "TestUnit1");
+                Assert.Fail("No exception is thrown");
+            }
+            catch (ArgumentException exc)
+            {
+                string expectedMessage = "Quantity must be a whole number.";
+                Assert.AreEqual(expectedMessage, exc.Message, "A different exception was thrown");
+            }
+        }
+
+        [TestMethod]
+        public void Update_ThrowsException_WhenQuantityNotPositive()
+        {
+            // Arrange
+            var categories = new List<Category>
+            {
+                new Category {Name = "TestCategory1", Id = 1},
+                new Category {Name = "TestCategory2", Id = 2}
+            }.AsQueryable();
+
+            var suppliers = new List<Supplier>
+            {
+                new Supplier { Name = "TestSupplier1", Id = 1,},
+                new Supplier { Name = "TestSupplier2", Id = 2},
+            }.AsQueryable();
+
+            var products = new List<Product>
+            {
+                new Product { Name = "TestProduct1", Code = "000000", CategoryId = 1 },
+                new Product { Name = "TestProduct2", Code = "000001", CategoryId = 1 },
+                new Product { Name = "TestProduct3", Code = "000002", CategoryId = 2 }
+            }.AsQueryable();
+
+            var units = new List<Unit>
+            {
+                new Unit {Name = "TestUnit1", Id = 1}
+            }.AsQueryable();
+
+            var categoryMockDbSet = new Mock<DbSet<Category>>();
+            categoryMockDbSet.As<IQueryable<Category>>().Setup(m => m.Provider).Returns(categories.Provider);
+            categoryMockDbSet.As<IQueryable<Category>>().Setup(m => m.Expression).Returns(categories.Expression);
+            categoryMockDbSet.As<IQueryable<Category>>().Setup(m => m.ElementType).Returns(categories.ElementType);
+            categoryMockDbSet.As<IQueryable<Category>>().Setup(m => m.GetEnumerator()).Returns(categories.GetEnumerator());
+
+            var supplierMockDbSet = new Mock<DbSet<Supplier>>();
+            supplierMockDbSet.As<IQueryable<Supplier>>().Setup(m => m.Provider).Returns(suppliers.Provider);
+            supplierMockDbSet.As<IQueryable<Supplier>>().Setup(m => m.Expression).Returns(suppliers.Expression);
+            supplierMockDbSet.As<IQueryable<Supplier>>().Setup(m => m.ElementType).Returns(suppliers.ElementType);
+            supplierMockDbSet.As<IQueryable<Supplier>>().Setup(m => m.GetEnumerator()).Returns(suppliers.GetEnumerator());
+
+            var productMockDbSet = new Mock<DbSet<Product>>();
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.Provider).Returns(products.Provider);
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.Expression).Returns(products.Expression);
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.ElementType).Returns(products.ElementType);
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.GetEnumerator()).Returns(products.GetEnumerator());
+
+            var unitMockDbSet = new Mock<DbSet<Unit>>();
+            unitMockDbSet.As<IQueryable<Unit>>().Setup(m => m.Provider).Returns(units.Provider);
+            unitMockDbSet.As<IQueryable<Unit>>().Setup(m => m.Expression).Returns(units.Expression);
+            unitMockDbSet.As<IQueryable<Unit>>().Setup(m => m.ElementType).Returns(units.ElementType);
+            unitMockDbSet.As<IQueryable<Unit>>().Setup(m => m.GetEnumerator()).Returns(units.GetEnumerator());
+
+            var mockContext = new Mock<EazyCartContext>();
+            mockContext.Setup(c => c.Products).Returns(productMockDbSet.Object);
+            mockContext.Setup(c => c.Categories).Returns(categoryMockDbSet.Object);
+            mockContext.Setup(c => c.Suppliers).Returns(supplierMockDbSet.Object);
+            mockContext.Setup(c => c.Units).Returns(unitMockDbSet.Object);
+
+            var productBusiness = new ProductBusiness(mockContext.Object);
+
+            // Act & Assert
+            try
+            {
+                productBusiness.Update("000000", "TestCategory1", "TestProduct1", -2, "TestSupplier1", 15, 17, "TestUnit1");
+                Assert.Fail("No exception is thrown");
+            }
+            catch (ArgumentException exc)
+            {
+                string expectedMessage = "Quantity must be positive.";
+                Assert.AreEqual(expectedMessage, exc.Message, "A different exception was thrown");
+            }
+        }
+        [TestMethod]
         public void Delete_SuccessfullyDeletesProduct()
         {
             // Assert
@@ -893,14 +1185,26 @@ namespace EazyCartUnitTests.BusinessUnitTests
                 new Product { Name = "TestProduct2", Code = "000001", CategoryId = 1 }
             }.AsQueryable();
 
+            var productsReceipts = new List<ProductReceipt>()
+            {
+                new ProductReceipt { Id = 1, ProductCode = "000001", Quantity = 1, DiscountPercentage = 0 },
+            }.AsQueryable();
+
             var productMockDbSet = new Mock<DbSet<Product>>();
             productMockDbSet.As<IQueryable<Product>>().Setup(m => m.Provider).Returns(products.Provider);
             productMockDbSet.As<IQueryable<Product>>().Setup(m => m.Expression).Returns(products.Expression);
             productMockDbSet.As<IQueryable<Product>>().Setup(m => m.ElementType).Returns(products.ElementType);
             productMockDbSet.As<IQueryable<Product>>().Setup(m => m.GetEnumerator()).Returns(products.GetEnumerator());
+            var productReceiptMockDbSet = new Mock<DbSet<ProductReceipt>>();
+
+            productReceiptMockDbSet.As<IQueryable<ProductReceipt>>().Setup(m => m.Provider).Returns(productsReceipts.Provider);
+            productReceiptMockDbSet.As<IQueryable<ProductReceipt>>().Setup(m => m.Expression).Returns(productsReceipts.Expression);
+            productReceiptMockDbSet.As<IQueryable<ProductReceipt>>().Setup(m => m.ElementType).Returns(productsReceipts.ElementType);
+            productReceiptMockDbSet.As<IQueryable<ProductReceipt>>().Setup(m => m.GetEnumerator()).Returns(productsReceipts.GetEnumerator());
 
             var mockContext = new Mock<EazyCartContext>();
             mockContext.Setup(c => c.Products).Returns(productMockDbSet.Object);
+            mockContext.Setup(c => c.ProductsReceipts).Returns(productReceiptMockDbSet.Object);
 
             var productBusiness = new ProductBusiness(mockContext.Object);
 

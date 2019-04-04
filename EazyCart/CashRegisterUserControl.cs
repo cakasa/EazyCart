@@ -21,6 +21,8 @@ namespace EazyCart
         private readonly Color disabledButtonColor = Color.FromArgb(127, 140, 141);
         private readonly Color promptTextColor = SystemColors.WindowFrame;
         private readonly Color activeTextColor = SystemColors.WindowText;
+        private readonly Color enabledDeleteButtonColor = Color.FromArgb(231, 76, 60);
+
 
         private int highestProductReceiptId;
         private int currentProductReceiptId;
@@ -39,7 +41,7 @@ namespace EazyCart
         /// <summary>
         /// Updates the user control every time it is loaded.
         /// </summary>
-        private void UpdateUserControl()
+        public void UpdateUserControl()
         {
             var eazyCartContext = new EazyCartContext();
             this.categoryBusiness = new CategoryBusiness(eazyCartContext);
@@ -48,6 +50,8 @@ namespace EazyCart
             this.receiptBusiness = new ReceiptBusiness(eazyCartContext);
             this.UpdateSelectProductTab();
             this.UpdateReceiptTab();
+            this.UpdatePaidAmountAndChange(0);
+            this.SetButtonAvailability();
             this.highestProductReceiptId = productReceiptBusiness.GetHighestId();
             this.currentProductReceiptId = highestProductReceiptId + 1;
         }
@@ -55,7 +59,7 @@ namespace EazyCart
         /// <summary>
         /// When a product is selected all fields restore their values accordingly.
         /// </summary>
-        public void UpdateSelectProductTab()
+        private void UpdateSelectProductTab()
         {
             this.UpdateCategoryComboBox();
             this.categoryComboBox.SelectedIndex = 0;
@@ -113,9 +117,27 @@ namespace EazyCart
                 row.Cells[6].Value = totalForProduct;
                 grandTotal += totalForProduct;
             }
-            grandTotalCashLabel.Text = string.Format("$ {0:f2}", grandTotal);
+            this.grandTotalCashLabel.Text = string.Format("$ {0:f2}", grandTotal);
         }
 
+        /// <summary>
+        /// Sets the buttons to their default availabitilites.
+        /// </summary>
+        private void SetButtonAvailability()
+        {
+            this.makePaymentButton.Enabled = true;
+            this.makePaymentButton.BackColor = enabledButtonColor;
+            this.completeOrderButton.Enabled = false;
+            this.completeOrderButton.BackColor = disabledButtonColor;
+            this.addProductButton.Enabled = true;
+            this.addProductButton.BackColor = enabledButtonColor;
+            this.editProductButton.Enabled = true;
+            this.deleteProductButton.BackColor = enabledButtonColor;
+            this.deleteProductButton.Enabled = true;
+            this.editProductButton.BackColor = enabledDeleteButtonColor;
+            this.saveProductButton.Enabled = false;
+            this.saveProductButton.BackColor = disabledButtonColor;
+        }
         /// <summary>
         /// Calls several methods related to updating comboBoxes, when the category tab is updated.
         /// </summary>
@@ -162,6 +184,17 @@ namespace EazyCart
         }
 
         /// <summary>
+        /// Update the paid amount and change labels when a payment has been made.
+        /// </summary>
+        private void UpdatePaidAmountAndChange(decimal paidAmount)
+        {
+            decimal grandTotal = decimal.Parse(this.grandTotalCashLabel.Text.Remove(0, 2));
+            decimal change = paidAmount - grandTotal;
+            paidCashLabel.Text = string.Format($"$ {paidAmount:f2}");
+            changeCashLabel.Text = string.Format($"$ {change:f2}");
+        }
+
+        /// <summary>
         /// Populate the search results into the dataGrid for available products.
         /// </summary>
         /// <param name="products"></param>
@@ -185,7 +218,7 @@ namespace EazyCart
         private void UpdateProductDataGridViewOnWarehouseUserControl()
         {
             var eazyCartForm = (EazyCartForm)EazyCartForm.ActiveForm;
-            eazyCartForm.warehouseUserControl.UpdateProductDataGridView();
+            eazyCartForm.warehouseUserControl.UpdateUserControl();
         }
 
         /// <summary>
@@ -285,7 +318,7 @@ namespace EazyCart
             // Update appropriate tabs.
             this.UpdateSearchResults();
             this.ToggleEditSave(editProductButton, saveProductButton, addProductButton, deleteProductButton);
-        }       
+        }
 
         /// <summary>
         /// The event triggers when the user clicks on the "Save Product" button.
@@ -356,6 +389,56 @@ namespace EazyCart
         }
 
         /// <summary>
+        /// This event triggers when the user clicks on the "Make Payment" Button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MakePaymentButton_Click(object sender, EventArgs e)
+        {
+            var grandTotal = decimal.Parse(this.grandTotalCashLabel.Text.Remove(0, 2));
+            var payForm = new PayForm(grandTotal);
+            payForm.Show();
+            payForm.VisibleChanged += this.PayFormVisibleChanged;
+        }
+
+        /// <summary>
+        /// This event is triggered when the pay form changes its visible state.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PayFormVisibleChanged(object sender, EventArgs e)
+        {
+            var payForm = (PayForm)sender;
+            if (!payForm.Visible)
+            {
+                decimal paidAmount = payForm.enteredAmount;
+                UpdatePaidAmountAndChange(paidAmount);
+                payForm.Dispose();
+            }
+            DisableAllButtonsToCompleteAnOrder();
+        }
+
+        /// <summary>
+        /// Disables all buttons when the user is about to complete an order
+        /// </summary>
+        public void DisableAllButtonsToCompleteAnOrder()
+        {
+            this.addProductButton.Enabled = false;
+            this.editProductButton.Enabled = false;
+            this.saveProductButton.Enabled = false;
+            this.deleteProductButton.Enabled = false;
+            this.makePaymentButton.Enabled = false;
+            this.addProductButton.BackColor = disabledButtonColor;
+            this.editProductButton.BackColor = disabledButtonColor;
+            this.saveProductButton.BackColor = disabledButtonColor;
+            this.deleteProductButton.BackColor = disabledButtonColor;
+            this.makePaymentButton.BackColor = disabledButtonColor;
+
+            this.completeOrderButton.Enabled = true;
+            this.completeOrderButton.BackColor = enabledButtonColor;
+        }
+
+        /// <summary>
         /// The event triggers when the user clicks on the "Complete Order" button.
         /// </summary>
         /// <param name="sender"></param>
@@ -378,6 +461,8 @@ namespace EazyCart
             // Update the appropriate tabs.
             this.UpdateSelectProductTab();
             this.UpdateReceiptTab();
+            this.SetButtonAvailability();
+            this.UpdatePaidAmountAndChange(0);
             this.UpdateProductDataGridViewOnWarehouseUserControl();
         }      
 
@@ -394,6 +479,8 @@ namespace EazyCart
             // Update the appropriate tabs.
             this.UpdateSelectProductTab();
             this.UpdateReceiptTab();
+            this.UpdatePaidAmountAndChange(0);
+            this.SetButtonAvailability();
         }
 
         /// <summary>
@@ -414,6 +501,8 @@ namespace EazyCart
                 addButton.BackColor = disabledButtonColor;
                 deleteButton.Enabled = false;
                 deleteButton.BackColor = disabledButtonColor;
+                makePaymentButton.Enabled = false;
+                makePaymentButton.BackColor = disabledButtonColor;
 
                 saveButton.Enabled = true;
                 saveButton.BackColor = enabledButtonColor;
@@ -426,7 +515,10 @@ namespace EazyCart
                 addButton.Enabled = true;
                 addButton.BackColor = enabledButtonColor;
                 deleteButton.Enabled = true;
-                deleteButton.BackColor = enabledButtonColor;
+                deleteButton.BackColor = enabledDeleteButtonColor;
+                deleteButton.BackColor = enabledDeleteButtonColor;
+                makePaymentButton.Enabled = true;
+                makePaymentButton.BackColor = enabledButtonColor;
 
                 saveButton.Enabled = false;
                 saveButton.BackColor = disabledButtonColor;
@@ -447,6 +539,7 @@ namespace EazyCart
             }
             else this.discountPercentageTextBox.Enabled = false;
         }
+
         // All of the following methods are connected with maintaining a clean UI.
         
         private void SearchBoxTextBox_Enter(object sender, EventArgs e)

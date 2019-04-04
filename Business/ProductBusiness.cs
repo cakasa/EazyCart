@@ -242,16 +242,14 @@ namespace Business
                 UnitId = unit.Id
             };
 
-            eazyCartContext.Products.Add(product);
-
-            try
-            {
-                eazyCartContext.SaveChanges();
-            }
-            catch
+            var allProductsWithGivenId = eazyCartContext.Products.Where(x => x.Code == productCode);
+            if (allProductsWithGivenId.Count() > 0)
             {
                 throw new ArgumentException($"Product with code {productCode} already exists.");
             }
+
+            eazyCartContext.Products.Add(product);
+            eazyCartContext.SaveChanges();
         }
 
         /// <summary>
@@ -291,7 +289,7 @@ namespace Business
             catch
             {
                 throw new ArgumentException("Invalid information about category/supplier.");
-            }            
+            }
 
             // Update the supplier's fields.
             var newProduct = new Product
@@ -357,8 +355,10 @@ namespace Business
             var product = eazyCartContext.Products.First(x => x.Code == productCode);
             if (product != null)
             {
+                var productReceipts = eazyCartContext.ProductsReceipts.Where(x => x.ProductCode == product.Code);
 
-                // Remove the chosen product and save the changes in the context.
+                // Remove the chosen product and its related productReceipts and save the changes in the context.
+                eazyCartContext.ProductsReceipts.RemoveRange(productReceipts);
                 eazyCartContext.Products.Remove(product);
                 eazyCartContext.SaveChanges();
             }
