@@ -1,6 +1,6 @@
 ﻿namespace EazyCart
 {
-    partial class ManagementUserControl
+    partial class LogisticsUserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -43,53 +43,53 @@
             this.countriesGroupBox = new System.Windows.Forms.GroupBox();
             this.countryIdTextBox = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.deleteCountryButton = new System.Windows.Forms.Button();
-            this.saveChangesForCountryButton = new System.Windows.Forms.Button();
-            this.editCountryButton = new System.Windows.Forms.Button();
             this.countriesDataGridView = new System.Windows.Forms.DataGridView();
             this.countryIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.countryNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addCountryButton = new System.Windows.Forms.Button();
             this.countryNameTextBox = new System.Windows.Forms.TextBox();
             this.citiesGroupBox = new System.Windows.Forms.GroupBox();
             this.cityIdTextBox = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.countryForCityComboBox = new System.Windows.Forms.ComboBox();
-            this.deleteCityButton = new System.Windows.Forms.Button();
-            this.saveChangesForCityButton = new System.Windows.Forms.Button();
-            this.editCityButton = new System.Windows.Forms.Button();
             this.citiesDataGridView = new System.Windows.Forms.DataGridView();
             this.cityIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cityNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.countryForCityName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addCityButton = new System.Windows.Forms.Button();
             this.cityNameTextBox = new System.Windows.Forms.TextBox();
             this.categoriesGroupBox = new System.Windows.Forms.GroupBox();
             this.categoryIdTextBox = new System.Windows.Forms.TextBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.deleteCategoryButton = new System.Windows.Forms.Button();
-            this.saveChangesForCategoryButton = new System.Windows.Forms.Button();
-            this.editCategoryButton = new System.Windows.Forms.Button();
             this.categoriesDataGridView = new System.Windows.Forms.DataGridView();
             this.categoryIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.categoryNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addCategoryButton = new System.Windows.Forms.Button();
             this.categoryNameTextBox = new System.Windows.Forms.TextBox();
             this.supplierNameTextBox = new System.Windows.Forms.TextBox();
-            this.addSupplierButton = new System.Windows.Forms.Button();
             this.suppliersDataGridView = new System.Windows.Forms.DataGridView();
             this.supplierIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.supplierNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.supplierCityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.editSupplierButton = new System.Windows.Forms.Button();
-            this.saveChangesForSupplierButton = new System.Windows.Forms.Button();
             this.countryForSupplierComboBox = new System.Windows.Forms.ComboBox();
-            this.deleteSupplierButton = new System.Windows.Forms.Button();
             this.cityForSupplierComboBox = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.supplierIdTextBox = new System.Windows.Forms.TextBox();
             this.suppliersGroupBox = new System.Windows.Forms.GroupBox();
+            this.saveChangesForCategoryButton = new System.Windows.Forms.Button();
+            this.editCategoryButton = new System.Windows.Forms.Button();
+            this.addCategoryButton = new System.Windows.Forms.Button();
+            this.deleteSupplierButton = new System.Windows.Forms.Button();
+            this.saveChangesForSupplierButton = new System.Windows.Forms.Button();
+            this.editSupplierButton = new System.Windows.Forms.Button();
+            this.addSupplierButton = new System.Windows.Forms.Button();
+            this.deleteCityButton = new System.Windows.Forms.Button();
+            this.saveChangesForCityButton = new System.Windows.Forms.Button();
+            this.editCityButton = new System.Windows.Forms.Button();
+            this.addCityButton = new System.Windows.Forms.Button();
+            this.deleteCountryButton = new System.Windows.Forms.Button();
+            this.saveChangesForCountryButton = new System.Windows.Forms.Button();
+            this.editCountryButton = new System.Windows.Forms.Button();
+            this.addCountryButton = new System.Windows.Forms.Button();
             this.countriesGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.countriesDataGridView)).BeginInit();
             this.citiesGroupBox.SuspendLayout();
@@ -137,55 +137,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(315, 5);
             this.panel2.TabIndex = 2;
-            // 
-            // deleteCountryButton
-            // 
-            this.deleteCountryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
-            this.deleteCountryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.deleteCountryButton.FlatAppearance.BorderSize = 0;
-            this.deleteCountryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.deleteCountryButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.deleteCountryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.deleteCountryButton.Location = new System.Drawing.Point(61, 776);
-            this.deleteCountryButton.Name = "deleteCountryButton";
-            this.deleteCountryButton.Size = new System.Drawing.Size(195, 34);
-            this.deleteCountryButton.TabIndex = 9;
-            this.deleteCountryButton.Text = "DELETE COUNTRY";
-            this.deleteCountryButton.UseVisualStyleBackColor = false;
-            this.deleteCountryButton.Click += new System.EventHandler(this.DeleteCountryButton_Click);
-            // 
-            // saveChangesForCountryButton
-            // 
-            this.saveChangesForCountryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
-            this.saveChangesForCountryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.saveChangesForCountryButton.Enabled = false;
-            this.saveChangesForCountryButton.FlatAppearance.BorderSize = 0;
-            this.saveChangesForCountryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.saveChangesForCountryButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.saveChangesForCountryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.saveChangesForCountryButton.Location = new System.Drawing.Point(61, 208);
-            this.saveChangesForCountryButton.Name = "saveChangesForCountryButton";
-            this.saveChangesForCountryButton.Size = new System.Drawing.Size(195, 34);
-            this.saveChangesForCountryButton.TabIndex = 7;
-            this.saveChangesForCountryButton.Text = "SAVE CHANGES";
-            this.saveChangesForCountryButton.UseVisualStyleBackColor = false;
-            this.saveChangesForCountryButton.Click += new System.EventHandler(this.SaveChangesForCountryButton_Click);
-            // 
-            // editCountryButton
-            // 
-            this.editCountryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.editCountryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.editCountryButton.FlatAppearance.BorderSize = 0;
-            this.editCountryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.editCountryButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.editCountryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.editCountryButton.Location = new System.Drawing.Point(61, 168);
-            this.editCountryButton.Name = "editCountryButton";
-            this.editCountryButton.Size = new System.Drawing.Size(195, 34);
-            this.editCountryButton.TabIndex = 6;
-            this.editCountryButton.Text = "EDIT COUNTRY";
-            this.editCountryButton.UseVisualStyleBackColor = false;
-            this.editCountryButton.Click += new System.EventHandler(this.EditCountryButton_Click);
             // 
             // countriesDataGridView
             // 
@@ -257,22 +208,6 @@
             this.countryNameColumn.ReadOnly = true;
             this.countryNameColumn.Width = 231;
             // 
-            // addCountryButton
-            // 
-            this.addCountryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.addCountryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.addCountryButton.FlatAppearance.BorderSize = 0;
-            this.addCountryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addCountryButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.addCountryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.addCountryButton.Location = new System.Drawing.Point(61, 92);
-            this.addCountryButton.Name = "addCountryButton";
-            this.addCountryButton.Size = new System.Drawing.Size(195, 34);
-            this.addCountryButton.TabIndex = 5;
-            this.addCountryButton.Text = "ADD COUNTRY";
-            this.addCountryButton.UseVisualStyleBackColor = false;
-            this.addCountryButton.Click += new System.EventHandler(this.AddCountryButton_Click);
-            // 
             // countryNameTextBox
             // 
             this.countryNameTextBox.Font = new System.Drawing.Font("Segoe UI", 14.25F);
@@ -336,55 +271,6 @@
             this.countryForCityComboBox.Size = new System.Drawing.Size(386, 33);
             this.countryForCityComboBox.TabIndex = 12;
             this.countryForCityComboBox.Text = "Select Country";
-            // 
-            // deleteCityButton
-            // 
-            this.deleteCityButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
-            this.deleteCityButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.deleteCityButton.FlatAppearance.BorderSize = 0;
-            this.deleteCityButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.deleteCityButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.deleteCityButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.deleteCityButton.Location = new System.Drawing.Point(97, 776);
-            this.deleteCityButton.Name = "deleteCityButton";
-            this.deleteCityButton.Size = new System.Drawing.Size(195, 34);
-            this.deleteCityButton.TabIndex = 19;
-            this.deleteCityButton.Text = "DELETE CITY";
-            this.deleteCityButton.UseVisualStyleBackColor = false;
-            this.deleteCityButton.Click += new System.EventHandler(this.DeleteCityButton_Click);
-            // 
-            // saveChangesForCityButton
-            // 
-            this.saveChangesForCityButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
-            this.saveChangesForCityButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.saveChangesForCityButton.Enabled = false;
-            this.saveChangesForCityButton.FlatAppearance.BorderSize = 0;
-            this.saveChangesForCityButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.saveChangesForCityButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.saveChangesForCityButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.saveChangesForCityButton.Location = new System.Drawing.Point(203, 208);
-            this.saveChangesForCityButton.Name = "saveChangesForCityButton";
-            this.saveChangesForCityButton.Size = new System.Drawing.Size(185, 34);
-            this.saveChangesForCityButton.TabIndex = 17;
-            this.saveChangesForCityButton.Text = "SAVE CHANGES";
-            this.saveChangesForCityButton.UseVisualStyleBackColor = false;
-            this.saveChangesForCityButton.Click += new System.EventHandler(this.SaveChangesForCityButton_Click);
-            // 
-            // editCityButton
-            // 
-            this.editCityButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.editCityButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.editCityButton.FlatAppearance.BorderSize = 0;
-            this.editCityButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.editCityButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.editCityButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.editCityButton.Location = new System.Drawing.Point(12, 208);
-            this.editCityButton.Name = "editCityButton";
-            this.editCityButton.Size = new System.Drawing.Size(185, 34);
-            this.editCityButton.TabIndex = 16;
-            this.editCityButton.Text = "EDIT CITY";
-            this.editCityButton.UseVisualStyleBackColor = false;
-            this.editCityButton.Click += new System.EventHandler(this.EditCityButton_Click);
             // 
             // citiesDataGridView
             // 
@@ -464,22 +350,6 @@
             this.countryForCityName.ReadOnly = true;
             this.countryForCityName.Width = 126;
             // 
-            // addCityButton
-            // 
-            this.addCityButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.addCityButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.addCityButton.FlatAppearance.BorderSize = 0;
-            this.addCityButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addCityButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.addCityButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.addCityButton.Location = new System.Drawing.Point(97, 136);
-            this.addCityButton.Name = "addCityButton";
-            this.addCityButton.Size = new System.Drawing.Size(195, 34);
-            this.addCityButton.TabIndex = 15;
-            this.addCityButton.Text = "ADD CITY";
-            this.addCityButton.UseVisualStyleBackColor = false;
-            this.addCityButton.Click += new System.EventHandler(this.AddCityButton_Click);
-            // 
             // cityNameTextBox
             // 
             this.cityNameTextBox.Font = new System.Drawing.Font("Segoe UI", 14.25F);
@@ -533,51 +403,18 @@
             // deleteCategoryButton
             // 
             this.deleteCategoryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
-            this.deleteCategoryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.deleteCategoryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.deleteCategoryButton.FlatAppearance.BorderSize = 0;
             this.deleteCategoryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteCategoryButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
             this.deleteCategoryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.deleteCategoryButton.Location = new System.Drawing.Point(61, 776);
+            this.deleteCategoryButton.Image = global::EazyCart.Properties.Resources.deleteCategoryButtonPicture;
+            this.deleteCategoryButton.Location = new System.Drawing.Point(47, 776);
             this.deleteCategoryButton.Name = "deleteCategoryButton";
-            this.deleteCategoryButton.Size = new System.Drawing.Size(195, 34);
+            this.deleteCategoryButton.Size = new System.Drawing.Size(225, 34);
             this.deleteCategoryButton.TabIndex = 37;
-            this.deleteCategoryButton.Text = "DELETE CATEGORY";
             this.deleteCategoryButton.UseVisualStyleBackColor = false;
             this.deleteCategoryButton.Click += new System.EventHandler(this.DeleteCategoryButton_Click);
-            // 
-            // saveChangesForCategoryButton
-            // 
-            this.saveChangesForCategoryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
-            this.saveChangesForCategoryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.saveChangesForCategoryButton.Enabled = false;
-            this.saveChangesForCategoryButton.FlatAppearance.BorderSize = 0;
-            this.saveChangesForCategoryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.saveChangesForCategoryButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.saveChangesForCategoryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.saveChangesForCategoryButton.Location = new System.Drawing.Point(61, 208);
-            this.saveChangesForCategoryButton.Name = "saveChangesForCategoryButton";
-            this.saveChangesForCategoryButton.Size = new System.Drawing.Size(195, 34);
-            this.saveChangesForCategoryButton.TabIndex = 35;
-            this.saveChangesForCategoryButton.Text = "SAVE CHANGES";
-            this.saveChangesForCategoryButton.UseVisualStyleBackColor = false;
-            this.saveChangesForCategoryButton.Click += new System.EventHandler(this.SaveChangesForCategoryButton_Click);
-            // 
-            // editCategoryButton
-            // 
-            this.editCategoryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.editCategoryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.editCategoryButton.FlatAppearance.BorderSize = 0;
-            this.editCategoryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.editCategoryButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.editCategoryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.editCategoryButton.Location = new System.Drawing.Point(61, 168);
-            this.editCategoryButton.Name = "editCategoryButton";
-            this.editCategoryButton.Size = new System.Drawing.Size(195, 34);
-            this.editCategoryButton.TabIndex = 34;
-            this.editCategoryButton.Text = "EDIT CATEGORY";
-            this.editCategoryButton.UseVisualStyleBackColor = false;
-            this.editCategoryButton.Click += new System.EventHandler(this.EditCategoryButton_Click);
             // 
             // categoriesDataGridView
             // 
@@ -649,22 +486,6 @@
             this.categoryNameColumn.ReadOnly = true;
             this.categoryNameColumn.Width = 220;
             // 
-            // addCategoryButton
-            // 
-            this.addCategoryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.addCategoryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.addCategoryButton.FlatAppearance.BorderSize = 0;
-            this.addCategoryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addCategoryButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.addCategoryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.addCategoryButton.Location = new System.Drawing.Point(61, 94);
-            this.addCategoryButton.Name = "addCategoryButton";
-            this.addCategoryButton.Size = new System.Drawing.Size(195, 34);
-            this.addCategoryButton.TabIndex = 33;
-            this.addCategoryButton.Text = "ADD CATEGORY";
-            this.addCategoryButton.UseVisualStyleBackColor = false;
-            this.addCategoryButton.Click += new System.EventHandler(this.AddCategoryButton_Click);
-            // 
             // categoryNameTextBox
             // 
             this.categoryNameTextBox.Font = new System.Drawing.Font("Segoe UI", 14.25F);
@@ -688,22 +509,6 @@
             this.supplierNameTextBox.Text = "Supplier Name";
             this.supplierNameTextBox.Enter += new System.EventHandler(this.SupplierNameTextBox_Enter);
             this.supplierNameTextBox.Leave += new System.EventHandler(this.SupplierNameTextBox_Leave);
-            // 
-            // addSupplierButton
-            // 
-            this.addSupplierButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.addSupplierButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.addSupplierButton.FlatAppearance.BorderSize = 0;
-            this.addSupplierButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addSupplierButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.addSupplierButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.addSupplierButton.Location = new System.Drawing.Point(184, 136);
-            this.addSupplierButton.Name = "addSupplierButton";
-            this.addSupplierButton.Size = new System.Drawing.Size(195, 34);
-            this.addSupplierButton.TabIndex = 26;
-            this.addSupplierButton.Text = "ADD SUPPLIER";
-            this.addSupplierButton.UseVisualStyleBackColor = false;
-            this.addSupplierButton.Click += new System.EventHandler(this.AddSupplierButton_Click);
             // 
             // suppliersDataGridView
             // 
@@ -791,39 +596,6 @@
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.Width = 120;
             // 
-            // editSupplierButton
-            // 
-            this.editSupplierButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.editSupplierButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.editSupplierButton.FlatAppearance.BorderSize = 0;
-            this.editSupplierButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.editSupplierButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.editSupplierButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.editSupplierButton.Location = new System.Drawing.Point(83, 208);
-            this.editSupplierButton.Name = "editSupplierButton";
-            this.editSupplierButton.Size = new System.Drawing.Size(195, 34);
-            this.editSupplierButton.TabIndex = 27;
-            this.editSupplierButton.Text = "EDIT SUPPLIER";
-            this.editSupplierButton.UseVisualStyleBackColor = false;
-            this.editSupplierButton.Click += new System.EventHandler(this.EditSupplierButton_Click);
-            // 
-            // saveChangesForSupplierButton
-            // 
-            this.saveChangesForSupplierButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
-            this.saveChangesForSupplierButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.saveChangesForSupplierButton.Enabled = false;
-            this.saveChangesForSupplierButton.FlatAppearance.BorderSize = 0;
-            this.saveChangesForSupplierButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.saveChangesForSupplierButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.saveChangesForSupplierButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.saveChangesForSupplierButton.Location = new System.Drawing.Point(284, 208);
-            this.saveChangesForSupplierButton.Name = "saveChangesForSupplierButton";
-            this.saveChangesForSupplierButton.Size = new System.Drawing.Size(195, 34);
-            this.saveChangesForSupplierButton.TabIndex = 28;
-            this.saveChangesForSupplierButton.Text = "SAVE CHANGES";
-            this.saveChangesForSupplierButton.UseVisualStyleBackColor = false;
-            this.saveChangesForSupplierButton.Click += new System.EventHandler(this.SaveChangesForSupplierButton_Click);
-            // 
             // countryForSupplierComboBox
             // 
             this.countryForSupplierComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
@@ -837,22 +609,6 @@
             this.countryForSupplierComboBox.TabIndex = 22;
             this.countryForSupplierComboBox.Text = "Select Country";
             this.countryForSupplierComboBox.SelectedIndexChanged += new System.EventHandler(this.CountryForSupplierComboBox_SelectedIndexChanged);
-            // 
-            // deleteSupplierButton
-            // 
-            this.deleteSupplierButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
-            this.deleteSupplierButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.deleteSupplierButton.FlatAppearance.BorderSize = 0;
-            this.deleteSupplierButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.deleteSupplierButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.deleteSupplierButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.deleteSupplierButton.Location = new System.Drawing.Point(184, 776);
-            this.deleteSupplierButton.Name = "deleteSupplierButton";
-            this.deleteSupplierButton.Size = new System.Drawing.Size(195, 34);
-            this.deleteSupplierButton.TabIndex = 30;
-            this.deleteSupplierButton.Text = "DELETE SUPPLIER";
-            this.deleteSupplierButton.UseVisualStyleBackColor = false;
-            this.deleteSupplierButton.Click += new System.EventHandler(this.DeleteSupplierButton_Click);
             // 
             // cityForSupplierComboBox
             // 
@@ -908,7 +664,251 @@
             this.suppliersGroupBox.TabStop = false;
             this.suppliersGroupBox.Text = "Suppliers";
             // 
-            // ManagementUserControl
+            // saveChangesForCategoryButton
+            // 
+            this.saveChangesForCategoryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
+            this.saveChangesForCategoryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.saveChangesForCategoryButton.Enabled = false;
+            this.saveChangesForCategoryButton.FlatAppearance.BorderSize = 0;
+            this.saveChangesForCategoryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveChangesForCategoryButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.saveChangesForCategoryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.saveChangesForCategoryButton.Image = global::EazyCart.Properties.Resources.saveChangesButtonPicture;
+            this.saveChangesForCategoryButton.Location = new System.Drawing.Point(61, 208);
+            this.saveChangesForCategoryButton.Name = "saveChangesForCategoryButton";
+            this.saveChangesForCategoryButton.Size = new System.Drawing.Size(195, 34);
+            this.saveChangesForCategoryButton.TabIndex = 35;
+            this.saveChangesForCategoryButton.UseVisualStyleBackColor = false;
+            this.saveChangesForCategoryButton.Click += new System.EventHandler(this.SaveChangesForCategoryButton_Click);
+            // 
+            // editCategoryButton
+            // 
+            this.editCategoryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.editCategoryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.editCategoryButton.FlatAppearance.BorderSize = 0;
+            this.editCategoryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.editCategoryButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.editCategoryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.editCategoryButton.Image = global::EazyCart.Properties.Resources.editCategoryButtonPicture;
+            this.editCategoryButton.Location = new System.Drawing.Point(61, 168);
+            this.editCategoryButton.Name = "editCategoryButton";
+            this.editCategoryButton.Size = new System.Drawing.Size(195, 34);
+            this.editCategoryButton.TabIndex = 34;
+            this.editCategoryButton.UseVisualStyleBackColor = false;
+            this.editCategoryButton.Click += new System.EventHandler(this.EditCategoryButton_Click);
+            // 
+            // addCategoryButton
+            // 
+            this.addCategoryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.addCategoryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.addCategoryButton.FlatAppearance.BorderSize = 0;
+            this.addCategoryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addCategoryButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.addCategoryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.addCategoryButton.Image = global::EazyCart.Properties.Resources.addCategoryButtonPicture;
+            this.addCategoryButton.Location = new System.Drawing.Point(61, 94);
+            this.addCategoryButton.Name = "addCategoryButton";
+            this.addCategoryButton.Size = new System.Drawing.Size(195, 34);
+            this.addCategoryButton.TabIndex = 33;
+            this.addCategoryButton.UseVisualStyleBackColor = false;
+            this.addCategoryButton.Click += new System.EventHandler(this.AddCategoryButton_Click);
+            // 
+            // deleteSupplierButton
+            // 
+            this.deleteSupplierButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.deleteSupplierButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.deleteSupplierButton.FlatAppearance.BorderSize = 0;
+            this.deleteSupplierButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteSupplierButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.deleteSupplierButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.deleteSupplierButton.Image = global::EazyCart.Properties.Resources.deleteSupplierButtonPicture;
+            this.deleteSupplierButton.Location = new System.Drawing.Point(165, 776);
+            this.deleteSupplierButton.Name = "deleteSupplierButton";
+            this.deleteSupplierButton.Size = new System.Drawing.Size(225, 34);
+            this.deleteSupplierButton.TabIndex = 30;
+            this.deleteSupplierButton.UseVisualStyleBackColor = false;
+            this.deleteSupplierButton.Click += new System.EventHandler(this.DeleteSupplierButton_Click);
+            // 
+            // saveChangesForSupplierButton
+            // 
+            this.saveChangesForSupplierButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
+            this.saveChangesForSupplierButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.saveChangesForSupplierButton.Enabled = false;
+            this.saveChangesForSupplierButton.FlatAppearance.BorderSize = 0;
+            this.saveChangesForSupplierButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveChangesForSupplierButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.saveChangesForSupplierButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.saveChangesForSupplierButton.Image = global::EazyCart.Properties.Resources.smallSaveChangesButtonPicture;
+            this.saveChangesForSupplierButton.Location = new System.Drawing.Point(284, 208);
+            this.saveChangesForSupplierButton.Name = "saveChangesForSupplierButton";
+            this.saveChangesForSupplierButton.Size = new System.Drawing.Size(195, 34);
+            this.saveChangesForSupplierButton.TabIndex = 28;
+            this.saveChangesForSupplierButton.UseVisualStyleBackColor = false;
+            this.saveChangesForSupplierButton.Click += new System.EventHandler(this.SaveChangesForSupplierButton_Click);
+            // 
+            // editSupplierButton
+            // 
+            this.editSupplierButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.editSupplierButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.editSupplierButton.FlatAppearance.BorderSize = 0;
+            this.editSupplierButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.editSupplierButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.editSupplierButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.editSupplierButton.Image = global::EazyCart.Properties.Resources.editSupplierButtonPicture;
+            this.editSupplierButton.Location = new System.Drawing.Point(83, 208);
+            this.editSupplierButton.Name = "editSupplierButton";
+            this.editSupplierButton.Size = new System.Drawing.Size(195, 34);
+            this.editSupplierButton.TabIndex = 27;
+            this.editSupplierButton.UseVisualStyleBackColor = false;
+            this.editSupplierButton.Click += new System.EventHandler(this.EditSupplierButton_Click);
+            // 
+            // addSupplierButton
+            // 
+            this.addSupplierButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.addSupplierButton.BackgroundImage = global::EazyCart.Properties.Resources.addSupplierButtonPicture;
+            this.addSupplierButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.addSupplierButton.FlatAppearance.BorderSize = 0;
+            this.addSupplierButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addSupplierButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.addSupplierButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.addSupplierButton.Location = new System.Drawing.Point(184, 136);
+            this.addSupplierButton.Name = "addSupplierButton";
+            this.addSupplierButton.Size = new System.Drawing.Size(195, 34);
+            this.addSupplierButton.TabIndex = 26;
+            this.addSupplierButton.UseVisualStyleBackColor = false;
+            this.addSupplierButton.Click += new System.EventHandler(this.AddSupplierButton_Click);
+            // 
+            // deleteCityButton
+            // 
+            this.deleteCityButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.deleteCityButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.deleteCityButton.FlatAppearance.BorderSize = 0;
+            this.deleteCityButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteCityButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.deleteCityButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.deleteCityButton.Image = global::EazyCart.Properties.Resources.deleteCityButtonPicture;
+            this.deleteCityButton.Location = new System.Drawing.Point(86, 776);
+            this.deleteCityButton.Name = "deleteCityButton";
+            this.deleteCityButton.Size = new System.Drawing.Size(225, 34);
+            this.deleteCityButton.TabIndex = 19;
+            this.deleteCityButton.UseVisualStyleBackColor = false;
+            this.deleteCityButton.Click += new System.EventHandler(this.DeleteCityButton_Click);
+            // 
+            // saveChangesForCityButton
+            // 
+            this.saveChangesForCityButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
+            this.saveChangesForCityButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.saveChangesForCityButton.Enabled = false;
+            this.saveChangesForCityButton.FlatAppearance.BorderSize = 0;
+            this.saveChangesForCityButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveChangesForCityButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.saveChangesForCityButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.saveChangesForCityButton.Image = global::EazyCart.Properties.Resources.smallSaveChangesButtonPicture;
+            this.saveChangesForCityButton.Location = new System.Drawing.Point(203, 208);
+            this.saveChangesForCityButton.Name = "saveChangesForCityButton";
+            this.saveChangesForCityButton.Size = new System.Drawing.Size(185, 34);
+            this.saveChangesForCityButton.TabIndex = 17;
+            this.saveChangesForCityButton.UseVisualStyleBackColor = false;
+            this.saveChangesForCityButton.Click += new System.EventHandler(this.SaveChangesForCityButton_Click);
+            // 
+            // editCityButton
+            // 
+            this.editCityButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.editCityButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.editCityButton.FlatAppearance.BorderSize = 0;
+            this.editCityButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.editCityButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.editCityButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.editCityButton.Image = global::EazyCart.Properties.Resources.editCityButtonPicture;
+            this.editCityButton.Location = new System.Drawing.Point(12, 208);
+            this.editCityButton.Name = "editCityButton";
+            this.editCityButton.Size = new System.Drawing.Size(185, 34);
+            this.editCityButton.TabIndex = 16;
+            this.editCityButton.UseVisualStyleBackColor = false;
+            this.editCityButton.Click += new System.EventHandler(this.EditCityButton_Click);
+            // 
+            // addCityButton
+            // 
+            this.addCityButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.addCityButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.addCityButton.FlatAppearance.BorderSize = 0;
+            this.addCityButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addCityButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.addCityButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.addCityButton.Image = global::EazyCart.Properties.Resources.addCityButtonPicture;
+            this.addCityButton.Location = new System.Drawing.Point(97, 136);
+            this.addCityButton.Name = "addCityButton";
+            this.addCityButton.Size = new System.Drawing.Size(195, 34);
+            this.addCityButton.TabIndex = 15;
+            this.addCityButton.UseVisualStyleBackColor = false;
+            this.addCityButton.Click += new System.EventHandler(this.AddCityButton_Click);
+            // 
+            // deleteCountryButton
+            // 
+            this.deleteCountryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.deleteCountryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.deleteCountryButton.FlatAppearance.BorderSize = 0;
+            this.deleteCountryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteCountryButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.deleteCountryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.deleteCountryButton.Image = global::EazyCart.Properties.Resources.deleteCountryButtonPicture;
+            this.deleteCountryButton.Location = new System.Drawing.Point(45, 776);
+            this.deleteCountryButton.Name = "deleteCountryButton";
+            this.deleteCountryButton.Size = new System.Drawing.Size(225, 34);
+            this.deleteCountryButton.TabIndex = 9;
+            this.deleteCountryButton.UseVisualStyleBackColor = false;
+            this.deleteCountryButton.Click += new System.EventHandler(this.DeleteCountryButton_Click);
+            // 
+            // saveChangesForCountryButton
+            // 
+            this.saveChangesForCountryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
+            this.saveChangesForCountryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.saveChangesForCountryButton.Enabled = false;
+            this.saveChangesForCountryButton.FlatAppearance.BorderSize = 0;
+            this.saveChangesForCountryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveChangesForCountryButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.saveChangesForCountryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.saveChangesForCountryButton.Image = global::EazyCart.Properties.Resources.saveChangesButtonPicture;
+            this.saveChangesForCountryButton.Location = new System.Drawing.Point(61, 208);
+            this.saveChangesForCountryButton.Name = "saveChangesForCountryButton";
+            this.saveChangesForCountryButton.Size = new System.Drawing.Size(195, 34);
+            this.saveChangesForCountryButton.TabIndex = 7;
+            this.saveChangesForCountryButton.UseVisualStyleBackColor = false;
+            this.saveChangesForCountryButton.Click += new System.EventHandler(this.SaveChangesForCountryButton_Click);
+            // 
+            // editCountryButton
+            // 
+            this.editCountryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.editCountryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.editCountryButton.FlatAppearance.BorderSize = 0;
+            this.editCountryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.editCountryButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.editCountryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.editCountryButton.Image = global::EazyCart.Properties.Resources.editCountryButtonPicture;
+            this.editCountryButton.Location = new System.Drawing.Point(61, 168);
+            this.editCountryButton.Name = "editCountryButton";
+            this.editCountryButton.Size = new System.Drawing.Size(195, 34);
+            this.editCountryButton.TabIndex = 6;
+            this.editCountryButton.UseVisualStyleBackColor = false;
+            this.editCountryButton.Click += new System.EventHandler(this.EditCountryButton_Click);
+            // 
+            // addCountryButton
+            // 
+            this.addCountryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.addCountryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.addCountryButton.FlatAppearance.BorderSize = 0;
+            this.addCountryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addCountryButton.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.addCountryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.addCountryButton.Image = global::EazyCart.Properties.Resources.addCountryButtonPicture;
+            this.addCountryButton.Location = new System.Drawing.Point(61, 92);
+            this.addCountryButton.Name = "addCountryButton";
+            this.addCountryButton.Size = new System.Drawing.Size(195, 34);
+            this.addCountryButton.TabIndex = 5;
+            this.addCountryButton.UseVisualStyleBackColor = false;
+            this.addCountryButton.Click += new System.EventHandler(this.AddCountryButton_Click);
+            // 
+            // LogisticsUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -916,9 +916,9 @@
             this.Controls.Add(this.suppliersGroupBox);
             this.Controls.Add(this.citiesGroupBox);
             this.Controls.Add(this.countriesGroupBox);
-            this.Name = "ManagementUserControl";
+            this.Name = "LogisticsUserControl";
             this.Size = new System.Drawing.Size(1600, 840);
-            this.Load += new System.EventHandler(this.ManagementUserControl_Load);
+            this.Load += new System.EventHandler(this.LogisticsUserControl_Load);
             this.countriesGroupBox.ResumeLayout(false);
             this.countriesGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.countriesDataGridView)).EndInit();

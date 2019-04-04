@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.exportReportButton = new System.Windows.Forms.Button();
-            this.generateReportButton = new System.Windows.Forms.Button();
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
             this.reportChart = new LiveCharts.Wpf.CartesianChart();
             this.reportCategoryComboBox = new System.Windows.Forms.ComboBox();
@@ -41,6 +40,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.generateReportButton = new System.Windows.Forms.Button();
+            this.exportInformationLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // exportReportButton
@@ -51,29 +52,13 @@
             this.exportReportButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.exportReportButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.exportReportButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.exportReportButton.Location = new System.Drawing.Point(1315, 424);
+            this.exportReportButton.Image = global::EazyCart.Properties.Resources.exportReportButtonImage;
+            this.exportReportButton.Location = new System.Drawing.Point(1297, 424);
             this.exportReportButton.Name = "exportReportButton";
-            this.exportReportButton.Size = new System.Drawing.Size(254, 65);
+            this.exportReportButton.Size = new System.Drawing.Size(282, 65);
             this.exportReportButton.TabIndex = 36;
-            this.exportReportButton.Text = "Export Report";
             this.exportReportButton.UseVisualStyleBackColor = false;
             this.exportReportButton.Click += new System.EventHandler(this.ExportReportButton_Click);
-            // 
-            // generateReportButton
-            // 
-            this.generateReportButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.generateReportButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.generateReportButton.FlatAppearance.BorderSize = 0;
-            this.generateReportButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.generateReportButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.generateReportButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.generateReportButton.Location = new System.Drawing.Point(1315, 12);
-            this.generateReportButton.Name = "generateReportButton";
-            this.generateReportButton.Size = new System.Drawing.Size(254, 65);
-            this.generateReportButton.TabIndex = 35;
-            this.generateReportButton.Text = "Generate Report";
-            this.generateReportButton.UseVisualStyleBackColor = false;
-            this.generateReportButton.Click += new System.EventHandler(this.GenerateReportButton_Click);
             // 
             // elementHost1
             // 
@@ -137,16 +122,16 @@
             // fileNameTextBox
             // 
             this.fileNameTextBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.fileNameTextBox.Location = new System.Drawing.Point(1315, 385);
+            this.fileNameTextBox.Location = new System.Drawing.Point(1297, 385);
             this.fileNameTextBox.Name = "fileNameTextBox";
-            this.fileNameTextBox.Size = new System.Drawing.Size(254, 33);
+            this.fileNameTextBox.Size = new System.Drawing.Size(282, 33);
             this.fileNameTextBox.TabIndex = 41;
             // 
             // fileNameLabel
             // 
             this.fileNameLabel.AutoSize = true;
             this.fileNameLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.fileNameLabel.Location = new System.Drawing.Point(1310, 357);
+            this.fileNameLabel.Location = new System.Drawing.Point(1292, 357);
             this.fileNameLabel.Name = "fileNameLabel";
             this.fileNameLabel.Size = new System.Drawing.Size(100, 25);
             this.fileNameLabel.TabIndex = 42;
@@ -184,10 +169,38 @@
             this.panel3.Size = new System.Drawing.Size(1239, 5);
             this.panel3.TabIndex = 43;
             // 
+            // generateReportButton
+            // 
+            this.generateReportButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.generateReportButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.generateReportButton.FlatAppearance.BorderSize = 0;
+            this.generateReportButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.generateReportButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.generateReportButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.generateReportButton.Image = global::EazyCart.Properties.Resources.generateReportButtonImage;
+            this.generateReportButton.Location = new System.Drawing.Point(1297, 12);
+            this.generateReportButton.Name = "generateReportButton";
+            this.generateReportButton.Size = new System.Drawing.Size(282, 65);
+            this.generateReportButton.TabIndex = 35;
+            this.generateReportButton.UseVisualStyleBackColor = false;
+            this.generateReportButton.Click += new System.EventHandler(this.GenerateReportButton_Click);
+            // 
+            // exportInformationLabel
+            // 
+            this.exportInformationLabel.AutoSize = true;
+            this.exportInformationLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.exportInformationLabel.Location = new System.Drawing.Point(1292, 492);
+            this.exportInformationLabel.MaximumSize = new System.Drawing.Size(500, 282);
+            this.exportInformationLabel.Name = "exportInformationLabel";
+            this.exportInformationLabel.Size = new System.Drawing.Size(287, 25);
+            this.exportInformationLabel.TabIndex = 44;
+            this.exportInformationLabel.Text = "Exports the report in .png format";
+            // 
             // StatisticsUserContol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.exportInformationLabel);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -223,5 +236,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label exportInformationLabel;
     }
 }

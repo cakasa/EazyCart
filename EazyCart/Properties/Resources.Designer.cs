@@ -63,9 +63,9 @@ namespace EazyCart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap addCategoryImage {
+        internal static System.Drawing.Bitmap addCategoryButtonPicture {
             get {
-                object obj = ResourceManager.GetObject("addCategoryImage", resourceCulture);
+                object obj = ResourceManager.GetObject("addCategoryButtonPicture", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace EazyCart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap AddProductPlaceHolder {
+        internal static System.Drawing.Bitmap addCityButtonPicture {
             get {
-                object obj = ResourceManager.GetObject("AddProductPlaceHolder", resourceCulture);
+                object obj = ResourceManager.GetObject("addCityButtonPicture", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace EazyCart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cartIcon {
+        internal static System.Drawing.Bitmap addCountryButtonPicture {
             get {
-                object obj = ResourceManager.GetObject("cartIcon", resourceCulture);
+                object obj = ResourceManager.GetObject("addCountryButtonPicture", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace EazyCart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cashRegisterImage {
+        internal static System.Drawing.Bitmap addProductButtonImage {
             get {
-                object obj = ResourceManager.GetObject("cashRegisterImage", resourceCulture);
+                object obj = ResourceManager.GetObject("addProductButtonImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,49 @@ namespace EazyCart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap closeIcon {
+        internal static System.Drawing.Bitmap addProductToReceiptButtonImage {
             get {
-                object obj = ResourceManager.GetObject("closeIcon", resourceCulture);
+                object obj = ResourceManager.GetObject("addProductToReceiptButtonImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap addSupplierButtonPicture {
+            get {
+                object obj = ResourceManager.GetObject("addSupplierButtonPicture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cashRegisterButtonImage {
+            get {
+                object obj = ResourceManager.GetObject("cashRegisterButtonImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap closeCancelIcon {
+            get {
+                object obj = ResourceManager.GetObject("closeCancelIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap completeOrderButtonImage {
+            get {
+                object obj = ResourceManager.GetObject("completeOrderButtonImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +163,9 @@ namespace EazyCart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap currentThemePlaceholder {
+        internal static System.Drawing.Bitmap confirmPaymentButtonImage {
             get {
-                object obj = ResourceManager.GetObject("currentThemePlaceholder", resourceCulture);
+                object obj = ResourceManager.GetObject("confirmPaymentButtonImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,9 +173,179 @@ namespace EazyCart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap MakeDeliveryImage {
+        internal static System.Drawing.Bitmap deleteCategoryButtonPicture {
             get {
-                object obj = ResourceManager.GetObject("MakeDeliveryImage", resourceCulture);
+                object obj = ResourceManager.GetObject("deleteCategoryButtonPicture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap deleteCityButtonPicture {
+            get {
+                object obj = ResourceManager.GetObject("deleteCityButtonPicture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap deleteCountryButtonPicture {
+            get {
+                object obj = ResourceManager.GetObject("deleteCountryButtonPicture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap deleteProductButtonImage {
+            get {
+                object obj = ResourceManager.GetObject("deleteProductButtonImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap deleteProductFromReceiptButtonImage {
+            get {
+                object obj = ResourceManager.GetObject("deleteProductFromReceiptButtonImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap deleteSupplierButtonPicture {
+            get {
+                object obj = ResourceManager.GetObject("deleteSupplierButtonPicture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap eazyCartIcon {
+            get {
+                object obj = ResourceManager.GetObject("eazyCartIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap editCategoryButtonPicture {
+            get {
+                object obj = ResourceManager.GetObject("editCategoryButtonPicture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap editCityButtonPicture {
+            get {
+                object obj = ResourceManager.GetObject("editCityButtonPicture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap editCountryButtonPicture {
+            get {
+                object obj = ResourceManager.GetObject("editCountryButtonPicture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap editProductButtonImage {
+            get {
+                object obj = ResourceManager.GetObject("editProductButtonImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap editProductFromReceiptButtonImage {
+            get {
+                object obj = ResourceManager.GetObject("editProductFromReceiptButtonImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap editSupplierButtonPicture {
+            get {
+                object obj = ResourceManager.GetObject("editSupplierButtonPicture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap exportReportButtonImage {
+            get {
+                object obj = ResourceManager.GetObject("exportReportButtonImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap generateReportButtonImage {
+            get {
+                object obj = ResourceManager.GetObject("generateReportButtonImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logisticsButtonPicture {
+            get {
+                object obj = ResourceManager.GetObject("logisticsButtonPicture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap makeDeliveryButtonPicture {
+            get {
+                object obj = ResourceManager.GetObject("makeDeliveryButtonPicture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap makePaymentButtonImage {
+            get {
+                object obj = ResourceManager.GetObject("makePaymentButtonImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,9 +363,9 @@ namespace EazyCart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap revertChangesImage {
+        internal static System.Drawing.Bitmap saveChangesButtonPicture {
             get {
-                object obj = ResourceManager.GetObject("revertChangesImage", resourceCulture);
+                object obj = ResourceManager.GetObject("saveChangesButtonPicture", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,9 +373,9 @@ namespace EazyCart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap saveProductPlaceholder {
+        internal static System.Drawing.Bitmap saveProductButtonImage {
             get {
-                object obj = ResourceManager.GetObject("saveProductPlaceholder", resourceCulture);
+                object obj = ResourceManager.GetObject("saveProductButtonImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -173,9 +383,9 @@ namespace EazyCart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap settingsImage {
+        internal static System.Drawing.Bitmap saveProductToReceiptButtonImage {
             get {
-                object obj = ResourceManager.GetObject("settingsImage", resourceCulture);
+                object obj = ResourceManager.GetObject("saveProductToReceiptButtonImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -183,9 +393,9 @@ namespace EazyCart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap statisticsImage {
+        internal static System.Drawing.Bitmap smallSaveChangesButtonPicture {
             get {
-                object obj = ResourceManager.GetObject("statisticsImage", resourceCulture);
+                object obj = ResourceManager.GetObject("smallSaveChangesButtonPicture", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -193,9 +403,19 @@ namespace EazyCart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap warehouseImage {
+        internal static System.Drawing.Bitmap statisticsButtonImage {
             get {
-                object obj = ResourceManager.GetObject("warehouseImage", resourceCulture);
+                object obj = ResourceManager.GetObject("statisticsButtonImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap warehouseButtonImage {
+            get {
+                object obj = ResourceManager.GetObject("warehouseButtonImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

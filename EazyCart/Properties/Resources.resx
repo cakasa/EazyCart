@@ -118,46 +118,112 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="saveProductPlaceholder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\saveProductPlaceholder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="closeCancelIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\closeCancelIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cashRegisterImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cashRegisterImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="closeIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\closeIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="settingsImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\settingsImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AddProductPlaceHolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AddProductPlaceHolder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="statisticsImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\statisticsImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="addProductButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addProductButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="completeOrderPlaceholder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\completeOrderPlaceholder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\completeOrderPlaceholder1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="revertChangesImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\revertChangesImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cashRegisterButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cashRegisterButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MakeDeliveryImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MakeDeliveryImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="deleteSupplierButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\deleteSupplierButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="warehouseImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\warehouseImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="deleteCountryButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\deleteCountryButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="addCategoryImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\addCategoryImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="saveProductToReceiptButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\saveProductToReceiptButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="statisticsButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\statisticsButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="addSupplierButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addSupplierButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="editProductFromReceiptButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\editProductFromReceiptButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="editCategoryButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\editCategoryButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="makePaymentButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\makePaymentButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="saveChangesButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\saveChangesButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="confirmPaymentButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\confirmPaymentButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="editCityButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\editCityButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="smallSaveChangesButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\smallSaveChangesButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="deleteCategoryButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\deleteCategoryButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="saveProductButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\saveProductButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="warehouseButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\warehouseButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="generateReportButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\generateReportButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="addCityButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addCityButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="addCountryButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addCountryButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="deleteCityButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\deleteCityButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="makeDeliveryButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\makeDeliveryButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logisticsButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logisticsButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="addProductToReceiptButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addProductToReceiptButtonImage2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ModifyProductPlaceHolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ModifyProductPlaceHolder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\ModifyProductPlaceHolder1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cartIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cartIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="deleteProductFromReceiptButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\deleteProductFromReceiptButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="currentThemePlaceholder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\currentThemePlaceholder.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="editCountryButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\editCountryButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="editSupplierButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\editSupplierButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="eazyCartIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\eazyCartIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="completeOrderButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\completeOrderButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="editProductButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\editProductButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="deleteProductButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\deleteProductButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="addCategoryButtonPicture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addCategoryButtonPicture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="exportReportButtonImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\exportReportButtonImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

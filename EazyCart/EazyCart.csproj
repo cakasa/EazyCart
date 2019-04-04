@@ -175,11 +175,11 @@
     <Compile Include="EazyCartForm.Designer.cs">
       <DependentUpon>EazyCartForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ManagementUserControl.cs">
+    <Compile Include="LogisticsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ManagementUserControl.Designer.cs">
-      <DependentUpon>ManagementUserControl.cs</DependentUpon>
+    <Compile Include="LogisticsUserControl.Designer.cs">
+      <DependentUpon>LogisticsUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PayForm.cs">
       <SubType>Form</SubType>
@@ -212,8 +212,8 @@
     <EmbeddedResource Include="EazyCartForm.resx">
       <DependentUpon>EazyCartForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManagementUserControl.resx">
-      <DependentUpon>ManagementUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="LogisticsUserControl.resx">
+      <DependentUpon>LogisticsUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PayForm.resx">
       <DependentUpon>PayForm.cs</DependentUpon>
@@ -244,32 +244,60 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\closeIcon.png">
+    <None Include="Resources\closeCancelIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\cartIcon.png">
+    <None Include="Resources\exportReportButtonImage.png" />
+    <None Include="Resources\generateReportButtonImage.png" />
+    <None Include="Resources\makePaymentButtonImage.png" />
+    <None Include="Resources\ModifyProductPlaceHolder1.png" />
+    <None Include="Resources\saveProductToReceiptButtonImage.png" />
+    <None Include="Resources\editProductFromReceiptButtonImage.png" />
+    <None Include="Resources\saveProductButtonImage.png" />
+    <None Include="Resources\editProductButtonImage.png" />
+    <None Include="Resources\makeDeliveryButtonPicture.png" />
+    <None Include="Resources\editSupplierButtonPicture.png" />
+    <None Include="Resources\editCityButtonPicture.png" />
+    <None Include="Resources\smallSaveChangesButtonPicture.png" />
+    <None Include="Resources\saveChangesButtonPicture.png" />
+    <None Include="Resources\editCategoryButtonPicture.png" />
+    <None Include="Resources\editCountryButtonPicture.png" />
+    <None Include="Resources\addCountryButtonPicture.png" />
+    <None Include="Resources\addCityButtonPicture.png" />
+    <None Include="Resources\addSupplierButtonPicture.png" />
+    <None Include="Resources\addCategoryButtonPicture.png" />
+    <None Include="Resources\deleteCountryButtonPicture.png" />
+    <None Include="Resources\deleteCityButtonPicture.png" />
+    <None Include="Resources\deleteSupplierButtonPicture.png" />
+    <None Include="Resources\deleteCategoryButtonPicture.png" />
+    <None Include="Resources\addProductButtonImage.png" />
+    <None Include="Resources\deleteProductButtonImage.png" />
+    <None Include="Resources\addProductToReceiptButtonImage.png" />
+    <None Include="Resources\addProductToReceiptButtonImage1.png" />
+    <None Include="Resources\addProductToReceiptButtonImage2.png" />
+    <None Include="Resources\deleteProductFromReceiptButtonImage.png" />
+    <None Include="Resources\completeOrderPlaceholder1.png" />
+    <None Include="Resources\completeOrderButtonImage.png" />
+    <None Include="Resources\confirmPaymentButtonImage.png" />
+    <Content Include="Resources\eazyCartIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\logisticsButtonPicture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cashRegisterButtonImage.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\cashRegisterImage.png">
+    <None Include="Resources\warehouseButtonImage.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\warehouseImage.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\statisticsImage.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\settingsImage.png">
+    <None Include="Resources\statisticsButtonImage.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -282,30 +310,6 @@
       <Project>{d554a775-f697-4e06-b1d1-7a30efa99014}</Project>
       <Name>Data</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\completeOrderPlaceholder.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\AddProductPlaceHolder.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ModifyProductPlaceHolder.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\saveProductPlaceholder.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\addCategoryImage.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\MakeDeliveryImage.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\revertChangesImage.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\currentThemePlaceholder.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

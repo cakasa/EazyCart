@@ -12,10 +12,10 @@ namespace EazyCart
     /// </summary>
     public partial class EazyCartForm : Form
     {
-        public CashRegisterUserControl cashRegisterUserControl { get; private set; }
-        public WarehouseUserControl warehouseUserControl { get; private set; }
+        public CashRegisterUserControl CashRegisterUserControl { get; private set; }
+        public WarehouseUserControl WarehouseUserControl { get; private set; }
         private StatisticsUserContol statisticsUserContol;
-        private ManagementUserControl managementUserControl;
+        private LogisticsUserControl logisticsUserControl;
 
         private int mouseX = 0;
         private int mouseY = 0;
@@ -50,25 +50,25 @@ namespace EazyCart
         /// </summary>
         private void InitializeFormUserControls()
         {
-            cashRegisterUserControl = new CashRegisterUserControl();
-            warehouseUserControl = new WarehouseUserControl();
+            CashRegisterUserControl = new CashRegisterUserControl();
+            WarehouseUserControl = new WarehouseUserControl();
             statisticsUserContol = new StatisticsUserContol();
-            managementUserControl = new ManagementUserControl();
+            logisticsUserControl = new LogisticsUserControl();
 
-            cashRegisterUserControl.Dock = DockStyle.Bottom;
-            warehouseUserControl.Dock = DockStyle.Bottom;
+            CashRegisterUserControl.Dock = DockStyle.Bottom;
+            WarehouseUserControl.Dock = DockStyle.Bottom;
             statisticsUserContol.Dock = DockStyle.Bottom;
-            managementUserControl.Dock = DockStyle.Bottom;
+            logisticsUserControl.Dock = DockStyle.Bottom;
 
-            this.Controls.Add(cashRegisterUserControl);
-            this.Controls.Add(warehouseUserControl);
+            this.Controls.Add(CashRegisterUserControl);
+            this.Controls.Add(WarehouseUserControl);
             this.Controls.Add(statisticsUserContol);
-            this.Controls.Add(managementUserControl);
+            this.Controls.Add(logisticsUserControl);
 
-            cashRegisterUserControl.Visible = false;
-            warehouseUserControl.Visible = false;
+            CashRegisterUserControl.Visible = false;
+            WarehouseUserControl.Visible = false;
             statisticsUserContol.Visible = false;
-            managementUserControl.Visible = false;
+            logisticsUserControl.Visible = false;
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace EazyCart
         /// <param name="e"></param>
         private void CloseButton_Click(object sender, EventArgs e)
         {
-            var receiptDataGridView = (DataGridView) cashRegisterUserControl.Controls["receiptDataGridView"];
+            var receiptDataGridView = (DataGridView) CashRegisterUserControl.Controls["receiptDataGridView"];
 
             // If the receipt is not empty, prompt the user to cancel it 
             // before closing it.
@@ -117,12 +117,12 @@ namespace EazyCart
             var userControlsToMakeInvisible = new List<UserControl>
             {
                 statisticsUserContol,
-                managementUserControl,
-                warehouseUserControl,
+                logisticsUserControl,
+                WarehouseUserControl,
             };
 
             Point mainMenuPanelLocationPoint = new Point(342, 57);
-            UserControlChanged(userControlsToMakeInvisible, cashRegisterUserControl, mainMenuPanelLocationPoint);
+            UserControlChanged(userControlsToMakeInvisible, CashRegisterUserControl, mainMenuPanelLocationPoint);
         }
 
         /// <summary>
@@ -134,13 +134,13 @@ namespace EazyCart
         {
             var userControlsToMakeInvisible = new List<UserControl>
             {
-                cashRegisterUserControl,
-                managementUserControl,
+                CashRegisterUserControl,
+                logisticsUserControl,
                 statisticsUserContol,
             };
 
             Point mainMenuPanelLocationPoint = new Point(598, 57);
-            UserControlChanged(userControlsToMakeInvisible, warehouseUserControl, mainMenuPanelLocationPoint);
+            UserControlChanged(userControlsToMakeInvisible, WarehouseUserControl, mainMenuPanelLocationPoint);
         }
 
         /// <summary>
@@ -153,12 +153,12 @@ namespace EazyCart
             var userControlsToMakeInvisible = new List<UserControl>
             {
                 statisticsUserContol,
-                cashRegisterUserControl,
-                warehouseUserControl,
+                CashRegisterUserControl,
+                WarehouseUserControl,
             };
 
             Point mainMenuPanelLocationPoint = new Point(854, 57);
-            UserControlChanged(userControlsToMakeInvisible, managementUserControl, mainMenuPanelLocationPoint);
+            UserControlChanged(userControlsToMakeInvisible, logisticsUserControl, mainMenuPanelLocationPoint);
         }
 
         /// <summary>
@@ -170,9 +170,9 @@ namespace EazyCart
         {
             var userControlsToMakeInvisible = new List<UserControl>
             {
-                cashRegisterUserControl,
-                managementUserControl,
-                warehouseUserControl,
+                CashRegisterUserControl,
+                logisticsUserControl,
+                WarehouseUserControl,
             };
 
             Point mainMenuPanelLocationPoint = new Point(1110, 57);
@@ -190,7 +190,7 @@ namespace EazyCart
         private void UserControlChanged
             (List<UserControl> userControlsToInvisible, UserControl userControlToVisible, Point mainMenuPanelLocationPoint)
         {
-            var receiptDataGridView = (DataGridView)cashRegisterUserControl.Controls["receiptDataGridView"];
+            var receiptDataGridView = (DataGridView)CashRegisterUserControl.Controls["receiptDataGridView"];
 
             // If the receipt is not empty, prompt the user to cancel it 
             // before closing it.

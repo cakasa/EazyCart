@@ -23,7 +23,6 @@ namespace EazyCart
         private readonly Color activeTextColor = SystemColors.WindowText;
         private readonly Color enabledDeleteButtonColor = Color.FromArgb(231, 76, 60);
 
-
         private int highestProductReceiptId;
         private int currentProductReceiptId;
 
@@ -132,9 +131,10 @@ namespace EazyCart
             this.addProductButton.Enabled = true;
             this.addProductButton.BackColor = enabledButtonColor;
             this.editProductButton.Enabled = true;
-            this.deleteProductButton.BackColor = enabledButtonColor;
+            this.editProductButton.BackColor = enabledButtonColor;
             this.deleteProductButton.Enabled = true;
-            this.editProductButton.BackColor = enabledDeleteButtonColor;
+            this.deleteProductButton.BackColor = enabledDeleteButtonColor;
+
             this.saveProductButton.Enabled = false;
             this.saveProductButton.BackColor = disabledButtonColor;
         }
@@ -218,7 +218,7 @@ namespace EazyCart
         private void UpdateProductDataGridViewOnWarehouseUserControl()
         {
             var eazyCartForm = (EazyCartForm)EazyCartForm.ActiveForm;
-            eazyCartForm.warehouseUserControl.UpdateUserControl();
+            eazyCartForm.WarehouseUserControl.UpdateUserControl();
         }
 
         /// <summary>
@@ -516,7 +516,6 @@ namespace EazyCart
                 addButton.BackColor = enabledButtonColor;
                 deleteButton.Enabled = true;
                 deleteButton.BackColor = enabledDeleteButtonColor;
-                deleteButton.BackColor = enabledDeleteButtonColor;
                 makePaymentButton.Enabled = true;
                 makePaymentButton.BackColor = enabledButtonColor;
 
@@ -540,8 +539,110 @@ namespace EazyCart
             else this.discountPercentageTextBox.Enabled = false;
         }
 
+        // The following methods are connected with implementing shortcuts
+        private void CashRegisterUserControl_KeyDown(object sender, KeyEventArgs e)
+        {
+            this.InterpretShortcut(e);
+        }
+
+        private void CategoryComboBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            this.InterpretShortcut(e);
+        }
+
+        private void SearchBoxTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            this.InterpretShortcut(e);
+        }
+
+        private void AvailableProductsDataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            this.InterpretShortcut(e);
+        }
+
+        private void QuantityTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            this.InterpretShortcut(e);
+        }
+
+        private void DiscountCheckBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            this.InterpretShortcut(e);
+        }
+
+        private void DiscountPercentageTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            this.InterpretShortcut(e);
+        }
+
+        private void AddProductButton_KeyDown(object sender, KeyEventArgs e)
+        {
+            this.InterpretShortcut(e);
+        }
+
+        private void EditProductButton_KeyDown(object sender, KeyEventArgs e)
+        {
+            this.InterpretShortcut(e);
+        }
+
+        private void SaveProductButton_KeyDown(object sender, KeyEventArgs e)
+        {
+            this.InterpretShortcut(e);
+        }
+
+        private void DeleteProductButton_KeyDown(object sender, KeyEventArgs e)
+        {
+            this.InterpretShortcut(e);
+        }
+
+        private void ReceiptDataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            this.InterpretShortcut(e);
+        }
+
+        /// <summary>
+        /// This method interprets the key that was pressed if it corresponds
+        /// to a shortcut key.
+        /// </summary>
+        /// <param name="e"></param>
+        private void InterpretShortcut(KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter && this.addProductButton.Enabled == true)
+            {
+                this.AddProductButton_Click(this, new EventArgs());
+                this.searchBoxTextBox.Focus();
+            }
+            if(e.KeyData == Keys.F7 && this.editProductButton.Enabled == true)
+            {
+                this.EditProductButton_Click(this, new EventArgs());
+                this.quantityTextBox.Focus();
+            }
+            if(e.KeyData == Keys.F8 && this.saveProductButton.Enabled == true)
+            {
+                this.SaveProductButton_Click(this, new EventArgs());
+                this.searchBoxTextBox.Focus();
+            }
+            if(e.KeyData == Keys.Delete && this.deleteProductButton.Enabled == true)
+            {
+                this.DeleteProduct_Click(this, new EventArgs());
+                this.searchBoxTextBox.Focus();
+            }
+            if(e.KeyData == Keys.F5)
+            {
+                if(makePaymentButton.Enabled == true)
+                {
+                    this.MakePaymentButton_Click(this, new EventArgs());
+                    this.completeOrderButton.Focus();
+                }
+                else if(completeOrderButton.Enabled == true)
+                {
+                    this.CompleteOrderButton_Click(this, new EventArgs());
+                    this.searchBoxTextBox.Focus();
+                }
+            }
+        }
+
         // All of the following methods are connected with maintaining a clean UI.
-        
         private void SearchBoxTextBox_Enter(object sender, EventArgs e)
         {
             this.RemovePromptFromTextBoxWhenTyping(this.searchBoxTextBox, "Enter a product's name or its id");

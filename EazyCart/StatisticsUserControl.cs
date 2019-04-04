@@ -247,6 +247,11 @@ namespace EazyCart
         /// <param name="e"></param>
         private void GenerateReportButton_Click(object sender, EventArgs e)
         {
+            // Renew the information.
+            var eazyCartContext = new EazyCartContext();
+            this.productBusiness = new ProductBusiness(eazyCartContext);
+            this.receiptBusiness = new ReceiptBusiness(eazyCartContext);
+
             int categoryIndex = this.reportCategoryComboBox.SelectedIndex;
             int typeIndex = this.reportTypeComboBox.SelectedIndex;
             int periodIndex = this.reportPeriodComboBox.SelectedIndex;
@@ -464,7 +469,7 @@ namespace EazyCart
                                                     .GetMonthlyOrders(currentDateTime)
                                                     .Select(x => (decimal)x)
                                                     .ToArray();
-                string[] labels = this.monthLabels;
+                string[] labels = this.dayLabels;
                 this.GenerateReport(totalOrdersByDay, labels, "Day", "Number of orders", 0, isMoneyReport);
             }
             else if (periodIndex == 3)

@@ -31,14 +31,14 @@
             this.menuPanel = new System.Windows.Forms.Panel();
             this.makePaymentLabel = new System.Windows.Forms.Label();
             this.titleLabel = new System.Windows.Forms.Label();
-            this.eazyCartLogoPictureBox = new System.Windows.Forms.PictureBox();
             this.grandTotalCashLabel = new System.Windows.Forms.Label();
             this.grandTotalLabel = new System.Windows.Forms.Label();
             this.ornamentalPanel = new System.Windows.Forms.Panel();
             this.payingAmountTextBox = new System.Windows.Forms.TextBox();
-            this.makePaymentButton = new System.Windows.Forms.Button();
             this.warningLabel = new System.Windows.Forms.Label();
+            this.makePaymentButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
+            this.eazyCartLogoPictureBox = new System.Windows.Forms.PictureBox();
             this.menuPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eazyCartLogoPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -79,16 +79,6 @@
             this.titleLabel.Size = new System.Drawing.Size(97, 30);
             this.titleLabel.TabIndex = 5;
             this.titleLabel.Text = "EazyCart";
-            // 
-            // eazyCartLogoPictureBox
-            // 
-            this.eazyCartLogoPictureBox.Image = global::EazyCart.Properties.Resources.cartIcon;
-            this.eazyCartLogoPictureBox.Location = new System.Drawing.Point(0, 0);
-            this.eazyCartLogoPictureBox.Name = "eazyCartLogoPictureBox";
-            this.eazyCartLogoPictureBox.Size = new System.Drawing.Size(50, 50);
-            this.eazyCartLogoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.eazyCartLogoPictureBox.TabIndex = 4;
-            this.eazyCartLogoPictureBox.TabStop = false;
             // 
             // grandTotalCashLabel
             // 
@@ -136,6 +126,18 @@
             this.payingAmountTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PayingAmountTextBox_KeyDown);
             this.payingAmountTextBox.Leave += new System.EventHandler(this.PayingAmountTextBox_Leave);
             // 
+            // warningLabel
+            // 
+            this.warningLabel.AutoSize = true;
+            this.warningLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.warningLabel.Location = new System.Drawing.Point(15, 250);
+            this.warningLabel.MinimumSize = new System.Drawing.Size(455, 21);
+            this.warningLabel.Name = "warningLabel";
+            this.warningLabel.Size = new System.Drawing.Size(455, 21);
+            this.warningLabel.TabIndex = 19;
+            this.warningLabel.Text = "Be wary that payment cannot be edited afterwards";
+            this.warningLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // makePaymentButton
             // 
             this.makePaymentButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
@@ -144,30 +146,18 @@
             this.makePaymentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.makePaymentButton.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.makePaymentButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.makePaymentButton.Location = new System.Drawing.Point(152, 184);
+            this.makePaymentButton.Image = global::EazyCart.Properties.Resources.confirmPaymentButtonImage;
+            this.makePaymentButton.Location = new System.Drawing.Point(102, 181);
             this.makePaymentButton.Name = "makePaymentButton";
-            this.makePaymentButton.Size = new System.Drawing.Size(184, 52);
+            this.makePaymentButton.Size = new System.Drawing.Size(275, 66);
             this.makePaymentButton.TabIndex = 18;
-            this.makePaymentButton.Text = "Make Payment";
             this.makePaymentButton.UseVisualStyleBackColor = false;
             this.makePaymentButton.Click += new System.EventHandler(this.MakePaymentButton_Click);
-            // 
-            // warningLabel
-            // 
-            this.warningLabel.AutoSize = true;
-            this.warningLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.warningLabel.Location = new System.Drawing.Point(19, 239);
-            this.warningLabel.MinimumSize = new System.Drawing.Size(455, 21);
-            this.warningLabel.Name = "warningLabel";
-            this.warningLabel.Size = new System.Drawing.Size(455, 21);
-            this.warningLabel.TabIndex = 19;
-            this.warningLabel.Text = "Be wary that payment cannot be edited afterwards";
-            this.warningLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // closeButton
             // 
             this.closeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.closeButton.BackgroundImage = global::EazyCart.Properties.Resources.closeIcon;
+            this.closeButton.BackgroundImage = global::EazyCart.Properties.Resources.closeCancelIcon;
             this.closeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.closeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
@@ -179,11 +169,21 @@
             this.closeButton.UseVisualStyleBackColor = false;
             this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
+            // eazyCartLogoPictureBox
+            // 
+            this.eazyCartLogoPictureBox.Image = global::EazyCart.Properties.Resources.eazyCartIcon;
+            this.eazyCartLogoPictureBox.Location = new System.Drawing.Point(0, 0);
+            this.eazyCartLogoPictureBox.Name = "eazyCartLogoPictureBox";
+            this.eazyCartLogoPictureBox.Size = new System.Drawing.Size(50, 50);
+            this.eazyCartLogoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.eazyCartLogoPictureBox.TabIndex = 4;
+            this.eazyCartLogoPictureBox.TabStop = false;
+            // 
             // PayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(495, 267);
+            this.ClientSize = new System.Drawing.Size(495, 281);
             this.Controls.Add(this.warningLabel);
             this.Controls.Add(this.makePaymentButton);
             this.Controls.Add(this.payingAmountTextBox);

@@ -25,6 +25,7 @@ namespace EazyCart
         private readonly Color disabledButtonColor = Color.FromArgb(127, 140, 141);
         private readonly Color promptTextColor = SystemColors.WindowFrame;
         private readonly Color activeTextColor = SystemColors.WindowText;
+        private readonly Color enabledDeleteButtonColor = Color.FromArgb(231, 76, 60);
 
         public WarehouseUserControl()
         {
@@ -228,7 +229,7 @@ namespace EazyCart
         private void UpdateCashRegisterUserControl()
         {
             var eazyCartForm = (EazyCartForm)EazyCartForm.ActiveForm;
-            eazyCartForm.cashRegisterUserControl.UpdateUserControl();
+            eazyCartForm.CashRegisterUserControl.UpdateUserControl();
         }
 
         // The following methods are related to user interaction with the user control.
@@ -612,7 +613,7 @@ namespace EazyCart
                 addProductButton.Enabled = true;
                 addProductButton.BackColor = enabledButtonColor;
                 deleteProductButton.Enabled = true;
-                deleteProductButton.BackColor = enabledButtonColor;
+                deleteProductButton.BackColor = enabledDeleteButtonColor;
 
                 saveProductButton.Enabled = false;
                 saveProductButton.BackColor = disabledButtonColor;
@@ -620,7 +621,7 @@ namespace EazyCart
         }
 
         // All of the following methods are responsible for maintaining a consistent UI
-        private void productNameTextBox_Enter(object sender, EventArgs e)
+        private void ProductNameTextBox_Enter(object sender, EventArgs e)
         {
             this.RemovePromptFromTextBox(this.productNameTextBox, "Product Name");
         }

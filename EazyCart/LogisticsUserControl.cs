@@ -11,7 +11,7 @@ namespace EazyCart
     /// This is the user control responsible for managing cities, countries,
     /// suppliers and categories, which products need to have a reference to.
     /// </summary>
-    public partial class ManagementUserControl : UserControl
+    public partial class LogisticsUserControl : UserControl
     {
         private CityBusiness cityBusiness;
         private CountryBusiness countryBusiness;
@@ -20,15 +20,16 @@ namespace EazyCart
 
         private readonly Color enabledButtonColor = Color.FromArgb(44, 62, 80);
         private readonly Color disabledButtonColor = Color.FromArgb(127, 140, 141);
+        private readonly Color enabledDeleteButtonColor = Color.FromArgb(231, 76, 60);
         private readonly Color promptTextColor = SystemColors.WindowFrame;
         private readonly Color activeTextColor = SystemColors.WindowText;
 
-        public ManagementUserControl()
+        public LogisticsUserControl()
         {
             InitializeComponent();
         }
 
-        private void ManagementUserControl_Load(object sender, EventArgs e)
+        private void LogisticsUserControl_Load(object sender, EventArgs e)
         {
             this.UpdateUserControl();
         }
@@ -221,8 +222,8 @@ namespace EazyCart
         private void UpdateCategoryComboBoxOnWarehouseUserControl()
         {
             var eazyCartForm = (EazyCartForm)EazyCartForm.ActiveForm;
-            eazyCartForm.warehouseUserControl.UpdateUserControl();
-            eazyCartForm.cashRegisterUserControl.UpdateUserControl();
+            eazyCartForm.WarehouseUserControl.UpdateUserControl();
+            eazyCartForm.CashRegisterUserControl.UpdateUserControl();
         }
 
         /// <summary>
@@ -231,8 +232,8 @@ namespace EazyCart
         private void UpdateWarehouseAndCashRegisterTabs()
         {
             var eazyCartForm = (EazyCartForm)EazyCartForm.ActiveForm;
-            eazyCartForm.warehouseUserControl.UpdateUserControl();
-            eazyCartForm.cashRegisterUserControl.UpdateUserControl();
+            eazyCartForm.WarehouseUserControl.UpdateUserControl();
+            eazyCartForm.CashRegisterUserControl.UpdateUserControl();
         }
 
         // The following methods are related to user interaction with the user control.
@@ -855,7 +856,7 @@ namespace EazyCart
                 addButton.Enabled = true;
                 addButton.BackColor = enabledButtonColor;
                 deleteButton.Enabled = true;
-                deleteButton.BackColor = enabledButtonColor;
+                deleteButton.BackColor = enabledDeleteButtonColor;
 
                 saveButton.Enabled = false;
                 saveButton.BackColor = disabledButtonColor;

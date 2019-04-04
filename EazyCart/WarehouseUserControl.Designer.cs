@@ -30,11 +30,11 @@ namespace EazyCart
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.generalPropertiesGroupBox = new System.Windows.Forms.GroupBox();
             this.inventoryQuantityTextBox = new System.Windows.Forms.TextBox();
             this.categoryComboBox = new System.Windows.Forms.ComboBox();
@@ -56,13 +56,8 @@ namespace EazyCart
             this.deliveryPriceTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.totalLinePanel = new System.Windows.Forms.Panel();
-            this.deleteProductButton = new System.Windows.Forms.Button();
-            this.saveProductButton = new System.Windows.Forms.Button();
-            this.editProductButton = new System.Windows.Forms.Button();
-            this.addProductButton = new System.Windows.Forms.Button();
             this.makeDeliveryGroupBox = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.makeDeliveryButton = new System.Windows.Forms.Button();
             this.deliveryQuantityTextBox = new System.Windows.Forms.TextBox();
             this.productComboBox = new System.Windows.Forms.ComboBox();
             this.allProductsDataGridView = new System.Windows.Forms.DataGridView();
@@ -74,6 +69,11 @@ namespace EazyCart
             this.supplierNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deliveryPriceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.makeDeliveryButton = new System.Windows.Forms.Button();
+            this.deleteProductButton = new System.Windows.Forms.Button();
+            this.saveProductButton = new System.Windows.Forms.Button();
+            this.editProductButton = new System.Windows.Forms.Button();
+            this.addProductButton = new System.Windows.Forms.Button();
             this.generalPropertiesGroupBox.SuspendLayout();
             this.supplierInformationGroupBox.SuspendLayout();
             this.pricingGroupBox.SuspendLayout();
@@ -131,7 +131,7 @@ namespace EazyCart
             this.productNameTextBox.Size = new System.Drawing.Size(325, 33);
             this.productNameTextBox.TabIndex = 7;
             this.productNameTextBox.Text = "Product Name";
-            this.productNameTextBox.Enter += new System.EventHandler(this.productNameTextBox_Enter);
+            this.productNameTextBox.Enter += new System.EventHandler(this.ProductNameTextBox_Enter);
             this.productNameTextBox.Leave += new System.EventHandler(this.ProductNameTextBox_Leave);
             // 
             // productCodeMaskedTextBox
@@ -340,70 +340,6 @@ namespace EazyCart
             this.totalLinePanel.Size = new System.Drawing.Size(460, 5);
             this.totalLinePanel.TabIndex = 34;
             // 
-            // deleteProductButton
-            // 
-            this.deleteProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
-            this.deleteProductButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.deleteProductButton.FlatAppearance.BorderSize = 0;
-            this.deleteProductButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.deleteProductButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.deleteProductButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.deleteProductButton.Location = new System.Drawing.Point(22, 577);
-            this.deleteProductButton.Name = "deleteProductButton";
-            this.deleteProductButton.Size = new System.Drawing.Size(437, 41);
-            this.deleteProductButton.TabIndex = 25;
-            this.deleteProductButton.Text = "DELETE PRODUCT";
-            this.deleteProductButton.UseVisualStyleBackColor = false;
-            this.deleteProductButton.Click += new System.EventHandler(this.DeleteProductButton_Click);
-            // 
-            // saveProductButton
-            // 
-            this.saveProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.saveProductButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.saveProductButton.FlatAppearance.BorderSize = 0;
-            this.saveProductButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.saveProductButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.saveProductButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.saveProductButton.Location = new System.Drawing.Point(244, 517);
-            this.saveProductButton.Name = "saveProductButton";
-            this.saveProductButton.Size = new System.Drawing.Size(215, 41);
-            this.saveProductButton.TabIndex = 25;
-            this.saveProductButton.Text = "SAVE PRODUCT";
-            this.saveProductButton.UseVisualStyleBackColor = false;
-            this.saveProductButton.Click += new System.EventHandler(this.SaveProductButton_Click);
-            // 
-            // editProductButton
-            // 
-            this.editProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.editProductButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.editProductButton.FlatAppearance.BorderSize = 0;
-            this.editProductButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.editProductButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.editProductButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.editProductButton.Location = new System.Drawing.Point(22, 517);
-            this.editProductButton.Name = "editProductButton";
-            this.editProductButton.Size = new System.Drawing.Size(215, 41);
-            this.editProductButton.TabIndex = 25;
-            this.editProductButton.Text = "EDIT PRODUCT";
-            this.editProductButton.UseVisualStyleBackColor = false;
-            this.editProductButton.Click += new System.EventHandler(this.EditProductButton_Click);
-            // 
-            // addProductButton
-            // 
-            this.addProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.addProductButton.BackgroundImage = global::EazyCart.Properties.Resources.AddProductPlaceHolder;
-            this.addProductButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.addProductButton.FlatAppearance.BorderSize = 0;
-            this.addProductButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addProductButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.addProductButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.addProductButton.Location = new System.Drawing.Point(22, 467);
-            this.addProductButton.Name = "addProductButton";
-            this.addProductButton.Size = new System.Drawing.Size(437, 41);
-            this.addProductButton.TabIndex = 25;
-            this.addProductButton.UseVisualStyleBackColor = false;
-            this.addProductButton.Click += new System.EventHandler(this.AddProductButton_Click);
-            // 
             // makeDeliveryGroupBox
             // 
             this.makeDeliveryGroupBox.Controls.Add(this.panel2);
@@ -425,22 +361,6 @@ namespace EazyCart
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(460, 5);
             this.panel2.TabIndex = 35;
-            // 
-            // makeDeliveryButton
-            // 
-            this.makeDeliveryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.makeDeliveryButton.BackgroundImage = global::EazyCart.Properties.Resources.MakeDeliveryImage;
-            this.makeDeliveryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.makeDeliveryButton.FlatAppearance.BorderSize = 0;
-            this.makeDeliveryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.makeDeliveryButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.makeDeliveryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.makeDeliveryButton.Location = new System.Drawing.Point(25, 133);
-            this.makeDeliveryButton.Name = "makeDeliveryButton";
-            this.makeDeliveryButton.Size = new System.Drawing.Size(437, 41);
-            this.makeDeliveryButton.TabIndex = 29;
-            this.makeDeliveryButton.UseVisualStyleBackColor = false;
-            this.makeDeliveryButton.Click += new System.EventHandler(this.MakeDeliveryButton_Click);
             // 
             // deliveryQuantityTextBox
             // 
@@ -480,15 +400,15 @@ namespace EazyCart
             this.allProductsDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.allProductsDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.allProductsDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.allProductsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.allProductsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.allProductsDataGridView.ColumnHeadersHeight = 30;
             this.allProductsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.allProductsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -500,14 +420,14 @@ namespace EazyCart
             this.supplierNameColumn,
             this.deliveryPriceColumn,
             this.dataGridViewTextBoxColumn4});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.allProductsDataGridView.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.allProductsDataGridView.DefaultCellStyle = dataGridViewCellStyle9;
             this.allProductsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.allProductsDataGridView.EnableHeadersVisualStyles = false;
             this.allProductsDataGridView.Location = new System.Drawing.Point(501, 20);
@@ -515,14 +435,14 @@ namespace EazyCart
             this.allProductsDataGridView.Name = "allProductsDataGridView";
             this.allProductsDataGridView.ReadOnly = true;
             this.allProductsDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.allProductsDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.allProductsDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.allProductsDataGridView.RowHeadersWidth = 4;
             this.allProductsDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.allProductsDataGridView.RowTemplate.Height = 30;
@@ -574,9 +494,9 @@ namespace EazyCart
             // 
             // deliveryPriceColumn
             // 
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.deliveryPriceColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.Format = "N2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.deliveryPriceColumn.DefaultCellStyle = dataGridViewCellStyle7;
             this.deliveryPriceColumn.HeaderText = "DEL. PR.";
             this.deliveryPriceColumn.Name = "deliveryPriceColumn";
             this.deliveryPriceColumn.ReadOnly = true;
@@ -584,14 +504,94 @@ namespace EazyCart
             // 
             // dataGridViewTextBoxColumn4
             // 
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewTextBoxColumn4.HeaderText = "SEL. PR.";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewTextBoxColumn4.Width = 80;
+            // 
+            // makeDeliveryButton
+            // 
+            this.makeDeliveryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.makeDeliveryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.makeDeliveryButton.FlatAppearance.BorderSize = 0;
+            this.makeDeliveryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.makeDeliveryButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.makeDeliveryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.makeDeliveryButton.Image = global::EazyCart.Properties.Resources.makeDeliveryButtonPicture;
+            this.makeDeliveryButton.Location = new System.Drawing.Point(25, 133);
+            this.makeDeliveryButton.Name = "makeDeliveryButton";
+            this.makeDeliveryButton.Size = new System.Drawing.Size(437, 41);
+            this.makeDeliveryButton.TabIndex = 29;
+            this.makeDeliveryButton.UseVisualStyleBackColor = false;
+            this.makeDeliveryButton.Click += new System.EventHandler(this.MakeDeliveryButton_Click);
+            // 
+            // deleteProductButton
+            // 
+            this.deleteProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.deleteProductButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.deleteProductButton.FlatAppearance.BorderSize = 0;
+            this.deleteProductButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteProductButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.deleteProductButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.deleteProductButton.Image = global::EazyCart.Properties.Resources.deleteProductButtonImage;
+            this.deleteProductButton.Location = new System.Drawing.Point(22, 577);
+            this.deleteProductButton.Name = "deleteProductButton";
+            this.deleteProductButton.Size = new System.Drawing.Size(437, 41);
+            this.deleteProductButton.TabIndex = 25;
+            this.deleteProductButton.UseVisualStyleBackColor = false;
+            this.deleteProductButton.Click += new System.EventHandler(this.DeleteProductButton_Click);
+            // 
+            // saveProductButton
+            // 
+            this.saveProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
+            this.saveProductButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.saveProductButton.FlatAppearance.BorderSize = 0;
+            this.saveProductButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveProductButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.saveProductButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.saveProductButton.Image = global::EazyCart.Properties.Resources.saveProductButtonImage;
+            this.saveProductButton.Location = new System.Drawing.Point(244, 517);
+            this.saveProductButton.Name = "saveProductButton";
+            this.saveProductButton.Size = new System.Drawing.Size(215, 41);
+            this.saveProductButton.TabIndex = 25;
+            this.saveProductButton.UseVisualStyleBackColor = false;
+            this.saveProductButton.Click += new System.EventHandler(this.SaveProductButton_Click);
+            // 
+            // editProductButton
+            // 
+            this.editProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.editProductButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.editProductButton.FlatAppearance.BorderSize = 0;
+            this.editProductButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.editProductButton.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.editProductButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.editProductButton.Image = global::EazyCart.Properties.Resources.editProductButtonImage;
+            this.editProductButton.Location = new System.Drawing.Point(22, 517);
+            this.editProductButton.Name = "editProductButton";
+            this.editProductButton.Size = new System.Drawing.Size(215, 41);
+            this.editProductButton.TabIndex = 25;
+            this.editProductButton.UseVisualStyleBackColor = false;
+            this.editProductButton.Click += new System.EventHandler(this.EditProductButton_Click);
+            // 
+            // addProductButton
+            // 
+            this.addProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.addProductButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.addProductButton.FlatAppearance.BorderSize = 0;
+            this.addProductButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addProductButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.addProductButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.addProductButton.Image = global::EazyCart.Properties.Resources.addProductButtonImage;
+            this.addProductButton.Location = new System.Drawing.Point(22, 467);
+            this.addProductButton.Name = "addProductButton";
+            this.addProductButton.Size = new System.Drawing.Size(437, 41);
+            this.addProductButton.TabIndex = 25;
+            this.addProductButton.UseVisualStyleBackColor = false;
+            this.addProductButton.Click += new System.EventHandler(this.AddProductButton_Click);
             // 
             // WarehouseUserControl
             // 
