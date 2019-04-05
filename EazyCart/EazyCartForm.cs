@@ -1,5 +1,4 @@
-﻿using Business;
-using Business.Controllers;
+﻿using Business.Controllers;
 using Data.Models;
 using EazyCart.InteractionForms;
 using EazyCart.UserControls;
@@ -34,7 +33,7 @@ namespace EazyCart
 
         private void EazyCartForm_Load(object sender, EventArgs e)
         {
-            LoadEazyCartForm();
+            this.LoadEazyCartForm();
         }
 
         /// <summary>
@@ -43,9 +42,9 @@ namespace EazyCart
         /// </summary>
         private void LoadEazyCartForm()
         {
-            InitializeFormUserControls();
-            mainMenuPanel.Visible = false;
-            AddUnitsIfTheyAreNotInTheDatabase();         
+            this.InitializeFormUserControls();
+            this.mainMenuPanel.Visible = false;
+            this.AddUnitsIfTheyAreNotInTheDatabase();         
         }
 
         /// <summary>
@@ -54,17 +53,17 @@ namespace EazyCart
         /// </summary>
         private void InitializeFormUserControls()
         {
-            CashRegisterUserControl = new CashRegisterUserControl();
-            WarehouseUserControl = new WarehouseUserControl();
-            statisticsUserContol = new StatisticsUserContol();
-            logisticsUserControl = new LogisticsUserControl();
-            greetingScreenUserControl = new GreetingScreenUserControl();
+            this.CashRegisterUserControl = new CashRegisterUserControl();
+            this.WarehouseUserControl = new WarehouseUserControl();
+            this.statisticsUserContol = new StatisticsUserContol();
+            this.logisticsUserControl = new LogisticsUserControl();
+            this.greetingScreenUserControl = new GreetingScreenUserControl();
 
-            CashRegisterUserControl.Dock = DockStyle.Bottom;
-            WarehouseUserControl.Dock = DockStyle.Bottom;
-            statisticsUserContol.Dock = DockStyle.Bottom;
-            logisticsUserControl.Dock = DockStyle.Bottom;
-            greetingScreenUserControl.Dock = DockStyle.Bottom;
+            this.CashRegisterUserControl.Dock = DockStyle.Bottom;
+            this.WarehouseUserControl.Dock = DockStyle.Bottom;
+            this.statisticsUserContol.Dock = DockStyle.Bottom;
+            this.logisticsUserControl.Dock = DockStyle.Bottom;
+            this.greetingScreenUserControl.Dock = DockStyle.Bottom;
 
             this.Controls.Add(CashRegisterUserControl);
             this.Controls.Add(WarehouseUserControl);
@@ -72,11 +71,11 @@ namespace EazyCart
             this.Controls.Add(logisticsUserControl);
             this.Controls.Add(greetingScreenUserControl);
 
-            CashRegisterUserControl.Visible = false;
-            WarehouseUserControl.Visible = false;
-            statisticsUserContol.Visible = false;
-            logisticsUserControl.Visible = false;
-            greetingScreenUserControl.Visible = true;
+            this.CashRegisterUserControl.Visible = false;
+            this.WarehouseUserControl.Visible = false;
+            this.statisticsUserContol.Visible = false;
+            this.logisticsUserControl.Visible = false;
+            this.greetingScreenUserControl.Visible = true;
         }
 
         /// <summary>
@@ -86,12 +85,12 @@ namespace EazyCart
         private void AddUnitsIfTheyAreNotInTheDatabase()
         {
             var eazyCartContext = new EazyCartContext();
-            unitBusiness = new UnitBusiness(eazyCartContext);
-            if (unitBusiness.GetNumberOfUnits() == 0)
+            this.unitBusiness = new UnitBusiness(eazyCartContext);
+            if (this.unitBusiness.GetNumberOfUnits() == 0)
             {
-                unitBusiness.Add(1, "Unit", "UN");
-                unitBusiness.Add(2, "Kilogram", "KG");
-                unitBusiness.Add(3, "Litre", "L");
+                this.unitBusiness.Add(1, "Unit", "UN");
+                this.unitBusiness.Add(2, "Kilogram", "KG");
+                this.unitBusiness.Add(3, "Litre", "L");
             }
         }
 
@@ -103,7 +102,7 @@ namespace EazyCart
         /// <param name="e"></param>
         private void CloseButton_Click(object sender, EventArgs e)
         {
-            var receiptDataGridView = (DataGridView) CashRegisterUserControl.Controls["receiptDataGridView"];
+            var receiptDataGridView = (DataGridView)this.CashRegisterUserControl.Controls["receiptDataGridView"];
 
             // If the receipt is not empty, prompt the user to cancel it 
             // before closing it.
@@ -126,13 +125,13 @@ namespace EazyCart
         {
             var userControlsToMakeInvisible = new List<UserControl>
             {
-                statisticsUserContol,
-                logisticsUserControl,
-                WarehouseUserControl,
+                this.statisticsUserContol,
+                this.logisticsUserControl,
+                this.WarehouseUserControl,
             };
 
             Point mainMenuPanelLocationPoint = new Point(342, 57);
-            UserControlChanged(userControlsToMakeInvisible, CashRegisterUserControl, mainMenuPanelLocationPoint);
+            this.UserControlChanged(userControlsToMakeInvisible, this.CashRegisterUserControl, mainMenuPanelLocationPoint);
         }
 
         /// <summary>
@@ -144,13 +143,13 @@ namespace EazyCart
         {
             var userControlsToMakeInvisible = new List<UserControl>
             {
-                CashRegisterUserControl,
-                logisticsUserControl,
-                statisticsUserContol,
+                this.CashRegisterUserControl,
+                this.logisticsUserControl,
+                this.statisticsUserContol,
             };
 
             Point mainMenuPanelLocationPoint = new Point(598, 57);
-            UserControlChanged(userControlsToMakeInvisible, WarehouseUserControl, mainMenuPanelLocationPoint);
+            UserControlChanged(userControlsToMakeInvisible, this.WarehouseUserControl, mainMenuPanelLocationPoint);
         }
 
         /// <summary>
@@ -162,13 +161,13 @@ namespace EazyCart
         {
             var userControlsToMakeInvisible = new List<UserControl>
             {
-                statisticsUserContol,
-                CashRegisterUserControl,
-                WarehouseUserControl,
+                this.statisticsUserContol,
+                this.CashRegisterUserControl,
+                this.WarehouseUserControl,
             };
 
             Point mainMenuPanelLocationPoint = new Point(854, 57);
-            UserControlChanged(userControlsToMakeInvisible, logisticsUserControl, mainMenuPanelLocationPoint);
+            UserControlChanged(userControlsToMakeInvisible, this.logisticsUserControl, mainMenuPanelLocationPoint);
         }
 
         /// <summary>
@@ -180,13 +179,13 @@ namespace EazyCart
         {
             var userControlsToMakeInvisible = new List<UserControl>
             {
-                CashRegisterUserControl,
-                logisticsUserControl,
-                WarehouseUserControl,
+                this.CashRegisterUserControl,
+                this.logisticsUserControl,
+                this.WarehouseUserControl,
             };
 
             Point mainMenuPanelLocationPoint = new Point(1110, 57);
-            UserControlChanged(userControlsToMakeInvisible, statisticsUserContol, mainMenuPanelLocationPoint);
+            UserControlChanged(userControlsToMakeInvisible, this.statisticsUserContol, mainMenuPanelLocationPoint);
         }
         
         /// <summary>
@@ -200,9 +199,9 @@ namespace EazyCart
         private void UserControlChanged
             (List<UserControl> userControlsToInvisible, UserControl userControlToVisible, Point mainMenuPanelLocationPoint)
         {
-            if (greetingScreenUserControl != null)
+            if (this.greetingScreenUserControl != null)
             {
-                greetingScreenUserControl.Dispose();
+                this.greetingScreenUserControl.Dispose();
             }
 
             var receiptDataGridView = (DataGridView)CashRegisterUserControl.Controls["receiptDataGridView"];
@@ -223,8 +222,8 @@ namespace EazyCart
             }
             userControlToVisible.Visible = true;
 
-            mainMenuPanel.Visible = true;
-            mainMenuPanel.Location = mainMenuPanelLocationPoint;
+            this.mainMenuPanel.Visible = true;
+            this.mainMenuPanel.Location = mainMenuPanelLocationPoint;
         }
 
         // Making the app movable with the use of the menu panel
@@ -235,9 +234,9 @@ namespace EazyCart
         /// <param name="e"></param>
         private void MenuPanel_MouseDown(object sender, MouseEventArgs e)
         {
-            mouseDown = true;
-            mouseX = e.X;
-            mouseY = e.Y;
+            this.mouseDown = true;
+            this.mouseX = e.X;
+            this.mouseY = e.Y;
         }
 
         /// <summary>
@@ -247,9 +246,9 @@ namespace EazyCart
         /// <param name="e"></param>
         private void MenuPanel_MouseMove(object sender, MouseEventArgs e)
         {
-            if (mouseDown == true)
+            if (this.mouseDown == true)
             {
-                this.SetDesktopLocation(MousePosition.X - mouseX, MousePosition.Y - mouseY);
+                this.SetDesktopLocation(MousePosition.X - this.mouseX, MousePosition.Y - this.mouseY);
             }
         }
 
@@ -260,7 +259,7 @@ namespace EazyCart
         /// <param name="e"></param>
         private void MenuPanel_MouseUp(object sender, MouseEventArgs e)
         {
-            mouseDown = false;
+            this.mouseDown = false;
         }       
     }
 }

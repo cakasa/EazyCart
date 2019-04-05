@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Controllers
 {
@@ -22,7 +20,7 @@ namespace Business.Controllers
         /// <returns>List of all products.</returns>
         public List<Product> GetAll()
         {
-            return eazyCartContext.Products.ToList();
+            return this.eazyCartContext.Products.ToList();
         }
 
         /// <summary>
@@ -31,7 +29,7 @@ namespace Business.Controllers
         /// <returns>List of all products' names.</returns>
         public List<string> GetAllNames()
         {
-            List<Product> allProducts = eazyCartContext.Products.ToList();
+            List<Product> allProducts = this.eazyCartContext.Products.ToList();
             var allProductNames = new List<string>();
             allProductNames.AddRange(allProducts.Select(x => x.Name).ToList());
             return allProductNames;
@@ -44,7 +42,7 @@ namespace Business.Controllers
         /// <returns>Return the first product of type Product with the wanted code.</returns>
         public Product Get(string code)
         {
-            return eazyCartContext.Products.First(x => x.Code == code);
+            return this.eazyCartContext.Products.First(x => x.Code == code);
         }
 
         /// <summary>
@@ -56,8 +54,9 @@ namespace Business.Controllers
         public Dictionary<string, int> GetCountOfProductsByCategory()
         {
             var productCountByCategory = new Dictionary<string, int>();
-            var allProducts = eazyCartContext.Products.ToList();
-            var allCategories = eazyCartContext.Categories.ToList();
+            var allProducts = this.eazyCartContext.Products.ToList();
+            var allCategories = this.eazyCartContext.Categories.ToList();
+
             foreach (var category in allCategories)
             {
                 int productCount = allProducts.Where(x => x.CategoryId == category.Id).Count();
@@ -75,7 +74,8 @@ namespace Business.Controllers
         public Dictionary<string, decimal> GetNetProfitByProduct()
         {
             var netProfitByProduct = new Dictionary<string, decimal>();
-            var allProducts = eazyCartContext.Products.ToList();
+            var allProducts = this.eazyCartContext.Products.ToList();
+
             foreach (var product in allProducts)
             {
                 decimal netProfit = product.SellingPrice - product.DeliveryPrice;
@@ -94,8 +94,9 @@ namespace Business.Controllers
         public Dictionary<string, int> GetCountOfProductsByCountry()
         {
             var productCountByCountry = new Dictionary<string, int>();
-            var allProducts = eazyCartContext.Products.ToList();
-            var allCountries = eazyCartContext.Countries.ToList();
+            var allProducts = this.eazyCartContext.Products.ToList();
+            var allCountries = this.eazyCartContext.Countries.ToList();
+
             foreach (var country in allCountries)
             {
                 productCountByCountry.Add(country.Name, 0);
@@ -103,9 +104,9 @@ namespace Business.Controllers
 
             foreach (var product in allProducts)
             {
-                var supplier = eazyCartContext.Suppliers.FirstOrDefault(x => x.Id == product.SupplierId);
-                var city = eazyCartContext.Cities.FirstOrDefault(x => x.Id == supplier.CityId);
-                var country = eazyCartContext.Countries.FirstOrDefault(x => x.Id == city.CountryId);
+                var supplier = this.eazyCartContext.Suppliers.FirstOrDefault(x => x.Id == product.SupplierId);
+                var city = this.eazyCartContext.Cities.FirstOrDefault(x => x.Id == supplier.CityId);
+                var country = this.eazyCartContext.Countries.FirstOrDefault(x => x.Id == city.CountryId);
                 productCountByCountry[country.Name]++;
             }
 
@@ -120,8 +121,9 @@ namespace Business.Controllers
         public Dictionary<string, int> GetCountOfProductsBySuppliers()
         {
             var productCountBySupplier = new Dictionary<string, int>();
-            var allProducts = eazyCartContext.Products.ToList();
-            var allSuppliers = eazyCartContext.Suppliers.ToList();
+            var allProducts = this.eazyCartContext.Products.ToList();
+            var allSuppliers = this.eazyCartContext.Suppliers.ToList();
+
             foreach (var supplier in allSuppliers)
             {
                 int productCount = allProducts.Where(x => x.SupplierId == supplier.Id).Count();
@@ -139,11 +141,13 @@ namespace Business.Controllers
         public Dictionary<string, decimal> GetAllQuantities()
         {
             var allProductQuantities = new Dictionary<string, decimal>();
-            var allProducts = eazyCartContext.Products.ToList();
+            var allProducts = this.eazyCartContext.Products.ToList();
+
             foreach (var product in allProducts.OrderBy(x => x.Name))
             {
                 allProductQuantities.Add(product.Name, product.Quantity);
             }
+
             return allProductQuantities;
         }
 
@@ -156,10 +160,12 @@ namespace Business.Controllers
         /// <returns>Return a list of the products that suit the given condition.</returns>
         public List<Product> GetAllByCategoryAndNameOrId(string categoryString, string searchPhrase)
         {
-            var category = eazyCartContext.Categories.First(x => x.Name == categoryString);
-            var products = eazyCartContext
+            var category = this.eazyCartContext.Categories.First(x => x.Name == categoryString);
+            var products = this.eazyCartContext
                                 .Products
-                                .Where(x => x.CategoryId == category.Id && (x.Name.ToUpper().Contains(searchPhrase.ToUpper()) || x.Code.ToUpper().Contains(searchPhrase.ToUpper())))
+                                .Where(x => x.CategoryId == category.Id &&
+                                    (x.Name.ToUpper().Contains(searchPhrase.ToUpper()) ||
+                                     x.Code.ToUpper().Contains(searchPhrase.ToUpper())))
                                 .ToList();
 
             return products;
@@ -172,8 +178,8 @@ namespace Business.Controllers
         /// <returns>Return a list of the products from a wanted catrgory.</returns>
         public List<Product> GetAllByCategory(string categoryString)
         {
-            var category = eazyCartContext.Categories.First(x => x.Name == categoryString);
-            var products = eazyCartContext.Products.Where(x => x.CategoryId == category.Id).ToList();
+            var category = this.eazyCartContext.Categories.First(x => x.Name == categoryString);
+            var products = this.eazyCartContext.Products.Where(x => x.CategoryId == category.Id).ToList();
 
             return products;
         }
@@ -185,7 +191,10 @@ namespace Business.Controllers
         /// <returns>Return a list of the products that suit the given condition.</returns>
         public List<Product> GetAllByNameOrId(string searchPhrase)
         {
-            var products = eazyCartContext.Products.Where(x => x.Name.ToUpper().Contains(searchPhrase.ToUpper()) || x.Code.ToUpper().Contains(searchPhrase.ToUpper())).ToList();
+            var products = this.eazyCartContext
+                                .Products
+                                .Where(x => x.Name.ToUpper().Contains(searchPhrase.ToUpper()) ||
+                                       x.Code.ToUpper().Contains(searchPhrase.ToUpper())).ToList();
 
             return products;
 
@@ -206,7 +215,7 @@ namespace Business.Controllers
         public void Add(string productCode, string categoryName, string productName, decimal quantity, string supplierName,
             decimal deliveryPrice, decimal sellingPrice, string unitName)
         {
-            var unit = eazyCartContext.Units.First(x => x.Name == unitName);
+            var unit = this.eazyCartContext.Units.First(x => x.Name == unitName);
 
             // Validation for quanity.
             if (quantity != Math.Floor(quantity) && unit.Id == 1)
@@ -222,8 +231,8 @@ namespace Business.Controllers
             Supplier supplier;
             try
             {
-                category = eazyCartContext.Categories.First(x => x.Name == categoryName);
-                supplier = eazyCartContext.Suppliers.First(x => x.Name == supplierName);
+                category = this.eazyCartContext.Categories.First(x => x.Name == categoryName);
+                supplier = this.eazyCartContext.Suppliers.First(x => x.Name == supplierName);
             }
             catch
             {
@@ -242,14 +251,14 @@ namespace Business.Controllers
                 UnitId = unit.Id
             };
 
-            var allProductsWithGivenId = eazyCartContext.Products.Where(x => x.Code == productCode);
+            var allProductsWithGivenId = this.eazyCartContext.Products.Where(x => x.Code == productCode);
             if (allProductsWithGivenId.Count() > 0)
             {
                 throw new ArgumentException($"Product with code {productCode} already exists.");
             }
 
-            eazyCartContext.Products.Add(product);
-            eazyCartContext.SaveChanges();
+            this.eazyCartContext.Products.Add(product);
+            this.eazyCartContext.SaveChanges();
         }
 
         /// <summary>
@@ -267,7 +276,7 @@ namespace Business.Controllers
         public void Update(string productCode, string categoryName, string productName, decimal quantity,
             string supplierName, decimal deliveryPrice, decimal sellingPrice, string unitName)
         {
-            var unit = eazyCartContext.Units.FirstOrDefault(x => x.Name == unitName);
+            var unit = this.eazyCartContext.Units.FirstOrDefault(x => x.Name == unitName);
 
             // Validation for quanity.
             if (quantity != Math.Floor(quantity) && unit.Id == 1)
@@ -283,15 +292,15 @@ namespace Business.Controllers
             Supplier supplier;
             try
             {
-                category = eazyCartContext.Categories.First(x => x.Name == categoryName);
-                supplier = eazyCartContext.Suppliers.First(x => x.Name == supplierName);
+                category = this.eazyCartContext.Categories.First(x => x.Name == categoryName);
+                supplier = this.eazyCartContext.Suppliers.First(x => x.Name == supplierName);
             }
             catch
             {
                 throw new ArgumentException("Invalid information about category/supplier.");
             }
 
-            var productToUpdate = eazyCartContext.Products.FirstOrDefault(x => x.Code == productCode);
+            var productToUpdate = this.eazyCartContext.Products.FirstOrDefault(x => x.Code == productCode);
             productToUpdate.CategoryId = category.Id;
             productToUpdate.Name = productName;
             productToUpdate.Quantity = quantity;
@@ -311,11 +320,13 @@ namespace Business.Controllers
         public decimal MakeDelivery(string productName, decimal quantity)
         {
             Product productToUpdate;
-            productToUpdate = eazyCartContext.Products.FirstOrDefault(x => x.Name == productName);
-            if(productToUpdate == null)
-            { 
+            productToUpdate = this.eazyCartContext.Products.FirstOrDefault(x => x.Name == productName);
+
+            if (productToUpdate == null)
+            {
                 throw new ArgumentException("Such product does not exist!");
             }
+
             // Validation for quanity.
             if (quantity != Math.Floor(quantity) && productToUpdate.UnitId == 1)
             {
@@ -328,7 +339,7 @@ namespace Business.Controllers
 
             productToUpdate.Quantity += quantity;
 
-            eazyCartContext.SaveChanges();
+            this.eazyCartContext.SaveChanges();
             var totalToPayForDelivery = productToUpdate.DeliveryPrice * quantity;
             return totalToPayForDelivery;
         }
@@ -339,15 +350,16 @@ namespace Business.Controllers
         /// <param name="productCode">Give the code of the product to delete.</param>
         public void Delete(string productCode)
         {
-            var product = eazyCartContext.Products.First(x => x.Code == productCode);
+            var product = this.eazyCartContext.Products.First(x => x.Code == productCode);
             if (product != null)
             {
-                var productReceipts = eazyCartContext.ProductsReceipts.Where(x => x.ProductCode == product.Code);
+                var productReceipts = this.eazyCartContext
+                                            .ProductsReceipts.Where(x => x.ProductCode == product.Code);
 
                 // Remove the chosen product and its related productReceipts and save the changes in the context.
-                eazyCartContext.ProductsReceipts.RemoveRange(productReceipts);
-                eazyCartContext.Products.Remove(product);
-                eazyCartContext.SaveChanges();
+                this.eazyCartContext.ProductsReceipts.RemoveRange(productReceipts);
+                this.eazyCartContext.Products.Remove(product);
+                this.eazyCartContext.SaveChanges();
             }
         }
     }

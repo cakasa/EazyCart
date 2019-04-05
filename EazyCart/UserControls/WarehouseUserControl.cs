@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Data.Models;
-using Business;
 using System.Text;
 using Business.Controllers;
 using EazyCart.InteractionForms;
@@ -67,15 +66,15 @@ namespace EazyCart.UserControls
 
             // Sets the fields for input to default values.
             this.productCodeMaskedTextBox.Text = string.Empty;
-            this.productCodeMaskedTextBox.ForeColor = promptTextColor;
+            this.productCodeMaskedTextBox.ForeColor = this.promptTextColor;
             this.productNameTextBox.Text = "Product Name";
-            this.productNameTextBox.ForeColor = promptTextColor;
+            this.productNameTextBox.ForeColor = this.promptTextColor;
             this.inventoryQuantityTextBox.Text = "Quantity";
-            this.inventoryQuantityTextBox.ForeColor = promptTextColor;
+            this.inventoryQuantityTextBox.ForeColor = this.promptTextColor;
             this.deliveryPriceTextBox.Text = "Delivery Price";
-            this.deliveryPriceTextBox.ForeColor = promptTextColor;
+            this.deliveryPriceTextBox.ForeColor = this.promptTextColor;
             this.sellingPriceTextBox.Text = "Selling Price";
-            this.sellingPriceTextBox.ForeColor = promptTextColor;
+            this.sellingPriceTextBox.ForeColor = this.promptTextColor;
             this.categoryComboBox.SelectedIndex = 0;
             this.supplierNameComboBox.SelectedIndex = 0;
             this.supplierCountryTextBox.Text = "Country";
@@ -112,7 +111,7 @@ namespace EazyCart.UserControls
         private void UpdateProductDataGridView()
         {
             this.allProductsDataGridView.Rows.Clear();
-            List<Product> allProducts = productBusiness.GetAll();
+            List<Product> allProducts = this.productBusiness.GetAll();
 
             // Inserting data into the grid.
             foreach (var product in allProducts)
@@ -178,20 +177,20 @@ namespace EazyCart.UserControls
         /// This method is responsible for inserting the product values into
         /// the correct textBoxes when a user wants to edit a given item
         /// </summary>
-        /// <param name="product"></param>
+        /// <param name="product">Parameter of type Product</param>
         private void UpdateProductTabFieldsOnEdit(Product product)
         {
             // Update fields with product values.
             this.productCodeMaskedTextBox.Text = product.Code;
-            this.productCodeMaskedTextBox.ForeColor = activeTextColor;
+            this.productCodeMaskedTextBox.ForeColor = this.activeTextColor;
             this.productNameTextBox.Text = product.Name;
-            this.productNameTextBox.ForeColor = activeTextColor;
+            this.productNameTextBox.ForeColor = this.activeTextColor;
             this.inventoryQuantityTextBox.Text = product.Quantity.ToString();
-            this.inventoryQuantityTextBox.ForeColor = activeTextColor;
+            this.inventoryQuantityTextBox.ForeColor = this.activeTextColor;
             this.deliveryPriceTextBox.Text = string.Format($"{product.DeliveryPrice:f2}");
             this.deliveryPriceTextBox.ForeColor = activeTextColor;
             this.sellingPriceTextBox.Text = string.Format($"{product.SellingPrice:f2}");
-            this.sellingPriceTextBox.ForeColor = activeTextColor;
+            this.sellingPriceTextBox.ForeColor = this.activeTextColor;
             var category = this.categoryBusiness.Get(product.CategoryId);
             this.categoryComboBox.SelectedItem = category.Name;
             var supplier = this.supplierBusiness.Get(product.SupplierId);
@@ -272,7 +271,7 @@ namespace EazyCart.UserControls
         private void AddProductButton_Click(object sender, EventArgs e)
         {
             var productCode = this.productCodeMaskedTextBox.Text;
-            productCode = RefactorProductCode(productCode);
+            productCode = this.RefactorProductCode(productCode);
             var category = (string)this.categoryComboBox.SelectedItem;
             var productName = this.productNameTextBox.Text;
             var quantityString = this.inventoryQuantityTextBox.Text;
@@ -356,7 +355,7 @@ namespace EazyCart.UserControls
         private void SaveProductButton_Click(object sender, EventArgs e)
         {
             var productCode = this.productCodeMaskedTextBox.Text;
-            productCode = RefactorProductCode(productCode);
+            productCode = this.RefactorProductCode(productCode);
             var category = (string)this.categoryComboBox.SelectedItem;
             var productName = this.productNameTextBox.Text;
             var quantityString = this.inventoryQuantityTextBox.Text;
@@ -384,7 +383,7 @@ namespace EazyCart.UserControls
                 var quantity = decimal.Parse(quantityString);
                 var deliveryPrice = decimal.Parse(deliveryPriceString);
                 var sellingPrice = decimal.Parse(sellingPriceString);
-                productBusiness.Update(productCode, category, productName, quantity, supplierName, deliveryPrice, sellingPrice, unit);
+                this.productBusiness.Update(productCode, category, productName, quantity, supplierName, deliveryPrice, sellingPrice, unit);
             }
             catch (ArgumentException exc)
             {
@@ -445,14 +444,14 @@ namespace EazyCart.UserControls
         /// This method is responsible for checkin whether all values are correct.
         /// In other words, it performs validation of the passed values.
         /// </summary>
-        /// <param name="productCode"></param>
-        /// <param name="category"></param>
-        /// <param name="productName"></param>
-        /// <param name="quantityString"></param>
-        /// <param name="supplierName"></param>
-        /// <param name="deliveryPriceString"></param>
-        /// <param name="sellingPriceString"></param>
-        /// <param name="unit"></param>
+        /// <param name="productCode">Code of the product.</param>
+        /// <param name="category">Category of the product.</param>
+        /// <param name="productName">Name of the product.</param>
+        /// <param name="quantityString">Quantity of the product.</param>
+        /// <param name="supplierName">Supplier of the product.</param>
+        /// <param name="deliveryPriceString">Delivery price of the product.</param>
+        /// <param name="sellingPriceString">Selling price of the product.</param>
+        /// <param name="unit">Product's unit type.</param>
         private void CheckIfValuesAreCorrect(string productCode, string category, string productName, string quantityString,
             string supplierName, string deliveryPriceString, string sellingPriceString, string unit)
         {
@@ -588,6 +587,11 @@ namespace EazyCart.UserControls
             }
         }
 
+        /// <summary>
+        /// Refactor the code of the product.
+        /// </summary>
+        /// <param name="productCode">Code of the product.</param>
+        /// <returns></returns>
         public string RefactorProductCode(string productCode)
         {
             StringBuilder stringBuilder = new StringBuilder(productCode);
@@ -614,28 +618,28 @@ namespace EazyCart.UserControls
             if (editProductButton.Enabled)
             {
                 // Disable all buttons except the Save Button
-                editProductButton.Enabled = false;
-                editProductButton.BackColor = disabledButtonColor;
-                addProductButton.Enabled = false;
-                addProductButton.BackColor = disabledButtonColor;
-                deleteProductButton.Enabled = false;
-                deleteProductButton.BackColor = disabledButtonColor;
+                this.editProductButton.Enabled = false;
+                this.editProductButton.BackColor = this.disabledButtonColor;
+                this.addProductButton.Enabled = false;
+                this.addProductButton.BackColor = this.disabledButtonColor;
+                this.deleteProductButton.Enabled = false;
+                this.deleteProductButton.BackColor = this.disabledButtonColor;
 
-                saveProductButton.Enabled = true;
-                saveProductButton.BackColor = enabledButtonColor;
+                this.saveProductButton.Enabled = true;
+                this.saveProductButton.BackColor = this.enabledButtonColor;
             }
             else
             {
                 // Enable all buttons and disable the Save Button
-                editProductButton.Enabled = true;
-                editProductButton.BackColor = enabledButtonColor;
-                addProductButton.Enabled = true;
-                addProductButton.BackColor = enabledButtonColor;
-                deleteProductButton.Enabled = true;
-                deleteProductButton.BackColor = enabledDeleteButtonColor;
+                this.editProductButton.Enabled = true;
+                this.editProductButton.BackColor = this.enabledButtonColor;
+                this.addProductButton.Enabled = true;
+                this.addProductButton.BackColor = this.enabledButtonColor;
+                this.deleteProductButton.Enabled = true;
+                this.deleteProductButton.BackColor = this.enabledDeleteButtonColor;
 
-                saveProductButton.Enabled = false;
-                saveProductButton.BackColor = disabledButtonColor;
+                this.saveProductButton.Enabled = false;
+                this.saveProductButton.BackColor = this.disabledButtonColor;
             }
         }
 
@@ -694,7 +698,7 @@ namespace EazyCart.UserControls
         {
             if (this.productCodeMaskedTextBox.Text == string.Empty)
             {
-                this.productCodeMaskedTextBox.ForeColor = activeTextColor;
+                this.productCodeMaskedTextBox.ForeColor = this.activeTextColor;
             }
         }
 
@@ -702,7 +706,7 @@ namespace EazyCart.UserControls
         {
             if (this.productCodeMaskedTextBox.Text == string.Empty)
             {
-                this.productCodeMaskedTextBox.ForeColor = promptTextColor;
+                this.productCodeMaskedTextBox.ForeColor = this.promptTextColor;
             }
         }
 
@@ -717,7 +721,7 @@ namespace EazyCart.UserControls
             if (textBox.Text == prompt)
             {
                 textBox.Text = string.Empty;
-                textBox.ForeColor = activeTextColor;
+                textBox.ForeColor = this.activeTextColor;
             }
         }
 
@@ -732,7 +736,7 @@ namespace EazyCart.UserControls
             if (textBox.Text == string.Empty)
             {
                 textBox.Text = prompt;
-                textBox.ForeColor = promptTextColor;
+                textBox.ForeColor = this.promptTextColor;
             }
         }
     }

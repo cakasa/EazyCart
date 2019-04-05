@@ -1,10 +1,7 @@
 ﻿using Data.Models;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Controllers
 {
@@ -27,26 +24,26 @@ namespace Business.Controllers
         /// <returns>A List of all countries.</returns>
         public List<Country> GetAll()
         {
-            return eazyCartContext.Countries.ToList();
+            return this.eazyCartContext.Countries.ToList();
         }
 
         /// <summary>
         /// Return a certain country by a given Id.
         /// </summary>
         /// <param name="id">The Id of the country.</param>
-        /// <returns>JA country, corresponding to the given Id.</returns>
+        /// <returns>A country, corresponding to the given Id.</returns>
         public Country Get(int id)
         {
-            return eazyCartContext.Countries.FirstOrDefault(x => x.Id == id);
+            return this.eazyCartContext.Countries.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
-        /// Get a list containing all countries' names.
+        /// Get all countries' names.
         /// </summary>
         /// <returns>A List of type string containing all country names.</returns>
         public List<string> GetAllNames()
         {
-            var countries = eazyCartContext.Countries.ToList();
+            var countries = this.eazyCartContext.Countries.ToList();
             var allCountriesNames = countries.Select(x => x.Name).ToList();
             return allCountriesNames;
         }
@@ -58,9 +55,9 @@ namespace Business.Controllers
         /// <returns>Name of the country, the supplier is located in.</returns>
         public string GetNameBySupplier(string supplierName)
         {
-            var supplier = eazyCartContext.Suppliers.First(x => x.Name == supplierName);
-            var city = eazyCartContext.Cities.First(x => x.Id == supplier.CityId);
-            var country = eazyCartContext.Countries.First(x => x.Id == city.CountryId);
+            var supplier = this.eazyCartContext.Suppliers.First(x => x.Name == supplierName);
+            var city = this.eazyCartContext.Cities.First(x => x.Id == supplier.CityId);
+            var country = this.eazyCartContext.Countries.First(x => x.Id == city.CountryId);
             return country.Name;
         }
 
@@ -77,14 +74,14 @@ namespace Business.Controllers
                 Name = countryName
             };
 
-            var countriesWithGivenId = eazyCartContext.Countries.Where(x=>x.Id == countryId);
-            if(countriesWithGivenId.Count() > 0)
+            var countriesWithGivenId = this.eazyCartContext.Countries.Where(x => x.Id == countryId);
+            if (countriesWithGivenId.Count() > 0)
             {
                 throw new ArgumentException($"Country with ID {countryId} already exists.");
             }
 
-            eazyCartContext.Countries.Add(country);
-            eazyCartContext.SaveChanges();
+            this.eazyCartContext.Countries.Add(country);
+            this.eazyCartContext.SaveChanges();
         }
 
         /// <summary>
@@ -94,11 +91,11 @@ namespace Business.Controllers
         /// <param name="countryId">The Id of the country to update.</param>
         public void Update(string countryName, int countryId)
         {
-            var countryToUpdate = 
-                eazyCartContext.Countries.FirstOrDefault(x => x.Id == countryId);
+            var countryToUpdate =
+                this.eazyCartContext.Countries.FirstOrDefault(x => x.Id == countryId);
             countryToUpdate.Name = countryName;
 
-            eazyCartContext.SaveChanges();
+            this.eazyCartContext.SaveChanges();
         }
 
         /// <summary>
@@ -107,9 +104,9 @@ namespace Business.Controllers
         /// <param name="id">Id of the country to delete.</param>
         public void Delete(int id)
         {
-            var country = eazyCartContext.Countries.FirstOrDefault(x=>x.Id == id);
+            var country = this.eazyCartContext.Countries.FirstOrDefault(x => x.Id == id);
             var citiesFromCountry =
-                eazyCartContext.Cities.Where(x => x.CountryId == country.Id).ToList();
+                this.eazyCartContext.Cities.Where(x => x.CountryId == country.Id).ToList();
 
             if (citiesFromCountry.Count > 0)
             {
@@ -117,8 +114,8 @@ namespace Business.Controllers
             }
 
             // Remove the chosen country and save the changes in the context.
-            eazyCartContext.Countries.Remove(country);
-            eazyCartContext.SaveChanges();
+            this.eazyCartContext.Countries.Remove(country);
+            this.eazyCartContext.SaveChanges();
         }
     }
 }

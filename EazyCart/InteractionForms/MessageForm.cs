@@ -1,21 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EazyCart.InteractionForms
 {
+    /// <summary>
+    /// This form is used to display information to
+    /// the user so as to show whether or not
+    /// his actions have been right.
+    /// </summary>
     public partial class MessageForm : Form
     {
         private int mouseX = 0;
         private int mouseY = 0;
         private bool mouseDown;
 
+        /// <summary>
+        /// Sets the properties.
+        /// </summary>
+        /// <param name="message">Message string.</param>
+        /// <param name="type">Type of message</param>
         public MessageForm(string message, MessageFormType type)
         {
             InitializeComponent();
@@ -72,7 +76,7 @@ namespace EazyCart.InteractionForms
             this.mouseDown = false;
         }
 
-        private void MakePaymentButton_Click(object sender, EventArgs e)
+        private void OkButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }

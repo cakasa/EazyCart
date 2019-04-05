@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 
 namespace Business.Controllers
@@ -27,7 +25,7 @@ namespace Business.Controllers
         /// <returns>A List of all categories.</returns>
         public List<Category> GetAll()
         {
-            return eazyCartContext.Categories.ToList();
+            return this.eazyCartContext.Categories.ToList();
         }
 
         /// <summary>
@@ -37,16 +35,16 @@ namespace Business.Controllers
         /// <returns>A category, corresponding to the given Id.</returns>
         public Category Get(int id)
         {
-            return eazyCartContext.Categories.FirstOrDefault(x => x.Id == id);
+            return this.eazyCartContext.Categories.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
-        /// Get a list containing all categories' names.
+        /// Get all categories' names.
         /// </summary>
-        /// <returns>A List of type string, containing all names of categories.</returns>
+        /// <returns>A List of type string, containing the name of each category.</returns>
         public List<string> GetAllNames()
         {
-            var allCategories = eazyCartContext.Categories.ToList();
+            var allCategories = this.eazyCartContext.Categories.ToList();
             var allNames = new List<string>();
 
             foreach (var category in allCategories)
@@ -70,28 +68,28 @@ namespace Business.Controllers
                 Name = categoryName
             };
 
-            var allCountriesWithGivenId = eazyCartContext.Categories.Where(x => x.Id == categoryId);
+            var allCountriesWithGivenId = this.eazyCartContext.Categories.Where(x => x.Id == categoryId);
 
             if (allCountriesWithGivenId.Count() > 0)
             {
                 throw new ArgumentException($"Category with ID {categoryId} already exists.");
             }
 
-            eazyCartContext.Categories.Add(category);
-            eazyCartContext.SaveChanges();
+            this.eazyCartContext.Categories.Add(category);
+            this.eazyCartContext.SaveChanges();
         }
 
         /// <summary>
         /// Update certain category's fields.
         /// </summary>
-        /// <param name="categoryName">Give the name of the category.</param>
-        /// <param name="categoryId">Give the id of the category.</param>
+        /// <param name="categoryName">Name of the category.</param>
+        /// <param name="categoryId">Id of the category.</param>
         public void Update(string categoryName, int categoryId)
         {
-            var categoryToUpdate = eazyCartContext.Categories.FirstOrDefault(x =>x.Id == categoryId);
+            var categoryToUpdate = eazyCartContext.Categories.FirstOrDefault(x => x.Id == categoryId);
             categoryToUpdate.Name = categoryName;
 
-            eazyCartContext.SaveChanges();
+            this.eazyCartContext.SaveChanges();
         }
 
         /// <summary>
@@ -100,9 +98,9 @@ namespace Business.Controllers
         /// <param name="id">Id of the supplier to delete.</param>
         public void Delete(int id)
         {
-            var category = eazyCartContext.Categories.FirstOrDefault(x => x.Id == id);
+            var category = this.eazyCartContext.Categories.FirstOrDefault(x => x.Id == id);
+            var allProducts = this.eazyCartContext.Products.ToList();
 
-            var allProducts = eazyCartContext.Products.ToList();
             foreach (var product in allProducts)
             {
                 if (product.CategoryId == category.Id)
@@ -112,8 +110,8 @@ namespace Business.Controllers
             }
 
             // Remove the chosen category and save the changes in the context.
-            eazyCartContext.Categories.Remove(category);
-            eazyCartContext.SaveChanges();
+            this.eazyCartContext.Categories.Remove(category);
+            this.eazyCartContext.SaveChanges();
         }
     }
 }

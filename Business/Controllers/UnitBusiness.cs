@@ -1,9 +1,5 @@
 ﻿using Data.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Controllers
 {
@@ -27,7 +23,7 @@ namespace Business.Controllers
         /// <returns>Unit, corresponding to the ID.</returns>
         public Unit Get(int id)
         {
-            return eazyCartContext.Units.FirstOrDefault(x=> x.Id == id);
+            return this.eazyCartContext.Units.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
@@ -36,7 +32,7 @@ namespace Business.Controllers
         /// <returns>Number of units in the databases.</returns>
         public int GetNumberOfUnits()
         {
-            return eazyCartContext.Units.Count();
+            return this.eazyCartContext.Units.Count();
         }
 
         /// <summary>
@@ -54,8 +50,8 @@ namespace Business.Controllers
                 Code = code
             };
 
-            eazyCartContext.Units.Add(unit);
-            eazyCartContext.SaveChanges();
+            this.eazyCartContext.Units.Add(unit);
+            this.eazyCartContext.SaveChanges();
         }
     }
 }

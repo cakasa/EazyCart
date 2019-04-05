@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Business;
 using Business.Controllers;
 using Data.Models;
 using EazyCart.InteractionForms;
@@ -53,8 +52,8 @@ namespace EazyCart.UserControls
             this.UpdateReceiptTab();
             this.UpdatePaidAmountAndChange(0);
             this.SetButtonAvailability();
-            this.highestProductReceiptId = productReceiptBusiness.GetHighestId();
-            this.currentProductReceiptId = highestProductReceiptId + 1;
+            this.highestProductReceiptId = this.productReceiptBusiness.GetHighestId();
+            this.currentProductReceiptId = this.highestProductReceiptId + 1;
         }
 
         /// <summary>
@@ -80,7 +79,6 @@ namespace EazyCart.UserControls
         /// </summary>
         private void UpdateReceiptTab()
         {
-            // Deletes the last receipt, when the program is launched.
             this.receiptBusiness.DeleteLastReceiptIfEmpty();
 
             var receiptNumber = this.receiptBusiness.GetNextReceiptNumber();
@@ -92,7 +90,6 @@ namespace EazyCart.UserControls
         /// <summary>
         /// Update the data grid for ordered products.
         /// </summary>
-        /// <param name="products"></param>
         private void UpdateReceiptDataGridView()
         {
             this.receiptDataGridView.Rows.Clear();
@@ -140,8 +137,10 @@ namespace EazyCart.UserControls
             this.saveProductButton.Enabled = false;
             this.saveProductButton.BackColor = disabledButtonColor;
         }
+
         /// <summary>
-        /// Calls several methods related to updating comboBoxes, when the category tab is updated.
+        /// Calls several methods related to updating comboBoxes,
+        /// when the category tab is updated.
         /// </summary>
         private void UpdateCategoryComboBox()
         {
@@ -149,7 +148,7 @@ namespace EazyCart.UserControls
 
             // Extract all category names
             categories.Add("Select Category");
-            categories.AddRange(categoryBusiness.GetAllNames());
+            categories.AddRange(this.categoryBusiness.GetAllNames());
 
             this.categoryComboBox.DataSource = categories;
         }
@@ -192,14 +191,14 @@ namespace EazyCart.UserControls
         {
             decimal grandTotal = decimal.Parse(this.grandTotalCashLabel.Text.Remove(0, 2));
             decimal change = paidAmount - grandTotal;
-            paidCashLabel.Text = string.Format($"$ {paidAmount:f2}");
-            changeCashLabel.Text = string.Format($"$ {change:f2}");
+            this.paidCashLabel.Text = string.Format($"$ {paidAmount:f2}");
+            this.changeCashLabel.Text = string.Format($"$ {change:f2}");
         }
 
         /// <summary>
         /// Populate the search results into the dataGrid for available products.
         /// </summary>
-        /// <param name="products"></param>
+        /// <param name="products">List of products to update the data grid view with.</param>
         private void UpdateAvailableProductsDataGrid(List<Product> products)
         {
             this.availableProductsDataGridView.Rows.Clear();
@@ -210,7 +209,7 @@ namespace EazyCart.UserControls
                 newRow.Cells[0].Value = product.Code;
                 newRow.Cells[1].Value = product.Name;
                 newRow.Cells[2].Value = category.Name;
-                newRow.Cells[3].Value = string.Format($"$ {product.SellingPrice}");
+                newRow.Cells[3].Value = string.Format($"$ {product.SellingPrice:f2}");
             }
         }
 
@@ -263,7 +262,7 @@ namespace EazyCart.UserControls
                 messageForm.ShowDialog();
                 return;
             }
-            var quantity = quantityTextBox.Text;
+            var quantity = this.quantityTextBox.Text;
 
             // Try to add product into the receipt. If validation fails, a messageForm is shown.
             try
@@ -271,7 +270,7 @@ namespace EazyCart.UserControls
                 var discount = "0";
                 if (this.discountCheckBox.Checked)
                 {
-                    discount = discountPercentageTextBox.Text;
+                    discount = this.discountPercentageTextBox.Text;
                 }
                 this.productReceiptBusiness.Add(currentProductReceiptId, productCode, quantity, discount);
             }
@@ -305,7 +304,7 @@ namespace EazyCart.UserControls
                 var product = this.productBusiness.Get(productCode);
                 var productReceiptIndex = (int)selectedRow.Cells[0].Value;
                 var productReceipt = this.productReceiptBusiness.Get(productReceiptIndex);
-                var category = categoryBusiness.Get(product.CategoryId);
+                var category = this.categoryBusiness.Get(product.CategoryId);
 
                 // Update textBoxes so that they display correct information.
                 this.categoryComboBox.SelectedItem = category.Name;
@@ -320,7 +319,7 @@ namespace EazyCart.UserControls
                     this.discountPercentageTextBox.ForeColor = activeTextColor;
                 }
 
-                currentProductReceiptId = productReceipt.Id;
+                this.currentProductReceiptId = productReceipt.Id;
             }
             catch
             {
@@ -332,7 +331,8 @@ namespace EazyCart.UserControls
 
             // Update appropriate tabs.
             this.UpdateSearchResults();
-            this.ToggleEditSave(editProductButton, saveProductButton, addProductButton, deleteProductButton);
+            this.ToggleEditSave(this.editProductButton, this.saveProductButton, 
+                        this.addProductButton, this.deleteProductButton);
         }
 
         /// <summary>
@@ -353,7 +353,7 @@ namespace EazyCart.UserControls
                 messageForm.ShowDialog();
                 return;
             }
-            var quantity = quantityTextBox.Text;
+            var quantity = this.quantityTextBox.Text;
 
             // Check if needed values have been entered.
             try
@@ -363,7 +363,7 @@ namespace EazyCart.UserControls
                 {
                     discount = this.discountPercentageTextBox.Text;
                 }
-                this.productReceiptBusiness.Update(currentProductReceiptId, productCode, quantity, discount);
+                this.productReceiptBusiness.Update(this.currentProductReceiptId, productCode, quantity, discount);
             }
             catch (ArgumentException exc)
             {
@@ -376,7 +376,8 @@ namespace EazyCart.UserControls
             this.UpdateSelectProductTab();
             this.UpdateReceiptDataGridView();
             this.currentProductReceiptId = highestProductReceiptId + 1;
-            this.ToggleEditSave(editProductButton, saveProductButton, addProductButton, deleteProductButton);
+            this.ToggleEditSave(this.editProductButton, this.saveProductButton, 
+                        this.addProductButton, this.deleteProductButton);
         }
 
         /// <summary>
@@ -444,7 +445,8 @@ namespace EazyCart.UserControls
                 UpdatePaidAmountAndChange(paidAmount);
                 payForm.Dispose();
             }
-            DisableAllButtonsToCompleteAnOrder();
+
+            this.DisableAllButtonsToCompleteAnOrder();
         }
 
         /// <summary>
@@ -457,14 +459,14 @@ namespace EazyCart.UserControls
             this.saveProductButton.Enabled = false;
             this.deleteProductButton.Enabled = false;
             this.makePaymentButton.Enabled = false;
-            this.addProductButton.BackColor = disabledButtonColor;
-            this.editProductButton.BackColor = disabledButtonColor;
-            this.saveProductButton.BackColor = disabledButtonColor;
-            this.deleteProductButton.BackColor = disabledButtonColor;
-            this.makePaymentButton.BackColor = disabledButtonColor;
+            this.addProductButton.BackColor = this.disabledButtonColor;
+            this.editProductButton.BackColor = this.disabledButtonColor;
+            this.saveProductButton.BackColor = this.disabledButtonColor;
+            this.deleteProductButton.BackColor = this.disabledButtonColor;
+            this.makePaymentButton.BackColor = this.disabledButtonColor;
 
             this.completeOrderButton.Enabled = true;
-            this.completeOrderButton.BackColor = enabledButtonColor;
+            this.completeOrderButton.BackColor = this.enabledButtonColor;
         }
 
         /// <summary>
@@ -478,8 +480,8 @@ namespace EazyCart.UserControls
             // a messageBox is shown.
             try
             {
-                var receiptNumber = int.Parse(receiptNumberTextBox.Text);
-                this.receiptBusiness.Update(int.Parse(receiptNumberTextBox.Text));
+                var receiptNumber = int.Parse(this.receiptNumberTextBox.Text);
+                this.receiptBusiness.Update(int.Parse(this.receiptNumberTextBox.Text));
             }
             catch (ArgumentException exc)
             {
@@ -516,10 +518,10 @@ namespace EazyCart.UserControls
         /// <summary>
         /// This method is tasked with enabling/disabling buttons when the Edit/Save buttons are clicked.
         /// </summary>
-        /// <param name="editButton"></param>
-        /// <param name="saveButton"></param>
-        /// <param name="addButton"></param>
-        /// <param name="deleteButton"></param>
+        /// <param name="editButton">Edit button.</param>
+        /// <param name="saveButton">Save button.</param>
+        /// <param name="addButton">Add button.</param>
+        /// <param name="deleteButton">Delete button.</param>
         private void ToggleEditSave(Button editButton, Button saveButton, Button addButton, Button deleteButton)
         {
             if (this.editProductButton.Enabled)
@@ -531,8 +533,8 @@ namespace EazyCart.UserControls
                 addButton.BackColor = disabledButtonColor;
                 deleteButton.Enabled = false;
                 deleteButton.BackColor = disabledButtonColor;
-                makePaymentButton.Enabled = false;
-                makePaymentButton.BackColor = disabledButtonColor;
+                this.makePaymentButton.Enabled = false;
+                this.makePaymentButton.BackColor = disabledButtonColor;
 
                 saveButton.Enabled = true;
                 saveButton.BackColor = enabledButtonColor;
@@ -540,14 +542,14 @@ namespace EazyCart.UserControls
             else
             {
                 // Enable all buttons and disable the Save Button.
-                editProductButton.Enabled = true;
-                editProductButton.BackColor = enabledButtonColor;
+                this.editProductButton.Enabled = true;
+                this.editProductButton.BackColor = enabledButtonColor;
                 addButton.Enabled = true;
                 addButton.BackColor = enabledButtonColor;
                 deleteButton.Enabled = true;
                 deleteButton.BackColor = enabledDeleteButtonColor;
-                makePaymentButton.Enabled = true;
-                makePaymentButton.BackColor = enabledButtonColor;
+                this.makePaymentButton.Enabled = true;
+                this.makePaymentButton.BackColor = enabledButtonColor;
 
                 saveButton.Enabled = false;
                 saveButton.BackColor = disabledButtonColor;
@@ -707,14 +709,14 @@ namespace EazyCart.UserControls
         /// This event is triggerred when one begins typing in a textBox.
         /// If the textBox had a prompt beforehand, it is removed.
         /// </summary>
-        /// <param name="textBox"></param>
-        /// <param name="prompt"></param>
+        /// <param name="textBox">Text box from which to remove the prompt.</param>
+        /// <param name="prompt">Prompt to remove from the text box.</param>
         private void RemovePromptFromTextBoxWhenTyping(TextBox textBox, string prompt)
         {
             if (textBox.Text == prompt)
             {
                 textBox.Text = string.Empty;
-                textBox.ForeColor = activeTextColor;
+                textBox.ForeColor = this.activeTextColor;
             }
         }
 
@@ -722,14 +724,14 @@ namespace EazyCart.UserControls
         /// This event is triggered when one stops typing in a textBox.
         /// If the textBox was left empty, a prompt, suitable for the textbox, would be added.
         /// </summary>
-        /// <param name="textBox"></param>
-        /// <param name="prompt"></param>
+        /// <param name="textBox">Text box from which to add the prompt.</param>
+        /// <param name="prompt">Prompt to add to the text box.</param>
         private void AddPromptToTextBoxIfEmpty(TextBox textBox, string prompt)
         {
             if (textBox.Text == string.Empty)
             {
                 textBox.Text = prompt;
-                textBox.ForeColor = promptTextColor;
+                textBox.ForeColor = this.promptTextColor;
             }
         }
     }

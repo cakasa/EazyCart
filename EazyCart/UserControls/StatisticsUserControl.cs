@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using LiveCharts; //Core of the library
 using LiveCharts.Wpf; //The WPF controls
 using System.Windows.Media;
-using Business;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.IO;
@@ -72,7 +71,7 @@ namespace EazyCart.UserControls
             this.fileNameTextBox.Text = "EazyCartChart";
             this.reportCategoryComboBox.SelectedIndex = 0;
             this.exportReportButton.Enabled = false;
-            this.exportReportButton.BackColor = disabledButtonColor;
+            this.exportReportButton.BackColor = this.disabledButtonColor;
             this.reportChart.Visibility = Visibility.Hidden;
         }
 
@@ -305,11 +304,11 @@ namespace EazyCart.UserControls
             }
             else if (categoryIndex == 2)
             {
-                reportNumber = typeIndex + salesReports.Count();
+                reportNumber = typeIndex + this.salesReports.Count();
             }
             else
             {
-                reportNumber = typeIndex + salesReports.Count() + inventoryReports.Count();
+                reportNumber = typeIndex + this.salesReports.Count() + this.inventoryReports.Count();
             }
 
             this.ChooseReportToGenerate(reportNumber, periodIndex);
@@ -319,8 +318,8 @@ namespace EazyCart.UserControls
         /// This method calls a method, responsible for generating that specific
         /// type of report.
         /// </summary>
-        /// <param name="reportNumber"></param>
-        /// <param name="periodIndex"></param>
+        /// <param name="reportNumber">Number of the report.</param>
+        /// <param name="periodIndex">Period of the wanted report.</param>
         private void ChooseReportToGenerate(int reportNumber, int periodIndex)
         {
             // Choose the report to generate
@@ -376,7 +375,7 @@ namespace EazyCart.UserControls
             // If everything is successful, the extract button will get enabled and
             // the report will become visible.
             this.exportReportButton.Enabled = true;
-            this.exportReportButton.BackColor = enabledButtonColor;
+            this.exportReportButton.BackColor = this.enabledButtonColor;
             this.reportChart.Visibility = Visibility.Visible;
         }
 
@@ -696,11 +695,11 @@ namespace EazyCart.UserControls
 
             if(isMoneyReport)
             {
-                InitializeMoneySeries();
+                this.InitializeMoneySeries();
             }
             else
             {
-                InitializeCountSeries();
+                this.InitializeCountSeries();
             }
 
             this.InitializeAxes(xAxisTitle, labels, yAxisTitle, labelRotation);

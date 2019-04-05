@@ -34,7 +34,7 @@
             this.titleLabel = new System.Windows.Forms.Label();
             this.eazyCartLogoPictureBox = new System.Windows.Forms.PictureBox();
             this.messageLabel = new System.Windows.Forms.Label();
-            this.makePaymentButton = new System.Windows.Forms.Button();
+            this.okButton = new System.Windows.Forms.Button();
             this.signPictureBox = new System.Windows.Forms.PictureBox();
             this.ornamentalPanel = new System.Windows.Forms.Panel();
             this.menuPanel.SuspendLayout();
@@ -49,7 +49,7 @@
             this.logoLabel.ForeColor = System.Drawing.SystemColors.Control;
             this.logoLabel.Location = new System.Drawing.Point(53, 9);
             this.logoLabel.Name = "logoLabel";
-            this.logoLabel.Size = new System.Drawing.Size(97, 30);
+            this.logoLabel.Size = new System.Drawing.Size(96, 30);
             this.logoLabel.TabIndex = 5;
             this.logoLabel.Text = "EazyCart";
             // 
@@ -103,21 +103,21 @@
             this.messageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.messageLabel.UseCompatibleTextRendering = true;
             // 
-            // makePaymentButton
+            // okButton
             // 
-            this.makePaymentButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.makePaymentButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.makePaymentButton.FlatAppearance.BorderSize = 0;
-            this.makePaymentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.makePaymentButton.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.makePaymentButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.makePaymentButton.Image = global::EazyCart.Properties.Resources.okButtonPicture;
-            this.makePaymentButton.Location = new System.Drawing.Point(287, 183);
-            this.makePaymentButton.Name = "makePaymentButton";
-            this.makePaymentButton.Size = new System.Drawing.Size(131, 45);
-            this.makePaymentButton.TabIndex = 19;
-            this.makePaymentButton.UseVisualStyleBackColor = false;
-            this.makePaymentButton.Click += new System.EventHandler(this.MakePaymentButton_Click);
+            this.okButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.okButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.okButton.FlatAppearance.BorderSize = 0;
+            this.okButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.okButton.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.okButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.okButton.Image = global::EazyCart.Properties.Resources.okButtonPicture;
+            this.okButton.Location = new System.Drawing.Point(287, 183);
+            this.okButton.Name = "okButton";
+            this.okButton.Size = new System.Drawing.Size(131, 45);
+            this.okButton.TabIndex = 19;
+            this.okButton.UseVisualStyleBackColor = false;
+            this.okButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
             // signPictureBox
             // 
@@ -142,7 +142,7 @@
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(430, 240);
             this.Controls.Add(this.ornamentalPanel);
-            this.Controls.Add(this.makePaymentButton);
+            this.Controls.Add(this.okButton);
             this.Controls.Add(this.messageLabel);
             this.Controls.Add(this.signPictureBox);
             this.Controls.Add(this.menuPanel);
@@ -168,7 +168,7 @@
         private System.Windows.Forms.Label titleLabel;
         private System.Windows.Forms.PictureBox signPictureBox;
         private System.Windows.Forms.Label messageLabel;
-        private System.Windows.Forms.Button makePaymentButton;
+        private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Panel ornamentalPanel;
     }
 }

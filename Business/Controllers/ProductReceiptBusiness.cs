@@ -25,7 +25,7 @@ namespace Business.Controllers
         /// <returns>Return a ProductReceipt object, corresponding to the given Id.</returns>
         public ProductReceipt Get(int id)
         {
-            return eazyCartContext.ProductsReceipts.FirstOrDefault(x => x.Id == id);
+            return this.eazyCartContext.ProductsReceipts.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
@@ -34,9 +34,9 @@ namespace Business.Controllers
         /// <returns>Return the Id of the most recently created ProductBusiness entry.</returns>
         public int GetHighestId()
         {
-            if (eazyCartContext.ProductsReceipts.Count() > 0)
+            if (this.eazyCartContext.ProductsReceipts.Count() > 0)
             {
-                return eazyCartContext.ProductsReceipts.Max(x => x.Id);
+                return this.eazyCartContext.ProductsReceipts.Max(x => x.Id);
             }
             else return 0;
         }
@@ -50,8 +50,9 @@ namespace Business.Controllers
         /// receipt number.</returns>
         public List<ProductReceipt> GetAllByReceiptId(int receiptId)
         {
-            var productsReceipt =
-                eazyCartContext.ProductsReceipts.Where(x => x.ReceiptId == receiptId).ToList();
+            var productsReceipt = this.eazyCartContext
+                                        .ProductsReceipts.Where(x => x.ReceiptId == receiptId).ToList();
+
             return productsReceipt;
         }
 
@@ -83,7 +84,9 @@ namespace Business.Controllers
             {
                 throw new ArgumentException("Discount must NOT be negative.");
             }
-            var product = eazyCartContext.Products.FirstOrDefault(x => x.Code == productCode);
+
+            var product = this.eazyCartContext.Products.FirstOrDefault(x => x.Code == productCode);
+
             if (product.Quantity < quantity)
             {
                 throw new ArgumentException("Insufficient quantity");
@@ -93,7 +96,8 @@ namespace Business.Controllers
             {
                 throw new ArgumentException("Quantity must be a whole number");
             }
-            Receipt receipt = eazyCartContext.Receipts.Last();
+
+            Receipt receipt = this.eazyCartContext.Receipts.Last();
             ProductReceipt productReceipt = new ProductReceipt
             {
                 Id = receiptId,
@@ -103,13 +107,14 @@ namespace Business.Controllers
                 ReceiptId = receipt.Id
             };
 
-            var allProductReceiptsWithGivenId = eazyCartContext.ProductsReceipts.Where(x => x.Id == receiptId);
+            var allProductReceiptsWithGivenId = this.eazyCartContext.ProductsReceipts.Where(x => x.Id == receiptId);
             if (allProductReceiptsWithGivenId.Count() > 0)
             {
                 throw new ArgumentException("Such productReceipt is already added.");
             }
-            eazyCartContext.ProductsReceipts.Add(productReceipt);
-            eazyCartContext.SaveChanges();
+
+            this.eazyCartContext.ProductsReceipts.Add(productReceipt);
+            this.eazyCartContext.SaveChanges();
         }
 
         /// <summary>
@@ -151,15 +156,15 @@ namespace Business.Controllers
             {
                 throw new ArgumentException("Quantity must be a whole number");
             }
-            Receipt receipt = eazyCartContext.Receipts.Last();
+            Receipt receipt = this.eazyCartContext.Receipts.Last();
 
-            var productReceiptToUpdate = eazyCartContext.ProductsReceipts.FirstOrDefault(x => x.Id == productReceiptId);
+            var productReceiptToUpdate = this.eazyCartContext.ProductsReceipts.FirstOrDefault(x => x.Id == productReceiptId);
             productReceiptToUpdate.Quantity = quantity;
             productReceiptToUpdate.DiscountPercentage = discountPercentage;
             productReceiptToUpdate.ProductCode = productCode;
             productReceiptToUpdate.ReceiptId = receipt.Id;
 
-            eazyCartContext.SaveChanges();
+            this.eazyCartContext.SaveChanges();
         }
 
         /// <summary>
@@ -168,12 +173,12 @@ namespace Business.Controllers
         /// <param name="id">Give the id of the product to delete.</param>
         public void Delete(int id)
         {
-            var productReceipt = eazyCartContext.ProductsReceipts.FirstOrDefault(x => x.Id == id);
+            var productReceipt = this.eazyCartContext.ProductsReceipts.FirstOrDefault(x => x.Id == id);
             if (productReceipt != null)
             {
                 // Remove the chosen product receipt and save the changes in the context.
-                eazyCartContext.ProductsReceipts.Remove(productReceipt);
-                eazyCartContext.SaveChanges();
+                this.eazyCartContext.ProductsReceipts.Remove(productReceipt);
+                this.eazyCartContext.SaveChanges();
             }
         }
     }

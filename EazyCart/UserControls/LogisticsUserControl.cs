@@ -1,5 +1,4 @@
-﻿using Business;
-using Business.Controllers;
+﻿using Business.Controllers;
 using Data.Models;
 using EazyCart.InteractionForms;
 using System;
@@ -60,9 +59,9 @@ namespace EazyCart.UserControls
         {
             // Resetting fields for input
             this.categoryIdTextBox.Text = "ID";
-            this.categoryIdTextBox.ForeColor = promptTextColor;
+            this.categoryIdTextBox.ForeColor = this.promptTextColor;
             this.categoryNameTextBox.Text = "Category Name";
-            this.categoryNameTextBox.ForeColor = promptTextColor;
+            this.categoryNameTextBox.ForeColor = this.promptTextColor;
 
             // Inserting data into the category dataGridView
             this.categoriesDataGridView.Rows.Clear();
@@ -150,7 +149,7 @@ namespace EazyCart.UserControls
 
             // Inserting data into the supplier dataGridView
             this.suppliersDataGridView.Rows.Clear();
-            var allSuppliers = supplierBusiness.GetAll();
+            var allSuppliers = this.supplierBusiness.GetAll();
             foreach (var supplier in allSuppliers)
             {
                 var newRow = this.suppliersDataGridView.Rows[suppliersDataGridView.Rows.Add()];
@@ -167,7 +166,8 @@ namespace EazyCart.UserControls
         }
 
         /// <summary>
-        /// Calls several methods related to updating comboBoxes, when the country tab is updated.
+        /// Calls several methods related to updating comboBoxes,
+        /// when the country tab is updated.
         /// </summary>
         public void UpdateComboBoxesOnCountryUpdate()
         {
@@ -177,7 +177,8 @@ namespace EazyCart.UserControls
         }
 
         /// <summary>
-        /// Calls several methods related to updating comboBoxes, when the city tab is updated.
+        /// Calls several methods related to updating comboBoxes,
+        /// when the city tab is updated.
         /// </summary>
         public void UpdateComboBoxesOnCityUpdate()
         {
@@ -186,7 +187,8 @@ namespace EazyCart.UserControls
         }
 
         /// <summary>
-        /// Updates a comboBox, which has information about countries. Accepts a comboBox as a parameter
+        /// Updates a comboBox, which has information about countries.
+        /// Accepts a comboBox as a parameter
         /// </summary>
         /// <param name="comboBox"></param>
         public void UpdateCountryComboBox(ComboBox comboBox)
@@ -196,15 +198,16 @@ namespace EazyCart.UserControls
             {               
                 "Select Country"
             };
-            allCountries.AddRange(countryBusiness.GetAllNames());
+            allCountries.AddRange(this.countryBusiness.GetAllNames());
 
             comboBox.DataSource = allCountries;
         }
 
         /// <summary>
-        /// // Updates a comboBox, which contains information about cities. Accepts a comboBox as a parameter.
+        /// // Updates a comboBox, which contains information about cities.
+        /// Accepts a comboBox as a parameter.
         /// </summary>
-        /// <param name="comboBox"></param>
+        /// <param name="comboBox">ComboBox to update.</param>
         private void UpdateCityComboBox(ComboBox comboBox)
         {
             comboBox.Enabled = false;
@@ -296,9 +299,9 @@ namespace EazyCart.UserControls
 
                 // Update textBoxes so that they display correct information.
                 this.categoryIdTextBox.Text = category.Id.ToString();
-                this.categoryIdTextBox.ForeColor = activeTextColor;
+                this.categoryIdTextBox.ForeColor = this.activeTextColor;
                 this.categoryNameTextBox.Text = category.Name.ToString();
-                this.categoryNameTextBox.ForeColor = activeTextColor;
+                this.categoryNameTextBox.ForeColor = this.activeTextColor;
             }
             catch
             {
@@ -308,7 +311,8 @@ namespace EazyCart.UserControls
                 return;
             }
 
-            this.ToggleEditSave(editCategoryButton, saveChangesForCategoryButton, addCategoryButton, deleteCategoryButton);
+            this.ToggleEditSave(this.editCategoryButton, this.saveChangesForCategoryButton,
+                        this.addCategoryButton, this.deleteCategoryButton);
         }
 
         /// <summary>
@@ -343,7 +347,8 @@ namespace EazyCart.UserControls
             
             // Call methods to update related tabs.
             this.categoryIdTextBox.Enabled = true;
-            this.ToggleEditSave(editCategoryButton, saveChangesForCategoryButton, addCategoryButton, deleteCategoryButton);
+            this.ToggleEditSave(this.editCategoryButton, this.saveChangesForCategoryButton,
+                        this.addCategoryButton, this.deleteCategoryButton);
             this.ClearAndUpdateCategoryTab();
             this.UpdateCategoryComboBoxOnWarehouseUserControl();
         }
@@ -441,9 +446,9 @@ namespace EazyCart.UserControls
 
                 // Update textBoxes so that they display correct information.
                 this.countryIdTextBox.Text = country.Id.ToString();
-                this.countryIdTextBox.ForeColor = activeTextColor;
+                this.countryIdTextBox.ForeColor = this.activeTextColor;
                 this.countryNameTextBox.Text = country.Name.ToString();
-                this.countryNameTextBox.ForeColor = activeTextColor;
+                this.countryNameTextBox.ForeColor = this.activeTextColor;
             }
             catch
             {
@@ -453,7 +458,8 @@ namespace EazyCart.UserControls
                 return;
             }
 
-            this.ToggleEditSave(editCountryButton, saveChangesForCountryButton, addCountryButton, deleteCountryButton);
+            this.ToggleEditSave(this.editCountryButton, this.saveChangesForCountryButton,
+                        this.addCountryButton, this.deleteCountryButton);
         }
 
         /// <summary>
@@ -479,7 +485,8 @@ namespace EazyCart.UserControls
 
             // Update related tabs.
             this.countryIdTextBox.Enabled = true;
-            this.ToggleEditSave(editCountryButton, saveChangesForCountryButton, addCountryButton, deleteCountryButton);
+            this.ToggleEditSave(this.editCountryButton, this.saveChangesForCountryButton,
+                        this.addCountryButton, this.deleteCountryButton);
             this.ClearAndUpdateCountryTab();
             this.ClearAndUpdateCityTab();
             this.ClearAndUpdateSupplierTab();
@@ -525,7 +532,8 @@ namespace EazyCart.UserControls
 
         // City Tab Interaction
         /// <summary>
-        /// This event is triggered if the index of the Country For Supplier ComboBox is changed.
+        /// This event is triggered if the index of the
+        /// Country For Supplier ComboBox is changed.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -542,17 +550,18 @@ namespace EazyCart.UserControls
             }
             else
             {
-                var country = (string)countryForSupplierComboBox.SelectedItem;
+                var country = (string)this.countryForSupplierComboBox.SelectedItem;
                 this.FilterCitiesForCountry(country);
                 this.cityForSupplierComboBox.Enabled = true;
             }
         }
 
         /// <summary>
-        /// This method is responsible for filtering cities when a country has been selected from the
+        /// This method is responsible for filtering cities when
+        /// a country has been selected from the
         /// country combo box for supplier.
         /// </summary>
-        /// <param name="country"></param>
+        /// <param name="country">Name of the country.</param>
         private void FilterCitiesForCountry(string country)
         {
             // Add all city names to the city for supplier comboBox
@@ -560,7 +569,7 @@ namespace EazyCart.UserControls
             {
                 "Select City"
             };
-            cityNames.AddRange(cityBusiness.GetAllCityNamesFromCountry(country));
+            cityNames.AddRange(this.cityBusiness.GetAllCityNamesFromCountry(country));
 
             this.cityForSupplierComboBox.DataSource = cityNames;
         }
@@ -612,18 +621,18 @@ namespace EazyCart.UserControls
             try
             {
                 // Lock the ID textBox, so the user can't intentionally change the ID.
-                cityIdTextBox.Enabled = false;
+                this.cityIdTextBox.Enabled = false;
 
-                var item = citiesDataGridView.SelectedRows[0].Cells;
+                var item = this.citiesDataGridView.SelectedRows[0].Cells;
                 var cityId = (int)item[0].Value;
-                var city = cityBusiness.Get(cityId);
+                var city = this.cityBusiness.Get(cityId);
 
                 // Update the tab so that it displays correct information.
                 this.cityIdTextBox.Text = city.Id.ToString();
-                this.cityIdTextBox.ForeColor = activeTextColor;
+                this.cityIdTextBox.ForeColor = this.activeTextColor;
                 this.cityNameTextBox.Text = city.Name.ToString();
-                this.cityNameTextBox.ForeColor = activeTextColor;
-                var country = countryBusiness.Get(city.CountryId);
+                this.cityNameTextBox.ForeColor = this.activeTextColor;
+                var country = this.countryBusiness.Get(city.CountryId);
                 this.countryForCityComboBox.SelectedItem = country.Name;
             }
             catch
@@ -634,7 +643,8 @@ namespace EazyCart.UserControls
                 return;
             }
 
-            this.ToggleEditSave(editCityButton, saveChangesForCityButton, addCityButton, deleteCityButton);
+            this.ToggleEditSave(this.editCityButton, this.saveChangesForCityButton,
+                        this.addCityButton, this.deleteCityButton);
         }
 
         /// <summary>
@@ -671,7 +681,8 @@ namespace EazyCart.UserControls
             this.cityIdTextBox.Enabled = true;
 
             // Update appropriate tab.
-            this.ToggleEditSave(editCityButton, saveChangesForCityButton, addCityButton, deleteCityButton);
+            this.ToggleEditSave(this.editCityButton, this.saveChangesForCityButton,
+                        this.addCityButton, this.deleteCityButton);
             this.ClearAndUpdateCityTab();
             this.ClearAndUpdateSupplierTab();
         }
@@ -772,9 +783,9 @@ namespace EazyCart.UserControls
 
                 // Insert information and format controls of the supplier tab for updating.
                 this.supplierIdTextBox.Text = supplier.Id.ToString();
-                this.supplierIdTextBox.ForeColor = activeTextColor;
+                this.supplierIdTextBox.ForeColor = this.activeTextColor;
                 this.supplierNameTextBox.Text = supplier.Name.ToString();
-                this.supplierNameTextBox.ForeColor = activeTextColor;
+                this.supplierNameTextBox.ForeColor = this.activeTextColor;
                 var city = this.cityBusiness.Get(supplier.CityId);
                 var country = this.countryBusiness.Get(city.CountryId);
                 this.countryForSupplierComboBox.SelectedItem = country.Name;
@@ -789,7 +800,8 @@ namespace EazyCart.UserControls
                 return;
             }
 
-            this.ToggleEditSave(editSupplierButton, saveChangesForSupplierButton, addSupplierButton, deleteSupplierButton);
+            this.ToggleEditSave(this.editSupplierButton, this.saveChangesForSupplierButton,
+                        this.addSupplierButton, this.deleteSupplierButton);
         }
 
         /// <summary>
@@ -827,7 +839,8 @@ namespace EazyCart.UserControls
             this.supplierIdTextBox.Enabled = true;
 
             // Update the appropriate tabs
-            this.ToggleEditSave(editSupplierButton, saveChangesForSupplierButton, addSupplierButton, deleteSupplierButton);
+            this.ToggleEditSave(this.editSupplierButton, this.saveChangesForSupplierButton,
+                        this.addSupplierButton, this.deleteSupplierButton);
             this.ClearAndUpdateSupplierTab();
             this.UpdateWarehouseAndCashRegisterTabs();
         }
@@ -844,7 +857,7 @@ namespace EazyCart.UserControls
             // Check if a row is selected.
             try
             {
-                var item = suppliersDataGridView.SelectedRows[0].Cells;
+                var item = this.suppliersDataGridView.SelectedRows[0].Cells;
                 supplierId = (int)item[0].Value;
             }
             catch
@@ -867,44 +880,44 @@ namespace EazyCart.UserControls
             }
 
             // Update appropriate tabs.
-            ClearAndUpdateSupplierTab();
-            UpdateWarehouseAndCashRegisterTabs();
+            this.ClearAndUpdateSupplierTab();
+            this.UpdateWarehouseAndCashRegisterTabs();
         }
 
         /// <summary>
         /// This method is tasked with enabling/disabling buttons when the Edit/Save buttons are clicked.
         /// </summary>
-        /// <param name="editButton"></param>
-        /// <param name="saveButton"></param>
-        /// <param name="addButton"></param>
-        /// <param name="deleteButton"></param>
+        /// <param name="editButton">Edit button.</param>
+        /// <param name="saveButton">Save button.</param>
+        /// <param name="addButton">Add button.</param>
+        /// <param name="deleteButton">Delete button.</param>
         private void ToggleEditSave(Button editButton, Button saveButton, Button addButton, Button deleteButton)
         {
             if (editButton.Enabled)
             {
                 // Disable all buttons except the Save Button
                 editButton.Enabled = false;
-                editButton.BackColor = disabledButtonColor;
+                editButton.BackColor = this.disabledButtonColor;
                 addButton.Enabled = false;
-                addButton.BackColor = disabledButtonColor;
+                addButton.BackColor = this.disabledButtonColor;
                 deleteButton.Enabled = false;
-                deleteButton.BackColor = disabledButtonColor;
+                deleteButton.BackColor = this.disabledButtonColor;
 
                 saveButton.Enabled = true;
-                saveButton.BackColor = enabledButtonColor;
+                saveButton.BackColor = this.enabledButtonColor;
             }
             else
             {
                 // Enable all buttons and disable the Save Button
                 editButton.Enabled = true;
-                editButton.BackColor = enabledButtonColor;
+                editButton.BackColor = this.enabledButtonColor;
                 addButton.Enabled = true;
-                addButton.BackColor = enabledButtonColor;
+                addButton.BackColor = this.enabledButtonColor;
                 deleteButton.Enabled = true;
-                deleteButton.BackColor = enabledDeleteButtonColor;
+                deleteButton.BackColor = this.enabledDeleteButtonColor;
 
                 saveButton.Enabled = false;
-                saveButton.BackColor = disabledButtonColor;
+                saveButton.BackColor = this.disabledButtonColor;
             }
         }
 
@@ -993,14 +1006,14 @@ namespace EazyCart.UserControls
         /// This event is triggerred when one begins typing in a textBox.
         /// If the textBox had a prompt beforehand, it is removed.
         /// </summary>
-        /// <param name="textBox"></param>
-        /// <param name="prompt"></param>
+        /// <param name="textBox">Text box from which to remove the prompt.</param>
+        /// <param name="prompt">Prompt to remove from the text box.</param>
         private void RemovePromptFromTextBoxWhenTyping(TextBox textBox, string prompt)
         {
             if (textBox.Text == prompt)
             {
                 textBox.Text = string.Empty;
-                textBox.ForeColor = activeTextColor;
+                textBox.ForeColor = this.activeTextColor;
             }
         }
 
@@ -1008,14 +1021,14 @@ namespace EazyCart.UserControls
         /// This event is triggered when one stops typing in a textBox.
         /// If the textBox was left empty, a prompt, suitable for the textbox, would be added.
         /// </summary>
-        /// <param name="textBox"></param>
-        /// <param name="prompt"></param>
+        /// <param name="textBox">Text box from which to add the prompt.</param>
+        /// <param name="prompt">Prompt to add to the text box.</param>
         private void AddPromptToTextBoxIfEmpty(TextBox textBox, string prompt)
         {
             if (textBox.Text == string.Empty)
             {
                 textBox.Text = prompt;
-                textBox.ForeColor = promptTextColor;
+                textBox.ForeColor = this.promptTextColor;
             }
         }
     }

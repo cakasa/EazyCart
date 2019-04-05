@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Controllers
 {
@@ -26,7 +24,7 @@ namespace Business.Controllers
         /// <returns>A List of all suppliers.</returns>
         public List<Supplier> GetAll()
         {
-            return eazyCartContext.Suppliers.ToList();
+            return this.eazyCartContext.Suppliers.ToList();
         }
 
         /// <summary>
@@ -36,16 +34,16 @@ namespace Business.Controllers
         /// <returns>Supplier, corresponding to the given Id.</returns>
         public Supplier Get(int id)
         {
-            return eazyCartContext.Suppliers.FirstOrDefault(x => x.Id == id);
+            return this.eazyCartContext.Suppliers.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>
-        /// Get a list containing all suppliers' names.
+        /// Get suppliers' names.
         /// </summary>
         /// <returns>A List of strings, containing supplier names.</returns>
         public List<string> GetAllNames()
         {
-            List<Supplier> suppliers = eazyCartContext.Suppliers.ToList();
+            List<Supplier> suppliers = this.eazyCartContext.Suppliers.ToList();
             var supplierNames = new List<string>();
 
             foreach (var supplier in suppliers)
@@ -65,17 +63,17 @@ namespace Business.Controllers
         /// <param name="supplierCountryName">The country name of the supplier.</param>
         public void Add(string supplierName, int supplierId, string supplierCityName, string supplierCountryName)
         {
-            List<City> allCitiesWithGivenName = eazyCartContext
-                                                    .Cities
-                                                    .Where(x => x.Name == supplierCityName)
-                                                    .ToList();
+            List<City> allCitiesWithGivenName = this.eazyCartContext
+                                                       .Cities
+                                                       .Where(x => x.Name == supplierCityName)
+                                                       .ToList();
 
             // Find the city and the country of the new supplier.
             Country country;
             City city;
             try
             {
-                country = eazyCartContext.Countries.First(x => x.Name == supplierCountryName);
+                country = this.eazyCartContext.Countries.First(x => x.Name == supplierCountryName);
                 city = allCitiesWithGivenName.First(x => x.CountryId == country.Id);
             }
             catch
@@ -92,15 +90,14 @@ namespace Business.Controllers
             };
 
             // Check whether a supplier with the given ID already exists.
-            var allSuppliersWithGivenId = eazyCartContext.Suppliers.Where(x => x.Id == supplierId);
+            var allSuppliersWithGivenId = this.eazyCartContext.Suppliers.Where(x => x.Id == supplierId);
             if (allSuppliersWithGivenId.Count() > 0)
             {
                 throw new ArgumentException($"Supplier with ID {supplierId} already exists.");
             }
 
-
-            eazyCartContext.Suppliers.Add(supplier);
-            eazyCartContext.SaveChanges();
+            this.eazyCartContext.Suppliers.Add(supplier);
+            this.eazyCartContext.SaveChanges();
 
         }
 
@@ -113,17 +110,17 @@ namespace Business.Controllers
         /// <param name="cityName">The new city name of the supplier.</param>
         public void Update(string supplierName, int supplierId, string countryName, string cityName)
         {
-            List<City> allCitiesWithGivenName = eazyCartContext
-                                                    .Cities
-                                                    .Where(x => x.Name == cityName)
-                                                    .ToList();
+            List<City> allCitiesWithGivenName = this.eazyCartContext
+                                                       .Cities
+                                                       .Where(x => x.Name == cityName)
+                                                       .ToList();
 
             // Find the city and the country of the selected supplier.
             Country country;
             City city;
             try
             {
-                country = eazyCartContext.Countries.First(x => x.Name == countryName);
+                country = this.eazyCartContext.Countries.First(x => x.Name == countryName);
                 city = allCitiesWithGivenName.First(x => x.CountryId == country.Id);
             }
             catch
@@ -131,7 +128,8 @@ namespace Business.Controllers
                 throw new ArgumentException("No such country/city exists.");
             }
 
-            var supplierToUpdate = eazyCartContext.Suppliers.FirstOrDefault(x => x.Id == supplierId);
+            var supplierToUpdate = this.eazyCartContext
+                                          .Suppliers.FirstOrDefault(x => x.Id == supplierId);
             supplierToUpdate.Name = supplierName;
             supplierToUpdate.CityId = city.Id;
 
@@ -144,18 +142,20 @@ namespace Business.Controllers
         /// <param name="id">The ID of the supplier.</param>
         public void Delete(int id)
         {
-            var supplier = eazyCartContext.Suppliers.FirstOrDefault(x => x.Id == id);
+            var supplier = this.eazyCartContext.Suppliers.FirstOrDefault(x => x.Id == id);
 
-            var productsFromSupplier =
-                eazyCartContext.Products.Where(x => x.SupplierId == supplier.Id).ToList();
+            var productsFromSupplier = this.eazyCartContext
+                                              .Products
+                                              .Where(x => x.SupplierId == supplier.Id)
+                                              .ToList();
             if (productsFromSupplier.Count > 0)
             {
                 throw new ArgumentException("One or more products are related to this supplier.");
             }
 
             // Remove the chosen supplier and save the changes in the context.
-            eazyCartContext.Suppliers.Remove(supplier);
-            eazyCartContext.SaveChanges();
+            this.eazyCartContext.Suppliers.Remove(supplier);
+            this.eazyCartContext.SaveChanges();
         }
     }
 }
