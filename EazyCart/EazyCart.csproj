@@ -268,45 +268,114 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\okButtonPicture.png" />
-    <None Include="Resources\informationMark.png" />
-    <None Include="Resources\exclamationMark.png" />
-    <None Include="Resources\exportReportButtonImage.png" />
-    <None Include="Resources\generateReportButtonImage.png" />
-    <None Include="Resources\makePaymentButtonImage.png" />
-    <None Include="Resources\ModifyProductPlaceHolder1.png" />
-    <None Include="Resources\saveProductToReceiptButtonImage.png" />
-    <None Include="Resources\editProductFromReceiptButtonImage.png" />
-    <None Include="Resources\saveProductButtonImage.png" />
-    <None Include="Resources\editProductButtonImage.png" />
-    <None Include="Resources\makeDeliveryButtonPicture.png" />
-    <None Include="Resources\editSupplierButtonPicture.png" />
-    <None Include="Resources\editCityButtonPicture.png" />
-    <None Include="Resources\smallSaveChangesButtonPicture.png" />
-    <None Include="Resources\saveChangesButtonPicture.png" />
-    <None Include="Resources\editCategoryButtonPicture.png" />
-    <None Include="Resources\editCountryButtonPicture.png" />
-    <None Include="Resources\addCountryButtonPicture.png" />
-    <None Include="Resources\addCityButtonPicture.png" />
-    <None Include="Resources\addSupplierButtonPicture.png" />
-    <None Include="Resources\addCategoryButtonPicture.png" />
-    <None Include="Resources\deleteCountryButtonPicture.png" />
-    <None Include="Resources\deleteCityButtonPicture.png" />
-    <None Include="Resources\deleteSupplierButtonPicture.png" />
-    <None Include="Resources\deleteCategoryButtonPicture.png" />
-    <None Include="Resources\addProductButtonImage.png" />
-    <None Include="Resources\deleteProductButtonImage.png" />
-    <None Include="Resources\addProductToReceiptButtonImage.png" />
-    <None Include="Resources\addProductToReceiptButtonImage1.png" />
-    <None Include="Resources\addProductToReceiptButtonImage2.png" />
-    <None Include="Resources\deleteProductFromReceiptButtonImage.png" />
-    <None Include="Resources\completeOrderPlaceholder1.png" />
-    <None Include="Resources\completeOrderButtonImage.png" />
-    <None Include="Resources\confirmPaymentButtonImage.png" />
+    <None Include="Resources\okButtonPicture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\informationMark.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\exclamationMark.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\exportReportButtonImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\generateReportButtonImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\makePaymentButtonImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\saveProductToReceiptButtonImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\editProductFromReceiptButtonImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\saveProductButtonImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\editProductButtonImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\makeDeliveryButtonPicture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\editSupplierButtonPicture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\editCityButtonPicture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\smallSaveChangesButtonPicture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\saveChangesButtonPicture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\editCategoryButtonPicture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\editCountryButtonPicture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\addCountryButtonPicture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\addCityButtonPicture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\addSupplierButtonPicture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\addCategoryButtonPicture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\deleteCountryButtonPicture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\deleteCityButtonPicture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\deleteSupplierButtonPicture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\deleteCategoryButtonPicture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\addProductButtonImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\deleteProductButtonImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\addProductToReceiptButtonImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\addProductToReceiptButtonImage1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\addProductToReceiptButtonImage2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\deleteProductFromReceiptButtonImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\completeOrderPlaceholder1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\completeOrderButtonImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\confirmPaymentButtonImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Resources\eazyCartIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\logisticsButtonPicture.png" />
+    <None Include="Resources\logisticsButtonPicture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\cashRegisterButtonImage.png">

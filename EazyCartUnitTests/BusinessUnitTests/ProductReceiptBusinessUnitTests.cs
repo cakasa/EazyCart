@@ -1,8 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Business;
 using Data.Models;
-using MySql.Data.MySqlClient;
 using Moq;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
@@ -14,8 +12,6 @@ namespace EazyCartUnitTests.BusinessUnitTests
     [TestClass]
     public class ProductReceiptBusinessUnitTests
     {
-        // TODO: UPDATE TESTS WITH PROPER VALUES
-
         [TestMethod]
         public void GetProductReceipt_ReturnsACountry_WhichIsNotNull()
         {
@@ -415,6 +411,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         [TestMethod]
         public void Update_SuccessfullyUpdatesProductReceipt_WhenValuesAreCorrect()
         {
+            // Arrange
             var products = new List<Product>()
             {
                 new Product() {Code = "000001", CategoryId = 1, SupplierId = 1, Quantity = 2,
@@ -511,6 +508,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
                 Assert.AreEqual(expectedMessage, exc.Message, "Different exception was thrown");
             }
         }
+
         [TestMethod]
         public void Update_ThrowsArgumentException_WhenQuantityIsNotPositive()
         {

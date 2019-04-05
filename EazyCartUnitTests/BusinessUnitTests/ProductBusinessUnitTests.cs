@@ -1,8 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Business;
 using Data.Models;
-using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Linq;
 using Moq;
@@ -74,7 +72,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void GetProduct_ReturnsAProduct_WhichIsNotNull()
+        public void GetProduct_ReturnsACorrectProduct()
         {
             // Arrange
             var products = new List<Product>
@@ -107,6 +105,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         [TestMethod]
         public void GetAllNames_ReturnsACorrectListOfProductNames_WhenNotEmpty()
         {
+            // Arrange
             var products = new List<Product>
             {
                 new Product { Name = "TestProduct1", Code = "000000" },
@@ -163,9 +162,9 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void GetCountOfProductsByCategory_ReturnsSuccessfullyDictionary()
+        public void GetCountOfProductsByCategory_ReturnsACorrectDictionary()
         {
-            // Assert
+            // Arrange
             var categories = new List<Category>
             {
                 new Category {Name = "TestCategory1", Id = 1},
@@ -210,9 +209,9 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void GetCountOfProductsByCountry_ReturnsSuccessfullyDictionary()
+        public void GetCountOfProductsByCountry_ReturnsACorrectDictionary()
         {
-            // Assert
+            // Arrange
             var countries = new List<Country>
             {
                 new Country {Name = "TestCountry1", Id = 1},
@@ -283,8 +282,9 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void GetCountOfProductsBySupplier_ReturnsSuccessfullyDictionary()
+        public void GetCountOfProductsBySupplier_ReturnsACorrectDictionary()
         {
+            // Arrange
             var countries = new List<Country>
             {
                 new Country {Name = "TestCountry1", Id = 1},
@@ -342,8 +342,9 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void GetAllQuantities_ReturnsSuccessfullyDictionary()
+        public void GetAllQuantities_ReturnsACorrectDictionaryOfQuantities()
         {
+            // Arrange
             var products = new List<Product>
             {
                 new Product { Name = "TestProduct1", Quantity = 5, Code = "000000", SupplierId = 1},
@@ -374,6 +375,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         [TestMethod]
         public void GetNetProfitByProduct_SuccessfullyReturnsADictionaryOfNetProfitsAndProducts()
         {
+            // Arrange
             var products = new List<Product>
             {
                 new Product { Name = "TestProduct1", Quantity = 5, Code = "000000", SupplierId = 1, DeliveryPrice = 10, SellingPrice = 20},
@@ -474,6 +476,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         [TestMethod]
         public void MakeDelivery_ThrowsArgumentException_WhenSuchProductDoesNotExist()
         {
+            // Arrange
             var products = new List<Product>
             {
                 new Product { Name = "TestProduct1", Quantity = 5, Code = "000000", SupplierId = 1, DeliveryPrice = 10, SellingPrice = 20, UnitId = 1},
@@ -508,8 +511,9 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void MakeDelivery_ThrowsArgumentException_WhenQyantityIsNotWholeAndUnitIdIsOne()
+        public void MakeDelivery_ThrowsArgumentException_WhenQuantityIsNotWholeAndUnitIdIsOne()
         {
+            // Arrange
             var products = new List<Product>
             {
                 new Product { Name = "TestProduct1", Quantity = 5, Code = "000000", SupplierId = 1, DeliveryPrice = 10, SellingPrice = 20, UnitId = 1},
@@ -916,7 +920,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void Add_ThrowsException_WhenCategorydOrSupplierIdDoesNotExist()
+        public void Add_ThrowsException_WhenCategorydOrSupplierDoesNotExist()
         {
             // Arrange
             var categories = new List<Category>
@@ -978,7 +982,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
             // Act & Assert
             try
             {
-                productBusiness.Add("000000", "TestCategory3", "TestProduct1", 4, "TestSupplier4", 15, 17, "TestUnit1");
+                productBusiness.Add("000000", "InvalidCategory", "TestProduct1", 4, "InvalidSupplier", 15, 17, "TestUnit1");
                 Assert.Fail("No exception was thrown");
             }
             catch (ArgumentException ex)
@@ -989,7 +993,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void Add_ThrowsException_WhenProductIdAlreadyExists()
+        public void Add_ThrowsException_WhenProductIdIsDuplicate()
         {
             // Arrange
             var categories = new List<Category>
@@ -1349,6 +1353,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
                 Assert.AreEqual(expectedMessage, exc.Message, "A different exception was thrown");
             }
         }
+
         [TestMethod]
         public void Delete_SuccessfullyDeletesProduct()
         {

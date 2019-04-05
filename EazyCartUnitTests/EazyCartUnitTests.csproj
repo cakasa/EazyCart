@@ -159,7 +159,7 @@
     <Compile Include="BusinessUnitTests\ProductBusinessUnitTests.cs" />
     <Compile Include="BusinessUnitTests\ProductReceiptBusinessUnitTests.cs" />
     <Compile Include="BusinessUnitTests\ReceiptBusinessUnitTests.cs" />
-    <Compile Include="BusinessUnitTests\SupplierBusinessUnitBusiness.cs" />
+    <Compile Include="BusinessUnitTests\SupplierBusinessUnitTests.cs" />
     <Compile Include="BusinessUnitTests\UnitBusinessUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

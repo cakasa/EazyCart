@@ -1,13 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Business;
 using Data.Models;
-using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Linq;
 using Moq;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Business.Controllers;
 
 namespace EazyCartUnitTests.BusinessUnitTests
@@ -15,8 +12,6 @@ namespace EazyCartUnitTests.BusinessUnitTests
     [TestClass]
     public class CountryBusinessUnitTests
     {
-        // TODO: UPDATE TESTS WITH PROPER VALUES
-
         [TestMethod]
         public void GetCountry_ReturnsACountry_WhichIsNotNull()
         {
@@ -24,7 +19,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
             var countries = new List<Country>
             {
                 new Country { Name = "TestCountry1", Id = 1 },
-                new Country { Name = "TestCountry2", Id = 2},
+                new Country { Name = "TestCountry2", Id = 2 },
                 new Country { Name = "TestCountry3", Id = 3 },
             }.AsQueryable();
 
@@ -50,7 +45,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void GetAll_ReturnsACorrectListOfCountries_WhenNotEmpty()
+        public void GetAll_ReturnsACorrectListOfCountries_WhenThereAreCountries()
         {
             // Arrange
             var countries = new List<Country>
@@ -111,6 +106,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         [TestMethod]
         public void GetAllNames_ReturnsACorrectListOfCountryNames_WhenNotEmpty()
         {
+            // Arrange
             var countries = new List<Country>
             {
                 new Country { Name = "TestCountry1", Id = 1 },
@@ -167,7 +163,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void GetNameBySupplier()
+        public void GetNameBySupplier_ReturnsACorrectCountry()
         {
             // Arrange
             var countries = new List<Country>()
@@ -238,7 +234,6 @@ namespace EazyCartUnitTests.BusinessUnitTests
             mockContext.Setup(m => m.Countries).Returns(countryMockDbSet.Object);
 
             var countryBusiness = new CountryBusiness(mockContext.Object);
-            
 
             // Act
             countryBusiness.Add("TestCountry", 1);
@@ -249,7 +244,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void AddCountry_ThrowsArgumentException_WhenIdIsADuplicate()
+        public void AddCountry_ThrowsArgumentException_WhenIdIsDuplicate()
         {
             // Arrange
             int duplicateId = 1;
@@ -304,14 +299,14 @@ namespace EazyCartUnitTests.BusinessUnitTests
             var countryBusiness = new CountryBusiness(mockContext.Object);
 
             // Act
-            countryBusiness.Update("UpdatedCategory", 1);
+            countryBusiness.Update("UpdatedCountry", 1);
 
             // Assert
             mockContext.Verify(m => m.SaveChanges(), Times.Once());
         }
 
         [TestMethod]
-        public void Delete_DeletesCountriesSuccessfully_WhenNoCitiesAreRelatedToTheCountry()
+        public void Delete_DeletesCountriesSuccessfully_WhenNoCitiesAreRelatedToCountry()
         {
             // Arrange
             var countries = new List<Country>
@@ -353,8 +348,9 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void Delete_ThrowsArgumentException_WhenCountryIsRelatedToCity()
-        {// Arrange
+        public void Delete_ThrowsArgumentException_WhenCitiesAreRelatedToCountry()
+        {
+            // Arrange
             var countries = new List<Country>
             {
                 new Country { Name = "TestCountry1", Id = 1},

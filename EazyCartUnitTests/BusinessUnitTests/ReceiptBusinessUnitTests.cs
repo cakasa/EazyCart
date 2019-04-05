@@ -1,8 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Business;
 using Data.Models;
-using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Linq;
 using Moq;
@@ -14,9 +12,6 @@ namespace EazyCartUnitTests.BusinessUnitTests
     [TestClass]
     public class ReceiptBusinessUnitTests
     {
-
-        // TODO: UPDATE WITH PROPER VALUES
-
         [TestMethod]
         public void Get_ReturnsAReceipt_WhichIsNotNull()
         {
@@ -49,7 +44,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void GetAll_ReturnsSuccessfullyReturnsAListOfReceipts()
+        public void GetAll_SuccessfullyReturnsAListOfReceipts()
         {
             // Arrange
             var testDateTime = DateTime.Now;
@@ -230,7 +225,6 @@ namespace EazyCartUnitTests.BusinessUnitTests
         [TestMethod]
         public void Delete_SuccessfullyDeletesTheReceipt()
         {
-
             // Arrange
             var testDateTime = DateTime.Now;
             var receipts = new List<Receipt>
@@ -270,6 +264,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         [TestMethod]
         public void DeleteLastReceiptIfEmpty_DeletesReceipt_WhenNoProductReceiptsAreRelatedToIt()
         {
+            // Arrange
             var testDateTime = DateTime.Now;
             var receipts = new List<Receipt>
             {
@@ -307,6 +302,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         [TestMethod]
         public void GetYearlyOrders_ReturnsACorrectArrayOfNumberOfOrders()
         {
+            // Arrange
             var testDateTime = DateTime.Parse("2019/01/01 12:00:00");
             var receipts = new List<Receipt>
             {

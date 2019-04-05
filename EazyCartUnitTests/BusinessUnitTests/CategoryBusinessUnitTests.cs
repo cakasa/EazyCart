@@ -1,8 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Business;
 using Data.Models;
-using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
@@ -15,20 +13,20 @@ namespace EazyCartUnitTests.BusinessUnitTests
     public class CategoryBusinessUnitTests
     {
         [TestMethod]
-        public void GetAllCategories_ReturnsAsAList()
+        public void GetAllCategories_ReturnsACorrectListOfCategories()
         {
             // Arrange
-            var data = new List<Category>
+            var categories = new List<Category>
             {
                 new Category {Name = "TestCategory1", Id = 1},
                 new Category {Name = "TestCategory2", Id = 2}
             }.AsQueryable();
 
             var mockSet = new Mock<DbSet<Category>>();
-            mockSet.As<IQueryable<Category>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<Category>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Category>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Category>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            mockSet.As<IQueryable<Category>>().Setup(m => m.Provider).Returns(categories.Provider);
+            mockSet.As<IQueryable<Category>>().Setup(m => m.Expression).Returns(categories.Expression);
+            mockSet.As<IQueryable<Category>>().Setup(m => m.ElementType).Returns(categories.ElementType);
+            mockSet.As<IQueryable<Category>>().Setup(m => m.GetEnumerator()).Returns(categories.GetEnumerator());
 
             var mockContext = new Mock<EazyCartContext>();
             mockContext.Setup(c => c.Categories).Returns(mockSet.Object);
@@ -36,27 +34,28 @@ namespace EazyCartUnitTests.BusinessUnitTests
             var categoryBusiness = new CategoryBusiness(mockContext.Object);
 
             // Act
-            var categories = categoryBusiness.GetAll();
+            var allCategories = categoryBusiness.GetAll();
 
             // Assert
-            Assert.AreEqual(1, categories[0].Id, "Ids do not match.");
+            Assert.AreEqual(1, allCategories[0].Id, "First Ids do not match.");
+            Assert.AreEqual(2, allCategories[1].Id, "Second Ids do not match.");
         }
 
         [TestMethod]
-        public void GetOneCategory_ReturnsACategory()
+        public void GetCategory_ReturnsACorrectCategory()
         {
             // Arrange
-            var data = new List<Category>
+            var categories = new List<Category>
             {
                 new Category {Name = "TestCategory1", Id = 1},
                 new Category {Name = "TestCategory2", Id = 2}
             }.AsQueryable();
 
             var mockSet = new Mock<DbSet<Category>>();
-            mockSet.As<IQueryable<Category>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<Category>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Category>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Category>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            mockSet.As<IQueryable<Category>>().Setup(m => m.Provider).Returns(categories.Provider);
+            mockSet.As<IQueryable<Category>>().Setup(m => m.Expression).Returns(categories.Expression);
+            mockSet.As<IQueryable<Category>>().Setup(m => m.ElementType).Returns(categories.ElementType);
+            mockSet.As<IQueryable<Category>>().Setup(m => m.GetEnumerator()).Returns(categories.GetEnumerator());
 
             var mockContext = new Mock<EazyCartContext>();
             mockContext.Setup(c => c.Categories).Returns(mockSet.Object);
@@ -65,27 +64,27 @@ namespace EazyCartUnitTests.BusinessUnitTests
 
             // Act
             int expectedId = 1;
-            var category = categoryBusiness.Get(1);
+            var category = categoryBusiness.Get(expectedId);
 
             // Assert
             Assert.AreEqual(expectedId, category.Id, "Ids do not match.");
         }
 
         [TestMethod]
-        public void GetAllNamesCategories_ReturnsAsAList()
+        public void GetAllNamesCategories_ReturnsAsACorrectListOfAllCategoryNames()
         {
             // Arrange
-            var data = new List<Category>
+            var categories = new List<Category>
             {
                 new Category {Name = "TestCategory1", Id = 1},
                 new Category {Name = "TestCategory2", Id = 2}
             }.AsQueryable();
 
             var mockSet = new Mock<DbSet<Category>>();
-            mockSet.As<IQueryable<Category>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<Category>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Category>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Category>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            mockSet.As<IQueryable<Category>>().Setup(m => m.Provider).Returns(categories.Provider);
+            mockSet.As<IQueryable<Category>>().Setup(m => m.Expression).Returns(categories.Expression);
+            mockSet.As<IQueryable<Category>>().Setup(m => m.ElementType).Returns(categories.ElementType);
+            mockSet.As<IQueryable<Category>>().Setup(m => m.GetEnumerator()).Returns(categories.GetEnumerator());
 
             var mockContext = new Mock<EazyCartContext>();
             mockContext.Setup(c => c.Categories).Returns(mockSet.Object);
@@ -93,15 +92,17 @@ namespace EazyCartUnitTests.BusinessUnitTests
             var categoryBusiness = new CategoryBusiness(mockContext.Object);
 
             // Act
-            string expectedName = "TestCategory1";
-            var category = categoryBusiness.GetAllNames();
+            string expectedFirstName = "TestCategory1";
+            string expectedSecondName = "TestCategory2";
+            var categoryNames = categoryBusiness.GetAllNames();
 
             // Assert
-            Assert.AreEqual(expectedName, category[0], "Category names do not match.");
+            Assert.AreEqual(expectedFirstName, categoryNames[0], "First category name does not match.");
+            Assert.AreEqual(expectedSecondName, categoryNames[1], "First category name does not match.");
         }
 
         [TestMethod]
-        public void Add_SuccessfullyAddsCategory_WhenIdDoesNotExist()
+        public void Add_SuccessfullyAddsCategory_WhenIdIsNotDuplicate()
         {
             // Arrange
             var categories = new List<Category>().AsQueryable();
@@ -126,7 +127,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void Add_ThrowsException_WhenIdAlreadyExists()
+        public void Add_ThrowsArgumentException_WhenCategoryWithGivenIdExists()
         {
             // Arrange
             int duplicateId = 1;
@@ -231,7 +232,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void Delete_ThrowsException_WhenProductsAreRelated()
+        public void Delete_ThrowsArgumentException_WhenProductsAreRelated()
         {
             // Arrange
             var categories = new List<Category>
@@ -270,7 +271,6 @@ namespace EazyCartUnitTests.BusinessUnitTests
                 categoryBusiness.Delete(idToDelete);
                 Assert.Fail("No exception was thrown.");
             }
-            
             catch (ArgumentException ex)
             {
                 string expectedMessage = string.Format("One or more products are related to this category.");

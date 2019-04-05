@@ -1,8 +1,5 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Business;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Data.Models;
-using MySql.Data.MySqlClient;
 using Moq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -39,6 +36,8 @@ namespace EazyCartUnitTests.BusinessUnitTests
             int idToGet = 1;
             string expectedUnitName = "TestUnit1";
             var unit = unitBusiness.Get(idToGet);
+
+            // Assert
             Assert.IsNotNull(unit, "Unit could not be extracted");
             Assert.AreEqual(expectedUnitName, unit.Name, "Name is not the same.");
         }
@@ -46,6 +45,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         [TestMethod]
         public void GetNumberOfUnits_ReturnsACorrectNumberOfUnits()
         {
+            // Arrange
             var units = new List<Unit>
             {
                 new Unit() {Name = "TestUnit1", Id = 1, Code = "TU1"},
@@ -66,20 +66,26 @@ namespace EazyCartUnitTests.BusinessUnitTests
             // Act
             int expectedCount = 2;
             int actualCount = unitBusiness.GetNumberOfUnits();
+
+            // Assert
             Assert.AreEqual(expectedCount, actualCount, "Count is not the same.");
         }
 
         [TestMethod]
         public void Add_SuccessfullyAddsAnUnit()
         {
+            // Arrange
             var mockUnitDbSet = new Mock<DbSet<Unit>>();
 
             var mockContext = new Mock<EazyCartContext>();
             mockContext.Setup(m => m.Units).Returns(mockUnitDbSet.Object);
 
             var unitBusiness = new UnitBusiness(mockContext.Object);
+
+            // Act
             unitBusiness.Add(1, "TestUnit", "TU");
 
+            // Assert
             mockUnitDbSet.Verify(m => m.Add(It.IsAny<Unit>()), Times.Once());
             mockContext.Verify(m => m.SaveChanges(), Times.Once());
         }
