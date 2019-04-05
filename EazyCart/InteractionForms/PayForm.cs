@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace EazyCart
+namespace EazyCart.InteractionForms
 {
     /// <summary>
     /// The form responsible for managing payments on receipts

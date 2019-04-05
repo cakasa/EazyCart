@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Moq;
 using Microsoft.EntityFrameworkCore;
+using Business.Controllers;
 
 namespace EazyCartUnitTests.BusinessUnitTests
 {
@@ -371,7 +372,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void GetNetProfitByProduct()
+        public void GetNetProfitByProduct_SuccessfullyReturnsADictionaryOfNetProfitsAndProducts()
         {
             var products = new List<Product>
             {
@@ -401,7 +402,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void MakeDelivery_SuccessfullyUpdatesProduct()
+        public void MakeDelivery_SuccessfullyUpdatesProduct_WhenValuesAreCorrect()
         {
             // Arrange
             var categories = new List<Category>
@@ -471,7 +472,43 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void MakeDelivery_WithoutAWholeNumberExceptionThrown()
+        public void MakeDelivery_ThrowsArgumentException_WhenSuchProductDoesNotExist()
+        {
+            var products = new List<Product>
+            {
+                new Product { Name = "TestProduct1", Quantity = 5, Code = "000000", SupplierId = 1, DeliveryPrice = 10, SellingPrice = 20, UnitId = 1},
+                new Product { Name = "TestProduct2", Quantity = 5, Code = "000001", SupplierId = 1, DeliveryPrice = 10, SellingPrice = 20, UnitId = 1},
+                new Product { Name = "TestProduct3", Quantity = 5, Code = "000002", SupplierId = 2, DeliveryPrice = 10, SellingPrice = 20, UnitId = 1}
+            }.AsQueryable();
+
+            var productMockDbSet = new Mock<DbSet<Product>>();
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.Provider).Returns(products.Provider);
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.Expression).Returns(products.Expression);
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.ElementType).Returns(products.ElementType);
+            productMockDbSet.As<IQueryable<Product>>().Setup(m => m.GetEnumerator()).Returns(products.GetEnumerator());
+
+            var mockContext = new Mock<EazyCartContext>();
+            mockContext.Setup(c => c.Products).Returns(productMockDbSet.Object);
+
+            var productBusiness = new ProductBusiness(mockContext.Object);
+
+            // Act & Assert
+            try
+            {
+                decimal quantityToDeliver = 10;
+                productBusiness.MakeDelivery("InvalidProduct", quantityToDeliver);
+                Assert.Fail("No exception was thrown.");
+            }
+
+            catch (ArgumentException ex)
+            {
+                string expectedMessage = string.Format("Such product does not exist!");
+                Assert.AreEqual(expectedMessage, ex.Message, "Wrong exception was thrown.");
+            }
+        }
+
+        [TestMethod]
+        public void MakeDelivery_ThrowsArgumentException_WhenQyantityIsNotWholeAndUnitIdIsOne()
         {
             var products = new List<Product>
             {
@@ -507,7 +544,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
         }
 
         [TestMethod]
-        public void MakeDelivery_WithourANegativeNumberExceptionThrown()
+        public void MakeDelivery_ThrowsArgumentException_WhenQuantityIsNotPositive()
         {
             var products = new List<Product>
             {

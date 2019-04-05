@@ -1,4 +1,4 @@
-﻿namespace EazyCart
+﻿namespace EazyCart.UserControls
 {
     partial class CashRegisterUserControl
     {
@@ -33,10 +33,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CashRegisterUserControl));
             this.totalLinePanel = new System.Windows.Forms.Panel();
             this.grandTotalLabel = new System.Windows.Forms.Label();
@@ -82,7 +83,7 @@
             this.totalLinePanel.Location = new System.Drawing.Point(408, 706);
             this.totalLinePanel.Name = "totalLinePanel";
             this.totalLinePanel.Size = new System.Drawing.Size(430, 5);
-            this.totalLinePanel.TabIndex = 9;
+            this.totalLinePanel.TabIndex = 17;
             // 
             // grandTotalLabel
             // 
@@ -92,7 +93,7 @@
             this.grandTotalLabel.Location = new System.Drawing.Point(414, 723);
             this.grandTotalLabel.Name = "grandTotalLabel";
             this.grandTotalLabel.Size = new System.Drawing.Size(170, 40);
-            this.grandTotalLabel.TabIndex = 10;
+            this.grandTotalLabel.TabIndex = 18;
             this.grandTotalLabel.Text = "Grand Total:";
             // 
             // grandTotalCashLabel
@@ -105,7 +106,7 @@
             this.grandTotalCashLabel.MinimumSize = new System.Drawing.Size(250, 40);
             this.grandTotalCashLabel.Name = "grandTotalCashLabel";
             this.grandTotalCashLabel.Size = new System.Drawing.Size(250, 47);
-            this.grandTotalCashLabel.TabIndex = 11;
+            this.grandTotalCashLabel.TabIndex = 19;
             this.grandTotalCashLabel.Text = " $ 0.00";
             this.grandTotalCashLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -273,14 +274,14 @@
             this.quantityColumn,
             this.discountColumn,
             this.totalPriceColumn});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.receiptDataGridView.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.receiptDataGridView.DefaultCellStyle = dataGridViewCellStyle9;
             this.receiptDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.receiptDataGridView.EnableHeadersVisualStyles = false;
             this.receiptDataGridView.Location = new System.Drawing.Point(13, 54);
@@ -288,21 +289,21 @@
             this.receiptDataGridView.Name = "receiptDataGridView";
             this.receiptDataGridView.ReadOnly = true;
             this.receiptDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.receiptDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.receiptDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.receiptDataGridView.RowHeadersWidth = 4;
             this.receiptDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.receiptDataGridView.RowTemplate.Height = 30;
             this.receiptDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.receiptDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.receiptDataGridView.Size = new System.Drawing.Size(825, 636);
-            this.receiptDataGridView.TabIndex = 11;
+            this.receiptDataGridView.TabIndex = 13;
             this.receiptDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ReceiptDataGridView_KeyDown);
             // 
             // receiptProductColumn
@@ -339,6 +340,8 @@
             // 
             // quantityColumn
             // 
+            dataGridViewCellStyle7.Format = "N3";
+            this.quantityColumn.DefaultCellStyle = dataGridViewCellStyle7;
             this.quantityColumn.HeaderText = "QUANTITY";
             this.quantityColumn.Name = "quantityColumn";
             this.quantityColumn.ReadOnly = true;
@@ -353,9 +356,9 @@
             // 
             // totalPriceColumn
             // 
-            dataGridViewCellStyle7.Format = "N2";
-            dataGridViewCellStyle7.NullValue = null;
-            this.totalPriceColumn.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.totalPriceColumn.DefaultCellStyle = dataGridViewCellStyle8;
             this.totalPriceColumn.HeaderText = "TOTAL";
             this.totalPriceColumn.Name = "totalPriceColumn";
             this.totalPriceColumn.ReadOnly = true;
@@ -393,7 +396,7 @@
             this.receiptNumberLabel.Location = new System.Drawing.Point(283, 18);
             this.receiptNumberLabel.Name = "receiptNumberLabel";
             this.receiptNumberLabel.Size = new System.Drawing.Size(97, 25);
-            this.receiptNumberLabel.TabIndex = 31;
+            this.receiptNumberLabel.TabIndex = 11;
             this.receiptNumberLabel.Text = "RECEIPT #";
             // 
             // receiptNumberTextBox
@@ -403,7 +406,7 @@
             this.receiptNumberTextBox.Location = new System.Drawing.Point(380, 15);
             this.receiptNumberTextBox.Name = "receiptNumberTextBox";
             this.receiptNumberTextBox.Size = new System.Drawing.Size(161, 33);
-            this.receiptNumberTextBox.TabIndex = 32;
+            this.receiptNumberTextBox.TabIndex = 12;
             this.receiptNumberTextBox.TabStop = false;
             // 
             // paidLabel
@@ -414,7 +417,7 @@
             this.paidLabel.Location = new System.Drawing.Point(416, 773);
             this.paidLabel.Name = "paidLabel";
             this.paidLabel.Size = new System.Drawing.Size(116, 25);
-            this.paidLabel.TabIndex = 10;
+            this.paidLabel.TabIndex = 20;
             this.paidLabel.Text = "Paid in cash:";
             // 
             // changeLabel
@@ -425,7 +428,7 @@
             this.changeLabel.Location = new System.Drawing.Point(416, 800);
             this.changeLabel.Name = "changeLabel";
             this.changeLabel.Size = new System.Drawing.Size(82, 25);
-            this.changeLabel.TabIndex = 10;
+            this.changeLabel.TabIndex = 22;
             this.changeLabel.Text = "Change:";
             // 
             // changeCashLabel
@@ -438,7 +441,7 @@
             this.changeCashLabel.MinimumSize = new System.Drawing.Size(250, 0);
             this.changeCashLabel.Name = "changeCashLabel";
             this.changeCashLabel.Size = new System.Drawing.Size(250, 25);
-            this.changeCashLabel.TabIndex = 11;
+            this.changeCashLabel.TabIndex = 23;
             this.changeCashLabel.Text = " $ 0.00";
             this.changeCashLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -452,7 +455,7 @@
             this.paidCashLabel.MinimumSize = new System.Drawing.Size(250, 0);
             this.paidCashLabel.Name = "paidCashLabel";
             this.paidCashLabel.Size = new System.Drawing.Size(250, 25);
-            this.paidCashLabel.TabIndex = 11;
+            this.paidCashLabel.TabIndex = 21;
             this.paidCashLabel.Text = " $ 0.00";
             this.paidCashLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -468,7 +471,7 @@
             this.makePaymentButton.Location = new System.Drawing.Point(13, 706);
             this.makePaymentButton.Name = "makePaymentButton";
             this.makePaymentButton.Size = new System.Drawing.Size(337, 52);
-            this.makePaymentButton.TabIndex = 12;
+            this.makePaymentButton.TabIndex = 14;
             this.makePaymentButton.UseVisualStyleBackColor = false;
             this.makePaymentButton.Click += new System.EventHandler(this.MakePaymentButton_Click);
             // 
@@ -552,7 +555,7 @@
             this.cancelOrderButton.Location = new System.Drawing.Point(350, 706);
             this.cancelOrderButton.Name = "cancelOrderButton";
             this.cancelOrderButton.Size = new System.Drawing.Size(41, 119);
-            this.cancelOrderButton.TabIndex = 14;
+            this.cancelOrderButton.TabIndex = 16;
             this.cancelOrderButton.Tag = "";
             this.cancelOrderButton.UseVisualStyleBackColor = false;
             this.cancelOrderButton.Click += new System.EventHandler(this.CancelOrderButton_Click);
@@ -569,7 +572,7 @@
             this.completeOrderButton.Location = new System.Drawing.Point(13, 758);
             this.completeOrderButton.Name = "completeOrderButton";
             this.completeOrderButton.Size = new System.Drawing.Size(337, 67);
-            this.completeOrderButton.TabIndex = 13;
+            this.completeOrderButton.TabIndex = 15;
             this.completeOrderButton.UseVisualStyleBackColor = false;
             this.completeOrderButton.Click += new System.EventHandler(this.CompleteOrderButton_Click);
             // 
@@ -634,6 +637,11 @@
         private System.Windows.Forms.Label receiptNumberLabel;
         private System.Windows.Forms.TextBox receiptNumberTextBox;
         private System.Windows.Forms.Button deleteProductButton;
+        private System.Windows.Forms.Label paidLabel;
+        private System.Windows.Forms.Label changeLabel;
+        private System.Windows.Forms.Label changeCashLabel;
+        private System.Windows.Forms.Label paidCashLabel;
+        private System.Windows.Forms.Button makePaymentButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn receiptProductColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
@@ -641,10 +649,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn discountColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalPriceColumn;
-        private System.Windows.Forms.Label paidLabel;
-        private System.Windows.Forms.Label changeLabel;
-        private System.Windows.Forms.Label changeCashLabel;
-        private System.Windows.Forms.Label paidCashLabel;
-        private System.Windows.Forms.Button makePaymentButton;
     }
 }

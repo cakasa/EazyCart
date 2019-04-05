@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace EazyCart
+namespace EazyCart.InteractionForms
 {
     public partial class MessageForm : Form
     {
@@ -25,12 +25,14 @@ namespace EazyCart
                 Image errorImage = Properties.Resources.exclamationMark;
                 this.signPictureBox.Image = errorImage;
                 titleLabel.Text = "Error";
+                System.Media.SystemSounds.Hand.Play();
             }
             else
             {
                 Image informationImage = Properties.Resources.informationMark;
                 this.signPictureBox.Image = informationImage;
                 titleLabel.Text = "Information";
+                System.Media.SystemSounds.Beep.Play();
             }
         }
 

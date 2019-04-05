@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Business
+namespace Business.Controllers
 {
     /// <summary>
     /// This business logic class is responsible for managing the

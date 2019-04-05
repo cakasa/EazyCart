@@ -5,8 +5,10 @@ using System.Windows.Forms;
 using Data.Models;
 using Business;
 using System.Text;
+using Business.Controllers;
+using EazyCart.InteractionForms;
 
-namespace EazyCart
+namespace EazyCart.UserControls
 {
     /// <summary>
     /// This user control is responsible for the products available for sale
@@ -125,8 +127,8 @@ namespace EazyCart
                 newRow.Cells[3].Value = product.Quantity;
                 newRow.Cells[4].Value = unit.Code;
                 newRow.Cells[5].Value = supplier.Name;
-                newRow.Cells[6].Value = product.DeliveryPrice;
-                newRow.Cells[7].Value = product.SellingPrice;
+                newRow.Cells[6].Value = string.Format($"${product.DeliveryPrice:f2}");
+                newRow.Cells[7].Value = string.Format($"${product.SellingPrice:f2}");
             }
         }
 
@@ -270,7 +272,7 @@ namespace EazyCart
         private void AddProductButton_Click(object sender, EventArgs e)
         {
             var productCode = this.productCodeMaskedTextBox.Text;
-            productCode = RefactorCode(productCode);
+            productCode = RefactorProductCode(productCode);
             var category = (string)this.categoryComboBox.SelectedItem;
             var productName = this.productNameTextBox.Text;
             var quantityString = this.inventoryQuantityTextBox.Text;
@@ -354,7 +356,7 @@ namespace EazyCart
         private void SaveProductButton_Click(object sender, EventArgs e)
         {
             var productCode = this.productCodeMaskedTextBox.Text;
-            productCode = RefactorCode(productCode);
+            productCode = RefactorProductCode(productCode);
             var category = (string)this.categoryComboBox.SelectedItem;
             var productName = this.productNameTextBox.Text;
             var quantityString = this.inventoryQuantityTextBox.Text;
@@ -586,7 +588,7 @@ namespace EazyCart
             }
         }
 
-        public string RefactorCode(string productCode)
+        public string RefactorProductCode(string productCode)
         {
             StringBuilder stringBuilder = new StringBuilder(productCode);
             for (int i = 0; i < stringBuilder.Length; i++)
@@ -690,9 +692,8 @@ namespace EazyCart
 
         private void ProductCodeMaskedTextBox_Enter(object sender, EventArgs e)
         {
-            if (this.productCodeMaskedTextBox.Text == "000000")
+            if (this.productCodeMaskedTextBox.Text == string.Empty)
             {
-                this.productCodeMaskedTextBox.Text = string.Empty;
                 this.productCodeMaskedTextBox.ForeColor = activeTextColor;
             }
         }
@@ -701,7 +702,6 @@ namespace EazyCart
         {
             if (this.productCodeMaskedTextBox.Text == string.Empty)
             {
-                this.productCodeMaskedTextBox.Text = "000000";
                 this.productCodeMaskedTextBox.ForeColor = promptTextColor;
             }
         }

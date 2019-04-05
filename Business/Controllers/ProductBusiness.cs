@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business
+namespace Business.Controllers
 {
     public class ProductBusiness
     {
@@ -310,10 +310,14 @@ namespace Business
         /// <param name="quantity">Give the quantity from the wanted product.</param>
         public decimal MakeDelivery(string productName, decimal quantity)
         {
-            var product = eazyCartContext.Products.First(x => x.Name == productName);
-
+            Product productToUpdate;
+            productToUpdate = eazyCartContext.Products.FirstOrDefault(x => x.Name == productName);
+            if(productToUpdate == null)
+            { 
+                throw new ArgumentException("Such product does not exist!");
+            }
             // Validation for quanity.
-            if (quantity != Math.Floor(quantity) && product.UnitId == 1)
+            if (quantity != Math.Floor(quantity) && productToUpdate.UnitId == 1)
             {
                 throw new ArgumentException("Quantity must be a whole number.");
             }
@@ -322,7 +326,6 @@ namespace Business
                 throw new ArgumentException("Quantity must be positive.");
             }
 
-            var productToUpdate = eazyCartContext.Products.FirstOrDefault(x => x.Name == productName);
             productToUpdate.Quantity += quantity;
 
             eazyCartContext.SaveChanges();

@@ -1,5 +1,8 @@
 ﻿using Business;
+using Business.Controllers;
 using Data.Models;
+using EazyCart.InteractionForms;
+using EazyCart.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -16,6 +19,7 @@ namespace EazyCart
         public WarehouseUserControl WarehouseUserControl { get; private set; }
         private StatisticsUserContol statisticsUserContol;
         private LogisticsUserControl logisticsUserControl;
+        private GreetingScreenUserControl greetingScreenUserControl;
 
         private int mouseX = 0;
         private int mouseY = 0;
@@ -54,21 +58,25 @@ namespace EazyCart
             WarehouseUserControl = new WarehouseUserControl();
             statisticsUserContol = new StatisticsUserContol();
             logisticsUserControl = new LogisticsUserControl();
+            greetingScreenUserControl = new GreetingScreenUserControl();
 
             CashRegisterUserControl.Dock = DockStyle.Bottom;
             WarehouseUserControl.Dock = DockStyle.Bottom;
             statisticsUserContol.Dock = DockStyle.Bottom;
             logisticsUserControl.Dock = DockStyle.Bottom;
+            greetingScreenUserControl.Dock = DockStyle.Bottom;
 
             this.Controls.Add(CashRegisterUserControl);
             this.Controls.Add(WarehouseUserControl);
             this.Controls.Add(statisticsUserContol);
             this.Controls.Add(logisticsUserControl);
+            this.Controls.Add(greetingScreenUserControl);
 
             CashRegisterUserControl.Visible = false;
             WarehouseUserControl.Visible = false;
             statisticsUserContol.Visible = false;
             logisticsUserControl.Visible = false;
+            greetingScreenUserControl.Visible = true;
         }
 
         /// <summary>
@@ -192,6 +200,11 @@ namespace EazyCart
         private void UserControlChanged
             (List<UserControl> userControlsToInvisible, UserControl userControlToVisible, Point mainMenuPanelLocationPoint)
         {
+            if (greetingScreenUserControl != null)
+            {
+                greetingScreenUserControl.Dispose();
+            }
+
             var receiptDataGridView = (DataGridView)CashRegisterUserControl.Controls["receiptDataGridView"];
 
             // If the receipt is not empty, prompt the user to cancel it 

@@ -1,11 +1,13 @@
 ﻿using Business;
+using Business.Controllers;
 using Data.Models;
+using EazyCart.InteractionForms;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace EazyCart
+namespace EazyCart.UserControls
 {
     /// <summary>
     /// This is the user control responsible for managing cities, countries,

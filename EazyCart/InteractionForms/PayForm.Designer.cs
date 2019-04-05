@@ -1,4 +1,4 @@
-﻿namespace EazyCart
+﻿namespace EazyCart.InteractionForms
 {
     partial class PayForm
     {
@@ -26,19 +26,21 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
+        //payform
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PayForm));
             this.menuPanel = new System.Windows.Forms.Panel();
+            this.closeButton = new System.Windows.Forms.Button();
             this.makePaymentLabel = new System.Windows.Forms.Label();
             this.logoLabel = new System.Windows.Forms.Label();
+            this.eazyCartLogoPictureBox = new System.Windows.Forms.PictureBox();
             this.grandTotalCashLabel = new System.Windows.Forms.Label();
             this.grandTotalLabel = new System.Windows.Forms.Label();
             this.ornamentalPanel = new System.Windows.Forms.Panel();
             this.payingAmountTextBox = new System.Windows.Forms.TextBox();
             this.warningLabel = new System.Windows.Forms.Label();
             this.makePaymentButton = new System.Windows.Forms.Button();
-            this.closeButton = new System.Windows.Forms.Button();
-            this.eazyCartLogoPictureBox = new System.Windows.Forms.PictureBox();
             this.menuPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eazyCartLogoPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -58,6 +60,21 @@
             this.menuPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MenuPanel_MouseMove);
             this.menuPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MenuPanel_MouseUp);
             // 
+            // closeButton
+            // 
+            this.closeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.closeButton.BackgroundImage = global::EazyCart.Properties.Resources.closeCancelIcon;
+            this.closeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.closeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.closeButton.Location = new System.Drawing.Point(445, 0);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(50, 50);
+            this.closeButton.TabIndex = 7;
+            this.closeButton.TabStop = false;
+            this.closeButton.UseVisualStyleBackColor = false;
+            this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
+            // 
             // makePaymentLabel
             // 
             this.makePaymentLabel.AutoSize = true;
@@ -65,7 +82,7 @@
             this.makePaymentLabel.ForeColor = System.Drawing.SystemColors.Control;
             this.makePaymentLabel.Location = new System.Drawing.Point(227, 9);
             this.makePaymentLabel.Name = "makePaymentLabel";
-            this.makePaymentLabel.Size = new System.Drawing.Size(151, 30);
+            this.makePaymentLabel.Size = new System.Drawing.Size(150, 30);
             this.makePaymentLabel.TabIndex = 6;
             this.makePaymentLabel.Text = "Make Payment";
             // 
@@ -76,9 +93,19 @@
             this.logoLabel.ForeColor = System.Drawing.SystemColors.Control;
             this.logoLabel.Location = new System.Drawing.Point(53, 9);
             this.logoLabel.Name = "logoLabel";
-            this.logoLabel.Size = new System.Drawing.Size(96, 30);
+            this.logoLabel.Size = new System.Drawing.Size(97, 30);
             this.logoLabel.TabIndex = 5;
             this.logoLabel.Text = "EazyCart";
+            // 
+            // eazyCartLogoPictureBox
+            // 
+            this.eazyCartLogoPictureBox.Image = global::EazyCart.Properties.Resources.eazyCartIcon;
+            this.eazyCartLogoPictureBox.Location = new System.Drawing.Point(0, 0);
+            this.eazyCartLogoPictureBox.Name = "eazyCartLogoPictureBox";
+            this.eazyCartLogoPictureBox.Size = new System.Drawing.Size(50, 50);
+            this.eazyCartLogoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.eazyCartLogoPictureBox.TabIndex = 4;
+            this.eazyCartLogoPictureBox.TabStop = false;
             // 
             // grandTotalCashLabel
             // 
@@ -101,7 +128,7 @@
             this.grandTotalLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.grandTotalLabel.Location = new System.Drawing.Point(12, 62);
             this.grandTotalLabel.Name = "grandTotalLabel";
-            this.grandTotalLabel.Size = new System.Drawing.Size(173, 40);
+            this.grandTotalLabel.Size = new System.Drawing.Size(170, 40);
             this.grandTotalLabel.TabIndex = 13;
             this.grandTotalLabel.Text = "Grand Total:";
             // 
@@ -154,35 +181,11 @@
             this.makePaymentButton.UseVisualStyleBackColor = false;
             this.makePaymentButton.Click += new System.EventHandler(this.MakePaymentButton_Click);
             // 
-            // closeButton
-            // 
-            this.closeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.closeButton.BackgroundImage = global::EazyCart.Properties.Resources.closeCancelIcon;
-            this.closeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.closeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.closeButton.Location = new System.Drawing.Point(445, 0);
-            this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(50, 50);
-            this.closeButton.TabIndex = 7;
-            this.closeButton.TabStop = false;
-            this.closeButton.UseVisualStyleBackColor = false;
-            this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
-            // 
-            // eazyCartLogoPictureBox
-            // 
-            this.eazyCartLogoPictureBox.Image = global::EazyCart.Properties.Resources.eazyCartIcon;
-            this.eazyCartLogoPictureBox.Location = new System.Drawing.Point(0, 0);
-            this.eazyCartLogoPictureBox.Name = "eazyCartLogoPictureBox";
-            this.eazyCartLogoPictureBox.Size = new System.Drawing.Size(50, 50);
-            this.eazyCartLogoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.eazyCartLogoPictureBox.TabIndex = 4;
-            this.eazyCartLogoPictureBox.TabStop = false;
-            // 
             // PayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(495, 281);
             this.Controls.Add(this.warningLabel);
             this.Controls.Add(this.makePaymentButton);
@@ -192,6 +195,7 @@
             this.Controls.Add(this.grandTotalLabel);
             this.Controls.Add(this.menuPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PayForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PayForm";

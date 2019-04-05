@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business
+namespace Business.Controllers
 {
     public class ReceiptBusiness
     {
@@ -59,6 +59,9 @@ namespace Business
                                 .Where(x => x.TimeOfPurchase.Year == currentDateTime.Year)
                                 .ToList();
 
+            //Exclude the last order, because it is always empty
+            allOrders.RemoveAt(allOrders.Count - 1);
+
             foreach (var order in allOrders)
             {
                 int monthOfPurchase = order.TimeOfPurchase.Month;
@@ -80,9 +83,12 @@ namespace Business
             int[] numberOfOrders = new int[numberOfMonthDays];
             var allOrders = eazyCartContext
                                 .Receipts
-                                .Where(x => x.TimeOfPurchase.Month == currentDateTime.Month && 
+                                .Where(x => x.TimeOfPurchase.Month == currentDateTime.Month &&
                                     x.TimeOfPurchase.Year == currentDateTime.Year)
                                 .ToList();
+
+            //Exclude the last order, because it is always empty
+            allOrders.RemoveAt(allOrders.Count - 1);
 
             foreach (var order in allOrders)
             {
@@ -105,6 +111,9 @@ namespace Business
                                         .Receipts
                                         .Where(x => x.TimeOfPurchase.Date == currentDateTime.Date)
                                         .ToList();
+
+            //Exclude the last order, because it is always empty
+            allOrders.RemoveAt(allOrders.Count - 1);
 
             int[] numberOfOrders = new int[8];
             foreach (var order in allOrders)
@@ -190,7 +199,7 @@ namespace Business
             int[] numberOfOrdersWithDiscount = new int[numberOfMonthDays];
             var allOrders = eazyCartContext
                                 .Receipts
-                                .Where(x => x.TimeOfPurchase.Year == currentDateTime.Year && 
+                                .Where(x => x.TimeOfPurchase.Year == currentDateTime.Year &&
                                     x.TimeOfPurchase.Month == currentDateTime.Month)
                                 .ToList();
 
@@ -287,14 +296,17 @@ namespace Business
                                                     .Where(x => x.TimeOfPurchase.Date == currentDateTime.Date)
                                                     .ToList();
 
+            //Exclude the last order, because it is always empty
+            allOrdersForTheDay.RemoveAt(allOrdersForTheDay.Count - 1);
+
             List<Receipt>[] receiptsByHour = new List<Receipt>[8];
-            for(int i = 0; i < 8; i++)
+            for (int i = 0; i < 8; i++)
             {
                 receiptsByHour[i] = new List<Receipt>();
-                foreach(var order in allOrdersForTheDay)
+                foreach (var order in allOrdersForTheDay)
                 {
                     int hourOfPurchase = order.TimeOfPurchase.Hour;
-                    if(hourOfPurchase == i*3 || hourOfPurchase == i*3 + 1 || hourOfPurchase == i*3+2)
+                    if (hourOfPurchase == i * 3 || hourOfPurchase == i * 3 + 1 || hourOfPurchase == i * 3 + 2)
                     {
                         receiptsByHour[i].Add(order);
                     }
@@ -306,7 +318,7 @@ namespace Business
                 if (receiptsByHour[i].Count() > 0)
                 {
                     decimal totalProductsByHour = 0;
-                    foreach(var receipt in receiptsByHour[i])
+                    foreach (var receipt in receiptsByHour[i])
                     {
                         int numberOfProductReceipts = eazyCartContext
                                                             .ProductsReceipts
@@ -338,12 +350,14 @@ namespace Business
             decimal[] averageNumberOfDifferentProductsInOrder = new decimal[numberOfDays];
             var allOrders = eazyCartContext.Receipts.ToList();
 
+            //Exclude the last order, because it is always empty
+            allOrders.RemoveAt(allOrders.Count - 1);
+
             for (int i = 0; i < averageNumberOfDifferentProductsInOrder.Count(); i++)
             {
-                List<Receipt> allOrdersForTheDay = eazyCartContext
-                                                        .Receipts
-                                                        .Where(x => x.TimeOfPurchase.Year == currentDateTime.Year && 
-                                                            x.TimeOfPurchase.Month == currentDateTime.Month && 
+                var allOrdersForTheDay = allOrders
+                                                        .Where(x => x.TimeOfPurchase.Year == currentDateTime.Year &&
+                                                            x.TimeOfPurchase.Month == currentDateTime.Month &&
                                                             x.TimeOfPurchase.Day == i + 1)
                                                         .ToList();
                 if (allOrdersForTheDay.Count() > 0)
@@ -375,13 +389,15 @@ namespace Business
             decimal[] averageNumberOfDifferentProductsInOrder = new decimal[12];
             var allOrders = eazyCartContext.Receipts.ToList();
 
+            //Exclude the last order, because it is always empty
+            allOrders.RemoveAt(allOrders.Count - 1);
+
             for (int i = 0; i < 12; i++)
             {
-                List<Receipt> allOrdersForTheMonth = eazyCartContext
-                                                        .Receipts
-                                                        .Where(x => x.TimeOfPurchase.Year == currentDateTime.Year 
-                                                            && x.TimeOfPurchase.Month == i + 1)
-                                                        .ToList();
+                var allOrdersForTheMonth = allOrders
+                                              .Where(x => x.TimeOfPurchase.Year == currentDateTime.Year
+                                                  && x.TimeOfPurchase.Month == i + 1)
+                                              .ToList();
 
                 if (allOrdersForTheMonth.Count() > 0)
                 {
@@ -406,7 +422,11 @@ namespace Business
         /// <returns>Return an array containing the revenue for each hour.</returns>
         public decimal[] GetDailyRevenue(DateTime currentDateTime)
         {
-            List<Receipt> receipts = eazyCartContext.Receipts.Where(x => x.TimeOfPurchase.Date == currentDateTime.Date).ToList();
+            var receipts = eazyCartContext
+                                .Receipts
+                                .Where(x => x.TimeOfPurchase.Date == currentDateTime.Date)
+                                .ToList();
+
             decimal[] revenueByHour = new decimal[8];
             foreach (var receipt in receipts)
             {

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business
+namespace Business.Controllers
 {
     /// <summary>
     /// This business logic class is responsible for managing the

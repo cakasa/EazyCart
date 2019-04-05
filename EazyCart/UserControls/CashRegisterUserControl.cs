@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Business;
+using Business.Controllers;
 using Data.Models;
+using EazyCart.InteractionForms;
 
-namespace EazyCart
+namespace EazyCart.UserControls
 {
     /// <summary>
     /// This is the user control responsible for managing orders 
@@ -110,10 +112,10 @@ namespace EazyCart
                 row.Cells[0].Value = productReceipt.Id;
                 row.Cells[1].Value = product.Code;
                 row.Cells[2].Value = product.Name;
-                row.Cells[3].Value = product.SellingPrice;
+                row.Cells[3].Value = string.Format($"$ {product.SellingPrice:f2}");
                 row.Cells[4].Value = productReceipt.Quantity;
                 row.Cells[5].Value = productReceipt.DiscountPercentage;
-                row.Cells[6].Value = totalForProduct;
+                row.Cells[6].Value = string.Format($"$ {totalForProduct:f2}");
                 grandTotal += totalForProduct;
             }
             this.grandTotalCashLabel.Text = string.Format("$ {0:f2}", grandTotal);
@@ -208,7 +210,7 @@ namespace EazyCart
                 newRow.Cells[0].Value = product.Code;
                 newRow.Cells[1].Value = product.Name;
                 newRow.Cells[2].Value = category.Name;
-                newRow.Cells[3].Value = product.SellingPrice;
+                newRow.Cells[3].Value = string.Format($"$ {product.SellingPrice}");
             }
         }
 
@@ -250,7 +252,17 @@ namespace EazyCart
         /// <param name="e"></param>
         private void AddProductButton_Click(object sender, EventArgs e)
         {
-            var productCode = (string)availableProductsDataGridView.SelectedRows[0].Cells[0].Value;
+            string productCode = string.Empty;
+            try
+            {
+                productCode = (string)availableProductsDataGridView.SelectedRows[0].Cells[0].Value;
+            }
+            catch
+            {
+                MessageForm messageForm = new MessageForm("You haven't selected a row!", MessageFormType.Error);
+                messageForm.ShowDialog();
+                return;
+            }
             var quantity = quantityTextBox.Text;
 
             // Try to add product into the receipt. If validation fails, a messageForm is shown.
@@ -330,7 +342,17 @@ namespace EazyCart
         /// <param name="e"></param>
         private void SaveProductButton_Click(object sender, EventArgs e)
         {
-            var productCode = (string)this.availableProductsDataGridView.SelectedRows[0].Cells[0].Value;
+            string productCode = string.Empty;
+            try
+            {
+                productCode = (string)availableProductsDataGridView.SelectedRows[0].Cells[0].Value;
+            }
+            catch
+            {
+                MessageForm messageForm = new MessageForm("You haven't selected a row!", MessageFormType.Error);
+                messageForm.ShowDialog();
+                return;
+            }
             var quantity = quantityTextBox.Text;
 
             // Check if needed values have been entered.

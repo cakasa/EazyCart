@@ -1,4 +1,4 @@
-﻿namespace EazyCart
+﻿namespace EazyCart.UserControls
 {
     partial class LogisticsUserControl
     {

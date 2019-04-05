@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EazyCart
+namespace EazyCart.UserControls
 {
     partial class WarehouseUserControl
     {
@@ -30,11 +30,12 @@ namespace EazyCart
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.generalPropertiesGroupBox = new System.Windows.Forms.GroupBox();
             this.inventoryQuantityTextBox = new System.Windows.Forms.TextBox();
             this.categoryComboBox = new System.Windows.Forms.ComboBox();
@@ -56,8 +57,13 @@ namespace EazyCart
             this.deliveryPriceTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.totalLinePanel = new System.Windows.Forms.Panel();
+            this.deleteProductButton = new System.Windows.Forms.Button();
+            this.saveProductButton = new System.Windows.Forms.Button();
+            this.editProductButton = new System.Windows.Forms.Button();
+            this.addProductButton = new System.Windows.Forms.Button();
             this.makeDeliveryGroupBox = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.makeDeliveryButton = new System.Windows.Forms.Button();
             this.deliveryQuantityTextBox = new System.Windows.Forms.TextBox();
             this.productComboBox = new System.Windows.Forms.ComboBox();
             this.allProductsDataGridView = new System.Windows.Forms.DataGridView();
@@ -69,11 +75,6 @@ namespace EazyCart
             this.supplierNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deliveryPriceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.makeDeliveryButton = new System.Windows.Forms.Button();
-            this.deleteProductButton = new System.Windows.Forms.Button();
-            this.saveProductButton = new System.Windows.Forms.Button();
-            this.editProductButton = new System.Windows.Forms.Button();
-            this.addProductButton = new System.Windows.Forms.Button();
             this.generalPropertiesGroupBox.SuspendLayout();
             this.supplierInformationGroupBox.SuspendLayout();
             this.pricingGroupBox.SuspendLayout();
@@ -340,195 +341,6 @@ namespace EazyCart
             this.totalLinePanel.Size = new System.Drawing.Size(460, 5);
             this.totalLinePanel.TabIndex = 34;
             // 
-            // makeDeliveryGroupBox
-            // 
-            this.makeDeliveryGroupBox.Controls.Add(this.panel2);
-            this.makeDeliveryGroupBox.Controls.Add(this.makeDeliveryButton);
-            this.makeDeliveryGroupBox.Controls.Add(this.deliveryQuantityTextBox);
-            this.makeDeliveryGroupBox.Controls.Add(this.productComboBox);
-            this.makeDeliveryGroupBox.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.makeDeliveryGroupBox.Location = new System.Drawing.Point(6, 652);
-            this.makeDeliveryGroupBox.Name = "makeDeliveryGroupBox";
-            this.makeDeliveryGroupBox.Size = new System.Drawing.Size(489, 185);
-            this.makeDeliveryGroupBox.TabIndex = 26;
-            this.makeDeliveryGroupBox.TabStop = false;
-            this.makeDeliveryGroupBox.Text = "Make Delivery";
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.panel2.Location = new System.Drawing.Point(8, 28);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(460, 5);
-            this.panel2.TabIndex = 35;
-            // 
-            // deliveryQuantityTextBox
-            // 
-            this.deliveryQuantityTextBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.deliveryQuantityTextBox.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.deliveryQuantityTextBox.Location = new System.Drawing.Point(25, 85);
-            this.deliveryQuantityTextBox.Name = "deliveryQuantityTextBox";
-            this.deliveryQuantityTextBox.Size = new System.Drawing.Size(437, 33);
-            this.deliveryQuantityTextBox.TabIndex = 28;
-            this.deliveryQuantityTextBox.Text = "Quantity";
-            this.deliveryQuantityTextBox.Enter += new System.EventHandler(this.DeliveryQuantityTextBox_Enter);
-            this.deliveryQuantityTextBox.Leave += new System.EventHandler(this.DeliveryQuantityTextBox_Leave);
-            // 
-            // productComboBox
-            // 
-            this.productComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.productComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.productComboBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productComboBox.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.productComboBox.FormattingEnabled = true;
-            this.productComboBox.Items.AddRange(new object[] {
-            "Product",
-            "Coca Cola",
-            "Perfume"});
-            this.productComboBox.Location = new System.Drawing.Point(25, 46);
-            this.productComboBox.Name = "productComboBox";
-            this.productComboBox.Size = new System.Drawing.Size(437, 33);
-            this.productComboBox.TabIndex = 27;
-            // 
-            // allProductsDataGridView
-            // 
-            this.allProductsDataGridView.AllowUserToAddRows = false;
-            this.allProductsDataGridView.AllowUserToDeleteRows = false;
-            this.allProductsDataGridView.AllowUserToOrderColumns = true;
-            this.allProductsDataGridView.AllowUserToResizeRows = false;
-            this.allProductsDataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.allProductsDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
-            this.allProductsDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.allProductsDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.allProductsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.allProductsDataGridView.ColumnHeadersHeight = 30;
-            this.allProductsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.allProductsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.categoryColumn,
-            this.quantityColumn,
-            this.unitsColumn,
-            this.supplierNameColumn,
-            this.deliveryPriceColumn,
-            this.dataGridViewTextBoxColumn4});
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.allProductsDataGridView.DefaultCellStyle = dataGridViewCellStyle9;
-            this.allProductsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.allProductsDataGridView.EnableHeadersVisualStyles = false;
-            this.allProductsDataGridView.Location = new System.Drawing.Point(501, 20);
-            this.allProductsDataGridView.MultiSelect = false;
-            this.allProductsDataGridView.Name = "allProductsDataGridView";
-            this.allProductsDataGridView.ReadOnly = true;
-            this.allProductsDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.allProductsDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
-            this.allProductsDataGridView.RowHeadersWidth = 4;
-            this.allProductsDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.allProductsDataGridView.RowTemplate.Height = 30;
-            this.allProductsDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.allProductsDataGridView.Size = new System.Drawing.Size(1091, 795);
-            this.allProductsDataGridView.TabIndex = 33;
-            this.allProductsDataGridView.TabStop = false;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "CODE";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "NAME";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 300;
-            // 
-            // categoryColumn
-            // 
-            this.categoryColumn.HeaderText = "CATEGORY";
-            this.categoryColumn.Name = "categoryColumn";
-            this.categoryColumn.ReadOnly = true;
-            this.categoryColumn.Width = 165;
-            // 
-            // quantityColumn
-            // 
-            this.quantityColumn.HeaderText = "QUANTITY";
-            this.quantityColumn.Name = "quantityColumn";
-            this.quantityColumn.ReadOnly = true;
-            // 
-            // unitsColumn
-            // 
-            this.unitsColumn.HeaderText = "UN";
-            this.unitsColumn.Name = "unitsColumn";
-            this.unitsColumn.ReadOnly = true;
-            this.unitsColumn.Width = 50;
-            // 
-            // supplierNameColumn
-            // 
-            this.supplierNameColumn.HeaderText = "SUPPLIER NAME";
-            this.supplierNameColumn.Name = "supplierNameColumn";
-            this.supplierNameColumn.ReadOnly = true;
-            this.supplierNameColumn.Width = 230;
-            // 
-            // deliveryPriceColumn
-            // 
-            dataGridViewCellStyle7.Format = "N2";
-            dataGridViewCellStyle7.NullValue = null;
-            this.deliveryPriceColumn.DefaultCellStyle = dataGridViewCellStyle7;
-            this.deliveryPriceColumn.HeaderText = "DEL. PR.";
-            this.deliveryPriceColumn.Name = "deliveryPriceColumn";
-            this.deliveryPriceColumn.ReadOnly = true;
-            this.deliveryPriceColumn.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            dataGridViewCellStyle8.Format = "N2";
-            dataGridViewCellStyle8.NullValue = null;
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle8;
-            this.dataGridViewTextBoxColumn4.HeaderText = "SEL. PR.";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn4.Width = 80;
-            // 
-            // makeDeliveryButton
-            // 
-            this.makeDeliveryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.makeDeliveryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.makeDeliveryButton.FlatAppearance.BorderSize = 0;
-            this.makeDeliveryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.makeDeliveryButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.makeDeliveryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.makeDeliveryButton.Image = global::EazyCart.Properties.Resources.makeDeliveryButtonPicture;
-            this.makeDeliveryButton.Location = new System.Drawing.Point(25, 133);
-            this.makeDeliveryButton.Name = "makeDeliveryButton";
-            this.makeDeliveryButton.Size = new System.Drawing.Size(437, 41);
-            this.makeDeliveryButton.TabIndex = 29;
-            this.makeDeliveryButton.UseVisualStyleBackColor = false;
-            this.makeDeliveryButton.Click += new System.EventHandler(this.MakeDeliveryButton_Click);
-            // 
             // deleteProductButton
             // 
             this.deleteProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
@@ -592,6 +404,196 @@ namespace EazyCart
             this.addProductButton.TabIndex = 25;
             this.addProductButton.UseVisualStyleBackColor = false;
             this.addProductButton.Click += new System.EventHandler(this.AddProductButton_Click);
+            // 
+            // makeDeliveryGroupBox
+            // 
+            this.makeDeliveryGroupBox.Controls.Add(this.panel2);
+            this.makeDeliveryGroupBox.Controls.Add(this.makeDeliveryButton);
+            this.makeDeliveryGroupBox.Controls.Add(this.deliveryQuantityTextBox);
+            this.makeDeliveryGroupBox.Controls.Add(this.productComboBox);
+            this.makeDeliveryGroupBox.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.makeDeliveryGroupBox.Location = new System.Drawing.Point(6, 652);
+            this.makeDeliveryGroupBox.Name = "makeDeliveryGroupBox";
+            this.makeDeliveryGroupBox.Size = new System.Drawing.Size(489, 185);
+            this.makeDeliveryGroupBox.TabIndex = 26;
+            this.makeDeliveryGroupBox.TabStop = false;
+            this.makeDeliveryGroupBox.Text = "Make Delivery";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.panel2.Location = new System.Drawing.Point(8, 28);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(460, 5);
+            this.panel2.TabIndex = 35;
+            // 
+            // makeDeliveryButton
+            // 
+            this.makeDeliveryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.makeDeliveryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.makeDeliveryButton.FlatAppearance.BorderSize = 0;
+            this.makeDeliveryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.makeDeliveryButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.makeDeliveryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.makeDeliveryButton.Image = global::EazyCart.Properties.Resources.makeDeliveryButtonPicture;
+            this.makeDeliveryButton.Location = new System.Drawing.Point(25, 133);
+            this.makeDeliveryButton.Name = "makeDeliveryButton";
+            this.makeDeliveryButton.Size = new System.Drawing.Size(437, 41);
+            this.makeDeliveryButton.TabIndex = 29;
+            this.makeDeliveryButton.UseVisualStyleBackColor = false;
+            this.makeDeliveryButton.Click += new System.EventHandler(this.MakeDeliveryButton_Click);
+            // 
+            // deliveryQuantityTextBox
+            // 
+            this.deliveryQuantityTextBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.deliveryQuantityTextBox.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.deliveryQuantityTextBox.Location = new System.Drawing.Point(25, 85);
+            this.deliveryQuantityTextBox.Name = "deliveryQuantityTextBox";
+            this.deliveryQuantityTextBox.Size = new System.Drawing.Size(437, 33);
+            this.deliveryQuantityTextBox.TabIndex = 28;
+            this.deliveryQuantityTextBox.Text = "Quantity";
+            this.deliveryQuantityTextBox.Enter += new System.EventHandler(this.DeliveryQuantityTextBox_Enter);
+            this.deliveryQuantityTextBox.Leave += new System.EventHandler(this.DeliveryQuantityTextBox_Leave);
+            // 
+            // productComboBox
+            // 
+            this.productComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.productComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.productComboBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productComboBox.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.productComboBox.FormattingEnabled = true;
+            this.productComboBox.Items.AddRange(new object[] {
+            "Product",
+            "Coca Cola",
+            "Perfume"});
+            this.productComboBox.Location = new System.Drawing.Point(25, 46);
+            this.productComboBox.Name = "productComboBox";
+            this.productComboBox.Size = new System.Drawing.Size(437, 33);
+            this.productComboBox.TabIndex = 27;
+            // 
+            // allProductsDataGridView
+            // 
+            this.allProductsDataGridView.AllowUserToAddRows = false;
+            this.allProductsDataGridView.AllowUserToDeleteRows = false;
+            this.allProductsDataGridView.AllowUserToOrderColumns = true;
+            this.allProductsDataGridView.AllowUserToResizeRows = false;
+            this.allProductsDataGridView.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.allProductsDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
+            this.allProductsDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.allProductsDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.allProductsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.allProductsDataGridView.ColumnHeadersHeight = 30;
+            this.allProductsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.allProductsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.categoryColumn,
+            this.quantityColumn,
+            this.unitsColumn,
+            this.supplierNameColumn,
+            this.deliveryPriceColumn,
+            this.dataGridViewTextBoxColumn4});
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.allProductsDataGridView.DefaultCellStyle = dataGridViewCellStyle5;
+            this.allProductsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.allProductsDataGridView.EnableHeadersVisualStyles = false;
+            this.allProductsDataGridView.Location = new System.Drawing.Point(501, 20);
+            this.allProductsDataGridView.MultiSelect = false;
+            this.allProductsDataGridView.Name = "allProductsDataGridView";
+            this.allProductsDataGridView.ReadOnly = true;
+            this.allProductsDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.allProductsDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.allProductsDataGridView.RowHeadersWidth = 4;
+            this.allProductsDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.allProductsDataGridView.RowTemplate.Height = 30;
+            this.allProductsDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.allProductsDataGridView.Size = new System.Drawing.Size(1091, 795);
+            this.allProductsDataGridView.TabIndex = 33;
+            this.allProductsDataGridView.TabStop = false;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "CODE";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "NAME";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 300;
+            // 
+            // categoryColumn
+            // 
+            this.categoryColumn.HeaderText = "CATEGORY";
+            this.categoryColumn.Name = "categoryColumn";
+            this.categoryColumn.ReadOnly = true;
+            this.categoryColumn.Width = 165;
+            // 
+            // quantityColumn
+            // 
+            dataGridViewCellStyle2.Format = "N3";
+            dataGridViewCellStyle2.NullValue = null;
+            this.quantityColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.quantityColumn.HeaderText = "QUANTITY";
+            this.quantityColumn.Name = "quantityColumn";
+            this.quantityColumn.ReadOnly = true;
+            // 
+            // unitsColumn
+            // 
+            this.unitsColumn.HeaderText = "UN";
+            this.unitsColumn.Name = "unitsColumn";
+            this.unitsColumn.ReadOnly = true;
+            this.unitsColumn.Width = 50;
+            // 
+            // supplierNameColumn
+            // 
+            this.supplierNameColumn.HeaderText = "SUPPLIER NAME";
+            this.supplierNameColumn.Name = "supplierNameColumn";
+            this.supplierNameColumn.ReadOnly = true;
+            this.supplierNameColumn.Width = 230;
+            // 
+            // deliveryPriceColumn
+            // 
+            dataGridViewCellStyle3.NullValue = null;
+            this.deliveryPriceColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            this.deliveryPriceColumn.HeaderText = "DEL. PR.";
+            this.deliveryPriceColumn.Name = "deliveryPriceColumn";
+            this.deliveryPriceColumn.ReadOnly = true;
+            this.deliveryPriceColumn.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            dataGridViewCellStyle4.NullValue = null;
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewTextBoxColumn4.HeaderText = "SEL. PR.";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn4.Width = 80;
             // 
             // WarehouseUserControl
             // 

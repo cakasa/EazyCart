@@ -1,4 +1,4 @@
-﻿namespace EazyCart
+﻿namespace EazyCart.InteractionForms
 {
     partial class MessageForm
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MessageForm));
             this.logoLabel = new System.Windows.Forms.Label();
             this.menuPanel = new System.Windows.Forms.Panel();
             this.titleLabel = new System.Windows.Forms.Label();
@@ -48,7 +49,7 @@
             this.logoLabel.ForeColor = System.Drawing.SystemColors.Control;
             this.logoLabel.Location = new System.Drawing.Point(53, 9);
             this.logoLabel.Name = "logoLabel";
-            this.logoLabel.Size = new System.Drawing.Size(96, 30);
+            this.logoLabel.Size = new System.Drawing.Size(97, 30);
             this.logoLabel.TabIndex = 5;
             this.logoLabel.Text = "EazyCart";
             // 
@@ -138,6 +139,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(430, 240);
             this.Controls.Add(this.ornamentalPanel);
             this.Controls.Add(this.makePaymentButton);
@@ -145,6 +147,7 @@
             this.Controls.Add(this.signPictureBox);
             this.Controls.Add(this.menuPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MessageForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MessageForm";

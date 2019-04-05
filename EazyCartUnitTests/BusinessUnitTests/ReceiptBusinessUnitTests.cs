@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Moq;
 using Microsoft.EntityFrameworkCore;
+using Business.Controllers;
 
 namespace EazyCartUnitTests.BusinessUnitTests
 {
@@ -328,7 +329,11 @@ namespace EazyCartUnitTests.BusinessUnitTests
                 new Receipt() { Id = 9, GrandTotal = 1,
                     TimeOfPurchase = DateTime.Parse("2019/05/22 01:01:01") },
                 new Receipt() {Id = 10, GrandTotal = 1,
-                    TimeOfPurchase = DateTime.Parse("2019/02/03 01:22:34") }
+                    TimeOfPurchase = DateTime.Parse("2019/02/03 01:22:34") },
+
+                // Last Empty Receipt
+                new Receipt() {Id = 11, GrandTotal = 1,
+                    TimeOfPurchase = DateTime.Parse("2019/12/03 00:00:01") }, 
             }.AsQueryable();
 
             var receiptMockDbSet = new Mock<DbSet<Receipt>>();
@@ -389,9 +394,13 @@ namespace EazyCartUnitTests.BusinessUnitTests
                 new Receipt() {Id = 11, GrandTotal = 1,
                     TimeOfPurchase = DateTime.Parse("2019/04/04 06:19:12") },
                 new Receipt() {Id = 12, GrandTotal = 1,
-                    TimeOfPurchase = DateTime.Parse("2019/05/01 13:16:44" )},
+                    TimeOfPurchase = DateTime.Parse("2019/05/01 13:16:44") },
                 new Receipt() {Id = 13, GrandTotal = 1,
-                    TimeOfPurchase = DateTime.Parse("2018/04/01 16:18:11")}
+                    TimeOfPurchase = DateTime.Parse("2018/04/01 16:18:11") },
+
+                // Last Empty Receipt
+                new Receipt() {Id = 14, GrandTotal = 1,
+                    TimeOfPurchase = DateTime.Parse("2019/04/03 00:00:01") },
             }.AsQueryable();
 
             var receiptMockDbSet = new Mock<DbSet<Receipt>>();
@@ -469,6 +478,10 @@ namespace EazyCartUnitTests.BusinessUnitTests
                     TimeOfPurchase = DateTime.Parse("2019/04/02 00:00:00") },
                 new Receipt() {Id = 20, GrandTotal = 1,
                     TimeOfPurchase = DateTime.Parse("2018/04/01 00:20:00") },
+
+                // Last Empty Receipt
+                new Receipt() {Id = 21, GrandTotal = 1,
+                    TimeOfPurchase = DateTime.Parse("2019/04/01 00:00:01") },
             }.AsQueryable();
 
             var receiptMockDbSet = new Mock<DbSet<Receipt>>();
@@ -1043,6 +1056,10 @@ namespace EazyCartUnitTests.BusinessUnitTests
                     TimeOfPurchase = DateTime.Parse("2020/02/02 00:00:01") },
                 new Receipt() {Id = 15, GrandTotal = 1,
                     TimeOfPurchase = DateTime.Parse("2017/06/01 00:00:01") },
+
+                // Last Empty Receipt
+                new Receipt() {Id = 16, GrandTotal = 1,
+                    TimeOfPurchase = DateTime.Parse("2019/12/16 00:00:01") },
             }.AsQueryable();
 
             var productReceipts = new List<ProductReceipt>
@@ -1221,6 +1238,10 @@ namespace EazyCartUnitTests.BusinessUnitTests
                     TimeOfPurchase = DateTime.Parse("2019/05/01 00:00:01") },
                 new Receipt() {Id = 33, GrandTotal = 1,
                     TimeOfPurchase = DateTime.Parse("2019/03/31 00:00:01") },
+
+                // Last Empty Receipt
+                new Receipt() { Id= 34, GrandTotal = 1,
+                    TimeOfPurchase = DateTime.Parse("2019/04/30 00:00:01") },
             }.AsQueryable();
 
             var productReceipts = new List<ProductReceipt>
@@ -1446,13 +1467,15 @@ namespace EazyCartUnitTests.BusinessUnitTests
                     TimeOfPurchase = DateTime.Parse("2019/04/01 19:30:01") },
                 new Receipt() { Id = 23, GrandTotal = 1,
                     TimeOfPurchase = DateTime.Parse("2019/04/01 20:30:01") },
+                new Receipt() { Id = 24, GrandTotal = 1,
+                    TimeOfPurchase = DateTime.Parse("2019/04/01 21:30:01") },
 
                 // Receipts out of day
-                new Receipt() {Id = 24, GrandTotal = 1,
-                    TimeOfPurchase = DateTime.Parse("2018/04/01 00:00:01") },
                 new Receipt() {Id = 25, GrandTotal = 1,
-                    TimeOfPurchase = DateTime.Parse("2019/04/02 00:00:01") },
+                    TimeOfPurchase = DateTime.Parse("2018/04/01 00:00:01") },
                 new Receipt() {Id = 26, GrandTotal = 1,
+                    TimeOfPurchase = DateTime.Parse("2019/04/02 00:00:01") },
+                new Receipt() {Id = 27, GrandTotal = 1,
                     TimeOfPurchase = DateTime.Parse("2019/03/01 00:00:01") },
             }.AsQueryable();
 

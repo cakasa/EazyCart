@@ -163,10 +163,10 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CashRegisterUserControl.cs">
+    <Compile Include="UserControls\CashRegisterUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CashRegisterUserControl.Designer.cs">
+    <Compile Include="UserControls\CashRegisterUserControl.Designer.cs">
       <DependentUpon>CashRegisterUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="EazyCartForm.cs">
@@ -175,29 +175,29 @@
     <Compile Include="EazyCartForm.Designer.cs">
       <DependentUpon>EazyCartForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GreetingScreenUserControl.cs">
+    <Compile Include="UserControls\GreetingScreenUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GreetingScreenUserControl.Designer.cs">
+    <Compile Include="UserControls\GreetingScreenUserControl.Designer.cs">
       <DependentUpon>GreetingScreenUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="LogisticsUserControl.cs">
+    <Compile Include="UserControls\LogisticsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="LogisticsUserControl.Designer.cs">
+    <Compile Include="UserControls\LogisticsUserControl.Designer.cs">
       <DependentUpon>LogisticsUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="MessageForm.cs">
+    <Compile Include="InteractionForms\MessageForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MessageForm.Designer.cs">
+    <Compile Include="InteractionForms\MessageForm.Designer.cs">
       <DependentUpon>MessageForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MessageFormType.cs" />
-    <Compile Include="PayForm.cs">
+    <Compile Include="InteractionForms\PayForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PayForm.Designer.cs">
+    <Compile Include="InteractionForms\PayForm.Designer.cs">
       <DependentUpon>PayForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -207,34 +207,34 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="StatisticsUserControl.cs">
+    <Compile Include="UserControls\StatisticsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="StatisticsUserControl.Designer.cs">
+    <Compile Include="UserControls\StatisticsUserControl.Designer.cs">
       <DependentUpon>StatisticsUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="WarehouseUserControl.cs">
+    <Compile Include="UserControls\WarehouseUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WarehouseUserControl.Designer.cs">
+    <Compile Include="UserControls\WarehouseUserControl.Designer.cs">
       <DependentUpon>WarehouseUserControl.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="CashRegisterUserControl.resx">
+    <EmbeddedResource Include="UserControls\CashRegisterUserControl.resx">
       <DependentUpon>CashRegisterUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EazyCartForm.resx">
       <DependentUpon>EazyCartForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GreetingScreenUserControl.resx">
+    <EmbeddedResource Include="UserControls\GreetingScreenUserControl.resx">
       <DependentUpon>GreetingScreenUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LogisticsUserControl.resx">
+    <EmbeddedResource Include="UserControls\LogisticsUserControl.resx">
       <DependentUpon>LogisticsUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MessageForm.resx">
+    <EmbeddedResource Include="InteractionForms\MessageForm.resx">
       <DependentUpon>MessageForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PayForm.resx">
+    <EmbeddedResource Include="InteractionForms\PayForm.resx">
       <DependentUpon>PayForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -242,10 +242,10 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="StatisticsUserControl.resx">
+    <EmbeddedResource Include="UserControls\StatisticsUserControl.resx">
       <DependentUpon>StatisticsUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WarehouseUserControl.resx">
+    <EmbeddedResource Include="UserControls\WarehouseUserControl.resx">
       <DependentUpon>WarehouseUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

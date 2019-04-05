@@ -11,8 +11,11 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using System.IO;
 using Data.Models;
+using System.Text;
+using Business.Controllers;
+using EazyCart.InteractionForms;
 
-namespace EazyCart
+namespace EazyCart.UserControls
 {
     /// <summary>
     /// This user control is responsible for displaying various reports based on user preference.
@@ -510,11 +513,7 @@ namespace EazyCart
 
             // If there are more labels, that can fit on the screen, rotate 
             // the labels so that they fit in the space, provided.
-            int labelRotation = 0;
-            if (netProfitByProduct.Count > 30)
-            {
-                labelRotation = 45;
-            }
+            int labelRotation = FormatLabels(labels);
 
             this.GenerateReport(netProfit, labels, "Product", "Net Profit", labelRotation, isMoneyReport);
         }
@@ -540,11 +539,7 @@ namespace EazyCart
 
             // If there are more labels, that can fit on the screen, rotate 
             // the labels so that they fit in the space, provided.
-            int labelRotation = 0;
-            if (productCountByCountry.Count > 30)
-            {
-                labelRotation = 45;
-            }
+            int labelRotation = FormatLabels(labels);
 
             this.GenerateReport(productCount, labels, "Country", "Number of products", labelRotation, isMoneyReport);
         }
@@ -570,12 +565,7 @@ namespace EazyCart
 
             // If there are more labels, that can fit on the screen, rotate 
             // the labels so that they fit in the space, provided.
-            int labelRotation = 0;
-            if (productCountByCategory.Count > 30)
-            {
-                labelRotation = 45;
-            }
-
+            int labelRotation = FormatLabels(labels);
             this.GenerateReport(productCount, labels, "Category", "Number of products", labelRotation, isMoneyReport);
         }
 
@@ -599,12 +589,8 @@ namespace EazyCart
             }
 
             // If there are more labels, that can fit on the screen, rotate 
-            // the labels so that they fit in the space, provided.
-            int labelRotation = 0;
-            if (productCountBySupplier.Count > 30)
-            {
-                labelRotation = 45;
-            }
+            // the labels so that they fit in the space provided.
+            int labelRotation = FormatLabels(labels);
 
             this.GenerateReport(productCount, labels, "Supplier", "Number of products", labelRotation, isMoneyReport);
         }
@@ -630,15 +616,10 @@ namespace EazyCart
 
             // If there are more labels, that can fit on the screen, rotate 
             // the labels so that they fit in the space, provided.
-            int labelRotation = 0;
-            if (allProductQuantities.Count > 30)
-            {
-                labelRotation = 45;
-            }
-
+            int labelRotation = FormatLabels(labels);
             this.GenerateReport(quantities, labels, "Product", "Quantity", labelRotation, isMoneyReport);
         }
-
+        
         /// <summary>
         /// /// <summary>
         /// Generate the 'Sales Report' reports, based on the given period.
@@ -667,6 +648,38 @@ namespace EazyCart
                 string[] labels = this.monthLabels;
                 this.GenerateReport(totalRevenueByDays, labels, "Month", "Revenue", 0, isMoneyReport);
             }
+        }
+
+        /// <summary>
+        /// Determines the rotation of the Xaxis labels in the report and formats the labels
+        /// to fit in the report.
+        /// </summary>
+        /// <param name="labels">The labels to format</param>
+        /// <returns></returns>
+        private int FormatLabels(string[] labels)
+        {
+            int labelRotation = 0;
+            int labelRotationIncrement = 2;
+            int maxItemsWithoutRotation = 10;
+            for (int i = 0; i < labels.Length - maxItemsWithoutRotation; i++)
+            {
+                labelRotation += labelRotationIncrement;
+            }
+
+            if (labelRotation >= 90) labelRotation = 85;
+
+            for(int i = 0; i<labels.Length; i++)
+            {
+                int maxLabelLength = 15;
+                if (labels[i].Length > maxLabelLength)
+                {
+                    StringBuilder stringBuilder = new StringBuilder();
+                    stringBuilder.Append(labels[i].Substring(0,15));
+                    stringBuilder.Append('.');
+                    labels[i] = stringBuilder.ToString();
+                }
+            }
+            return labelRotation;
         }
 
         /// <summary>

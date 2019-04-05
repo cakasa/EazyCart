@@ -117,4 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="informationLabel.Text" xml:space="preserve">
+    <value>This is a Point Of Sale(POS) program, which is best-suited for retail managers and clerks. It is simple to use, yet provides basic functionalities for shopkeepers. 
+
+If you do not know where to start from, please take your time to read the simple tutorial below, which explains how the tabs function.
+ </value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>                             CASH REGISTER
+This tab is responsible for managing sales of the existing products. The table on the left represents the current order and the one on the right is all of the products, which can be added to the receipt. You can sort all items by typing in the search box or selecting a category. Shortcuts have been implemented to ease the workflow.
+
+                               WAREHOUSE
+This tab is responsible for managing products, such as their names, prices and available quantities. The table on the right lists all items. If you run out of a product, you can restore its amount by configuring the "Make Delivery" section.</value>
+  </data>
+  <data name="logisticsAndStatisticsTutorialLabel.Text" xml:space="preserve">
+    <value>                               LOGISTICS 
+This is the tab, which provides compulsory information about the products such as category and supplier. Every supplier is required to have a city, which on its own needs to be located in a country. Therefore, all of the tables need to have at least one item before a product can be created.
+
+                        
+                              STATISTICS
+This tab can generate reports about the sales, orders and the warehouse. Just configure what report you would like to be generated and click on the button on the top right corner. The produced chart can be exported in a .PNG image format.
+</value>
+  </data>
 </root>

@@ -135,15 +135,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CategoryBusiness.cs" />
-    <Compile Include="CityBusiness.cs" />
-    <Compile Include="CountryBusiness.cs" />
-    <Compile Include="ProductBusiness.cs" />
-    <Compile Include="ProductReceiptBusiness.cs" />
+    <Compile Include="Controllers\CategoryBusiness.cs" />
+    <Compile Include="Controllers\CityBusiness.cs" />
+    <Compile Include="Controllers\CountryBusiness.cs" />
+    <Compile Include="Controllers\ProductBusiness.cs" />
+    <Compile Include="Controllers\ProductReceiptBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SupplierBusiness.cs" />
-    <Compile Include="ReceiptBusiness.cs" />
-    <Compile Include="UnitBusiness.cs" />
+    <Compile Include="Controllers\SupplierBusiness.cs" />
+    <Compile Include="Controllers\ReceiptBusiness.cs" />
+    <Compile Include="Controllers\UnitBusiness.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
