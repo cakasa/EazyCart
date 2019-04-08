@@ -1031,5 +1031,10 @@ namespace EazyCart.UserControls
                 textBox.ForeColor = this.promptTextColor;
             }
         }
+
+        private void CountriesGroupBox_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

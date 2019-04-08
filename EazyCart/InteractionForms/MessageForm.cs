@@ -27,14 +27,14 @@ namespace EazyCart.InteractionForms
             if (type == MessageFormType.Error)
             {
                 Image errorImage = Properties.Resources.exclamationMark;
-                this.signPictureBox.Image = errorImage;
+                this.signPictureBox.BackgroundImage = errorImage;
                 titleLabel.Text = "Error";
                 System.Media.SystemSounds.Hand.Play();
             }
             else
             {
                 Image informationImage = Properties.Resources.informationMark;
-                this.signPictureBox.Image = informationImage;
+                this.signPictureBox.BackgroundImage = informationImage;
                 titleLabel.Text = "Information";
                 System.Media.SystemSounds.Beep.Play();
             }

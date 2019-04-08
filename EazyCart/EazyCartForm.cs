@@ -130,7 +130,7 @@ namespace EazyCart
                 this.WarehouseUserControl,
             };
 
-            Point mainMenuPanelLocationPoint = new Point(342, 57);
+            Point mainMenuPanelLocationPoint = new Point(270, 48);
             this.UserControlChanged(userControlsToMakeInvisible, this.CashRegisterUserControl, mainMenuPanelLocationPoint);
         }
 
@@ -148,7 +148,7 @@ namespace EazyCart
                 this.statisticsUserContol,
             };
 
-            Point mainMenuPanelLocationPoint = new Point(598, 57);
+            Point mainMenuPanelLocationPoint = new Point(488, 48);
             UserControlChanged(userControlsToMakeInvisible, this.WarehouseUserControl, mainMenuPanelLocationPoint);
         }
 
@@ -166,7 +166,7 @@ namespace EazyCart
                 this.WarehouseUserControl,
             };
 
-            Point mainMenuPanelLocationPoint = new Point(854, 57);
+            Point mainMenuPanelLocationPoint = new Point(706, 48);
             UserControlChanged(userControlsToMakeInvisible, this.logisticsUserControl, mainMenuPanelLocationPoint);
         }
 
@@ -184,7 +184,7 @@ namespace EazyCart
                 this.WarehouseUserControl,
             };
 
-            Point mainMenuPanelLocationPoint = new Point(1110, 57);
+            Point mainMenuPanelLocationPoint = new Point(924, 48);
             UserControlChanged(userControlsToMakeInvisible, this.statisticsUserContol, mainMenuPanelLocationPoint);
         }
         
@@ -260,6 +260,11 @@ namespace EazyCart
         private void MenuPanel_MouseUp(object sender, MouseEventArgs e)
         {
             this.mouseDown = false;
-        }       
+        }
+
+        private void MinimizeButton_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
     }
 }

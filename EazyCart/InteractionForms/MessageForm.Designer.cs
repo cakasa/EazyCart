@@ -49,7 +49,7 @@
             this.logoLabel.ForeColor = System.Drawing.SystemColors.Control;
             this.logoLabel.Location = new System.Drawing.Point(53, 9);
             this.logoLabel.Name = "logoLabel";
-            this.logoLabel.Size = new System.Drawing.Size(96, 30);
+            this.logoLabel.Size = new System.Drawing.Size(97, 30);
             this.logoLabel.TabIndex = 5;
             this.logoLabel.Text = "EazyCart";
             // 
@@ -70,13 +70,13 @@
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
-            this.titleLabel.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.titleLabel.Font = new System.Drawing.Font("Segoe UI", 13.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.titleLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.titleLabel.Location = new System.Drawing.Point(296, 9);
-            this.titleLabel.MaximumSize = new System.Drawing.Size(122, 30);
-            this.titleLabel.MinimumSize = new System.Drawing.Size(122, 30);
+            this.titleLabel.Location = new System.Drawing.Point(242, 13);
+            this.titleLabel.MaximumSize = new System.Drawing.Size(106, 25);
+            this.titleLabel.MinimumSize = new System.Drawing.Size(106, 25);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(122, 30);
+            this.titleLabel.Size = new System.Drawing.Size(106, 25);
             this.titleLabel.TabIndex = 6;
             this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -93,12 +93,12 @@
             // messageLabel
             // 
             this.messageLabel.AutoSize = true;
-            this.messageLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.messageLabel.Location = new System.Drawing.Point(108, 53);
-            this.messageLabel.MaximumSize = new System.Drawing.Size(310, 110);
-            this.messageLabel.MinimumSize = new System.Drawing.Size(310, 110);
+            this.messageLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.messageLabel.Location = new System.Drawing.Point(78, 53);
+            this.messageLabel.MaximumSize = new System.Drawing.Size(264, 94);
+            this.messageLabel.MinimumSize = new System.Drawing.Size(264, 94);
             this.messageLabel.Name = "messageLabel";
-            this.messageLabel.Size = new System.Drawing.Size(310, 110);
+            this.messageLabel.Size = new System.Drawing.Size(264, 94);
             this.messageLabel.TabIndex = 6;
             this.messageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.messageLabel.UseCompatibleTextRendering = true;
@@ -106,33 +106,34 @@
             // okButton
             // 
             this.okButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.okButton.BackgroundImage = global::EazyCart.Properties.Resources.okButtonPicture;
             this.okButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.okButton.FlatAppearance.BorderSize = 0;
             this.okButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.okButton.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.okButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.okButton.Image = global::EazyCart.Properties.Resources.okButtonPicture;
-            this.okButton.Location = new System.Drawing.Point(287, 183);
+            this.okButton.Location = new System.Drawing.Point(230, 164);
             this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(131, 45);
+            this.okButton.Size = new System.Drawing.Size(111, 38);
             this.okButton.TabIndex = 19;
             this.okButton.UseVisualStyleBackColor = false;
             this.okButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
             // signPictureBox
             // 
-            this.signPictureBox.Location = new System.Drawing.Point(12, 69);
+            this.signPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.signPictureBox.Location = new System.Drawing.Point(12, 68);
             this.signPictureBox.Name = "signPictureBox";
-            this.signPictureBox.Size = new System.Drawing.Size(70, 140);
+            this.signPictureBox.Size = new System.Drawing.Size(60, 120);
             this.signPictureBox.TabIndex = 5;
             this.signPictureBox.TabStop = false;
             // 
             // ornamentalPanel
             // 
             this.ornamentalPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.ornamentalPanel.Location = new System.Drawing.Point(100, 172);
+            this.ornamentalPanel.Location = new System.Drawing.Point(78, 153);
             this.ornamentalPanel.Name = "ornamentalPanel";
-            this.ornamentalPanel.Size = new System.Drawing.Size(318, 5);
+            this.ornamentalPanel.Size = new System.Drawing.Size(264, 5);
             this.ornamentalPanel.TabIndex = 20;
             // 
             // MessageForm
@@ -140,7 +141,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
-            this.ClientSize = new System.Drawing.Size(430, 240);
+            this.ClientSize = new System.Drawing.Size(353, 208);
             this.Controls.Add(this.ornamentalPanel);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.messageLabel);
@@ -151,6 +152,7 @@
             this.Name = "MessageForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MessageForm";
+            this.TopMost = true;
             this.menuPanel.ResumeLayout(false);
             this.menuPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eazyCartLogoPictureBox)).EndInit();

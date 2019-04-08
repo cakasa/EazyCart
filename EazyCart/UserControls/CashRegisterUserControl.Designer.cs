@@ -38,7 +38,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CashRegisterUserControl));
             this.totalLinePanel = new System.Windows.Forms.Panel();
             this.grandTotalLabel = new System.Windows.Forms.Label();
             this.grandTotalCashLabel = new System.Windows.Forms.Label();
@@ -80,42 +79,42 @@
             // totalLinePanel
             // 
             this.totalLinePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.totalLinePanel.Location = new System.Drawing.Point(408, 706);
+            this.totalLinePanel.Location = new System.Drawing.Point(354, 601);
             this.totalLinePanel.Name = "totalLinePanel";
-            this.totalLinePanel.Size = new System.Drawing.Size(430, 5);
+            this.totalLinePanel.Size = new System.Drawing.Size(366, 5);
             this.totalLinePanel.TabIndex = 17;
             // 
             // grandTotalLabel
             // 
             this.grandTotalLabel.AutoSize = true;
-            this.grandTotalLabel.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.grandTotalLabel.Font = new System.Drawing.Font("Segoe UI", 18.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.grandTotalLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.grandTotalLabel.Location = new System.Drawing.Point(414, 723);
+            this.grandTotalLabel.Location = new System.Drawing.Point(348, 612);
             this.grandTotalLabel.Name = "grandTotalLabel";
-            this.grandTotalLabel.Size = new System.Drawing.Size(170, 40);
+            this.grandTotalLabel.Size = new System.Drawing.Size(148, 35);
             this.grandTotalLabel.TabIndex = 18;
             this.grandTotalLabel.Text = "Grand Total:";
             // 
             // grandTotalCashLabel
             // 
             this.grandTotalCashLabel.AutoSize = true;
-            this.grandTotalCashLabel.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.grandTotalCashLabel.Font = new System.Drawing.Font("Segoe UI", 22.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.grandTotalCashLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.grandTotalCashLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.grandTotalCashLabel.Location = new System.Drawing.Point(589, 719);
-            this.grandTotalCashLabel.MinimumSize = new System.Drawing.Size(250, 40);
+            this.grandTotalCashLabel.Location = new System.Drawing.Point(515, 607);
+            this.grandTotalCashLabel.MinimumSize = new System.Drawing.Size(213, 34);
             this.grandTotalCashLabel.Name = "grandTotalCashLabel";
-            this.grandTotalCashLabel.Size = new System.Drawing.Size(250, 47);
+            this.grandTotalCashLabel.Size = new System.Drawing.Size(213, 41);
             this.grandTotalCashLabel.TabIndex = 19;
             this.grandTotalCashLabel.Text = " $ 0.00";
             this.grandTotalCashLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // searchBoxTextBox
             // 
-            this.searchBoxTextBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.searchBoxTextBox.Location = new System.Drawing.Point(853, 54);
+            this.searchBoxTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.searchBoxTextBox.Location = new System.Drawing.Point(738, 50);
             this.searchBoxTextBox.Name = "searchBoxTextBox";
-            this.searchBoxTextBox.Size = new System.Drawing.Size(729, 33);
+            this.searchBoxTextBox.Size = new System.Drawing.Size(620, 29);
             this.searchBoxTextBox.TabIndex = 2;
             this.searchBoxTextBox.Text = "Enter a product\'s name or its id";
             this.searchBoxTextBox.TextChanged += new System.EventHandler(this.SearchBoxTextBox_TextChanged);
@@ -125,10 +124,10 @@
             // 
             // quantityTextBox
             // 
-            this.quantityTextBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.quantityTextBox.Location = new System.Drawing.Point(853, 657);
+            this.quantityTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.quantityTextBox.Location = new System.Drawing.Point(738, 563);
             this.quantityTextBox.Name = "quantityTextBox";
-            this.quantityTextBox.Size = new System.Drawing.Size(729, 33);
+            this.quantityTextBox.Size = new System.Drawing.Size(620, 29);
             this.quantityTextBox.TabIndex = 4;
             this.quantityTextBox.Text = "Enter Quantity";
             this.quantityTextBox.Enter += new System.EventHandler(this.QuantityTextBox_Enter);
@@ -139,18 +138,18 @@
             // 
             this.categoryComboBox.DropDownHeight = 200;
             this.categoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.categoryComboBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.categoryComboBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.categoryComboBox.FormattingEnabled = true;
             this.categoryComboBox.IntegralHeight = false;
-            this.categoryComboBox.ItemHeight = 25;
+            this.categoryComboBox.ItemHeight = 21;
             this.categoryComboBox.Items.AddRange(new object[] {
             "(none)",
             "Drinks",
             "Food",
             "Cleaning Products"});
-            this.categoryComboBox.Location = new System.Drawing.Point(853, 15);
+            this.categoryComboBox.Location = new System.Drawing.Point(738, 15);
             this.categoryComboBox.Name = "categoryComboBox";
-            this.categoryComboBox.Size = new System.Drawing.Size(729, 33);
+            this.categoryComboBox.Size = new System.Drawing.Size(620, 29);
             this.categoryComboBox.TabIndex = 1;
             this.categoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
             this.categoryComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CategoryComboBox_KeyDown);
@@ -167,14 +166,14 @@
             this.availableProductsDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10F);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.availableProductsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.availableProductsDataGridView.ColumnHeadersHeight = 30;
+            this.availableProductsDataGridView.ColumnHeadersHeight = 26;
             this.availableProductsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.availableProductsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.codeColumn,
@@ -183,7 +182,7 @@
             this.unitPriceColumn});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F);
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -191,7 +190,7 @@
             this.availableProductsDataGridView.DefaultCellStyle = dataGridViewCellStyle3;
             this.availableProductsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.availableProductsDataGridView.EnableHeadersVisualStyles = false;
-            this.availableProductsDataGridView.Location = new System.Drawing.Point(853, 93);
+            this.availableProductsDataGridView.Location = new System.Drawing.Point(738, 85);
             this.availableProductsDataGridView.MultiSelect = false;
             this.availableProductsDataGridView.Name = "availableProductsDataGridView";
             this.availableProductsDataGridView.ReadOnly = true;
@@ -206,10 +205,10 @@
             this.availableProductsDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.availableProductsDataGridView.RowHeadersWidth = 4;
             this.availableProductsDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.availableProductsDataGridView.RowTemplate.Height = 30;
+            this.availableProductsDataGridView.RowTemplate.Height = 26;
             this.availableProductsDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.availableProductsDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.availableProductsDataGridView.Size = new System.Drawing.Size(729, 558);
+            this.availableProductsDataGridView.Size = new System.Drawing.Size(620, 472);
             this.availableProductsDataGridView.StandardTab = true;
             this.availableProductsDataGridView.TabIndex = 3;
             this.availableProductsDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AvailableProductsDataGridView_KeyDown);
@@ -219,20 +218,21 @@
             this.codeColumn.HeaderText = "CODE";
             this.codeColumn.Name = "codeColumn";
             this.codeColumn.ReadOnly = true;
+            this.codeColumn.Width = 85;
             // 
             // nameColumn
             // 
             this.nameColumn.HeaderText = "NAME";
             this.nameColumn.Name = "nameColumn";
             this.nameColumn.ReadOnly = true;
-            this.nameColumn.Width = 350;
+            this.nameColumn.Width = 292;
             // 
             // categoryTextBox
             // 
             this.categoryTextBox.HeaderText = "CATEGORY";
             this.categoryTextBox.Name = "categoryTextBox";
             this.categoryTextBox.ReadOnly = true;
-            this.categoryTextBox.Width = 150;
+            this.categoryTextBox.Width = 127;
             // 
             // unitPriceColumn
             // 
@@ -243,7 +243,7 @@
             this.unitPriceColumn.Name = "unitPriceColumn";
             this.unitPriceColumn.ReadOnly = true;
             this.unitPriceColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.unitPriceColumn.Width = 130;
+            this.unitPriceColumn.Width = 110;
             // 
             // receiptDataGridView
             // 
@@ -257,14 +257,14 @@
             this.receiptDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 10F);
             dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.receiptDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.receiptDataGridView.ColumnHeadersHeight = 30;
+            this.receiptDataGridView.ColumnHeadersHeight = 26;
             this.receiptDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.receiptDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.receiptProductColumn,
@@ -276,7 +276,7 @@
             this.totalPriceColumn});
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 12F);
             dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -299,10 +299,10 @@
             this.receiptDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.receiptDataGridView.RowHeadersWidth = 4;
             this.receiptDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.receiptDataGridView.RowTemplate.Height = 30;
+            this.receiptDataGridView.RowTemplate.Height = 26;
             this.receiptDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.receiptDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.receiptDataGridView.Size = new System.Drawing.Size(825, 636);
+            this.receiptDataGridView.Size = new System.Drawing.Size(707, 541);
             this.receiptDataGridView.TabIndex = 13;
             this.receiptDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ReceiptDataGridView_KeyDown);
             // 
@@ -312,20 +312,21 @@
             this.receiptProductColumn.Name = "receiptProductColumn";
             this.receiptProductColumn.ReadOnly = true;
             this.receiptProductColumn.Visible = false;
+            this.receiptProductColumn.Width = 85;
             // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.HeaderText = "CODE";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 90;
+            this.dataGridViewTextBoxColumn1.Width = 77;
             // 
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.HeaderText = "NAME";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 320;
+            this.dataGridViewTextBoxColumn2.Width = 268;
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -336,7 +337,7 @@
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn4.Width = 130;
+            this.dataGridViewTextBoxColumn4.Width = 110;
             // 
             // quantityColumn
             // 
@@ -345,14 +346,14 @@
             this.quantityColumn.HeaderText = "QUANTITY";
             this.quantityColumn.Name = "quantityColumn";
             this.quantityColumn.ReadOnly = true;
-            this.quantityColumn.Width = 90;
+            this.quantityColumn.Width = 81;
             // 
             // discountColumn
             // 
             this.discountColumn.HeaderText = "DISC. (%)";
             this.discountColumn.Name = "discountColumn";
             this.discountColumn.ReadOnly = true;
-            this.discountColumn.Width = 90;
+            this.discountColumn.Width = 80;
             // 
             // totalPriceColumn
             // 
@@ -362,14 +363,15 @@
             this.totalPriceColumn.HeaderText = "TOTAL";
             this.totalPriceColumn.Name = "totalPriceColumn";
             this.totalPriceColumn.ReadOnly = true;
+            this.totalPriceColumn.Width = 85;
             // 
             // discountPercentageTextBox
             // 
             this.discountPercentageTextBox.Enabled = false;
-            this.discountPercentageTextBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.discountPercentageTextBox.Location = new System.Drawing.Point(964, 696);
+            this.discountPercentageTextBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.discountPercentageTextBox.Location = new System.Drawing.Point(832, 594);
             this.discountPercentageTextBox.Name = "discountPercentageTextBox";
-            this.discountPercentageTextBox.Size = new System.Drawing.Size(618, 33);
+            this.discountPercentageTextBox.Size = new System.Drawing.Size(526, 29);
             this.discountPercentageTextBox.TabIndex = 6;
             this.discountPercentageTextBox.Text = "Enter Discount (%)";
             this.discountPercentageTextBox.Enter += new System.EventHandler(this.DiscountPercentageTextBox_Enter);
@@ -379,10 +381,10 @@
             // discountCheckBox
             // 
             this.discountCheckBox.AutoSize = true;
-            this.discountCheckBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.discountCheckBox.Location = new System.Drawing.Point(853, 698);
+            this.discountCheckBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.discountCheckBox.Location = new System.Drawing.Point(738, 598);
             this.discountCheckBox.Name = "discountCheckBox";
-            this.discountCheckBox.Size = new System.Drawing.Size(105, 29);
+            this.discountCheckBox.Size = new System.Drawing.Size(90, 25);
             this.discountCheckBox.TabIndex = 5;
             this.discountCheckBox.Text = "Discount";
             this.discountCheckBox.UseVisualStyleBackColor = true;
@@ -392,55 +394,55 @@
             // receiptNumberLabel
             // 
             this.receiptNumberLabel.AutoSize = true;
-            this.receiptNumberLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.receiptNumberLabel.Location = new System.Drawing.Point(283, 18);
+            this.receiptNumberLabel.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.receiptNumberLabel.Location = new System.Drawing.Point(260, 18);
             this.receiptNumberLabel.Name = "receiptNumberLabel";
-            this.receiptNumberLabel.Size = new System.Drawing.Size(97, 25);
+            this.receiptNumberLabel.Size = new System.Drawing.Size(80, 21);
             this.receiptNumberLabel.TabIndex = 11;
             this.receiptNumberLabel.Text = "RECEIPT #";
             // 
             // receiptNumberTextBox
             // 
             this.receiptNumberTextBox.Enabled = false;
-            this.receiptNumberTextBox.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.receiptNumberTextBox.Location = new System.Drawing.Point(380, 15);
+            this.receiptNumberTextBox.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.receiptNumberTextBox.Location = new System.Drawing.Point(343, 15);
             this.receiptNumberTextBox.Name = "receiptNumberTextBox";
-            this.receiptNumberTextBox.Size = new System.Drawing.Size(161, 33);
+            this.receiptNumberTextBox.Size = new System.Drawing.Size(161, 29);
             this.receiptNumberTextBox.TabIndex = 12;
             this.receiptNumberTextBox.TabStop = false;
             // 
             // paidLabel
             // 
             this.paidLabel.AutoSize = true;
-            this.paidLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.paidLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.paidLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.paidLabel.Location = new System.Drawing.Point(416, 773);
+            this.paidLabel.Location = new System.Drawing.Point(357, 656);
             this.paidLabel.Name = "paidLabel";
-            this.paidLabel.Size = new System.Drawing.Size(116, 25);
+            this.paidLabel.Size = new System.Drawing.Size(94, 21);
             this.paidLabel.TabIndex = 20;
             this.paidLabel.Text = "Paid in cash:";
             // 
             // changeLabel
             // 
             this.changeLabel.AutoSize = true;
-            this.changeLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.changeLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.changeLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.changeLabel.Location = new System.Drawing.Point(416, 800);
+            this.changeLabel.Location = new System.Drawing.Point(357, 678);
             this.changeLabel.Name = "changeLabel";
-            this.changeLabel.Size = new System.Drawing.Size(82, 25);
+            this.changeLabel.Size = new System.Drawing.Size(69, 21);
             this.changeLabel.TabIndex = 22;
             this.changeLabel.Text = "Change:";
             // 
             // changeCashLabel
             // 
             this.changeCashLabel.AutoSize = true;
-            this.changeCashLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.changeCashLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.changeCashLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.changeCashLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.changeCashLabel.Location = new System.Drawing.Point(588, 800);
-            this.changeCashLabel.MinimumSize = new System.Drawing.Size(250, 0);
+            this.changeCashLabel.Location = new System.Drawing.Point(513, 678);
+            this.changeCashLabel.MinimumSize = new System.Drawing.Size(212, 0);
             this.changeCashLabel.Name = "changeCashLabel";
-            this.changeCashLabel.Size = new System.Drawing.Size(250, 25);
+            this.changeCashLabel.Size = new System.Drawing.Size(212, 21);
             this.changeCashLabel.TabIndex = 23;
             this.changeCashLabel.Text = " $ 0.00";
             this.changeCashLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -448,13 +450,13 @@
             // paidCashLabel
             // 
             this.paidCashLabel.AutoSize = true;
-            this.paidCashLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.paidCashLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.paidCashLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.paidCashLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.paidCashLabel.Location = new System.Drawing.Point(588, 773);
-            this.paidCashLabel.MinimumSize = new System.Drawing.Size(250, 0);
+            this.paidCashLabel.Location = new System.Drawing.Point(513, 656);
+            this.paidCashLabel.MinimumSize = new System.Drawing.Size(212, 0);
             this.paidCashLabel.Name = "paidCashLabel";
-            this.paidCashLabel.Size = new System.Drawing.Size(250, 25);
+            this.paidCashLabel.Size = new System.Drawing.Size(212, 21);
             this.paidCashLabel.TabIndex = 21;
             this.paidCashLabel.Text = " $ 0.00";
             this.paidCashLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -462,15 +464,15 @@
             // makePaymentButton
             // 
             this.makePaymentButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.makePaymentButton.BackgroundImage = global::EazyCart.Properties.Resources.makePaymentButtonImage;
             this.makePaymentButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.makePaymentButton.FlatAppearance.BorderSize = 0;
             this.makePaymentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.makePaymentButton.Font = new System.Drawing.Font("Segoe UI", 18.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.makePaymentButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.makePaymentButton.Image = ((System.Drawing.Image)(resources.GetObject("makePaymentButton.Image")));
-            this.makePaymentButton.Location = new System.Drawing.Point(13, 706);
+            this.makePaymentButton.Location = new System.Drawing.Point(13, 607);
             this.makePaymentButton.Name = "makePaymentButton";
-            this.makePaymentButton.Size = new System.Drawing.Size(337, 52);
+            this.makePaymentButton.Size = new System.Drawing.Size(287, 44);
             this.makePaymentButton.TabIndex = 14;
             this.makePaymentButton.UseVisualStyleBackColor = false;
             this.makePaymentButton.Click += new System.EventHandler(this.MakePaymentButton_Click);
@@ -478,15 +480,15 @@
             // deleteProductButton
             // 
             this.deleteProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.deleteProductButton.BackgroundImage = global::EazyCart.Properties.Resources.deleteProductFromReceiptButtonImage;
             this.deleteProductButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.deleteProductButton.FlatAppearance.BorderSize = 0;
             this.deleteProductButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteProductButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.deleteProductButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.deleteProductButton.Image = global::EazyCart.Properties.Resources.deleteProductFromReceiptButtonImage;
-            this.deleteProductButton.Location = new System.Drawing.Point(1404, 743);
+            this.deleteProductButton.Location = new System.Drawing.Point(1207, 634);
             this.deleteProductButton.Name = "deleteProductButton";
-            this.deleteProductButton.Size = new System.Drawing.Size(178, 82);
+            this.deleteProductButton.Size = new System.Drawing.Size(151, 70);
             this.deleteProductButton.TabIndex = 10;
             this.deleteProductButton.UseVisualStyleBackColor = false;
             this.deleteProductButton.Click += new System.EventHandler(this.DeleteProduct_Click);
@@ -495,16 +497,16 @@
             // saveProductButton
             // 
             this.saveProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
+            this.saveProductButton.BackgroundImage = global::EazyCart.Properties.Resources.saveProductToReceiptButtonImage;
             this.saveProductButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.saveProductButton.Enabled = false;
             this.saveProductButton.FlatAppearance.BorderSize = 0;
             this.saveProductButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveProductButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.saveProductButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.saveProductButton.Image = global::EazyCart.Properties.Resources.saveProductToReceiptButtonImage;
-            this.saveProductButton.Location = new System.Drawing.Point(1221, 743);
+            this.saveProductButton.Location = new System.Drawing.Point(1050, 634);
             this.saveProductButton.Name = "saveProductButton";
-            this.saveProductButton.Size = new System.Drawing.Size(178, 82);
+            this.saveProductButton.Size = new System.Drawing.Size(151, 70);
             this.saveProductButton.TabIndex = 9;
             this.saveProductButton.UseVisualStyleBackColor = false;
             this.saveProductButton.Click += new System.EventHandler(this.SaveProductButton_Click);
@@ -513,15 +515,15 @@
             // editProductButton
             // 
             this.editProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.editProductButton.BackgroundImage = global::EazyCart.Properties.Resources.editProductFromReceiptButtonImage;
             this.editProductButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.editProductButton.FlatAppearance.BorderSize = 0;
             this.editProductButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editProductButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.editProductButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.editProductButton.Image = global::EazyCart.Properties.Resources.editProductFromReceiptButtonImage;
-            this.editProductButton.Location = new System.Drawing.Point(1037, 743);
+            this.editProductButton.Location = new System.Drawing.Point(895, 634);
             this.editProductButton.Name = "editProductButton";
-            this.editProductButton.Size = new System.Drawing.Size(178, 82);
+            this.editProductButton.Size = new System.Drawing.Size(151, 70);
             this.editProductButton.TabIndex = 8;
             this.editProductButton.UseVisualStyleBackColor = false;
             this.editProductButton.Click += new System.EventHandler(this.EditProductButton_Click);
@@ -530,15 +532,15 @@
             // addProductButton
             // 
             this.addProductButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.addProductButton.BackgroundImage = global::EazyCart.Properties.Resources.addProductToReceiptButtonImage;
             this.addProductButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.addProductButton.FlatAppearance.BorderSize = 0;
             this.addProductButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addProductButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.addProductButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.addProductButton.Image = ((System.Drawing.Image)(resources.GetObject("addProductButton.Image")));
-            this.addProductButton.Location = new System.Drawing.Point(853, 743);
+            this.addProductButton.Location = new System.Drawing.Point(738, 634);
             this.addProductButton.Name = "addProductButton";
-            this.addProductButton.Size = new System.Drawing.Size(178, 82);
+            this.addProductButton.Size = new System.Drawing.Size(151, 70);
             this.addProductButton.TabIndex = 7;
             this.addProductButton.UseVisualStyleBackColor = false;
             this.addProductButton.Click += new System.EventHandler(this.AddProductButton_Click);
@@ -547,14 +549,14 @@
             // cancelOrderButton
             // 
             this.cancelOrderButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
-            this.cancelOrderButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.cancelOrderButton.BackgroundImage = global::EazyCart.Properties.Resources.closeCancelIcon;
+            this.cancelOrderButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.cancelOrderButton.FlatAppearance.BorderSize = 0;
             this.cancelOrderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelOrderButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.cancelOrderButton.Image = global::EazyCart.Properties.Resources.closeCancelIcon;
-            this.cancelOrderButton.Location = new System.Drawing.Point(350, 706);
+            this.cancelOrderButton.Location = new System.Drawing.Point(298, 606);
             this.cancelOrderButton.Name = "cancelOrderButton";
-            this.cancelOrderButton.Size = new System.Drawing.Size(41, 119);
+            this.cancelOrderButton.Size = new System.Drawing.Size(38, 98);
             this.cancelOrderButton.TabIndex = 16;
             this.cancelOrderButton.Tag = "";
             this.cancelOrderButton.UseVisualStyleBackColor = false;
@@ -563,15 +565,15 @@
             // completeOrderButton
             // 
             this.completeOrderButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.completeOrderButton.BackgroundImage = global::EazyCart.Properties.Resources.completeOrderButtonImage;
             this.completeOrderButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.completeOrderButton.FlatAppearance.BorderSize = 0;
             this.completeOrderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.completeOrderButton.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.completeOrderButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.completeOrderButton.Image = global::EazyCart.Properties.Resources.completeOrderButtonImage;
-            this.completeOrderButton.Location = new System.Drawing.Point(13, 758);
+            this.completeOrderButton.Location = new System.Drawing.Point(13, 651);
             this.completeOrderButton.Name = "completeOrderButton";
-            this.completeOrderButton.Size = new System.Drawing.Size(337, 67);
+            this.completeOrderButton.Size = new System.Drawing.Size(287, 53);
             this.completeOrderButton.TabIndex = 15;
             this.completeOrderButton.UseVisualStyleBackColor = false;
             this.completeOrderButton.Click += new System.EventHandler(this.CompleteOrderButton_Click);
@@ -601,10 +603,10 @@
             this.Controls.Add(this.paidLabel);
             this.Controls.Add(this.grandTotalLabel);
             this.Controls.Add(this.totalLinePanel);
-            this.Controls.Add(this.cancelOrderButton);
             this.Controls.Add(this.completeOrderButton);
+            this.Controls.Add(this.cancelOrderButton);
             this.Name = "CashRegisterUserControl";
-            this.Size = new System.Drawing.Size(1600, 840);
+            this.Size = new System.Drawing.Size(1366, 717);
             this.Load += new System.EventHandler(this.CashRegisterUserControl_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CashRegisterUserControl_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.availableProductsDataGridView)).EndInit();
@@ -626,10 +628,6 @@
         private System.Windows.Forms.ComboBox categoryComboBox;
         private System.Windows.Forms.Button editProductButton;
         private System.Windows.Forms.DataGridView availableProductsDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn categoryTextBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unitPriceColumn;
         private System.Windows.Forms.Button saveProductButton;
         private System.Windows.Forms.DataGridView receiptDataGridView;
         private System.Windows.Forms.TextBox discountPercentageTextBox;
@@ -642,6 +640,10 @@
         private System.Windows.Forms.Label changeCashLabel;
         private System.Windows.Forms.Label paidCashLabel;
         private System.Windows.Forms.Button makePaymentButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn categoryTextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unitPriceColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn receiptProductColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;

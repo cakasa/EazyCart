@@ -723,7 +723,7 @@ namespace EazyCart.UserControls
                 DataLabels = true,
                 Fill = this.reportBarColoredBrush,
                 LabelPoint = value => string.Format($"$ {value.Y:f2}"),
-                FontSize = 15,
+                FontSize = 12.75,
                 LabelsPosition = BarLabelPosition.Parallel,
                 Foreground = this.reportValueLabelBrush
             });
@@ -741,7 +741,7 @@ namespace EazyCart.UserControls
                 DataLabels = true,
                 Fill = this.reportBarColoredBrush,
                 LabelPoint = value => string.Format($"{value.Y}"),
-                FontSize = 15,
+                FontSize = 12.75,
                 LabelsPosition = BarLabelPosition.Parallel,
                 Foreground = this.reportValueLabelBrush
             });
@@ -763,7 +763,7 @@ namespace EazyCart.UserControls
                 Title = axisXTitle,
                 Separator = new Separator { Step = 1, IsEnabled = false },
                 Labels = axisXLabels,
-                FontSize = 15,
+                FontSize = 12.75,
                 FontFamily = this.reportFontFamily,
                 Foreground = this.reportGraphLabelBrush,
                 LabelsRotation = labelsRotation
@@ -773,7 +773,7 @@ namespace EazyCart.UserControls
             this.reportChart.AxisY.Add(new Axis
             {
                 Title = axisYTitle,
-                FontSize = 15,
+                FontSize = 12.75,
                 FontFamily = this.reportFontFamily,
                 Foreground = this.reportGraphLabelBrush
             });
