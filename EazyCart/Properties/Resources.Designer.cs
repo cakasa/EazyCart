@@ -373,6 +373,16 @@ namespace EazyCart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap minimiseButtonImage {
+            get {
+                object obj = ResourceManager.GetObject("minimiseButtonImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap okButtonPicture {
             get {
                 object obj = ResourceManager.GetObject("okButtonPicture", resourceCulture);
