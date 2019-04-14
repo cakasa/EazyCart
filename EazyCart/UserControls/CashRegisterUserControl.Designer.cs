@@ -29,15 +29,17 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.totalLinePanel = new System.Windows.Forms.Panel();
             this.grandTotalLabel = new System.Windows.Forms.Label();
             this.grandTotalCashLabel = new System.Windows.Forms.Label();
@@ -45,18 +47,7 @@
             this.quantityTextBox = new System.Windows.Forms.TextBox();
             this.categoryComboBox = new System.Windows.Forms.ComboBox();
             this.availableProductsDataGridView = new System.Windows.Forms.DataGridView();
-            this.codeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.categoryTextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitPriceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.receiptDataGridView = new System.Windows.Forms.DataGridView();
-            this.receiptProductColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.discountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalPriceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.discountPercentageTextBox = new System.Windows.Forms.TextBox();
             this.discountCheckBox = new System.Windows.Forms.CheckBox();
             this.receiptNumberLabel = new System.Windows.Forms.Label();
@@ -72,6 +63,19 @@
             this.addProductButton = new System.Windows.Forms.Button();
             this.cancelOrderButton = new System.Windows.Forms.Button();
             this.completeOrderButton = new System.Windows.Forms.Button();
+            this.codeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.barcodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.categoryTextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitPriceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.receiptProductColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.barcodeOnReceiptColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalPriceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.availableProductsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.receiptDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -177,17 +181,18 @@
             this.availableProductsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.availableProductsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.codeColumn,
+            this.barcodeColumn,
             this.nameColumn,
             this.categoryTextBox,
             this.unitPriceColumn});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.availableProductsDataGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.availableProductsDataGridView.DefaultCellStyle = dataGridViewCellStyle4;
             this.availableProductsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.availableProductsDataGridView.EnableHeadersVisualStyles = false;
             this.availableProductsDataGridView.Location = new System.Drawing.Point(738, 85);
@@ -195,14 +200,14 @@
             this.availableProductsDataGridView.Name = "availableProductsDataGridView";
             this.availableProductsDataGridView.ReadOnly = true;
             this.availableProductsDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.availableProductsDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.availableProductsDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.availableProductsDataGridView.RowHeadersWidth = 4;
             this.availableProductsDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.availableProductsDataGridView.RowTemplate.Height = 26;
@@ -212,38 +217,6 @@
             this.availableProductsDataGridView.StandardTab = true;
             this.availableProductsDataGridView.TabIndex = 3;
             this.availableProductsDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AvailableProductsDataGridView_KeyDown);
-            // 
-            // codeColumn
-            // 
-            this.codeColumn.HeaderText = "CODE";
-            this.codeColumn.Name = "codeColumn";
-            this.codeColumn.ReadOnly = true;
-            this.codeColumn.Width = 85;
-            // 
-            // nameColumn
-            // 
-            this.nameColumn.HeaderText = "NAME";
-            this.nameColumn.Name = "nameColumn";
-            this.nameColumn.ReadOnly = true;
-            this.nameColumn.Width = 292;
-            // 
-            // categoryTextBox
-            // 
-            this.categoryTextBox.HeaderText = "CATEGORY";
-            this.categoryTextBox.Name = "categoryTextBox";
-            this.categoryTextBox.ReadOnly = true;
-            this.categoryTextBox.Width = 127;
-            // 
-            // unitPriceColumn
-            // 
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.unitPriceColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.unitPriceColumn.HeaderText = "UNIT PRICE";
-            this.unitPriceColumn.Name = "unitPriceColumn";
-            this.unitPriceColumn.ReadOnly = true;
-            this.unitPriceColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.unitPriceColumn.Width = 110;
             // 
             // receiptDataGridView
             // 
@@ -255,33 +228,34 @@
             this.receiptDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.receiptDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.receiptDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 10F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.receiptDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.receiptDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.receiptDataGridView.ColumnHeadersHeight = 26;
             this.receiptDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.receiptDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.receiptProductColumn,
             this.dataGridViewTextBoxColumn1,
+            this.barcodeOnReceiptColumn,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn4,
             this.quantityColumn,
             this.discountColumn,
             this.totalPriceColumn});
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 12F);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.receiptDataGridView.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 12F);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.receiptDataGridView.DefaultCellStyle = dataGridViewCellStyle11;
             this.receiptDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.receiptDataGridView.EnableHeadersVisualStyles = false;
             this.receiptDataGridView.Location = new System.Drawing.Point(13, 54);
@@ -289,14 +263,14 @@
             this.receiptDataGridView.Name = "receiptDataGridView";
             this.receiptDataGridView.ReadOnly = true;
             this.receiptDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.receiptDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.receiptDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.receiptDataGridView.RowHeadersWidth = 4;
             this.receiptDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.receiptDataGridView.RowTemplate.Height = 26;
@@ -305,65 +279,6 @@
             this.receiptDataGridView.Size = new System.Drawing.Size(707, 541);
             this.receiptDataGridView.TabIndex = 13;
             this.receiptDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ReceiptDataGridView_KeyDown);
-            // 
-            // receiptProductColumn
-            // 
-            this.receiptProductColumn.HeaderText = "RECEIPTPRODUCTID";
-            this.receiptProductColumn.Name = "receiptProductColumn";
-            this.receiptProductColumn.ReadOnly = true;
-            this.receiptProductColumn.Visible = false;
-            this.receiptProductColumn.Width = 85;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "CODE";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 77;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "NAME";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 268;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            dataGridViewCellStyle6.Format = "N2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridViewTextBoxColumn4.HeaderText = "UNIT PRICE";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewTextBoxColumn4.Width = 110;
-            // 
-            // quantityColumn
-            // 
-            dataGridViewCellStyle7.Format = "N3";
-            this.quantityColumn.DefaultCellStyle = dataGridViewCellStyle7;
-            this.quantityColumn.HeaderText = "QUANTITY";
-            this.quantityColumn.Name = "quantityColumn";
-            this.quantityColumn.ReadOnly = true;
-            this.quantityColumn.Width = 81;
-            // 
-            // discountColumn
-            // 
-            this.discountColumn.HeaderText = "DISC. (%)";
-            this.discountColumn.Name = "discountColumn";
-            this.discountColumn.ReadOnly = true;
-            this.discountColumn.Width = 80;
-            // 
-            // totalPriceColumn
-            // 
-            dataGridViewCellStyle8.Format = "N2";
-            dataGridViewCellStyle8.NullValue = null;
-            this.totalPriceColumn.DefaultCellStyle = dataGridViewCellStyle8;
-            this.totalPriceColumn.HeaderText = "TOTAL";
-            this.totalPriceColumn.Name = "totalPriceColumn";
-            this.totalPriceColumn.ReadOnly = true;
-            this.totalPriceColumn.Width = 85;
             // 
             // discountPercentageTextBox
             // 
@@ -578,6 +493,116 @@
             this.completeOrderButton.UseVisualStyleBackColor = false;
             this.completeOrderButton.Click += new System.EventHandler(this.CompleteOrderButton_Click);
             // 
+            // codeColumn
+            // 
+            this.codeColumn.HeaderText = "CODE";
+            this.codeColumn.Name = "codeColumn";
+            this.codeColumn.ReadOnly = true;
+            this.codeColumn.Width = 70;
+            // 
+            // barcodeColumn
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.barcodeColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.barcodeColumn.HeaderText = "BARCODE";
+            this.barcodeColumn.Name = "barcodeColumn";
+            this.barcodeColumn.ReadOnly = true;
+            this.barcodeColumn.Width = 75;
+            // 
+            // nameColumn
+            // 
+            this.nameColumn.HeaderText = "NAME";
+            this.nameColumn.Name = "nameColumn";
+            this.nameColumn.ReadOnly = true;
+            this.nameColumn.Width = 255;
+            // 
+            // categoryTextBox
+            // 
+            this.categoryTextBox.HeaderText = "CATEGORY";
+            this.categoryTextBox.Name = "categoryTextBox";
+            this.categoryTextBox.ReadOnly = true;
+            this.categoryTextBox.Width = 115;
+            // 
+            // unitPriceColumn
+            // 
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.unitPriceColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            this.unitPriceColumn.HeaderText = "UNIT PRICE";
+            this.unitPriceColumn.Name = "unitPriceColumn";
+            this.unitPriceColumn.ReadOnly = true;
+            this.unitPriceColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // receiptProductColumn
+            // 
+            this.receiptProductColumn.HeaderText = "RECEIPTPRODUCTID";
+            this.receiptProductColumn.Name = "receiptProductColumn";
+            this.receiptProductColumn.ReadOnly = true;
+            this.receiptProductColumn.Visible = false;
+            this.receiptProductColumn.Width = 85;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "CODE";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 77;
+            // 
+            // barcodeOnReceiptColumn
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.barcodeOnReceiptColumn.DefaultCellStyle = dataGridViewCellStyle7;
+            this.barcodeOnReceiptColumn.HeaderText = "BARCODE";
+            this.barcodeOnReceiptColumn.Name = "barcodeOnReceiptColumn";
+            this.barcodeOnReceiptColumn.ReadOnly = true;
+            this.barcodeOnReceiptColumn.Width = 75;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "NAME";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 240;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dataGridViewTextBoxColumn4.HeaderText = "UN. PRICE";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn4.Width = 90;
+            // 
+            // quantityColumn
+            // 
+            dataGridViewCellStyle9.Format = "N3";
+            this.quantityColumn.DefaultCellStyle = dataGridViewCellStyle9;
+            this.quantityColumn.HeaderText = "QUANTITY";
+            this.quantityColumn.Name = "quantityColumn";
+            this.quantityColumn.ReadOnly = true;
+            this.quantityColumn.Width = 81;
+            // 
+            // discountColumn
+            // 
+            this.discountColumn.HeaderText = "DISC.";
+            this.discountColumn.Name = "discountColumn";
+            this.discountColumn.ReadOnly = true;
+            this.discountColumn.Width = 60;
+            // 
+            // totalPriceColumn
+            // 
+            dataGridViewCellStyle10.Format = "N2";
+            dataGridViewCellStyle10.NullValue = null;
+            this.totalPriceColumn.DefaultCellStyle = dataGridViewCellStyle10;
+            this.totalPriceColumn.HeaderText = "TOTAL";
+            this.totalPriceColumn.Name = "totalPriceColumn";
+            this.totalPriceColumn.ReadOnly = true;
+            this.totalPriceColumn.Width = 85;
+            // 
             // CashRegisterUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -641,11 +666,13 @@
         private System.Windows.Forms.Label paidCashLabel;
         private System.Windows.Forms.Button makePaymentButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn codeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn barcodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn categoryTextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn unitPriceColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn receiptProductColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn barcodeOnReceiptColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityColumn;

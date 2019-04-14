@@ -137,6 +137,11 @@ namespace Data.Models
                     .HasColumnType("char(6)")
                     .ValueGeneratedNever();
 
+                entity.Property(e => e.Barcode)
+                    .HasColumnName("barcode")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.CategoryId)
                     .HasColumnName("categoryId")
                     .HasColumnType("int(6)");

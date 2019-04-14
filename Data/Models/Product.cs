@@ -11,6 +11,7 @@ namespace Data.Models
         }
 
         public string Code { get; set; }
+        public string Barcode { get; set; }
         public string Name { get; set; }
         public int SupplierId { get; set; }
         public int UnitId { get; set; }

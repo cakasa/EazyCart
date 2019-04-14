@@ -621,7 +621,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
             // Act
             string categoryName = "TestCategory1";
             string searchPhrase = "Test";
-            var allProducts = productBusiness.GetAllByCategoryAndNameOrId(categoryName, searchPhrase);
+            var allProducts = productBusiness.GetAllByCategoryAndNameCodeOrBarcode(categoryName, searchPhrase);
 
             // Assert
             string expectedFirstProductName = "TestProduct1";
@@ -698,7 +698,7 @@ namespace EazyCartUnitTests.BusinessUnitTests
 
             // Act
             string searchPhrase = "3";
-            var allProducts = productBusiness.GetAllByNameOrId(searchPhrase);
+            var allProducts = productBusiness.GetAllByNameCodeOrBarcode(searchPhrase);
 
             // Assert
             string expectedProductName = "TestProduct3";

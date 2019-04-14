@@ -158,14 +158,15 @@ namespace Business.Controllers
         /// <param name="categoryString">Give the name of the category.</param>
         /// <param name="searchPhrase">Give the searched string.</param>
         /// <returns>Return a list of the products that suit the given condition.</returns>
-        public List<Product> GetAllByCategoryAndNameOrId(string categoryString, string searchPhrase)
+        public List<Product> GetAllByCategoryAndNameCodeOrBarcode(string categoryString, string searchPhrase)
         {
             var category = this.eazyCartContext.Categories.First(x => x.Name == categoryString);
             var products = this.eazyCartContext
                                 .Products
                                 .Where(x => x.CategoryId == category.Id &&
                                     (x.Name.ToUpper().Contains(searchPhrase.ToUpper()) ||
-                                     x.Code.ToUpper().Contains(searchPhrase.ToUpper())))
+                                     x.Code.ToUpper().Contains(searchPhrase.ToUpper()) ||
+                                     x.Barcode.ToUpper().Contains(searchPhrase.ToUpper())))
                                 .ToList();
 
             return products;
@@ -189,12 +190,14 @@ namespace Business.Controllers
         /// </summary>
         /// <param name="searchPhrase">Give the searched string.</param>
         /// <returns>Return a list of the products that suit the given condition.</returns>
-        public List<Product> GetAllByNameOrId(string searchPhrase)
+        public List<Product> GetAllByNameCodeOrBarcode(string searchPhrase)
         {
             var products = this.eazyCartContext
                                 .Products
                                 .Where(x => x.Name.ToUpper().Contains(searchPhrase.ToUpper()) ||
-                                       x.Code.ToUpper().Contains(searchPhrase.ToUpper())).ToList();
+                                       x.Code.ToUpper().Contains(searchPhrase.ToUpper()) ||
+                                       x.Barcode.ToUpper().Contains(searchPhrase.ToUpper()))
+                                .ToList();
 
             return products;
 
@@ -205,6 +208,7 @@ namespace Business.Controllers
         /// each of product's fields.
         /// </summary>
         /// <param name="productCode">Give the product's code to add.</param>
+        /// <param name="productBarcode">Give the product's barcode to add.</param>
         /// <param name="categoryName">Give the product's category to add.</param>
         /// <param name="productName">Give the product's name to add.</param>
         /// <param name="quantity">Give the product's quantity to add.</param>
@@ -212,8 +216,8 @@ namespace Business.Controllers
         /// <param name="deliveryPrice">Give the product's delivery price to add.</param>
         /// <param name="sellingPrice">Give the product's selling price to add.</param>
         /// <param name="unitName">Give the product's unit name to add.</param>
-        public void Add(string productCode, string categoryName, string productName, decimal quantity, string supplierName,
-            decimal deliveryPrice, decimal sellingPrice, string unitName)
+        public void Add(string productCode, string productBarcode, string categoryName, string productName, decimal quantity,
+                string supplierName, decimal deliveryPrice, decimal sellingPrice, string unitName)
         {
             var unit = this.eazyCartContext.Units.First(x => x.Name == unitName);
 
@@ -242,6 +246,7 @@ namespace Business.Controllers
             var product = new Product
             {
                 Code = productCode,
+                Barcode = productBarcode,
                 CategoryId = category.Id,
                 Name = productName,
                 Quantity = quantity,
@@ -265,16 +270,17 @@ namespace Business.Controllers
         /// Update a certain product by providing information about
         /// each of product's fields.
         /// </summary>
-        /// <param name="productCode">Give the product's code to upgrade.</param>
-        /// <param name="categoryName">Give the product's category to upgrade.</param>
-        /// <param name="productName">Give the product's name to upgrade.</param>
-        /// <param name="quantity">Give the product's quantity to upgrade.</param>
-        /// <param name="supplierName">Give the product's supplier name to upgrade.</param>
-        /// <param name="deliveryPrice">Give the product's delivery price to upgrade.</param>
-        /// <param name="sellingPrice">Give the product's selling price to upgrade.</param>
-        /// <param name="unitName">Give the product's unit name to upgrade.</param>
-        public void Update(string productCode, string categoryName, string productName, decimal quantity,
-            string supplierName, decimal deliveryPrice, decimal sellingPrice, string unitName)
+        /// <param name="productCode">Give the product's code to update.</param>
+        /// <param name="productBarcode">Give the product's barcode to update.</param>
+        /// <param name="categoryName">Give the product's category to update.</param>
+        /// <param name="productName">Give the product's name to update.</param>
+        /// <param name="quantity">Give the product's quantity to update.</param>
+        /// <param name="supplierName">Give the product's supplier name to update.</param>
+        /// <param name="deliveryPrice">Give the product's delivery price to update.</param>
+        /// <param name="sellingPrice">Give the product's selling price to update.</param>
+        /// <param name="unitName">Give the product's unit name to update.</param>
+        public void Update(string productCode, string productBarcode, string categoryName, string productName, 
+                decimal quantity, string supplierName, decimal deliveryPrice, decimal sellingPrice, string unitName)
         {
             var unit = this.eazyCartContext.Units.FirstOrDefault(x => x.Name == unitName);
 
@@ -301,6 +307,7 @@ namespace Business.Controllers
             }
 
             var productToUpdate = this.eazyCartContext.Products.FirstOrDefault(x => x.Code == productCode);
+            productToUpdate.Barcode = productBarcode;
             productToUpdate.CategoryId = category.Id;
             productToUpdate.Name = productName;
             productToUpdate.Quantity = quantity;

@@ -108,11 +108,12 @@ namespace EazyCart.UserControls
                 decimal totalForProduct = basePrice * percentageOfBasePrice;
                 row.Cells[0].Value = productReceipt.Id;
                 row.Cells[1].Value = product.Code;
-                row.Cells[2].Value = product.Name;
-                row.Cells[3].Value = string.Format($"$ {product.SellingPrice:f2}");
-                row.Cells[4].Value = productReceipt.Quantity;
-                row.Cells[5].Value = productReceipt.DiscountPercentage;
-                row.Cells[6].Value = string.Format($"$ {totalForProduct:f2}");
+                row.Cells[2].Value = product.Barcode;
+                row.Cells[3].Value = product.Name;
+                row.Cells[4].Value = string.Format($"$ {product.SellingPrice:f2}");
+                row.Cells[5].Value = productReceipt.Quantity;
+                row.Cells[6].Value = string.Format($"{productReceipt.DiscountPercentage} %");
+                row.Cells[7].Value = string.Format($"$ {totalForProduct:f2}");
                 grandTotal += totalForProduct;
             }
             this.grandTotalCashLabel.Text = string.Format("$ {0:f2}", grandTotal);
@@ -169,7 +170,7 @@ namespace EazyCart.UserControls
             }
             else if (categoryString == "Select Category")
             {
-                var products = this.productBusiness.GetAllByNameOrId(searchPhrase);
+                var products = this.productBusiness.GetAllByNameCodeOrBarcode(searchPhrase);
                 this.UpdateAvailableProductsDataGrid(products);
             }
             else if (searchPhrase == "Enter a product's name or its id")
@@ -179,7 +180,7 @@ namespace EazyCart.UserControls
             }
             else
             {
-                var products = this.productBusiness.GetAllByCategoryAndNameOrId(categoryString, searchPhrase);
+                var products = this.productBusiness.GetAllByCategoryAndNameCodeOrBarcode(categoryString, searchPhrase);
                 this.UpdateAvailableProductsDataGrid(products);
             }
         }
@@ -207,9 +208,10 @@ namespace EazyCart.UserControls
                 var newRow = this.availableProductsDataGridView.Rows[this.availableProductsDataGridView.Rows.Add()];
                 var category = this.categoryBusiness.Get(product.CategoryId);
                 newRow.Cells[0].Value = product.Code;
-                newRow.Cells[1].Value = product.Name;
-                newRow.Cells[2].Value = category.Name;
-                newRow.Cells[3].Value = string.Format($"$ {product.SellingPrice:f2}");
+                newRow.Cells[1].Value = product.Barcode;
+                newRow.Cells[2].Value = product.Name;
+                newRow.Cells[3].Value = category.Name;
+                newRow.Cells[4].Value = string.Format($"$ {product.SellingPrice:f2}");
             }
         }
 
@@ -263,6 +265,10 @@ namespace EazyCart.UserControls
                 return;
             }
             var quantity = this.quantityTextBox.Text;
+            if(quantity == "Enter Quantity")
+            {
+                quantity = "1";
+            }
 
             // Try to add product into the receipt. If validation fails, a messageForm is shown.
             try
@@ -642,21 +648,25 @@ namespace EazyCart.UserControls
             if (e.KeyData == Keys.Enter && this.addProductButton.Enabled == true)
             {
                 this.AddProductButton_Click(this, new EventArgs());
+                this.searchBoxTextBox.Clear();
                 this.searchBoxTextBox.Focus();
             }
             if(e.KeyData == Keys.F7 && this.editProductButton.Enabled == true)
             {
                 this.EditProductButton_Click(this, new EventArgs());
+                this.quantityTextBox.Clear();
                 this.quantityTextBox.Focus();
             }
             if(e.KeyData == Keys.F8 && this.saveProductButton.Enabled == true)
             {
                 this.SaveProductButton_Click(this, new EventArgs());
+                this.searchBoxTextBox.Clear();
                 this.searchBoxTextBox.Focus();
             }
             if(e.KeyData == Keys.Delete && this.deleteProductButton.Enabled == true)
             {
                 this.DeleteProduct_Click(this, new EventArgs());
+                this.searchBoxTextBox.Clear();
                 this.searchBoxTextBox.Focus();
             }
             if(e.KeyData == Keys.F5)

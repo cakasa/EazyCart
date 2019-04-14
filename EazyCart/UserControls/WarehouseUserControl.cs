@@ -67,6 +67,8 @@ namespace EazyCart.UserControls
             // Sets the fields for input to default values.
             this.productCodeMaskedTextBox.Text = string.Empty;
             this.productCodeMaskedTextBox.ForeColor = this.promptTextColor;
+            this.barcodeTextBox.Text = "Barcode (Optional)";
+            this.barcodeTextBox.ForeColor = this.promptTextColor;
             this.productNameTextBox.Text = "Product Name";
             this.productNameTextBox.ForeColor = this.promptTextColor;
             this.inventoryQuantityTextBox.Text = "Quantity";
@@ -121,13 +123,14 @@ namespace EazyCart.UserControls
                 var unit = this.unitBusiness.Get(product.UnitId);
                 var supplier = this.supplierBusiness.Get(product.SupplierId);
                 newRow.Cells[0].Value = product.Code;
-                newRow.Cells[1].Value = product.Name;
-                newRow.Cells[2].Value = category.Name;
-                newRow.Cells[3].Value = product.Quantity;
-                newRow.Cells[4].Value = unit.Code;
-                newRow.Cells[5].Value = supplier.Name;
-                newRow.Cells[6].Value = string.Format($"${product.DeliveryPrice:f2}");
-                newRow.Cells[7].Value = string.Format($"${product.SellingPrice:f2}");
+                newRow.Cells[1].Value = product.Barcode;
+                newRow.Cells[2].Value = product.Name;
+                newRow.Cells[3].Value = category.Name;
+                newRow.Cells[4].Value = product.Quantity;
+                newRow.Cells[5].Value = unit.Code;
+                newRow.Cells[6].Value = supplier.Name;
+                newRow.Cells[7].Value = string.Format($"${product.DeliveryPrice:f2}");
+                newRow.Cells[8].Value = string.Format($"${product.SellingPrice:f2}");
             }
         }
 
@@ -183,6 +186,16 @@ namespace EazyCart.UserControls
             // Update fields with product values.
             this.productCodeMaskedTextBox.Text = product.Code;
             this.productCodeMaskedTextBox.ForeColor = this.activeTextColor;
+            if (product.Barcode != string.Empty)
+            {
+                this.barcodeTextBox.Text = product.Barcode;
+                this.barcodeTextBox.ForeColor = this.activeTextColor;
+            }
+            else
+            {
+                this.barcodeTextBox.Text = "Barcode (Optional)";
+                this.barcodeTextBox.ForeColor = this.promptTextColor;
+            }
             this.productNameTextBox.Text = product.Name;
             this.productNameTextBox.ForeColor = this.activeTextColor;
             this.inventoryQuantityTextBox.Text = product.Quantity.ToString();
@@ -272,6 +285,11 @@ namespace EazyCart.UserControls
         {
             var productCode = this.productCodeMaskedTextBox.Text;
             productCode = this.RefactorProductCode(productCode);
+            var productBarcode = string.Empty;
+            if (this.barcodeTextBox.Text != "Barcode (Optional)")
+            {
+                productBarcode = this.barcodeTextBox.Text;
+            }
             var category = (string)this.categoryComboBox.SelectedItem;
             var productName = this.productNameTextBox.Text;
             var quantityString = this.inventoryQuantityTextBox.Text;
@@ -299,7 +317,7 @@ namespace EazyCart.UserControls
                 var quantity = decimal.Parse(quantityString);
                 var deliveryPrice = decimal.Parse(deliveryPriceString);
                 var sellingPrice = decimal.Parse(sellingPriceString);
-                this.productBusiness.Add(productCode, category, productName, quantity, supplierName, deliveryPrice, sellingPrice, unit);
+                this.productBusiness.Add(productCode, productBarcode, category, productName, quantity, supplierName, deliveryPrice, sellingPrice, unit);
             }
             catch (ArgumentException exc)
             {
@@ -356,6 +374,11 @@ namespace EazyCart.UserControls
         {
             var productCode = this.productCodeMaskedTextBox.Text;
             productCode = this.RefactorProductCode(productCode);
+            var productBarcode = string.Empty;
+            if (this.barcodeTextBox.Text != "Barcode (Optional)")
+            {
+                productBarcode = this.barcodeTextBox.Text;
+            }
             var category = (string)this.categoryComboBox.SelectedItem;
             var productName = this.productNameTextBox.Text;
             var quantityString = this.inventoryQuantityTextBox.Text;
@@ -383,7 +406,7 @@ namespace EazyCart.UserControls
                 var quantity = decimal.Parse(quantityString);
                 var deliveryPrice = decimal.Parse(deliveryPriceString);
                 var sellingPrice = decimal.Parse(sellingPriceString);
-                this.productBusiness.Update(productCode, category, productName, quantity, supplierName, deliveryPrice, sellingPrice, unit);
+                this.productBusiness.Update(productCode, productBarcode, category, productName, quantity, supplierName, deliveryPrice, sellingPrice, unit);
             }
             catch (ArgumentException exc)
             {
@@ -644,6 +667,16 @@ namespace EazyCart.UserControls
         }
 
         // All of the following methods are responsible for maintaining a consistent UI
+        private void barcodeTextBox_Enter(object sender, EventArgs e)
+        {
+            this.RemovePromptFromTextBox(this.barcodeTextBox, "Barcode (Optional)");
+        }
+
+        private void barcodeTextBox_Leave(object sender, EventArgs e)
+        {
+            this.AddPromptToTextBox(this.barcodeTextBox, "Barcode (Optional)");
+        }
+
         private void ProductNameTextBox_Enter(object sender, EventArgs e)
         {
             this.RemovePromptFromTextBox(this.productNameTextBox, "Product Name");
