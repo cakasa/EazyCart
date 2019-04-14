@@ -246,6 +246,16 @@ namespace EazyCart.UserControls
             eazyCartForm.CashRegisterUserControl.UpdateUserControl();
         }
 
+        /// <summary>
+        /// Updates the logistics tab when a product is modified or deleted.
+        /// the cash register user control.
+        /// </summary>
+        private void UpdateLogisticsUserControl()
+        {
+            var eazyCartForm = (EazyCartForm)EazyCartForm.ActiveForm;
+            eazyCartForm.logisticsUserControl.UpdateUserControl();
+        }
+
         // The following methods are related to user interaction with the user control.
         /// <summary>
         /// The event triggers when the supplier comboBox has a change in the 
@@ -329,6 +339,7 @@ namespace EazyCart.UserControls
             // Update appropriate tabs.
             this.ClearAndUpdateProductTab();
             this.UpdateCashRegisterUserControl();
+            this.UpdateLogisticsUserControl();
         }
 
         /// <summary>
@@ -421,6 +432,7 @@ namespace EazyCart.UserControls
             this.ClearAndUpdateProductTab();
             this.ToggleEditSave();
             this.UpdateCashRegisterUserControl();
+            this.UpdateLogisticsUserControl();
         }
 
         /// <summary>
@@ -461,6 +473,7 @@ namespace EazyCart.UserControls
             // Update the appropriate tabs.
             this.ClearAndUpdateProductTab();
             this.UpdateCashRegisterUserControl();
+            this.UpdateLogisticsUserControl();
         }
 
         /// <summary>
@@ -743,6 +756,17 @@ namespace EazyCart.UserControls
             }
         }
 
+        private void barcodeTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (barcodeTextBox.Text != string.Empty)
+            {
+                if (!Char.IsLetterOrDigit(barcodeTextBox.Text[0]))
+                {
+                    barcodeTextBox.Text = barcodeTextBox.Text.Remove(0, 1);
+                }
+            }
+        }
+
         /// <summary>
         /// This event is triggerred when one begins typing in a textBox.
         /// If the textBox had a prompt beforehand, it is removed.
@@ -771,6 +795,6 @@ namespace EazyCart.UserControls
                 textBox.Text = prompt;
                 textBox.ForeColor = this.promptTextColor;
             }
-        }
+        }     
     }
 }

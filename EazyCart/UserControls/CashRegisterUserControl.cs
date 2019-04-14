@@ -54,6 +54,8 @@ namespace EazyCart.UserControls
             this.SetButtonAvailability();
             this.highestProductReceiptId = this.productReceiptBusiness.GetHighestId();
             this.currentProductReceiptId = this.highestProductReceiptId + 1;
+
+            searchBoxTextBox.Focus();
         }
 
         /// <summary>
@@ -63,7 +65,7 @@ namespace EazyCart.UserControls
         {
             this.UpdateCategoryComboBox();
             this.categoryComboBox.SelectedIndex = 0;
-            this.searchBoxTextBox.Text = "Enter a product's name or its id";
+            this.searchBoxTextBox.Text = "Enter a Product's Name, its Code or Barcode";
             this.searchBoxTextBox.ForeColor = promptTextColor;
             this.quantityTextBox.Text = "Enter Quantity";
             this.quantityTextBox.ForeColor = promptTextColor;
@@ -163,7 +165,7 @@ namespace EazyCart.UserControls
             var searchPhrase = this.searchBoxTextBox.Text;
 
             // Search by the certain chosen information type.
-            if (categoryString == "Select Category" && searchPhrase == "Enter a product's name or its id")
+            if (categoryString == "Select Category" && searchPhrase == "Enter a Product's Name, its Code or Barcode")
             {
                 var products = this.productBusiness.GetAll();
                 this.UpdateAvailableProductsDataGrid(products);
@@ -173,7 +175,7 @@ namespace EazyCart.UserControls
                 var products = this.productBusiness.GetAllByNameCodeOrBarcode(searchPhrase);
                 this.UpdateAvailableProductsDataGrid(products);
             }
-            else if (searchPhrase == "Enter a product's name or its id")
+            else if (searchPhrase == "Enter a Product's Name, its Code or Barcode")
             {
                 var products = this.productBusiness.GetAllByCategory(categoryString);
                 this.UpdateAvailableProductsDataGrid(products);
@@ -243,6 +245,13 @@ namespace EazyCart.UserControls
         /// <param name="e"></param>
         private void SearchBoxTextBox_TextChanged(object sender, EventArgs e)
         {
+            if (searchBoxTextBox.Text != string.Empty)
+            {
+                if (!Char.IsLetterOrDigit(searchBoxTextBox.Text[0]))
+                {
+                    searchBoxTextBox.Text = searchBoxTextBox.Text.Remove(0, 1);
+                }
+            }
             this.UpdateSearchResults();
         }
 
@@ -687,12 +696,12 @@ namespace EazyCart.UserControls
         // All of the following methods are connected with maintaining a clean UI.
         private void SearchBoxTextBox_Enter(object sender, EventArgs e)
         {
-            this.RemovePromptFromTextBoxWhenTyping(this.searchBoxTextBox, "Enter a product's name or its id");
+            this.RemovePromptFromTextBoxWhenTyping(this.searchBoxTextBox, "Enter a Product's Name, its Code or Barcode");
         }
 
         private void SearchBoxTextBox_Leave(object sender, EventArgs e)
         {
-            this.AddPromptToTextBoxIfEmpty(this.searchBoxTextBox, "Enter a product's name or its id");
+            this.AddPromptToTextBoxIfEmpty(this.searchBoxTextBox, "Enter a Product's Name, its Code or Barcode");
         }
 
         private void QuantityTextBox_Enter(object sender, EventArgs e)

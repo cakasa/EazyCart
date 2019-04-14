@@ -39,7 +39,7 @@ namespace EazyCart.UserControls
         /// <summary>
         /// Updates the user control every time it is loaded.
         /// </summary>
-        private void UpdateUserControl()
+        public void UpdateUserControl()
         {
             var eazyCartContext = new EazyCartContext();
             this.cityBusiness = new CityBusiness(eazyCartContext);
@@ -1030,11 +1030,6 @@ namespace EazyCart.UserControls
                 textBox.Text = prompt;
                 textBox.ForeColor = this.promptTextColor;
             }
-        }
-
-        private void CountriesGroupBox_Enter(object sender, EventArgs e)
-        {
-
         }
     }
 }

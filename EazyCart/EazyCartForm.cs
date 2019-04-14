@@ -16,8 +16,8 @@ namespace EazyCart
     {
         public CashRegisterUserControl CashRegisterUserControl { get; private set; }
         public WarehouseUserControl WarehouseUserControl { get; private set; }
-        private StatisticsUserContol statisticsUserContol;
-        private LogisticsUserControl logisticsUserControl;
+        public LogisticsUserControl logisticsUserControl { get; private set; }
+        private StatisticsUserContol statisticsUserContol;    
         private GreetingScreenUserControl greetingScreenUserControl;
 
         private int mouseX = 0;

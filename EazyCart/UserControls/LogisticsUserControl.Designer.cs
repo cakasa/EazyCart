@@ -117,7 +117,6 @@
             this.countriesGroupBox.TabIndex = 1;
             this.countriesGroupBox.TabStop = false;
             this.countriesGroupBox.Text = "Countries";
-            this.countriesGroupBox.Enter += new System.EventHandler(this.CountriesGroupBox_Enter);
             // 
             // countryIdTextBox
             // 
